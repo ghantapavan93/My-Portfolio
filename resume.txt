@@ -1,0 +1,98 @@
+Pavankalyan Ghanta
+📧 gpavankalyan1102@gmail.com | 📞 +1 940-843-8161 | LinkedIn | GitHub
+
+Summary
+Generative AI & LLM Engineer specializing in RAG pipelines, multi-agent orchestration, and small-model optimization (LangGraph, LoRA, vLLM). Experienced in turning research into scalable, cloud-native GenAI systems with real-time reasoning, explainability, and human-in-the-loop alignment. Proven ability to design agentic AI workflows, deploy low-latency inference pipelines, and optimize for production-scale use cases.
+
+Skills
+Languages & Programming: Python (Advanced), Java, C, SQL/PLSQL, JavaScript, TypeScript, Dart, Flutter, HTML/CSS
+
+Generative & Agentic AI: LangChain, LangGraph, Planner–Retriever–Critic orchestration, LoRA fine-tuning, vLLM, DeepSpeed, GPT-4, Claude 3, Gemini 1.5, DistilGPT, LLaMA 3.x, Prompt Engineering, RAG, Responsible AI (Langfuse, Evidently AI)
+
+Model Training & Optimization: Quantization, Dynamic Batching, HuggingFace Transformers, BERT, CNN-LSTM, VAEs (Basic)
+
+Vector Search & Memory: FAISS, Pinecone, ChromaDB, HuggingFace MiniLM, PgVector
+
+Cloud & Infrastructure: AWS (EC2, Lambda, S3), GCP (Vertex AI, Cloud Run), Azure ML, Docker, Kubernetes, Firebase
+
+Backend & APIs: FastAPI, Flask, Spring Boot WebFlux, Node.js, REST APIs, GraphQL
+
+Data Pipelines & Queues: Kafka, Airflow, Prefect, Redis, PostgreSQL, Cassandra
+
+DevOps & Observability: GitHub Actions, Jenkins, MLflow, OpenTelemetry, Prometheus, CI/CD pipelines
+
+Core Strengths: Multi-Agent AI Systems, Scalable RAG Workflows, Cloud-Native Microservices, Human-Centered AI Design
+
+Experience
+Software Engineer Intern – Krowd Guide – Dallas, TX
+Jun 2025 – Present
+
+Built and maintained real-time safety microservices for crowd density & parking insights using React.js, TypeScript, and Express.js, improving response times by 30%.
+
+Enhanced backend API efficiency through optimized Mongoose queries and lazy-loading strategies, reducing redundant data fetches by 40%.
+
+Delivered cloud-ready MVP builds via Vercel & Render; documented commits and staged CI/CD pipelines for seamless deployment.
+
+Research Assistant – Generative AI & RAG Systems – University of North Texas
+Dec 2023 – May 2025
+
+Designed RAG pipelines (LangChain + FAISS) and Planner–Retriever–Critic orchestration, enabling cross-domain, fact-grounded GenAI reasoning.
+
+Deployed LLMs (GPT-4, BERT, DistilGPT) on GCP Vertex AI with quantization & batching, reducing inference latency by 30%.
+
+Automated Airflow + Prefect pipelines for dataset ingestion & retraining; implemented Langfuse + MLflow observability for token cost and latency monitoring.
+
+Outreach Assistant – Discovery Park Library (UNT)
+Aug 2023 – May 2025
+
+Conducted 20+ GenAI workshops, teaching 200+ students prompt engineering & RAG-based Q&A using LangChain + OpenAI APIs.
+
+Built a MiniLM + ChromaDB-powered Q&A assistant, increasing learner query resolution by 40%.
+
+Deployed Firebase + AWS automation for outreach content generation, cutting manual preparation time by 30%.
+
+AI & Vision Systems Intern – SRM ROBOCON Team – Chennai, India
+Jan 2021 – Feb 2023
+
+Engineered YOLOv4 + OpenCV pipelines for real-time object detection on Raspberry Pi & STM32, achieving <50ms inference latency.
+
+Integrated UART/I2C control loops for intelligent robotics actuation; optimized for low-power, edge inference environments.
+
+AI Engineering Intern – Builder.ai – Remote
+May 2022 – Feb 2023
+
+Built prompt-to-app GenAI workflows using GPT-3 + Codex, converting natural language into modular UI/API components.
+
+Optimized RAG-inspired pipelines (FAISS + FastAPI) to reduce hallucinations and improve low-latency previews.
+
+Key Projects
+AgentForge – Multi-Agent GenAI Control Plane
+Designed Planner–Retriever–Critic orchestration with LangChain + Pinecone + ChromaDB, simulating collaborative reasoning and memory replay.
+
+Deployed containerized endpoints via FastAPI + Docker + GCP Cloud Run, achieving sub-second multi-agent inference.
+
+EagleEyeAI – Real-Time Surveillance Intelligence
+Built a crime summarization pipeline (CCTV + CLIP + GPT-4) with 0.25s frame sampling, achieving 85% precision on flagged incidents.
+
+Integrated Kafka + Airflow for event-driven processing and deployed on AWS Lambda for real-time streaming inference.
+
+Project-H – AI Wellness & Fitness Coach
+Developed “Oats,” an AI health coach powered by FAISS + GPT-based RAG, processing 20K+ biometric data points from Apple Watch/WHOOP APIs.
+
+Achieved sub-second inference and 90%+ user satisfaction through optimized AWS Lambda deployment.
+
+(Additional projects: PeopleMate AI, Clinical Query Assistant, SmartTutor AI, Poster Accessibility Tool, Phishing URL Classifier – details available on request.)
+
+Education
+MS in Computer Science – University of North Texas, Denton, TX
+GPA: 3.8/4.0 – May 2025
+
+B.Tech in Electronics and Communication Engineering – SRM Institute of Science and Technology, India
+CGPA: 9.27/10 – May 2023
+
+Achievements
+Presented RAG-based GenAI research at UNT’s AI/ML Symposium (2024).
+
+Hackathon Winner (MILAN Fest 2024): Built a multi-agent orchestration prototype simulating AutoGen-style reasoning.
+
+Published peer-reviewed paper (IJFMR) on edge-optimized CNN-LSTM speech enhancement.

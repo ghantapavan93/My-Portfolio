@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Portfolio</title>
+    <!-- Import Inter font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0047AB;
+            --primary-light: #3373c4;
+            --primary-dark: #00348c;
+            --primary-bg: rgba(0, 71, 171, 0.06);
+            --text-color: #333333;
+            --text-light: #666666;
+            --light-bg: #f8f9fc;
+            --white: #ffffff;
+            --gray: #777777;
+            --light-gray: #f2f2f2;
+            --border-radius: 8px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background-color: var(--white);
+            color: var(--text-color);
+            line-height: 1.6;
+            font-weight: 400;
+            font-size: 16px;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            font-weight: 400;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            padding: 25px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--primary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 35px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 100px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 42px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* Cards Section */
+        .cards-section {
+            padding: 60px 0;
+            background-color: var(--light-bg);
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 24px;
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 30px;
+        }
+        
+        .card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-color);
+        }
+        
+        .card p {
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+        
+        .card a {
+            display: inline-flex;
+            align-items: center;
+            font-weight: 500;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+        
+        .card a svg {
+            margin-left: 4px;
+            transition: transform 0.3s;
+        }
+        
+        .card a:hover svg {
+            transform: translateX(3px);
+        }
+        
+        /* Courses Section */
+        .courses {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .section-subtitle {
+            color: var(--primary-color);
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 24px;
+            color: var(--text-color);
+        }
+        
+        .course-description {
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+            text-align: center;
+            margin: 60px 0;
+        }
+        
+        .feature {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-bg);
+            border-radius: 50%;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .feature h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+        
+        .feature p {
+            font-size: 14px;
+        }
+        
+        .explore-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 28px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .explore-btn svg {
+            margin-left: 8px;
+        }
+        
+        .explore-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* Projects Section */
+        .projects {
+            padding: 80px 0;
+            background-color: var(--light-bg);
+        }
+        
+        .projects-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-image {
+            height: 200px;
+            background-color: var(--light-gray);
+            position: relative;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .project-details {
+            padding: 24px;
+        }
+        
+        .project-details h3 {
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+        
+        .project-details p {
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .project-tag {
+            background-color: var(--primary-bg);
+            color: var(--primary-color);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .project-link svg {
+            margin-left: 4px;
+            transition: transform 0.3s;
+        }
+        
+        .project-link:hover svg {
+            transform: translateX(3px);
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+        }
+        
+        .contact-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            padding: 80px 0;
+            background-color: var(--light-bg);
+            text-align: center;
+        }
+        
+        .newsletter-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .newsletter h2 {
+            margin-bottom: 16px;
+        }
+        
+        .newsletter p {
+            margin-bottom: 30px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 10px;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            font-size: 14px;
+        }
+        
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .newsletter-note {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 12px;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 60px 0 30px;
+            background-color: #1a1a2e;
+            color: var(--white);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-section h3 {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+        }
+        
+        .footer-bottom {
+            margin-top: 50px;
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .cards-grid, 
+            .features-grid, 
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">Pavankalyan<span>Ghanta</span></a>
+                <nav>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Building innovative solutions through technology and Full-Stack Developer & AI Enthusiast  </h1>
+                <p>I'm a full-stack developer who learns fast, builds with purpose, and loves turning ideas into real-world solutions.
+                    Specializing in RAG pipelines, multi-agent orchestration, and scalable GenAI systems. Passionate about building real-world AI solutions and mentoring future engineers. Always seeking the next challenge to innovate, grow, and make an impact.</p>
+                <a href="#courses" class="btn">Explore My Courses</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cards Section -->
+    <section class="cards-section" id="about">
+        <div class="container">
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Educator and mentor</h3>
+                    <p>Has educated thousands of developers, sharing in-depth knowledge and expertise in tech.</p>
+                </div>
+                <div class="card">
+                    <h3>Cloud consultant</h3>
+                    <p>Provides insightful consultancy to companies embarking on their cloud journeys.</p>
+                </div>
+                <div class="card">
+                    <h3>Community leader & keynote speaker</h3>
+                    <p>Renowned for exceptional community leadership and engaging as a speaker at global tech conferences.</p>
+                    <a href="#">
+                        Learn more
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="card">
+                    <h3>Empathy and professionalism</h3>
+                    <p>Known for a unique blend of empathetic understanding and professional acumen in his approach to work and life.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses" id="courses">
+        <div class="container">
+            <p class="section-subtitle">Courses</p>
+            <h2 class="section-title">Teaching developers to upskill themselves.</h2>
+            <p class="course-description">Step into a world of learning with my comprehensive courses, designed for developers at all levels. I guide you through the intricacies of Machine Learning, the practical applications of DevOps, and mastery of the latest development technologies and complex infrastructures.</p>
+            
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.9999 2.80005L15.0999 9.10005L22.1999 10.2L17.0999 15.2L18.3999 22.2L11.9999 18.9L5.59985 22.2L6.89985 15.2L1.79985 10.2L8.89985 9.10005L11.9999 2.80005Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Widely acclaimed courses</h3>
+                    <p>Join thousands who have benefitted from my courses, backed by thousands of positive reviews.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Latest tech trends webinars</h3>
+                    <p>Regular webinars and sessions to keep you updated with the latest technological advancements.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 16V7.99999C20.9996 7.64927 20.9071 7.3048 20.7315 7.00116C20.556 6.69751 20.3037 6.44536 20 6.26999L13 2.26999C12.696 2.09446 12.3511 2.00204 12 2.00204C11.6489 2.00204 11.304 2.09446 11 2.26999L4 6.26999C3.69626 6.44536 3.44398 6.69751 3.26846 7.00116C3.09294 7.30481 3.00036 7.64927 3 7.99999V16C3.00036 16.3507 3.09294 16.6952 3.26846 16.9988C3.44398 17.3025 3.69626 17.5546 4 17.73L11 21.73C11.304 21.9055 11.6489 21.9979 12 21.9979C12.3511 21.9979 12.696 21.9055 13 21.73L20 17.73C20.3037 17.5546 20.556 17.3025 20.7315 16.9988C20.9071 16.6952 20.9996 16.3507 21 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M3.27002 6.96L12 12.01L20.73 6.96" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 22.08V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Free access to knowledge</h3>
+                    <p>All courses are completely free to watch, making quality education accessible to everyone.</p>
+                </div>
+            </div>
+            
+            <a href="#" class="explore-btn">
+                Explore courses
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="projects-header">
+                <p class="section-subtitle">Projects</p>
+                <h2 class="section-title">Featured Work</h2>
+                <p>Check out some of my recent projects that showcase my skills and expertise.</p>
+            </div>            
+            <div class="project-grid">
+                <!-- Speech Enhancement Using Deep Learning -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="public/projects/Speech Enhancement/thumbnail.png" alt="Speech Enhancement">
+                    </div>
+                    <div class="project-details">
+                        <h3>Speech Enhancement Using Deep Learning</h3>
+                        <p>Real-time speech enhancement system using CNNs and LSTMs, published in IJFMR, optimized for telecom and speech recognition.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">Deep Learning</span>
+                            <span class="project-tag">AI</span>
+                        </div>
+                        <a href="https://github.com/ghantapavan93/speech-enhancement" class="project-link" target="_blank">
+                            GitHub Repo
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.ijfmr.com/research-paper.php?id=12384" class="project-link" target="_blank">
+                            Research Paper
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <!-- Clinical Query Assistant Using RAG and LLMs -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="public/projects/doctorfinder/thumbnail.png" alt="Clinical Query Assistant">
+                    </div>
+                    <div class="project-details">
+                        <h3>Clinical Query Assistant Using RAG and LLMs</h3>
+                        <p>AI-driven assistant using DistilGPT-2 and FAISS to answer clinical queries with a real-time Flask interface.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Flask</span>
+                            <span class="project-tag">LLM</span>
+                            <span class="project-tag">AI</span>
+                        </div>
+                        <a href="https://github.com/ghantapavan93/clinical-query-assistant" class="project-link" target="_blank">
+                            GitHub Repo
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <!-- Mobile Sleep & Wellness Tracker App -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="public/projects/sleepinsights/thumbnail.png" alt="Sleep Tracker App">
+                    </div>
+                    <div class="project-details">
+                        <h3>Mobile Sleep & Wellness Tracker App</h3>
+                        <p>Flutter-based app with Firebase for sleep monitoring, wellness tracking, and smart reminders. Launching soon on Android/iOS.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Flutter</span>
+                            <span class="project-tag">Firebase</span>
+                            <span class="project-tag">Mobile</span>
+                        </div>
+                        <a href="https://github.com/ghantapavan93/sleep-tracker-app" class="project-link" target="_blank">
+                            GitHub Repo
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <!-- EagleEyeAI -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="public/projects/eagleeyeai/thumbnail.png" alt="EagleEyeAI">
+                    </div>
+                    <div class="project-details">
+                        <h3>EagleEyeAI – Real-Time Surveillance Intelligence</h3>
+                        <p>Real-time surveillance system that detects human actions, summarizes video scenes, and flags violent crime indicators for law enforcement.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">AI</span>
+                            <span class="project-tag">Video Analysis</span>
+                            <span class="project-tag">Hackathon</span>
+                        </div>
+                        <a href="https://github.com/ghantapavan93/eagleeyeai" class="project-link" target="_blank">
+                            GitHub Repo
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <!-- Medisync -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="public/projects/medisync/thumbnail.png" alt="Medisync">
+                    </div>
+                    <div class="project-details">
+                        <h3>Medisync – Prescription Tracker Web App</h3>
+                        <p>Full-stack app using Flask, React.js, and Firebase for tracking prescriptions and sending refill alerts. Dockerized deployment.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Flask</span>
+                            <span class="project-tag">React.js</span>
+                            <span class="project-tag">Firebase</span>
+                        </div>
+                        <a href="https://github.com/ghantapavan93/medisync" class="project-link" target="_blank">
+                            GitHub Repo
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <!-- E-buy Website -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="public/projects/phishingwebsite/thumbnail.png" alt="E-buy Website">
+                    </div>
+                    <div class="project-details">
+                        <h3>E-buy Website Development and Data Analysis</h3>
+                        <p>E-commerce website with TLS/SSL, multifactor authentication, and multiple payment gateways. Security tested and production-ready.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">WordPress</span>
+                            <span class="project-tag">Security</span>
+                            <span class="project-tag">E-commerce</span>
+                        </div>
+                        <a href="https://github.com/ghantapavan93/e-buy" class="project-link" target="_blank">
+                            GitHub Repo
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <!-- Get Towed -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="public/projects/Get Towed/" alt="Get Towed">
+                    </div>
+                    <div class="project-details">
+                        <h3>Get Towed (Towing Management System)</h3>
+                        <p>Full-stack system for towing companies to log in, manage vehicles, and streamline operations via an admin dashboard.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">Flask</span>
+                            <span class="project-tag">SQL</span>
+                        </div>
+                        <a href="https://github.com/ghantapavan93/get-towed" class="project-link" target="_blank">
+                            GitHub Repo
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-header">
+                <p class="section-subtitle">Contact</p>
+                <h2 class="section-title">Get in Touch</h2>
+                <p>Have a question or want to work together? Feel free to reach out.</p>
+            </div>
+            
+            <div class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Your Email">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Your Message"></textarea>
+                </div>
+                <button class="btn">Send Message</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Join the newsletter</h2>
+                <p>Get the latest insights and updates straight to your inbox.</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Enter your email">
+                    <button class="btn">Subscribe</button>
+                </div>
+                <p class="newsletter-note">Your privacy is important. I never share your email.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Your Name</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Courses</a></li>
+                        <li><a href="#">Projects</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Socials</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">YouTube</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Other</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">GitHub</a></li>
+                        <li><a href="#">Reddit</a></li>
+                        <li><a href="#">YouTube Hindi</a></li>
+                        <li><a href="#">Credly</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Sponsorships</a></li>
+                        <li><a href="#">Courses</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2023 Your Name. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
