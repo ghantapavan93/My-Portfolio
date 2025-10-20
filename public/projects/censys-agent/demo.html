@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Censys Summarization Agent - Live Demo</title>
+  <meta name="description" content="Interactive demo of the AI-powered Censys host data summarization agent with live video walkthrough." />
+  <link rel="icon" href="/Favicon.png" />
+  <style>
+    :root{color-scheme:light dark}
+    *{box-sizing:border-box}
+    body{font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;margin:0;padding:0;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;min-height:100vh}
+    
+    .container{max-width:1200px;margin:0 auto;padding:20px}
+    .hero{text-align:center;padding:40px 0;background:rgba(255,255,255,0.1);border-radius:20px;margin-bottom:30px;backdrop-filter:blur(10px)}
+    .hero h1{font-size:2.5rem;margin:0 0 10px;font-weight:700}
+    .hero p{font-size:1.2rem;opacity:0.9;max-width:600px;margin:0 auto}
+    
+    .demo-section{background:rgba(255,255,255,0.95);color:#333;border-radius:15px;padding:30px;margin:20px 0;box-shadow:0 10px 30px rgba(0,0,0,0.2)}
+    .demo-section h2{color:#4A5568;margin-top:0;font-size:1.8rem}
+    
+    .video-container{position:relative;width:100%;max-width:900px;margin:0 auto;border-radius:10px;overflow:hidden;box-shadow:0 8px 25px rgba(0,0,0,0.3)}
+    .video-container video{width:100%;height:auto;display:block}
+    
+    .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin:30px 0}
+    .feature-card{background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%);color:white;padding:20px;border-radius:10px;text-align:center}
+    .feature-card h3{margin:0 0 10px;font-size:1.2rem}
+    .feature-card p{font-size:0.9rem;opacity:0.9}
+    
+    .cta-section{text-align:center;padding:40px 0}
+    .btn{display:inline-block;padding:12px 30px;background:#4299e1;color:white;text-decoration:none;border-radius:25px;font-weight:600;margin:10px;transition:all 0.3s ease;box-shadow:0 4px 15px rgba(66,153,225,0.4)}
+    .btn:hover{background:#3182ce;transform:translateY(-2px);box-shadow:0 6px 20px rgba(66,153,225,0.6)}
+    .btn-secondary{background:#48bb78;box-shadow:0 4px 15px rgba(72,187,120,0.4)}
+    .btn-secondary:hover{background:#38a169;box-shadow:0 6px 20px rgba(72,187,120,0.6)}
+    
+    .stats{display:flex;justify-content:space-around;text-align:center;margin:30px 0}
+    .stat{flex:1}
+    .stat-number{font-size:2rem;font-weight:700;color:#4299e1}
+    .stat-label{font-size:0.9rem;opacity:0.8;text-transform:uppercase;letter-spacing:1px}
+    
+    @media (max-width: 768px) {
+      .hero h1{font-size:2rem}
+      .hero p{font-size:1rem}
+      .container{padding:15px}
+      .stats{flex-direction:column;gap:20px}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Hero Section -->
+    <div class="hero">
+      <h1>🤖 Censys Summarization Agent</h1>
+      <p>AI-Powered Cybersecurity Intelligence Platform</p>
+      <p><strong>Live Demo</strong> • <strong>RAG Architecture</strong> • <strong>LLM Integration</strong></p>
+    </div>
+
+    <!-- Live Demo Video Section -->
+    <div class="demo-section">
+      <h2>🎥 Live Demo Walkthrough</h2>
+      <p>Watch the complete end-to-end demonstration of the Censys Summarization Agent in action:</p>
+      
+      <div class="video-container">
+        <video controls preload="metadata" poster="./Censys-1.png">
+          <source src="./Censys Summarization Agent - Google Chrome 2025-10-20 17-13-17.mp4" type="video/mp4">
+          <p>Your browser doesn't support video playback. <a href="./Censys Summarization Agent - Google Chrome 2025-10-20 17-13-17.mp4">Download the demo video</a></p>
+        </video>
+      </div>
+      
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-number">98%</div>
+          <div class="stat-label">Accuracy</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">&lt;2s</div>
+          <div class="stat-label">Response Time</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">100K+</div>
+          <div class="stat-label">Data Points</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Key Features -->
+    <div class="demo-section">
+      <h2>🚀 Key Capabilities Demonstrated</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>🧠 AI Agent Architecture</h3>
+          <p>Autonomous decision-making with context-aware processing</p>
+        </div>
+        <div class="feature-card">
+          <h3>🔍 RAG Integration</h3>
+          <p>Retrieval-Augmented Generation for accurate, contextual responses</p>
+        </div>
+        <div class="feature-card">
+          <h3>🛡️ Cybersecurity Focus</h3>
+          <p>Specialized in threat analysis and security intelligence</p>
+        </div>
+        <div class="feature-card">
+          <h3>⚡ Real-time Processing</h3>
+          <p>Instant analysis and summarization of complex security data</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Screenshots -->
+    <div class="demo-section">
+      <h2>📸 Application Screenshots</h2>
+      <div class="features-grid">
+        <div style="text-align:center;">
+          <img src="./Censys-1.png" alt="Dashboard Interface" style="width:100%;max-width:300px;border-radius:10px;box-shadow:0 4px 15px rgba(0,0,0,0.2)">
+          <h4>Dashboard Interface</h4>
+        </div>
+        <div style="text-align:center;">
+          <img src="./Censys-2.png" alt="Analysis Results" style="width:100%;max-width:300px;border-radius:10px;box-shadow:0 4px 15px rgba(0,0,0,0.2)">
+          <h4>AI Analysis Results</h4>
+        </div>
+        <div style="text-align:center;">
+          <img src="./Censys-3.png" alt="Report Generation" style="width:100%;max-width:300px;border-radius:10px;box-shadow:0 4px 15px rgba(0,0,0,0.2)">
+          <h4>Report Generation</h4>
+        </div>
+      </div>
+    </div>
+
+    <!-- Architecture Diagram -->
+    <div class="demo-section">
+      <h2>🏗️ System Architecture</h2>
+      <div style="text-align:center;">
+        <img src="./diagram.svg" alt="System Architecture Diagram" style="width:100%;max-width:800px;border-radius:10px">
+        <p><em>End-to-end data flow: Ingestion → AI Processing → Summarization → Export</em></p>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="cta-section">
+      <h2>🔗 Explore Further</h2>
+      <a href="https://github.com/ghantapavan93/censys-summarization-agent" class="btn" target="_blank">
+        📂 View Source Code
+      </a>
+      <a href="./index.html" class="btn btn-secondary">
+        📚 Technical Documentation
+      </a>
+      <a href="/" class="btn btn-secondary">
+        ← Back to Portfolio
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Add some interactive features
+    document.addEventListener('DOMContentLoaded', function() {
+      // Smooth scroll for internal links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+
+      // Video analytics (optional)
+      const video = document.querySelector('video');
+      if (video) {
+        video.addEventListener('play', () => {
+          console.log('Demo video started');
+        });
+        video.addEventListener('ended', () => {
+          console.log('Demo video completed');
+        });
+      }
+    });
+  </script>
+</body>
+</html>

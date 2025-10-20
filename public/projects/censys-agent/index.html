@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Censys Summarization Agent – Docs</title>
+  <meta name="description" content="An AI-powered, full‑stack app that ingests Censys host data and turns it into analyst‑grade summaries with a React UI and FastAPI backend." />
+  <link rel="icon" href="/Favicon.png" />
+  <style>
+    :root{color-scheme:light dark}*{box-sizing:border-box}body{font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;margin:0;padding:0;background:Canvas;color:CanvasText}a{color:inherit}header{position:sticky;top:0;background:color-mix(in oklab,Canvas,CanvasText 3%);border-bottom:1px solid color-mix(in oklab,CanvasText 15%,Canvas);padding:10px 16px;z-index:10}header .wrap{display:flex;align-items:center;gap:12px;max-width:1000px;margin:0 auto}header h1{font-size:16px;margin:0}main{max-width:1000px;margin:24px auto;padding:0 16px;display:grid;grid-template-columns:1fr;gap:20px}section{background:color-mix(in oklab,Canvas,CanvasText 3%);border:1px solid color-mix(in oklab,CanvasText 15%,Canvas);border-radius:12px;padding:16px}h2{margin:0 0 8px}code,kbd,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}pre{background:color-mix(in oklab,Canvas,CanvasText 6%);border:1px solid color-mix(in oklab,CanvasText 15%,Canvas);border-radius:10px;padding:12px;overflow:auto}ul{margin:8px 0 0 18px}li+li{margin-top:4px}.pill{display:inline-block;border:1px solid color-mix(in oklab,CanvasText 15%,Canvas);border-radius:999px;padding:2px 8px;font-size:12px;margin-right:6px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+    .footer{font-size:12px;color:gray;text-align:center;margin:16px 0}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <img src="/Favicon.png" width="20" height="20" alt="logo" />
+      <h1>Censys Summarization Agent – Project Docs</h1>
+      <span class="pill">React</span><span class="pill">FastAPI</span><span class="pill">Python</span><span class="pill">Docker</span>
+    </div>
+  </header>
+  <main>
+    <section>
+      <h2>Overview</h2>
+      <p>An AI-powered, full‑stack application that ingests Censys host data and turns it into analyst‑grade summaries: risks, insights, and next actions. Ships with a modern React UI, a FastAPI backend, optional LLM rewrite, metrics, and handy export tools.</p>
+    </section>
+
+    <section>
+      <h2>End‑to‑End Flow</h2>
+      <div class="grid">
+        <figure>
+          <img src="./diagram.svg" alt="End to End Diagram" style="width:100%;max-width:640px" />
+          <figcaption style="font-size:12px;color:gray">Data ingest → Parsing → Scoring → LLM rewrite → Summary + Exports</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section>
+      <h2>Features</h2>
+      <ul>
+        <li>Import JSON/CSV from Censys; batch uploads supported</li>
+        <li>Risk scoring, service fingerprinting, and flagged exposures</li>
+        <li>LLM rewrite for executive‑friendly summaries (optional)</li>
+        <li>Exports: Markdown, PDF, CSV of findings</li>
+        <li>Metrics: run stats, time-to-summary, flagged count</li>
+        <li>API-first with Swagger/OpenAPI</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Quick Start (Windows PowerShell)</h2>
+      <pre><code># 1) Backend
+python -m venv .venv; . .venv/Scripts/Activate.ps1
+pip install -U pip wheel fastapi uvicorn[standard] pydantic
+$env:PORT=8000; uvicorn app.main:app --host 0.0.0.0 --port $env:PORT
+
+# 2) Frontend
+npm install; npm run dev
+
+# Open http://localhost:5173
+</code></pre>
+      <h3>Docker (Optional)</h3>
+      <pre><code>docker build -t censys-agent .
+docker run --rm -p 8000:8000 censys-agent
+</code></pre>
+    </section>
+
+    <section>
+      <h2>API</h2>
+      <ul>
+        <li>POST /api/ingest – upload Censys data</li>
+        <li>GET /api/summary – get computed summaries</li>
+        <li>POST /api/rewrite – optional LLM rewrite</li>
+        <li>GET /api/metrics – run and performance metrics</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Testing</h2>
+      <pre><code># API smoke
+curl -s http://localhost:8000/health
+
+# Frontend lint/build
+npm run lint; npm run build
+</code></pre>
+    </section>
+
+    <section>
+      <h2>Screenshots</h2>
+      <p>Project screenshots showcasing the end-to-end functionality:</p>
+      <ul>
+        <li>/public/projects/censys-agent/Censys-1.png</li>
+        <li>/public/projects/censys-agent/Censys-2.png</li>
+        <li>/public/projects/censys-agent/Censys-3.png</li>
+        <li>/public/projects/censys-agent/diagram.svg</li>
+      </ul>
+    </section>
+
+    <p class="footer">© <span id="y"></span> Pavankalyan Ghanta</p>
+  </main>
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>

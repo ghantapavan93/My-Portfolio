@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="280" viewBox="0 0 920 280" fill="none">
+  <style>
+    .box{rx:10;ry:10;fill:#0ea5e9;fill-opacity:.08;stroke:#0ea5e9;stroke-opacity:.5}
+    .text{font:14px system-ui,Segoe UI,Roboto;color:#0ea5e9}
+    .muted{font:12px system-ui,Segoe UI,Roboto;fill:#64748b}
+    .arrow{stroke:#94a3b8;stroke-width:2;marker-end:url(#a)}
+  </style>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#94a3b8" />
+    </marker>
+  </defs>
+
+  <!-- Boxes -->
+  <rect class="box" x="20" y="60" width="160" height="80" />
+  <rect class="box" x="210" y="60" width="160" height="80" />
+  <rect class="box" x="400" y="60" width="160" height="80" />
+  <rect class="box" x="590" y="60" width="160" height="80" />
+  <rect class="box" x="780" y="60" width="120" height="80" />
+
+  <!-- Labels -->
+  <g fill="#0ea5e9">
+    <text x="40" y="96" class="text">Ingest</text>
+    <text x="40" y="118" class="muted">Censys JSON/CSV</text>
+
+    <text x="230" y="96" class="text">Parse + Score</text>
+    <text x="230" y="118" class="muted">risks, services</text>
+
+    <text x="420" y="96" class="text">Summarize</text>
+    <text x="420" y="118" class="muted">findings, actions</text>
+
+    <text x="610" y="96" class="text">LLM Rewrite</text>
+    <text x="610" y="118" class="muted">optional</text>
+
+    <text x="800" y="96" class="text">Export</text>
+    <text x="800" y="118" class="muted">MD/PDF/CSV</text>
+  </g>
+
+  <!-- Arrows -->
+  <path class="arrow" d="M180 100 H205" />
+  <path class="arrow" d="M370 100 H395" />
+  <path class="arrow" d="M560 100 H585" />
+  <path class="arrow" d="M750 100 H775" />
+</svg>
