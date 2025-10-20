@@ -57,6 +57,21 @@ export function ProjectsSection() {
             githubUrl="https://github.com/ghantapavan93/project-h"
             highlight={true}
           />
+
+          {/* New: Censys Summarization Agent (appears right after Project-H) */}
+          <ProjectCard 
+            title="Censys Summarization Agent"
+            description="Full‑stack app that ingests Censys host data and produces analyst‑grade summaries: risks, insights, and next actions. Modern React UI, FastAPI backend, optional LLM rewrite, metrics, and export tools. Windows and Docker quickstart."
+            tags={["AI Agent", "RAG", "LLM Integration", "Cybersecurity AI", "React"]}
+            imageUrl={[
+              "/projects/censys-agent/Censys-1.png",
+              "/projects/censys-agent/Censys-2.png",
+              "/projects/censys-agent/Censys-3.png",
+              "/projects/censys-agent/diagram.svg"
+            ]}
+            liveUrl="/projects/censys-agent/demo.html"
+            githubUrl="https://github.com/ghantapavan93/censys-summarization-agent"
+          />
           
           <ProjectCard 
             title="Poster Accessibility Evaluation Tool"
