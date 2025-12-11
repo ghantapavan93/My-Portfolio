@@ -222,112 +222,10 @@ export function HeroSection() {
               </h1>
             </div>
 
-            <div className="animate-fade-up animation-delay-200 mb-6">
-              {/* Premium Intro Paragraph */}
-              <div className="mb-4 p-6 rounded-2xl bg-gradient-to-br from-white/5 via-white/[0.02] to-transparent dark:from-black/10 dark:via-black/5 dark:to-transparent backdrop-blur-sm border border-white/10 shadow-lg">
-                <p className="text-lg md:text-xl leading-relaxed max-w-3xl">
-                  <span className="font-medium text-foreground">I'm an AI Engineer and Full-Stack Developer focused on taking real problems people face and turning them into </span>
-                  <span className="relative inline-block">
-                    <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent font-bold">
-                      deployed products
-                    </span>
-                    <span className="absolute -bottom-0.5 left-0 w-full h-1 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30 rounded-full" />
-                  </span>
-                  <span className="font-medium text-foreground">. My motivation is simple: use technology to quietly </span>
-                  <span className="relative inline-block">
-                    <span className="bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent font-semibold">
-                      reduce everyday friction
-                    </span>
-                    <span className="absolute -bottom-0.5 left-0 w-full h-1 bg-gradient-to-r from-emerald-500/30 to-cyan-500/30 rounded-full" />
-                  </span>
-                  <span className="font-medium text-foreground">—help someone manage their health, feel safer in a crowd, get faster answers at work, or access information more easily. I build systems that fit how companies already operate: </span>
-                  <span className="font-semibold text-foreground/90">APIs, internal tools, AI copilots, and full-stack platforms</span>
-                  <span className="font-medium text-foreground"> that are </span>
-                  <span className="relative inline-block">
-                    <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent font-bold">
-                      reliable in production
-                    </span>
-                    <span className="absolute -bottom-0.5 left-0 w-full h-1 bg-gradient-to-r from-orange-500/30 to-red-500/30 rounded-full" />
-                  </span>
-                  <span className="font-medium text-foreground">, not just impressive in demos.</span>
-                </p>
-              </div>
-
-              {/* Expandable Impact Details */}
-              <button
-                onClick={() => setExpandedProcess(!expandedProcess)}
-                className="flex items-center gap-2 text-sm text-primary font-medium mb-3 hover:gap-3 transition-all group"
-              >
-                <span>→ See real systems & impact metrics</span>
-                <ChevronDown className={`w-4 h-4 transition-transform ${expandedProcess ? 'rotate-180' : ''}`} />
-              </button>
-
-              {expandedProcess && (
-                <div className="space-y-4 animate-fade-down">
-                  {/* Impact Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                    <div className="p-3 rounded-lg bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/20">
-                      <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-                        15+
-                      </div>
-                      <div className="text-xs text-muted-foreground mt-1">
-                        AI & full-stack systems <span className="font-semibold text-foreground">deployed to production</span>
-                      </div>
-                    </div>
-
-                    <div className="p-3 rounded-lg bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/20">
-                      <div className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                        200+
-                      </div>
-                      <div className="text-xs text-muted-foreground mt-1">
-                        Students mentored in <span className="font-semibold text-foreground">AI & software engineering</span>
-                      </div>
-                    </div>
-
-                    <div className="p-3 rounded-lg bg-gradient-to-br from-emerald-500/10 to-lime-500/10 border border-emerald-500/20">
-                      <div className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-lime-600 bg-clip-text text-transparent">
-                        10,000+
-                      </div>
-                      <div className="text-xs text-muted-foreground mt-1">
-                        People using my <span className="font-semibold text-foreground">live safety & health systems</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Real Examples */}
-                  <div className="p-4 rounded-lg bg-white/5 dark:bg-black/10 backdrop-blur-sm border border-white/10">
-                    <h4 className="text-sm font-semibold mb-2 flex items-center gap-2">
-                      <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-r from-orange-500 to-red-500 text-xs">
-                        🚀
-                      </span>
-                      Production systems I've shipped:
-                    </h4>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
-                      <li className="flex items-start gap-2">
-                        <span className="text-blue-500 mt-0.5">▸</span>
-                        <span><span className="font-semibold text-foreground">Medical AI copilot</span> helping patients decode complex diagnoses into plain language</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-purple-500 mt-0.5">▸</span>
-                        <span><span className="font-semibold text-foreground">Real-time crowd safety monitoring</span> for 10,000+ person events with live threat detection</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-emerald-500 mt-0.5">▸</span>
-                        <span><span className="font-semibold text-foreground">HR automation tools</span> saving teams 10+ hours weekly on admin workflows</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-orange-500 mt-0.5">▸</span>
-                        <span><span className="font-semibold text-foreground">RAG-powered knowledge engines</span> for enterprise teams with 95%+ accuracy</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  {/* Value Prop */}
-                  <p className="text-sm leading-relaxed text-muted-foreground italic border-l-2 border-primary pl-3">
-                    "I build systems that fit how companies already operate—APIs, internal tools, AI copilots, and platforms that are reliable in production, handle real edge cases, and actually used by real people. Not just demos that look good in slides."
-                  </p>
-                </div>
-              )}
+            <div className="animate-fade-up animation-delay-200 mb-5">
+              <p className="text-lg leading-relaxed text-muted-foreground max-w-2xl">
+                I'm an AI Engineer and Full-Stack Developer focused on taking real problems people face and turning them into deployed products. My motivation is simple: use technology to quietly reduce everyday friction—help someone manage their health, feel safer in a crowd, get faster answers at work, or access information more easily. I build systems that fit how companies already operate: APIs, internal tools, AI copilots, and full-stack platforms that are reliable in production, not just impressive in demos.
+              </p>
             </div>
 
             <div className="animate-fade-up animation-delay-300 mb-8">
@@ -423,8 +321,8 @@ export function HeroSection() {
                 >
                   <div
                     className={`px-3 py-2 rounded-full backdrop-blur-md shadow-lg cursor-pointer transition-all duration-300 border ${activeEmoji === item.chipId
-                      ? 'bg-primary/30 border-primary scale-110 shadow-primary/50'
-                      : 'bg-white/10 dark:bg-black/20 border-white/20 hover:scale-110 hover:bg-white/20'
+                        ? 'bg-primary/30 border-primary scale-110 shadow-primary/50'
+                        : 'bg-white/10 dark:bg-black/20 border-white/20 hover:scale-110 hover:bg-white/20'
                       } ${easterEggActive ? 'animate-bounce' : 'animate-float-subtle'}`}
                   >
                     <span className="text-2xl" role="img" aria-label={item.label}>
@@ -440,27 +338,11 @@ export function HeroSection() {
 
       {/* Capabilities Box - Centered Below Grid */}
       <div className="max-w-5xl mx-auto mb-10 animate-fade-up animation-delay-400">
-        <div className="bg-white/5 dark:bg-black/10 backdrop-blur-xl rounded-2xl p-6 md:p-8 border border-white/10 shadow-lg shadow-primary/10 hover:shadow-primary/20 hover:border-primary/40 transition-all duration-500">
-          {/* Header row */}
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-6">
-            <div className="flex items-center gap-2">
-              <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-xs">
-                ⚙️
-              </span>
-              <h2 className="text-sm font-semibold tracking-wide uppercase text-muted-foreground">
-                Capabilities snapshot
-              </h2>
-            </div>
-            <p className="text-xs text-muted-foreground">
-              12 domains · 7 system patterns · 6 ways of working
-            </p>
-          </div>
-          {/* 3-column grid of pillars */}
-          <div className="grid gap-6 md:grid-cols-3">
+        <div className="bg-white/5 dark:bg-black/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+          <div className="space-y-5">
             {/* Building Across */}
             <div>
-              <h3 className="text-xs font-semibold text-muted-foreground mb-2.5 tracking-wide uppercase flex items-center gap-1">
-                <span className="inline-block h-4 w-1 rounded-full bg-gradient-to-b from-blue-500 to-cyan-400" />
+              <h3 className="text-xs font-semibold text-muted-foreground mb-2.5 tracking-wide uppercase">
                 Building across
               </h3>
               <div className="flex flex-wrap gap-1.5">
@@ -468,8 +350,8 @@ export function HeroSection() {
                   <span
                     key={chip.id}
                     className={`px-2.5 py-1 rounded-full text-xs font-medium bg-white/5 dark:bg-black/10 backdrop-blur-sm border transition-all duration-300 cursor-default ${activeEmoji === chip.id
-                      ? 'border-primary bg-primary/20 shadow-lg shadow-primary/30 scale-105'
-                      : 'border-white/10 hover:border-primary/50 hover:bg-white/10'
+                        ? 'border-primary bg-primary/20 shadow-lg shadow-primary/30 scale-105'
+                        : 'border-white/10 hover:border-primary/50 hover:bg-white/10'
                       }`}
                   >
                     <span className="mr-1">{chip.icon}</span>
@@ -478,10 +360,10 @@ export function HeroSection() {
                 ))}
               </div>
             </div>
+
             {/* What I Build */}
             <div>
-              <h3 className="text-xs font-semibold text-muted-foreground mb-2.5 tracking-wide uppercase flex items-center gap-1">
-                <span className="inline-block h-4 w-1 rounded-full bg-gradient-to-b from-purple-500 to-pink-500" />
+              <h3 className="text-xs font-semibold text-muted-foreground mb-2.5 tracking-wide uppercase">
                 What I build
               </h3>
               <div className="flex flex-wrap gap-1.5">
@@ -496,10 +378,10 @@ export function HeroSection() {
                 ))}
               </div>
             </div>
+
             {/* How I Work */}
             <div>
-              <h3 className="text-xs font-semibold text-muted-foreground mb-2.5 tracking-wide uppercase flex items-center gap-1">
-                <span className="inline-block h-4 w-1 rounded-full bg-gradient-to-b from-emerald-500 to-lime-400" />
+              <h3 className="text-xs font-semibold text-muted-foreground mb-2.5 tracking-wide uppercase">
                 How I work
               </h3>
               <div className="flex flex-wrap gap-1.5">
@@ -514,19 +396,17 @@ export function HeroSection() {
                 ))}
               </div>
             </div>
-          </div>
-          {/* Tech Stack band */}
-          <div className="mt-6 pt-4 border-t border-white/10">
-            <h3 className="text-xs font-semibold text-muted-foreground mb-2.5 tracking-wide uppercase flex items-center gap-1">
-              <span className="inline-block h-4 w-1 rounded-full bg-gradient-to-b from-orange-500 to-red-500" />
-              Tech stack
-            </h3>
-            <div className="overflow-hidden">
-              <div className="flex gap-2 animate-scroll-infinite">
-                {[...techStack, ...techStack, ...techStack].map((tech, idx) => (
+
+            {/* Tech Stack */}
+            <div>
+              <h3 className="text-xs font-semibold text-muted-foreground mb-2.5 tracking-wide uppercase">
+                Tech Stack
+              </h3>
+              <div className="flex flex-wrap gap-1.5">
+                {techStack.map((tech, idx) => (
                   <span
                     key={idx}
-                    className="px-2.5 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-primary/10 to-purple-500/10 border border-primary/20 shadow-sm shadow-primary/10 whitespace-nowrap"
+                    className="px-2.5 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-primary/10 to-purple-500/10 border border-primary/20"
                   >
                     {tech}
                   </span>
