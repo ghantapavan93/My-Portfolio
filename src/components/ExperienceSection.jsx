@@ -1,5 +1,5 @@
 import { Badge } from './ui/badge'
-import { CalendarIcon, MapPinIcon, Briefcase, ChevronRightIcon, X } from 'lucide-react'
+import { CalendarIcon, MapPinIcon, Briefcase, ChevronRightIcon, X, ExternalLink } from 'lucide-react'
 import { useState } from 'react'
 
 const experiences = [
@@ -145,6 +145,19 @@ const experiences = [
     learnMore: {
       intro:
         'Krowd Guide started as a rough sketch and a simple idea: give organizers a real-time sense of crowd safety that fits directly into how they already run events. As founding engineer, I owned the full stack—from UX, to APIs, to AI agents and observability.',
+      website: 'https://krowd-guide-mvp.vercel.app/',
+      images: [
+        '/krowd-deep-dive/Home page.png',
+        '/krowd-deep-dive/Houston-1.png',
+        '/krowd-deep-dive/Houston-2.png',
+        '/krowd-deep-dive/j1.png',
+        '/krowd-deep-dive/j2.png',
+        '/krowd-deep-dive/j3.png',
+        '/krowd-deep-dive/j4.png',
+        '/krowd-deep-dive/j5.png',
+        '/krowd-deep-dive/j6.png',
+        '/krowd-deep-dive/j7.png'
+      ],
       sections: [
         {
           heading: 'Problem & context',
@@ -720,49 +733,98 @@ export function ExperienceSection() {
 
       {/* Learn more modal */}
       {openModalId && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/55 backdrop-blur-sm">
-          <div className="relative bg-card max-w-3xl w-full mx-4 rounded-xl border border-border/50 shadow-2xl max-h-[80vh] overflow-hidden">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
+          <div className="relative bg-card w-full max-w-[95vw] h-[90vh] rounded-2xl border border-border/50 shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             {(() => {
               const exp = experiences.find((e) => e.id === openModalId)
               return (
                 <>
-                  <div className="flex items-center justify-between px-5 py-4 border-b border-border/40">
+                  {/* Modal Header */}
+                  <div className="flex items-center justify-between px-6 py-5 border-b border-border/40 shrink-0">
                     <div>
                       <p className="text-xs font-semibold uppercase tracking-wide text-primary/80">
                         Deep dive
                       </p>
-                      <h3 className="text-lg font-semibold">
+                      <h3 className="text-2xl font-bold mt-1">
                         {exp.fullTitle}
                       </h3>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-sm text-muted-foreground mt-1">
                         {exp.company} · {exp.period} · {exp.location}
                       </p>
                     </div>
                     <button
                       onClick={() => setOpenModalId(null)}
-                      className="p-1.5 rounded-full hover:bg-secondary/60 transition-colors"
+                      className="p-2 rounded-full hover:bg-secondary/60 transition-colors"
                       aria-label="Close"
                     >
-                      <X className="h-4 w-4" />
+                      <X className="h-6 w-6" />
                     </button>
                   </div>
 
-                  <div className="px-5 py-4 space-y-3 overflow-y-auto max-h-[60vh]">
-                    <p className="text-sm text-foreground">
-                      {exp.learnMore.intro}
-                    </p>
-                    {exp.learnMore.sections.map((section) => (
-                      <div key={section.heading} className="mt-3">
-                        <h4 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1.5">
-                          {section.heading}
-                        </h4>
-                        <ul className="list-disc list-inside space-y-1.5 text-sm text-muted-foreground">
-                          {section.points.map((point) => (
-                            <li key={point}>{point}</li>
-                          ))}
-                        </ul>
+                  {/* Modal Body - Scrollable */}
+                  <div className="flex-1 overflow-y-auto px-6 py-6 custom-scrollbar">
+                    <div className="max-w-6xl mx-auto space-y-8">
+                      {/* Intro Section */}
+                      <div className="space-y-4">
+                        <p className="text-base md:text-lg text-foreground leading-relaxed">
+                          {exp.learnMore.intro}
+                        </p>
+
+                        {exp.learnMore.website && (
+                          <div className="flex">
+                            <a
+                              href={exp.learnMore.website}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-semibold hover:bg-primary/90 transition-all shadow-sm hover:shadow-md hover:scale-[1.02]"
+                            >
+                              <ExternalLink className="h-4 w-4" />
+                              Visit Live Project
+                            </a>
+                          </div>
+                        )}
                       </div>
-                    ))}
+
+                      {/* Image Gallery */}
+                      {exp.learnMore.images && exp.learnMore.images.length > 0 && (
+                        <div className="space-y-4">
+                          <h4 className="text-sm font-bold uppercase tracking-wide text-muted-foreground border-b border-border/40 pb-2">
+                            Project Visuals
+                          </h4>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {exp.learnMore.images.map((img, idx) => (
+                              <div key={idx} className="group relative rounded-xl border border-border/40 bg-secondary/10 overflow-hidden shadow-sm hover:shadow-lg transition-all">
+                                <img
+                                  src={img}
+                                  alt={`${exp.company} screenshot ${idx + 1}`}
+                                  className="w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-500"
+                                  loading="lazy"
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Detailed Sections (Problem, Systems, Impact) */}
+                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {exp.learnMore.sections.map((section) => (
+                          <div key={section.heading} className="bg-secondary/20 rounded-xl p-5 border border-border/30">
+                            <h4 className="text-xs font-bold uppercase tracking-wide text-primary mb-3">
+                              {section.heading}
+                            </h4>
+                            <ul className="space-y-2.5">
+                              {section.points.map((point) => (
+                                <li key={point} className="flex gap-2 text-sm text-foreground/90">
+                                  <span className="text-primary/60 mt-1.5">•</span>
+                                  <span className="leading-snug">{point}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </>
               )
