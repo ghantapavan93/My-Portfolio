@@ -80,6 +80,70 @@ export function ProjectsSection() {
     ]
   };
 
+  // Data for Episode Companion Agent
+  const episodeAgentLearnMore = {
+    id: "episode-agent",
+    title: "Episode Companion Agent",
+    tagline: "Microservice for AI Research Daily Episodes",
+    description: "A focused microservice designed to give individual 'AI Research Daily' episodes their own dedicated mini-agents. It creates structured interaction modes like 'Founder Takeaway' and 'Engineer Angle', transforming static audio/text content into dynamic, queryable agents.",
+    role: "Full-Stack Developer",
+    timeline: "2024",
+    type: "AI Agent System",
+    liveUrl: null, // No live URL mentioned, only GitHub
+    repoUrl: "https://github.com/ghantapavan93/EPISODE-COMPANION-AGENT",
+    technologies: ["Python", "FastAPI", "Google Gemini", "ChromaDB", "React", "RAG"],
+    heroImage: "/Episode%20Companion%20Agent/Kochi-1.png",
+    gallery: [
+      "/Episode%20Companion%20Agent/Kochi-1.png",
+      "/Episode%20Companion%20Agent/Kochi-2.png",
+      "/Episode%20Companion%20Agent/Kochi-3.png",
+      "/Episode%20Companion%20Agent/Kochi-4.png",
+      "/Episode%20Companion%20Agent/Kochi-5.png",
+      "/Episode%20Companion%20Agent/Kochi-6.png"
+    ],
+    story: [
+      {
+        type: "video_showcase",
+        heading: "Demo Video",
+        videoUrl: "/Episode%20Companion%20Agent/AI%20Research%20Daily%20Companion.mp4",
+        caption: "Watch the Episode Companion Agent in action"
+      },
+      {
+        type: "intro",
+        heading: "The Challenge",
+        text: "Daily AI research updates are valuable but often static. The goal was to transform these episodes into interactive experiences, allowing users to query specific details, understand technical depth, or get high-level business takeaways on demand."
+      },
+      {
+        type: "feature_split",
+        heading: "Ingestion & RAG Pipeline",
+        text: "The system automatically chunks and embeds episode scripts into a local vector store (ChromaDB). This enables Retrieval-Augmented Generation (RAG) to provide precise, context-aware answers to user queries, grounded in the actual content of the episode.",
+        bullets: ["Automated Script Chunking", "Vector Store Embedding", "Context-Aware Retrieval"],
+        image: "/Episode%20Companion%20Agent/Kochi-2.png",
+        imageCaption: "RAG Pipeline Visualization",
+        reverse: false
+      },
+      {
+        type: "feature_split",
+        heading: "Structured Personas",
+        text: "Users can interact with the content through different lenses. 'Plain English' simplifies complex topics, 'Founder Takeaway' focuses on market intent and product strategy, and 'Engineer Angle' dives into the architectural and technical details.",
+        bullets: ["Multi-Persona RAG", "Business vs. Technical Views", "Tailored Insights"],
+        image: "/Episode%20Companion%20Agent/Kochi-3.png",
+        imageCaption: "Persona Selection Interface",
+        reverse: true
+      },
+      {
+        type: "grid",
+        heading: "Tech Stack & Architecture",
+        items: [
+          { title: "Backend", desc: "FastAPI for high-performance REST endpoints.", icon: "Server" },
+          { title: "AI/LLM", desc: "Google Gemini & OpenAI for intelligence and reasoning.", icon: "Zap" },
+          { title: "Vectors", desc: "ChromaDB for semantic search and retrieval.", icon: "Database" },
+          { title: "Frontend", desc: "React for a responsive, interactive chat interface.", icon: "Layout" }
+        ]
+      }
+    ]
+  };
+
   // Add fade-in animation when section comes into view
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -145,6 +209,20 @@ export function ProjectsSection() {
             ]}
             liveUrl="/projects/censys-agent/demo.html"
             githubUrl="https://github.com/ghantapavan93/censys-summarization-agent"
+          />
+
+          <ProjectCard
+            title="Episode Companion Agent"
+            description="Microservice agent for 'AI Research Daily' episodes. Features automated RAG ingestion, vector search, and multi-persona queries (Founder, Engineer, Plain English)."
+            tags={["AI Agent", "FastAPI", "RAG", "ChromaDB", "Gemini"]}
+            imageUrl={[
+              "/Episode%20Companion%20Agent/Kochi-1.png",
+              "/Episode%20Companion%20Agent/Kochi-2.png",
+              "/Episode%20Companion%20Agent/Kochi-3.png"
+            ]}
+            githubUrl="https://github.com/ghantapavan93/EPISODE-COMPANION-AGENT"
+            onLearnMore={() => setActiveProject(episodeAgentLearnMore)}
+            learnMore={true}
           />
 
           <ProjectCard
@@ -468,6 +546,36 @@ export function ProjectsSection() {
                           </div>
                         );
                       }
+
+
+                      if (section.type === 'video_showcase') {
+                        return (
+                          <div key={idx} className="max-w-4xl mx-auto space-y-4">
+                            <div className="text-center mb-6">
+                              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 text-primary text-xs font-bold uppercase tracking-wider mb-2">
+                                Video Demo
+                              </div>
+                              <h4 className="text-2xl sm:text-3xl font-bold">{section.heading}</h4>
+                            </div>
+                            <div className="relative rounded-xl overflow-hidden border border-border/50 shadow-2xl bg-black">
+                              <video
+                                src={section.videoUrl}
+                                controls
+                                className="w-full h-auto max-h-[600px] mx-auto"
+                                poster={section.poster || activeProject.heroImage}
+                              >
+                                Your browser does not support the video tag.
+                              </video>
+                            </div>
+                            {section.caption && (
+                              <p className="text-center text-sm text-muted-foreground italic">
+                                {section.caption}
+                              </p>
+                            )}
+                          </div>
+                        );
+                      }
+
                       return null;
                     })}
                   </div>
