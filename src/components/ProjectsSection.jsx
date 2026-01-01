@@ -80,6 +80,59 @@ export function ProjectsSection() {
     ]
   };
 
+  // Data for Medisync
+  const medisyncLearnMore = {
+    id: "medisync",
+    title: "Medisync",
+    tagline: "Intelligent Web Prescription & Healthcare Platform",
+    description: "A secure, end-to-end digital health platform designed to streamline the prescription lifecycle. It connects physicians, patients, and pharmacies in a unified interface, ensuring medication accuracy, improving adherence, and facilitating seamless healthcare communication.",
+    role: "Full-Stack Engineer",
+    timeline: "2024",
+    type: "Healthcare Platform",
+    liveUrl: null,
+    repoUrl: "https://github.com/ghantapavan93/Medisync",
+    technologies: ["React", "Node.js", "Express", "MongoDB", "JWT Auth", "REST API"],
+    heroImage: "/projects/Medisync/thumbnail.png",
+    gallery: [
+      "/projects/Medisync/thumbnail.png"
+    ],
+    story: [
+      {
+        type: "intro",
+        heading: "The Challenge",
+        text: "Traditional prescription management is often fragmented, relying on handwritten notes or disconnected systems. This leads to medication errors, pharmacy bottlenecks, and a lack of clear tracking for patients. The goal was to build a system that digitizes this entire flow while maintaining high standards of data integrity."
+      },
+      {
+        type: "feature_split",
+        heading: "Smart Prescription Hub",
+        text: "Doctors can generate digital prescriptions with instant validation checks. These are immediately accessible to linked pharmacies and the patient's mobile-ready dashboard, eliminating paper waste and transcription errors.",
+        bullets: ["Instant Digital Prescriptions", "Pharmacy Integration", "Error Reduction"],
+        image: "/projects/Medisync/thumbnail.png",
+        imageCaption: "Doctor's Prescription Dashboard",
+        reverse: false
+      },
+      {
+        type: "feature_split",
+        heading: "Patient-Centric Portal",
+        text: "Patients get a dedicated portal to view their medication history, track active prescriptions, and find nearby pharmacies. The interface is designed for accessibility, ensuring users of all ages can manage their health effectively.",
+        bullets: ["Medication History Tracking", "Pharmacy Finder", "Accessible UI Design"],
+        image: "/projects/Medisync/thumbnail.png",
+        imageCaption: "Patient Medical History View",
+        reverse: true
+      },
+      {
+        type: "grid",
+        heading: "Technical Architecture",
+        items: [
+          { title: "Frontend", desc: "React with modular components for a responsive experience.", icon: "Layout" },
+          { title: "Backend", desc: "Node.js & Express REST API for scalable data handling.", icon: "Server" },
+          { title: "Database", desc: "MongoDB for flexible patient and record schemas.", icon: "Database" },
+          { title: "Security", desc: "JWT Authentication & Role-Based Access Control (RBAC).", icon: "Shield" }
+        ]
+      }
+    ]
+  };
+
   // Data for Episode Companion Agent
   const episodeAgentLearnMore = {
     id: "episode-agent",
@@ -209,6 +262,16 @@ export function ProjectsSection() {
             ]}
             liveUrl="/projects/censys-agent/demo.html"
             githubUrl="https://github.com/ghantapavan93/censys-summarization-agent"
+          />
+
+          <ProjectCard
+            title="Medisync"
+            description="A secure, HIPAA-compliant web prescription platform connecting doctors, patients, and pharmacies. Streamlines medication management with real-time tracking and digital verification."
+            tags={["React", "Node.js", "Healthcare", "HIPAA", "Web App"]}
+            imageUrl="/projects/Medisync/thumbnail.png"
+            githubUrl="https://github.com/ghantapavan93/Medisync"
+            onLearnMore={() => setActiveProject(medisyncLearnMore)}
+            learnMore={true}
           />
 
           <ProjectCard
