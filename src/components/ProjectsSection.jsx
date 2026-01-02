@@ -197,6 +197,59 @@ export function ProjectsSection() {
     ]
   };
 
+  // Data for Smart Tutor AI
+  const smartTutorLearnMore = {
+    id: "smart-tutor",
+    title: "Smart Tutor AI",
+    tagline: "Autonomous RAG-Driven Educational Agent",
+    description: "A next-generation educational platform leveraging Retrieval-Augmented Generation (RAG) and Large Language Models (LLMs) to deliver hyper-personalized tutoring. Unlike static learning management systems, Smart Tutor AI acts as an intelligent companion that dynamically adapts tailored curriculums, generates context-aware quizzes, and employs Socratic reasoning to guide students through complex concepts.",
+    role: "AI Engineer & Full-Stack Developer",
+    timeline: "2024",
+    type: "AI & EdTech Platform",
+    liveUrl: null,
+    repoUrl: "https://github.com/ghantapavan93/Smart-Tutor-AI-Clean/tree/main/Smart-Tutor-AI-AI-Driven-Personalized-Teaching-Support-main",
+    technologies: ["OpenAI GPT-4", "LangChain", "RAG Pipeline", "Pinecone (Vector DB)", "React", "Python FastAPI"],
+    heroImage: "/projects/Smart-Tutor-AI-Clean/thumbnail.png",
+    gallery: [
+      "/projects/Smart-Tutor-AI-Clean/thumbnail.png"
+    ],
+    story: [
+      {
+        type: "intro",
+        heading: "The Challenge: Beyond Static Learning",
+        text: "Traditional online education is passive, and generic LLMs often hallucinate or lack curriculum alignment. The challenge was to build an AI system that is both 'grounded' in specific educational materials (accuracy) and 'pedagogically adaptive' to the student's learning pace (efficacy)."
+      },
+      {
+        type: "feature_split",
+        heading: "Context-Aware RAG Engine",
+        text: "The core engine ingests textbooks, lecture notes, and research papers into a vector store (Pinecone). When a student asks a query, the system retrieves only the relevant 'knowledge chunks' to prompt the LLM. This ensures every explanation is factually grounded in the course material, eliminating hallucinations.",
+        bullets: ["Vector-Based Knowledge Retrieval", "Source-Cided Explanations", "Zero-Hallucination Architecture"],
+        image: "/projects/Smart-Tutor-AI-Clean/thumbnail.png",
+        imageCaption: "RAG Pipeline: From Textbook to Insight",
+        reverse: false
+      },
+      {
+        type: "feature_split",
+        heading: "Socratic Reasoning Core",
+        text: "Instead of simply providing answers, the LLM is instruction-tuned to act as a Socratic tutor. It breaks down complex problems into step-by-step reasoning chains, asking guiding questions that encourage the student to derive the solution themselves, reinforcing long-term retention.",
+        bullets: ["Chain-of-Thought Reasoning", "Socratic Dialogue Mode", "Step-by-Step Problem Solving"],
+        image: "/projects/Smart-Tutor-AI-Clean/thumbnail.png",
+        imageCaption: "AI Tutor Guiding a Student Promise",
+        reverse: true
+      },
+      {
+        type: "grid",
+        heading: "Architecture & AI Stack",
+        items: [
+          { title: "LLM Orchestration", desc: "LangChain agents for multi-step reasoning and tool use.", icon: "Zap" },
+          { title: "Vector Memory", desc: "Pinecone/ChromaDB for semantic search over course content.", icon: "Database" },
+          { title: "API Layer", desc: "Python FastAPI handling asynchronous inference streams.", icon: "Server" },
+          { title: "Frontend", desc: "React UI with LaTeX support for mathematical rendering.", icon: "Layout" }
+        ]
+      }
+    ]
+  };
+
   // Add fade-in animation when section comes into view
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -402,12 +455,16 @@ export function ProjectsSection() {
             githubUrl="https://github.com/ghantapavan93/SafePath-Airport-Transit-Assistant-for-Travelers-"
           />
 
+
+
           <ProjectCard
             title="Smart Tutor AI"
             description="AI-driven personalized teaching support platform, offering adaptive learning paths and intelligent tutoring for students."
             tags={["AI", "EdTech", "Personalization", "React"]}
             imageUrl="/projects/Smart-Tutor-AI-Clean/thumbnail.png"
             githubUrl="https://github.com/ghantapavan93/Smart-Tutor-AI-Clean/tree/main/Smart-Tutor-AI-AI-Driven-Personalized-Teaching-Support-main"
+            onLearnMore={() => setActiveProject(smartTutorLearnMore)}
+            learnMore={true}
           />
         </div>
       </div>
