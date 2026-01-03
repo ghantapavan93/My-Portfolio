@@ -197,6 +197,85 @@ export function ProjectsSection() {
     ]
   };
 
+
+  // Data for EagleEye AI
+  const eagleEyeLearnMore = {
+    id: "eagle-eye",
+    title: "EagleEye AI",
+    tagline: "Safety-First, AI-Powered Video Intelligence Platform",
+    description: "EagleEye AI is evolving into a full safety + incident intelligence platform—not just a 'camera demo.' It turns surveillance into a real-time, evidence-grounded decision system: detect risk, explain why, attach proof, and route alerts. Designed like a SOC platform for the physical world, it prioritizes deterministic reasoning and operator trust.",
+    role: "AI Engineer & Architect",
+    timeline: "2024",
+    type: "Enterprise Safety Platform",
+    liveUrl: "https://fardeen210-eagle-eye-ai-streamlitapp-cebf0r.streamlit.app/",
+    repoUrl: "https://github.com/ghantapavan93/Eagle-Eye-AI/tree/main/Eagle-Eye-AI-main",
+    technologies: ["Python", "FastAPI", "OpenCV", "PyTorch", "Docker", "AWS", "Multimodal LLM", "Vector Search"],
+    heroImage: "/projects/EagleEye AI/thumbnail.png",
+    gallery: [
+      "/projects/EagleEye AI/thumbnail.png"
+    ],
+    story: [
+      {
+        type: "intro",
+        heading: "North Star: Production Safety",
+        text: "Most CCTV AI projects are 'box detection.' EagleEye AI is designed like a SOC platform for the physical world. From video → to incident → to action. It features deterministic-first reasoning, evidence bundles (timestamps, frames), and operator-grade workflows. If a security operator opens EagleEye AI, it feels like a production safety platform."
+      },
+      {
+        type: "grid",
+        heading: "Core Principles",
+        items: [
+          { title: "Evidence > Eloquence", desc: "Every summary must map to visible cues + time anchors. No evidence = no escalation.", icon: "Shield" },
+          { title: "Deterministic First", desc: "Risk scores decided by rules + physics first. LLM is for explanation, not decision-making.", icon: "Zap" },
+          { title: "Operator Trust", desc: "Validation in <15s. Every incident ships with before/during/after context.", icon: "CheckCircle2" },
+          { title: "Privacy-by-Design", desc: "Face-blur modes, retention policies, and audit trails are core features.", icon: "Lock" }
+        ]
+      },
+      {
+        type: "intro", // Using intro style for Architecture overview
+        heading: "Platform Architecture (V2)",
+        text: "Built like a real system with distinct layers: **A) Ingestion** (RTSP/ONVIF), **B) Event Fabric** (Signal Bus), **C) Threat Understanding** (Temporal Behavior), **D) Risk Scoring** (Deterministic Truth), **E) Multimodal Reporting** (Grounded LLM), **F) Operator Console** (Triage UI), and **G) Feedback Loop** (Regression Testing)."
+      },
+      {
+        type: "feature_split",
+        heading: "Solving Real-World Noise",
+        text: "Challenge: 'Movement = Danger' causes false positives. Solution: A two-stage gating design. signals + heuristics build the event first, then a threat lexicon filter applies. For low-light/blur, we use multi-frame context and peak-motion keyframes, bundling evidence so human review is fast even if model confidence drops.",
+        bullets: ["Two-Stage Gating", "Multi-Frame Context", "Evidence Bundling"],
+        image: "/projects/EagleEye AI/thumbnail.png",
+        imageCaption: "Noise Filtering & Evidence Bundling",
+        reverse: false
+      },
+      {
+        type: "feature_split",
+        heading: "Halt Hallucinations & Cost",
+        text: "Surveillance AI cannot invent weapons. We use constrained prompts ('describe only visible') and force timestamp references. To manage compute cost, we use dynamic sampling—only 'promising' time windows get expensive reasoning, keeping throughput practical on modest infra.",
+        bullets: ["Constrained Prompts", "Dynamic Sampling", "Visual-Only Grounding"],
+        image: "/projects/EagleEye AI/thumbnail.png",
+        imageCaption: "Cost-Aware AI Reasoning",
+        reverse: true
+      },
+      {
+        type: "grid",
+        heading: "Results & Impact",
+        items: [
+          { title: "High-Signal", desc: "Converts long video into specific incident candidates.", icon: "Zap" },
+          { title: "Reduced Workload", desc: "Reviewers see only threat-aligned events.", icon: "CheckCircle2" },
+          { title: "Explainable", desc: "Audit-friendly bundles with explainable decisions.", icon: "FileText" },
+          { title: "Performance", desc: "Optimized frames/sec on CPU vs GPU.", icon: "Activity" }
+        ]
+      },
+      {
+        type: "grid",
+        heading: "Future Integrations",
+        items: [
+          { title: "Security Ops", desc: "Slack/Teams alerts, Twilio SMS, Jira tickets.", icon: "Bell" },
+          { title: "SOC/SIEM", desc: "Splunk/Sentinel export, SOAR webhooks.", icon: "Server" },
+          { title: "VMS Connectors", desc: "Inject incidents back into standard VMS timelines.", icon: "Video" },
+          { title: "IoT Triggers", desc: "Correlate with access control (badges) and sensors.", icon: "Wifi" }
+        ]
+      }
+    ]
+  };
+
   // Data for Smart Tutor AI
   const smartTutorLearnMore = {
     id: "smart-tutor",
@@ -425,10 +504,13 @@ export function ProjectsSection() {
 
           <ProjectCard
             title="EagleEye AI"
-            description="A real-time computer vision platform for surveillance and anomaly detection, leveraging deep learning for security and analytics."
+            description="Safety-First, AI-Powered Video Intelligence Platform. Turns surveillance into real-time, evidence-grounded decision systems with deterministic reasoning and privacy-by-design."
             tags={["Computer Vision", "Deep Learning", "Python", "OpenCV"]}
             imageUrl="/projects/EagleEye AI/thumbnail.png"
             githubUrl="https://github.com/ghantapavan93/Eagle-Eye-AI/tree/main/Eagle-Eye-AI-main"
+            liveUrl="https://fardeen210-eagle-eye-ai-streamlitapp-cebf0r.streamlit.app/"
+            onLearnMore={() => setActiveProject(eagleEyeLearnMore)}
+            learnMore={true}
           />
 
           <ProjectCard
