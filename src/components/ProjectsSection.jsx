@@ -7,6 +7,83 @@ export function ProjectsSection() {
   const sectionRef = useRef(null);
   const [activeProject, setActiveProject] = useState(null); // For Learn More modal
 
+  // Data for Project-H: AI-Powered Health & Fitness Assistant
+  const projectHLearnMore = {
+    id: "project-h",
+    title: "Project-H",
+    tagline: "AI-Powered Health & Fitness Assistant",
+    description: "A full-stack AI-driven health assistant that integrates wearable data from Apple Watch and WHOOP to generate personalized fitness, diet, and sleep plans. Powered by LLMs and RAG, it delivers real-time coaching with smart visualizations. Meet 'Oats'—your intelligent health companion that turns biometric data into actionable insights.",
+    role: "Full-Stack AI Engineer",
+    timeline: "8 weeks",
+    type: "HealthTech AI Platform",
+    liveUrl: "https://projhealth.com",
+    repoUrl: "https://github.com/ghantapavan93/project-h",
+    technologies: ["React", "Flask", "OpenAI GPT-4o", "Tailwind CSS", "Apple HealthKit", "RAG", "Recharts", "Machine Learning"],
+    heroImage: "/projects/project-h/thumbnail.png",
+    gallery: [
+      "/projects/project-h/thumbnail.png"
+    ],
+    story: [
+      {
+        type: "intro",
+        heading: "Motivation: Intelligent Health, Accessible Anywhere",
+        text: "With my family in healthcare and my own fitness journey, I wanted to create an intelligent health companion that merges AI reasoning with real biometric data. The vision: actionable insights from your wearables, accessible anytime, powered by generative AI that truly understands your health context."
+      },
+      {
+        type: "feature_split",
+        heading: "'Oats' — Your AI Health Coach",
+        text: "Oats is powered by GPT-4o + RAG, trained on 20K+ biometric data points from Apple Watch and WHOOP APIs. Ask questions like 'Why am I tired today?' and get evidence-backed answers referencing your sleep stages, HRV, strain, and recovery. Multi-turn dialogue keeps context across the entire conversation.",
+        bullets: ["LLM + RAG for Personalized Coaching", "20K+ Biometric Data Points", "Multi-Turn Context Awareness"],
+        image: "/projects/project-h/thumbnail.png",
+        imageCaption: "Oats AI Coach Interface",
+        reverse: false
+      },
+      {
+        type: "feature_split",
+        heading: "Sleep Intelligence Dashboard",
+        text: "Visualize REM, Core, and Deep sleep with interactive pie charts and timelines. The system parses Apple Health XML to extract sleep stages, then correlates them with recovery scores and strain metrics. Users see exactly how their sleep quality impacts next-day performance.",
+        bullets: ["Custom XML Parser for Apple Health", "REM/Core/Deep Visualizations", "Recovery Score Correlation"],
+        image: "/projects/project-h/thumbnail.png",
+        imageCaption: "Sleep Analytics Dashboard",
+        reverse: true
+      },
+      {
+        type: "feature_split",
+        heading: "Personalized Meal & Workout Plans",
+        text: "The platform generates custom meal and workout plans based on your goals (weight loss, muscle gain, endurance) and current biometrics. Rule-based logic adapts suggestions in real-time: high strain? Suggest recovery meals. Low HRV? Recommend lighter workouts.",
+        bullets: ["Goal-Based Plan Generation", "Real-Time Biometric Adaptation", "Nutrition + Workout Sync"],
+        image: "/projects/project-h/thumbnail.png",
+        imageCaption: "Custom Meal & Workout Planner",
+        reverse: false
+      },
+      {
+        type: "grid",
+        heading: "Technical Architecture",
+        items: [
+          { title: "Frontend", desc: "React + Tailwind for responsive, modular health dashboards.", icon: "Layout" },
+          { title: "Backend", desc: "Flask REST API with Apple HealthKit \u0026 WHOOP integration.", icon: "Server" },
+          { title: "AI Engine", desc: "GPT-4o + RAG with FAISS for biometric-grounded coaching.", icon: "Zap" },
+          { title: "Visualization", desc: "Recharts for sleep, recovery, and performance graphs.", icon: "Database" }
+        ]
+      },
+      {
+        type: "intro",
+        heading: "Challenges \u0026 Solutions",
+        text: "**Challenge 1:** Parsing Apple Health XML accurately → Built custom XML parser with strict validation. **Challenge 2:** Responsive UI for complex health data → Modular React components + Recharts. **Challenge 3:** Multi-turn LLM dialogue → Implemented session-based context management with OpenAI API. **Challenge 4:** Adapting suggestions to biometrics → Rule-based logic + synthetic WHOOP datasets for real-time personalization."
+      },
+      {
+        type: "grid",
+        heading: "Results \u0026 Impact",
+        items: [
+          { title: "Demo Success", desc: "Simulates real-world use cases with synthetic data.", icon: "CheckCircle2" },
+          { title: "User Feedback", desc: "Highly positive reviews for usability \u0026 content accuracy.", icon: "Star" },
+          { title: "Recognition", desc: "Praised by mentors for bridging tech with health.", icon: "Award" },
+          { title: "Sub-second Inference", desc: "90%+ user satisfaction with AWS Lambda deployment.", icon: "Zap" }
+        ]
+      }
+    ]
+  };
+
   // Data for Get Towed Learn More
   // Data for Get Towed - Premium Case Study Structure
   const getTowedLearnMore = {
@@ -379,6 +456,8 @@ export function ProjectsSection() {
             liveUrl="https://projhealth.com"
             githubUrl="https://github.com/ghantapavan93/project-h"
             highlight={true}
+            onLearnMore={() => setActiveProject(projectHLearnMore)}
+            learnMore={true}
           />
 
           {/* New: Censys Summarization Agent (appears right after Project-H) */}
