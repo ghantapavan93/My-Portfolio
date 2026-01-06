@@ -406,7 +406,71 @@ export function ProjectsSection() {
     ]
   };
 
+  // Data for AI Powered Phishing URL Classifier
+  const phishingLearnMore = {
+    id: "phishbuster",
+    title: "PhishBuster",
+    tagline: "AI-Powered Phishing URL Classifier",
+    description: "A supervised machine learning system designed to detect zero-day phishing attempts by analyzing lexical and host-based URL features. PhishBuster bridges the gap between static blacklists and dynamic threat landscapes using high-accuracy classification and a real-time inference API.",
+    role: "Full-Stack ML Engineer",
+    timeline: "2024",
+    type: "Cybersecurity ML Platform",
+    liveUrl: null,
+    repoUrl: "https://github.com/ghantapavan93/PhishBuster",
+    technologies: ["Python", "Scikit-Learn", "Flask", "Pandas", "XGBoost", "React"],
+    heroImage: "/projects/phishingwebsite/thumbnail.png",
+    gallery: [
+      "/projects/phishingwebsite/thumbnail.png"
+    ],
+    story: [
+      {
+        type: "intro",
+        heading: "The Challenge: Beyond Static Blacklists",
+        text: "Phishing URLs evolve faster than blacklists can be updated. The goal was to build a predictive system that identifies malicious patterns within the URL structure itself—analyzing length, entropy, special characters, and domain age to catch 'zero-hour' attacks before they land in an inbox."
+      },
+      {
+        type: "grid",
+        heading: "Feature Engineering & Data",
+        items: [
+          { title: "Lexical Analysis", desc: "Extracting 30+ features like URL length, digit counts, and hyphen ratios.", icon: "Shield" },
+          { title: "Host-Based Cues", desc: "Checking domain age, TTL metrics, and SSL certificate validity via API.", icon: "Globe" },
+          { title: "Balanced Dataset", desc: "Trained on 100K+ URLs from PhishTank and legitimate sources.", icon: "Database" },
+          { title: "Normalization", desc: "Robust pre-processing to handle URL encoding and obfuscation.", icon: "Zap" }
+        ]
+      },
+      {
+        type: "feature_split",
+        heading: "High-Confidence Classification",
+        text: "Leveraging ensemble models like Random Forest and XGBoost, the classifier achieves 98%+ accuracy. The system doesn't just give a yes/no; it calculates a probability score, allowing security teams to set custom thresholds for automated blocking vs. manual review.",
+        bullets: ["98%+ Model Accuracy", "Probability-Based Scoring", "Ensemble Learning (XGBoost)"],
+        image: "/projects/phishingwebsite/thumbnail.png", // Assuming same thumbnail for now
+        imageCaption: "Model Performance & Confusion Matrix",
+        reverse: false
+      },
+      {
+        type: "feature_split",
+        heading: "Real-Time Inference API",
+        text: "Built with Flask, the inference API allows external systems to scan suspicious links programmatically. It handles request validation, feature extraction on-the-fly, and returns a JSON payload with the risk level and extracted metadata in milliseconds.",
+        bullets: ["Sub-50ms Inference Latency", "RESTful API Integration", "Automated Feature Extraction"],
+        image: "/projects/phishingwebsite/thumbnail.png",
+        imageCaption: "Inference API Documentation & Logic",
+        reverse: true
+      },
+      {
+        type: "grid",
+        heading: "Technical Architecture",
+        items: [
+          { title: "ML Core", desc: "Python with Scikit-Learn and XGBoost for model training.", icon: "Zap" },
+          { title: "API Layer", desc: "Flask backend serving the model and exposing REST endpoints.", icon: "Server" },
+          { title: "Data Pipeline", desc: "Pandas and Numpy for high-speed feature vectorization.", icon: "Database" },
+          { title: "UI Dashboard", desc: "React interface for manual URL scanning and reporting.", icon: "Layout" }
+        ]
+      }
+    ]
+  };
+
   // Add fade-in animation when section comes into view
+
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -579,6 +643,8 @@ export function ProjectsSection() {
             tags={["Python", "Machine Learning", "Flask", "Cybersecurity"]}
             imageUrl="/projects/phishingwebsite/thumbnail.png"
             githubUrl="https://github.com/ghantapavan93/PhishBuster"
+            onLearnMore={() => setActiveProject(phishingLearnMore)}
+            learnMore={true}
           />
 
           <ProjectCard
