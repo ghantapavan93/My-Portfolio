@@ -469,6 +469,75 @@ export function ProjectsSection() {
     ]
   };
 
+  // Data for SafePath Transit Assistant
+  const safePathLearnMore = {
+    id: "safepath",
+    title: "SafePath Transit Assistant",
+    tagline: "AI-Powered Airport Navigation & Travel Companion",
+    description: "An intelligent airport transit assistant that combines real-time flight tracking, indoor navigation, and personalized travel recommendations. SafePath helps travelers navigate complex airport terminals, track their flights, and get AI-powered assistance for a seamless travel experience.",
+    role: "Full-Stack AI Engineer",
+    timeline: "2024",
+    type: "Travel Tech AI Platform",
+    liveUrl: null,
+    repoUrl: "https://github.com/ghantapavan93/SafePath-Airport-Transit-Assistant-for-Travelers-",
+    technologies: ["React", "AI Assistant", "Travel APIs", "Real-time Data", "Navigation", "Python"],
+    heroImage: "/projects/SafePath-Airport-Transit-Assistant-for-Travelers/safepath.png",
+    gallery: [
+      "/projects/SafePath-Airport-Transit-Assistant-for-Travelers/safepath.png",
+      "/projects/SafePath-Airport-Transit-Assistant-for-Travelers/Demo video-1.gif",
+      "/projects/SafePath-Airport-Transit-Assistant-for-Travelers/demo video-2.gif"
+    ],
+    story: [
+      {
+        type: "intro",
+        heading: "The Challenge: Navigating Modern Airports",
+        text: "Modern airports are complex ecosystems with multiple terminals, constantly changing gates, and real-time flight updates. Travelers—especially first-timers or those with tight connections—often struggle to find their way efficiently. SafePath was built to transform this chaotic experience into a guided, stress-free journey using AI-powered assistance and real-time data integration."
+      },
+      {
+        type: "feature_split",
+        heading: "Intelligent AI Travel Companion",
+        text: "At the core of SafePath is an AI assistant that understands natural language queries about flights, gates, amenities, and navigation. Ask 'Where is my gate?' or 'Find the nearest coffee shop,' and get instant, context-aware responses tailored to your current location and flight status.",
+        bullets: ["Natural Language Understanding", "Context-Aware Responses", "Personalized Recommendations"],
+        image: "/projects/SafePath-Airport-Transit-Assistant-for-Travelers/Demo video-1.gif",
+        imageCaption: "AI Assistant in Action",
+        reverse: false
+      },
+      {
+        type: "feature_split",
+        heading: "Real-Time Flight & Gate Tracking",
+        text: "SafePath integrates with flight tracking APIs to provide live updates on departures, arrivals, gate changes, and delays. The system proactively alerts users to important changes, ensuring they never miss a flight or connection due to last-minute gate switches.",
+        bullets: ["Live Flight Status Updates", "Gate Change Alerts", "Connection Time Warnings"],
+        image: "/projects/SafePath-Airport-Transit-Assistant-for-Travelers/demo video-2.gif",
+        imageCaption: "Real-Time Flight Tracking Dashboard",
+        reverse: true
+      },
+      {
+        type: "feature_split",
+        heading: "Indoor Navigation & Wayfinding",
+        text: "Leveraging indoor mapping technology, SafePath provides step-by-step navigation within airport terminals. Whether you need to find your gate, baggage claim, or a specific restaurant, the system generates optimized routes considering walking time and current terminal congestion.",
+        bullets: ["Turn-by-Turn Terminal Navigation", "Optimized Route Planning", "Amenity Discovery"],
+        image: "/projects/SafePath-Airport-Transit-Assistant-for-Travelers/safepath.png",
+        imageCaption: "Terminal Navigation Interface",
+        reverse: false
+      },
+      {
+        type: "grid",
+        heading: "Technical Architecture",
+        items: [
+          { title: "Frontend", desc: "React-based responsive UI with real-time updates and smooth animations.", icon: "Layout" },
+          { title: "AI Engine", desc: "Natural language processing for conversational travel assistance.", icon: "Zap" },
+          { title: "Data Integration", desc: "Real-time flight APIs and airport terminal data feeds.", icon: "Database" },
+          { title: "Navigation", desc: "Indoor mapping and pathfinding algorithms for terminal wayfinding.", icon: "Server" }
+        ]
+      },
+      {
+        type: "intro",
+        heading: "Impact & User Experience",
+        text: "SafePath reduces travel anxiety by providing travelers with a single, intelligent interface for all their airport navigation needs. From check-in to boarding, users have a trusted AI companion that understands their journey and proactively guides them through every step. The system is designed to be especially helpful for international travelers, people with disabilities, and anyone navigating unfamiliar airports."
+      }
+    ]
+  };
+
   // Add fade-in animation when section comes into view
 
   useEffect(() => {
@@ -680,6 +749,8 @@ export function ProjectsSection() {
             tags={["AI Assistant", "Travel Tech", "React", "APIs"]}
             imageUrl="/projects/SafePath-Airport-Transit-Assistant-for-Travelers/safepath.png"
             githubUrl="https://github.com/ghantapavan93/SafePath-Airport-Transit-Assistant-for-Travelers-"
+            onLearnMore={() => setActiveProject(safePathLearnMore)}
+            learnMore={true}
           />
 
 
