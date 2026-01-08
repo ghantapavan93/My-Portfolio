@@ -538,6 +538,76 @@ export function ProjectsSection() {
     ]
   };
 
+  // Data for Clinical Query Assistant
+  const clinicalQueryLearnMore = {
+    id: "clinical-query",
+    title: "Clinical Query Assistant",
+    tagline: "RAG-Powered Medical Intelligence Platform",
+    description: "An advanced AI-powered clinical assistant that leverages Retrieval-Augmented Generation (RAG) and Large Language Models to deliver accurate, evidence-based answers to complex medical queries. Designed for healthcare professionals, this system combines the power of semantic search over medical literature with the reasoning capabilities of state-of-the-art LLMs to provide contextually relevant clinical insights.",
+    role: "AI Engineer & Healthcare Tech Developer",
+    timeline: "2024",
+    type: "Healthcare AI Platform",
+    liveUrl: null,
+    repoUrl: "https://github.com/ghantapavan93/CLINICAL-QUERY-ASSISTANT-USING-RAG-AND-LLMS-",
+    technologies: ["RAG", "LLMs", "Python", "Vector Database", "Medical NLP", "FastAPI"],
+    heroImage: "/projects/CLINICAL-QUERY-ASSISTANT-USING-RAG-AND-LLMs/interface-1.png",
+    gallery: [
+      "/projects/CLINICAL-QUERY-ASSISTANT-USING-RAG-AND-LLMs/interface-1.png",
+      "/projects/CLINICAL-QUERY-ASSISTANT-USING-RAG-AND-LLMs/interface-2.png",
+      "/projects/CLINICAL-QUERY-ASSISTANT-USING-RAG-AND-LLMs/interface-3.png",
+      "/projects/CLINICAL-QUERY-ASSISTANT-USING-RAG-AND-LLMs/performance-report.png"
+    ],
+    story: [
+      {
+        type: "intro",
+        heading: "The Challenge: Bridging AI and Clinical Accuracy",
+        text: "Healthcare professionals need instant access to accurate, evidence-based medical information. Traditional search engines lack clinical context, while pure LLMs risk hallucinations that could have serious consequences. The challenge was to build an AI system that retrieves information from trusted medical sources and generates responses grounded in verified clinical evidence, ensuring both accuracy and relevance."
+      },
+      {
+        type: "feature_split",
+        heading: "Retrieval-Augmented Generation (RAG) Pipeline",
+        text: "At the core of the system is a sophisticated RAG pipeline that ingests medical literature, clinical guidelines, and research papers into a vector database. When a query is received, the system performs semantic search to retrieve the most relevant medical documents, then feeds this context to the LLM to generate accurate, source-grounded responses.",
+        bullets: ["Semantic Search Over Medical Literature", "Vector Embeddings for Clinical Context", "Source Attribution & Citation"],
+        image: "/projects/CLINICAL-QUERY-ASSISTANT-USING-RAG-AND-LLMs/interface-2.png",
+        imageCaption: "RAG Pipeline Architecture",
+        reverse: false
+      },
+      {
+        type: "feature_split",
+        heading: "High-Accuracy Medical Query Processing",
+        text: "The system is designed to handle complex clinical queries ranging from diagnostic criteria to treatment protocols. By combining retrieval with LLM reasoning, it can synthesize information from multiple sources, identify conflicting evidence, and present balanced, evidence-based recommendations that healthcare professionals can trust.",
+        bullets: ["Multi-Source Evidence Synthesis", "Clinical Guideline Adherence", "Hallucination Prevention"],
+        image: "/projects/CLINICAL-QUERY-ASSISTANT-USING-RAG-AND-LLMs/interface-3.png",
+        imageCaption: "Medical Query Interface",
+        reverse: true
+      },
+      {
+        type: "feature_split",
+        heading: "Performance Validation & Metrics",
+        text: "Rigorous testing ensures the system meets clinical-grade standards. Performance metrics include retrieval accuracy, response relevance, and source attribution quality. The platform was validated against established medical knowledge bases to ensure responses align with current clinical guidelines and best practices.",
+        bullets: ["Clinical Accuracy Validation", "Response Quality Metrics", "Evidence Attribution Tracking"],
+        image: "/projects/CLINICAL-QUERY-ASSISTANT-USING-RAG-AND-LLMs/performance-report.png",
+        imageCaption: "Performance Metrics Dashboard",
+        reverse: false
+      },
+      {
+        type: "grid",
+        heading: "Technical Architecture",
+        items: [
+          { title: "RAG Engine", desc: "Custom RAG pipeline with semantic chunking and vector retrieval.", icon: "Zap" },
+          { title: "LLM Integration", desc: "State-of-the-art language models for medical reasoning.", icon: "Server" },
+          { title: "Vector Store", desc: "Optimized vector database for fast medical literature search.", icon: "Database" },
+          { title: "API Layer", desc: "FastAPI backend for scalable query processing.", icon: "Layout" }
+        ]
+      },
+      {
+        type: "intro",
+        heading: "Impact on Healthcare Professionals",
+        text: "The Clinical Query Assistant empowers healthcare professionals with instant access to evidence-based medical information. By reducing the time needed to research clinical questions and ensuring responses are grounded in trusted sources, the platform supports better decision-making and improved patient care. The system is designed with safety as a priority, always attributing sources and avoiding speculative medical advice."
+      }
+    ]
+  };
+
   // Add fade-in animation when section comes into view
 
   useEffect(() => {
@@ -733,6 +803,8 @@ export function ProjectsSection() {
             tags={["RAG", "LLMs", "Healthcare AI", "Python"]}
             imageUrl="/projects/CLINICAL-QUERY-ASSISTANT-USING-RAG-AND-LLMs/interface-1.png"
             githubUrl="https://github.com/ghantapavan93/CLINICAL-QUERY-ASSISTANT-USING-RAG-AND-LLMS-"
+            onLearnMore={() => setActiveProject(clinicalQueryLearnMore)}
+            learnMore={true}
           />
 
           <ProjectCard
