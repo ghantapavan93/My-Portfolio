@@ -608,6 +608,71 @@ export function ProjectsSection() {
     ]
   };
 
+  // Data for Doctor Finder
+  const doctorFinderLearnMore = {
+    id: "doctor-finder",
+    title: "Doctor Finder",
+    tagline: "Connecting Patients with Quality Healthcare",
+    description: "Doctor Finder is a comprehensive Next.js and Firebase-powered web application designed to bridge the gap between patients and healthcare providers. It provides a seamless, intuitive interface for searching doctors by specialty, location, and insurance, while offering real-time appointment scheduling and interactive mapping.",
+    role: "Full-Stack Developer",
+    timeline: "2024",
+    type: "Healthcare Marketplace Platform",
+    liveUrl: "https://capstone2024-five.vercel.app/",
+    repoUrl: "https://github.com/Afthab33/capstone2024",
+    technologies: ["Next.js", "Firebase", "React", "Tailwind CSS", "ShadCN UI", "Google Maps API"],
+    heroImage: "/projects/doctorfinder/thumbnail.png",
+    gallery: [
+      "/projects/doctorfinder/thumbnail.png",
+      "/projects/doctorfinder/search_results.png",
+      "/projects/doctorfinder/profile_view.png",
+      "/projects/doctorfinder/map_view.png"
+    ],
+    story: [
+      {
+        type: "intro",
+        heading: "The Challenge: Navigating Healthcare Choices",
+        text: "Finding the right doctor often involves navigating fragmented systems, outdated directories, and complex insurance networks. The goal of Doctor Finder was to centralize this experience, providing patients with a modern, trusted platform to find, research, and book medical professionals with ease."
+      },
+      {
+        type: "feature_split",
+        heading: "Advanced Patient Search & Filtering",
+        text: "Patients can filter through a curated database of doctors using granular criteria: specialty, city, insurance provider, and patient ratings. The search engine is optimized for speed, ensuring that users find the care they need in seconds, even with complex combinations of filters.",
+        bullets: ["Multi-Criteria Search Engine", "Real-Time Filter Updates", "Insurance-Specific Search"],
+        image: "/projects/doctorfinder/search_results.png",
+        imageCaption: "Search Results & Granular Filtering Interface",
+        reverse: false
+      },
+      {
+        type: "feature_split",
+        heading: "Interactive Map-Based Discovery",
+        text: "Integrated with Google Maps API, the platform allows users to visually browse doctor locations. Selecting a map pin instantly provides an overview of the doctor's practice, allowing patients to find providers that are geographically convenient.",
+        bullets: ["Visual Practice Discovery", "Distance-Based Search", "One-Click Profile Access"],
+        image: "/projects/doctorfinder/map_view.png",
+        imageCaption: "Interactive Mapping & Location Awareness",
+        reverse: true
+      },
+      {
+        type: "feature_split",
+        heading: "Comprehensive Profiles & Scheduling",
+        text: "Each doctor has a detailed professional profile showcasing their education, verified reviews, and a live availability calendar. Patients can request appointments directly through the platform, which syncs in real-time with the doctor's management dashboard.",
+        bullets: ["Verified Patient Reviews", "Live Appointment Scheduling", "Doctor-Patient Communication Hub"],
+        image: "/projects/doctorfinder/profile_view.png",
+        imageCaption: "Detailed Doctor Profiles & Booking Flow",
+        reverse: false
+      },
+      {
+        type: "grid",
+        heading: "Technical Architecture",
+        items: [
+          { title: "Frontend", desc: "Next.js for server-side rendering and optimized performance.", icon: "Layout" },
+          { title: "Backend", desc: "Firebase for real-time data, authentication, and hosting.", icon: "Server" },
+          { title: "UI Components", desc: "ShadCN UI + Tailwind for a professional, accessible design system.", icon: "Zap" },
+          { title: "Integrations", desc: "Google Maps API for geospatial intelligence and doctor discovery.", icon: "Database" }
+        ]
+      }
+    ]
+  };
+
   // Add fade-in animation when section comes into view
 
   useEffect(() => {
@@ -756,6 +821,8 @@ export function ProjectsSection() {
             imageUrl="/projects/doctorfinder/thumbnail.png"
             liveUrl="https://capstone2024-five.vercel.app/"
             githubUrl="https://github.com/Afthab33/capstone2024"
+            onLearnMore={() => setActiveProject(doctorFinderLearnMore)}
+            learnMore={true}
           />
 
           <ProjectCard
