@@ -608,6 +608,69 @@ export function ProjectsSection() {
     ]
   };
 
+  // Data for AetherLabs
+  const aetherLabsLearnMore = {
+    id: "aetherlabs",
+    title: "AetherLabs",
+    tagline: "Democratizing AI Through Open-Source Innovation",
+    description: "AetherLabs is a collaborative innovation hub dedicated to building accessible, high-impact technology solutions. By bridging the gap between cutting-edge AI research and real-world accessibility challenges, AetherLabs fosters an ecosystem of open-source projects designed to empower researchers, developers, and users alike.",
+    role: "Founder & Lead Architect",
+    timeline: "2024 - Present",
+    type: "Innovation Hub & Research Lab",
+    liveUrl: "https://aetherlabs.vercel.app/",
+    repoUrl: "https://github.com/ghantapavan93/aetherlabs",
+    technologies: ["Next.js", "AI/ML", "Python", "Open Source", "Tailwind CSS", "Accessibility-First Design"],
+    heroImage: "/projects/aetherlabs/thumbnail.png",
+    gallery: [
+      "/projects/aetherlabs/thumbnail.png"
+    ],
+    story: [
+      {
+        type: "intro",
+        heading: "The Vision: Innovation Without Barriers",
+        text: "The rapid evolution of AI often leaves accessibility as an after-thought. AetherLabs was founded on the principle that the most advanced technology should be the most inclusive. Our mission is to build a foundation of open-source tools that solve real accessibility gaps while pushing the boundaries of what's possible with agentic AI and computer vision."
+      },
+      {
+        type: "grid",
+        heading: "Core Strategic Pillars",
+        items: [
+          { title: "Research & Development", desc: "Developing novel AI architectures for multimodal safety and incident intelligence.", icon: "Zap" },
+          { title: "Open-Source Advocacy", desc: "Releasing modular, documented codebases to empower global builders.", icon: "Database" },
+          { title: "Accessibility Standards", desc: "Enforcing WCAG compliance and inclusive design in every project.", icon: "Shield" },
+          { title: "Community Growth", desc: "Mentoring over 200+ students through interactive learning platforms like A11yGame.", icon: "Layout" }
+        ]
+      },
+      {
+        type: "feature_split",
+        heading: "A Thriving Project Ecosystem",
+        text: "AetherLabs serves as the launchpad for a suite of specialized platforms. From 'EagleEye AI' (safety intelligence) to 'Smart Tutor' (RAG-driven education), each project follows a unified blueprint: high performance, grounded reasoning, and enterprise-grade accessibility.",
+        bullets: ["Unified AI Architecture", "Cross-Project Synergies", "Production-Ready Open Source"],
+        image: "/projects/aetherlabs/thumbnail.png",
+        imageCaption: "AetherLabs Ecosystem Overview",
+        reverse: false
+      },
+      {
+        type: "feature_split",
+        heading: "Ethical AI & Safety First",
+        text: "We believe in deterministic-first reasoning where AI enhances human decision-making rather than replacing it. Our projects prioritize privacy-by-design, audit-ready logs, and cross-verified evidence, ensuring that technology serves as a reliable partner in critical environments.",
+        bullets: ["Transparent Logic Chains", "Privacy-Preserving Models", "Human-in-the-Loop Design"],
+        image: "/projects/aetherlabs/thumbnail.png",
+        imageCaption: "Safety & Integrity Dashboard",
+        reverse: true
+      },
+      {
+        type: "grid",
+        heading: "Innovation Stack",
+        items: [
+          { title: "Intelligence Layer", desc: "Gemini, OpenAI, and custom fine-tuned LLMs for specialized tasks.", icon: "Zap" },
+          { title: "Infrastructure", desc: "FastAPI and Next.js for high-speed, scalable deployment.", icon: "Server" },
+          { title: "Data Memory", desc: "Pinecone and ChromaDB for high-fidelity semantic recall.", icon: "Database" },
+          { title: "Experience", desc: "Tailwind CSS and ShadCN for consistent, accessible UI/UX.", icon: "Layout" }
+        ]
+      }
+    ]
+  };
+
   // Data for Doctor Finder
   const doctorFinderLearnMore = {
     id: "doctor-finder",
@@ -832,6 +895,8 @@ export function ProjectsSection() {
             imageUrl="/projects/aetherlabs/thumbnail.png"
             liveUrl="https://aetherlabs.vercel.app/"
             githubUrl="https://github.com/ghantapavan93/aetherlabs"
+            onLearnMore={() => setActiveProject(aetherLabsLearnMore)}
+            learnMore={true}
           />
 
           <ProjectCard
