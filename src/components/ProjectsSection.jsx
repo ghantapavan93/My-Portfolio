@@ -736,6 +736,50 @@ export function ProjectsSection() {
     ]
   };
 
+  // Data for 100 Miles of Summer
+  const hundredMilesLearnMore = {
+    id: "100-miles",
+    title: "100 Miles of Summer",
+    tagline: "Premium Event & Experience Prototype",
+    description: "A high-fidelity React Native prototype delivering a buttery-smooth, premium user experience for summer event tracking. Built to demonstrate top-tier mobile interactions, complex animations, and a visually stunning design system that keeps users engaged and moving.",
+    role: "Mobile UX Engineer",
+    timeline: "2024",
+    type: "Mobile Experience Proto",
+    liveUrl: "https://100mosproto.vercel.app/",
+    repoUrl: "https://github.com/ghantapavan93/100MoS-Proto",
+    technologies: ["React Native", "Expo", "Reanimated", "TypeScript", "Skia", "Moti"],
+    heroImage: "/projects/100MoS-Proto/thumbnail.png",
+    gallery: [
+      "/projects/100MoS-Proto/thumbnail.png"
+    ],
+    story: [
+      {
+        type: "intro",
+        heading: "The Vision: Capturing the Vibe",
+        text: "Summer isn't just about distance; it's about the feeling. The goal was to build a mobile experience that captures that energy. This prototype isn't just functional—it's visceral. From the moment you launch it, the fluid animations and vibrant aesthetics promise a premium journey, setting a new standard for fitness and event apps."
+      },
+      {
+        type: "feature_split",
+        heading: "Fluid Motion & Interaction",
+        text: "Leveraging React Native Reanimated and Skia, every touch response is instantaneous and delightful. The interface breathes with the user, using micro-interactions to provide deep feedback. It's not just about tracking miles; it's about enjoying every swipe and tap along the way.",
+        bullets: ["60fps Animations", "Gesture-Driven UI", "Haptic Feedback Integration"],
+        image: "/projects/100MoS-Proto/thumbnail.png",
+        imageCaption: "Immersive Home Screen Experience",
+        reverse: false
+      },
+      {
+        type: "grid",
+        heading: "Engineering Excellence",
+        items: [
+          { title: "Performance", desc: "Optimized render cycles for silky smooth scrolling.", icon: "Zap" },
+          { title: "Aesthetics", desc: "Pixel-perfect implementation of a high-end design system.", icon: "Layout" },
+          { title: "Architecture", desc: "Clean, modular code structure ready for scale.", icon: "Server" },
+          { title: "Cross-Platform", desc: "Unified code delivering native excellence on iOS & Web.", icon: "Globe" }
+        ]
+      }
+    ]
+  };
+
   // Add fade-in animation when section comes into view
 
   useEffect(() => {
@@ -788,6 +832,18 @@ export function ProjectsSection() {
             githubUrl="https://github.com/ghantapavan93/project-h"
             highlight={true}
             onLearnMore={() => setActiveProject(projectHLearnMore)}
+            learnMore={true}
+          />
+
+          <ProjectCard
+            title="100 Miles of Summer"
+            description="Premium React Native experience for summer event tracking. Features buttery-smooth 60fps animations, intuitive gesture-based UI, and a top-notch design system powered by Skia and Reanimated. The gold standard for mobile interaction."
+            tags={["React Native", "Expo", "Reanimated", "Skia", "Top Notch UX"]}
+            imageUrl="/projects/100MoS-Proto/thumbnail.png"
+            liveUrl="https://100mosproto.vercel.app/"
+            githubUrl="https://github.com/ghantapavan93/100MoS-Proto"
+            highlight={true}
+            onLearnMore={() => setActiveProject(hundredMilesLearnMore)}
             learnMore={true}
           />
 
