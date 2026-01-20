@@ -156,7 +156,7 @@ export function HeroSection() {
           animateValue('hackathons', 0, 5, 1500);
         }
       });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.1 }); // Reduced from 0.5 to 0.1 for better mobile support
 
     if (heroRef.current) {
       observer.observe(heroRef.current);

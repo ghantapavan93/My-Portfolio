@@ -780,6 +780,59 @@ export function ProjectsSection() {
     ]
   };
 
+  // Data for Sleep & Lifestyle Insights
+  const sleepLifestyleLearnMore = {
+    id: "sleep-lifestyle",
+    title: "Sleep & Lifestyle Insights",
+    tagline: "Decoding the Invisible Architecture of Rest",
+    description: "A deep-learning powered analysis engine that correlates 50+ lifestyle markers with sleep architecture. It goes beyond simple tracking to answer 'why'—identifying hidden saboteurs like late-night screen lux levels, specific nutrient gaps, and circadian misalignment.",
+    role: "Data Science Engineer",
+    timeline: "2024",
+    type: "Data Science & Analytics Platform",
+    liveUrl: "https://sdv-project-website.vercel.app/",
+    repoUrl: "https://github.com/Afthab33/sdv-project-website",
+    technologies: ["Python", "Pandas", "Scikit-learn", "React", "D3.js", "Random Forest"],
+    heroImage: "/projects/sleepinsights/thumbnail.png",
+    gallery: [
+      "/projects/sleepinsights/thumbnail.png"
+    ],
+    story: [
+      {
+        type: "intro",
+        heading: "The Challenge: Quantifying the 'Why'",
+        text: "Most sleep trackers tell you *what* happened: 'You slept 6 hours.' But they don't tell you *why*. I wanted to build a deterministic debugger for human rest—a system that ingests messy lifestyle data (caffeine timing, exercise intensity, lux exposure) and mathematically proves their impact on Sleep Efficiency and REM cycles."
+      },
+      {
+        type: "feature_split",
+        heading: "Multivariate Correlation Engine",
+        text: "Using Pandas and Seaborn, the platform generates correlation matrices that reveal non-obvious relationships. For example, it might detect that 'High Intensity Cardio > 8 PM' correlates with a '30% reduction in Deep Sleep,' visualizing these insights as interactive heatmaps.",
+        bullets: ["Behavioral Heatmaps", "Lag-Time Analysis", "Hidden Pattern Detection"],
+        image: "/projects/sleepinsights/thumbnail.png",
+        imageCaption: "Correlation Matrix: Habits vs. Sleep Stages",
+        reverse: false
+      },
+      {
+        type: "feature_split",
+        heading: "Predictive Quality Scoring",
+        text: "Beyond simple analytics, the system uses a Random Forest Regressor to predict tonight's 'Recovery Score' based on today's inputs. This moves the platform from descriptive analytics ('You slept poorly') to prescriptive guidance ('Avoid caffeine now to save your deep sleep').",
+        bullets: ["Random Forest Regression", "Prescriptive Analytics", "feature Importance Ranking"],
+        image: "/projects/sleepinsights/thumbnail.png",
+        imageCaption: "ML Model Feature Importance",
+        reverse: true
+      },
+      {
+        type: "grid",
+        heading: "Technical Architecture",
+        items: [
+          { title: "Analysis Core", desc: "Python (Pandas, Scikit-learn) for heavy statistical lifting.", icon: "Zap" },
+          { title: "Visualization", desc: "D3.js & Recharts for interactive data storytelling.", icon: "Layout" },
+          { title: "Frontend", desc: "React dashboard for accessible, responsive insights.", icon: "Globe" },
+          { title: "Processing", desc: "Automated ETL pipelines for cleaning wearable JSON data.", icon: "Server" }
+        ]
+      }
+    ]
+  };
+
   // Add fade-in animation when section comes into view
 
   useEffect(() => {
@@ -962,6 +1015,8 @@ export function ProjectsSection() {
             imageUrl="/projects/sleepinsights/thumbnail.png"
             liveUrl="https://sdv-project-website.vercel.app/"
             githubUrl="https://github.com/Afthab33/sdv-project-website"
+            onLearnMore={() => setActiveProject(sleepLifestyleLearnMore)}
+            learnMore={true}
           />
 
           <ProjectCard
