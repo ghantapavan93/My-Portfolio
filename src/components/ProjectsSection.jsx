@@ -833,6 +833,50 @@ export function ProjectsSection() {
     ]
   };
 
+  // Data for AI Powered Diet Plan Generator
+  const dietPlanLearnMore = {
+    id: "diet-plan-ai",
+    title: "AI Powered Diet Plan Generator",
+    tagline: "Your Personal Nutritionist, Evolving in Real-Time",
+    description: "A highly intelligent nutrition engine that moves beyond static PDF plans. It combines metabolic science (TDEE/BMR calculations) with generative AI to build hyper-personalized meal plans that adapt to allergies, budget, and taste preferences instantly.",
+    role: "Full-Stack AI Engineer",
+    timeline: "4 weeks",
+    type: "AI Consumer App",
+    liveUrl: "https://diet-plan-app-woad.vercel.app/",
+    repoUrl: "https://github.com/ghantapavan93/diet-plan-app",
+    technologies: ["OpenAI API", "Django", "React", "Python", "Tailwind CSS", "PostgreSQL"],
+    heroImage: "/projects/dietapp/thumbnail.png",
+    story: [
+      {
+        type: "intro",
+        heading: "The Problem: Static Diets Fail",
+        text: "Most diet apps are glorified spreadsheets. They give you a rigid target but don't help you execute. I wanted to build a system that acts like a human nutritionist—understanding that if you hate fish or are on a budget, your plan needs to fundamentally change, not just swap one row in a table."
+      },
+      {
+        type: "feature_split",
+        heading: "Metabolic Math + GenAI Creativity",
+        text: "The core engine first performs rigid metabolic calculations (using the Mifflin-St Jeor equation) to determine precise caloric and macro needs. It then passes these constraints to a fine-tuned LLM context, which generates recipes that are mathematically compliant but culinarily creative.",
+        image: "/projects/dietapp/thumbnail.png",
+        imageCaption: "AI generating a vegan, high-protein plan in real-time.",
+        bullets: [
+          "Precise TDEE & Macro Calculation",
+          "Allergy & Restriction-Aware Generation",
+          "Dynamic Weekly Adjustments"
+        ]
+      },
+      {
+        type: "grid",
+        heading: "Under the Hood",
+        items: [
+          { icon: "Zap", title: "Real-Time Inference", desc: "Generates 7-day plans in under 15 seconds using optimized prompts." },
+          { icon: "Database", title: "Smart Caching", desc: "Caches common dietary patterns to reduce API costs and latency." },
+          { icon: "Layout", title: "Responsive UI", desc: "Mobile-first React frontend for grocery shopping on the go." },
+          { icon: "Server", title: "Django Backend", desc: "Robust Python API handling user authentication and profile management." }
+        ]
+      }
+    ]
+  };
+
   // Add fade-in animation when section comes into view
 
   useEffect(() => {
@@ -977,6 +1021,16 @@ export function ProjectsSection() {
             githubUrl="https://github.com/ghantapavan93/A11yPDF"
           />
 
+
+
+
+
+
+
+
+
+
+
           <ProjectCard
             title="AI Powered Diet Plan Generator"
             description="An OpenAI-powered web app that generates personalized diet plans based on user preferences and dietary restrictions."
@@ -984,6 +1038,9 @@ export function ProjectsSection() {
             imageUrl="/projects/dietapp/thumbnail.png"
             liveUrl="https://diet-plan-app-woad.vercel.app/"
             githubUrl="https://github.com/ghantapavan93/diet-plan-app"
+            onLearnMore={() => setActiveProject(dietPlanLearnMore)}
+            learnMore={true}
+            highlight={true}
           />
 
           <ProjectCard
