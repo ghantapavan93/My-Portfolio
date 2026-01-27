@@ -877,6 +877,51 @@ export function ProjectsSection() {
     ]
   };
 
+  const a11yGameLearnMore = {
+    id: "a11y-game",
+    title: "A11yGame - Accessibility Game Portal",
+    tagline: "Gamifying Inclusive Design for the Next Generation",
+    description: "A multi-game education portal designed to teach web accessibility (WCAG) concepts through interactive gameplay. Built for UNT students, it transforms dry technical standards into engaging challenges that build empathy and practical skills.",
+    role: "Lead Developer",
+    timeline: "2023",
+    type: "Education Tech",
+    liveUrl: "https://a11ygamification.vercel.app",
+    repoUrl: "https://github.com/ghantapavan93/A11yPDF",
+    technologies: ["React", "Firebase", "Redux", "Tailwind CSS", "WCAG 2.1"],
+    heroImage: "/projects/a11ygame/thumbnail.png",
+    story: [
+      {
+        type: "intro",
+        heading: "The Challenge: Making Standards Engaging",
+        text: "Web accessibility is often seen as a 'checklist item' rather than a design pillar. I wanted to move away from text-heavy manuals and create a sandbox where students could *feel* the impact of inaccessible design. The goal: 200+ students learning WCAG guidelines by playing, not just reading."
+      },
+      {
+        type: "feature_split",
+        heading: "Interactive Learning Modules",
+        text: "The portal features custom-built games targeting specific WCAG criteria. From 'Keyboard navigation obstacle courses' to 'Color contrast puzzles,' each module tracks player progress and provides immediate feedback on accessibility violations.",
+        bullets: ["Real-time WCAG Feedback", "Progressive Difficulty Levels", "Empowerment through Empathy"],
+        image: "/projects/a11ygame/thumbnail.png",
+        imageCaption: "A portal showcasing interactive accessibility challenges.",
+        reverse: false
+      },
+      {
+        type: "grid",
+        heading: "Platform Architecture",
+        items: [
+          { icon: "Layout", title: "React Frontend", desc: "Fully accessible UI following the very standards it teaches." },
+          { icon: "Database", title: "Firebase Backend", desc: "Real-time leaderboard and student progress persistence." },
+          { icon: "Zap", title: "Redux State", desc: "Centralized management for cross-game achievements and stats." },
+          { icon: "Shield", title: "WCAG Compliance", desc: "Built to AA/AAA standards to serve as a living example." }
+        ]
+      },
+      {
+        type: "intro",
+        heading: "Impact & Scale",
+        text: "The platform was successfully integrated into the University of North Texas curriculum, serving over 200 students. It proved that gamification can significantly increase student engagement with technical accessibility standards, turning a complex requirement into a competitive learning outcome."
+      }
+    ]
+  };
+
   // Add fade-in animation when section comes into view
 
   useEffect(() => {
@@ -1013,12 +1058,15 @@ export function ProjectsSection() {
           />
 
           <ProjectCard
-            title="A11yGame - Accessibility Game Portal"
+            title="A11y Game - Accessibility Game Portal"
             description="Multi-game accessibility learning portal built with React and Firebase, used by 200+ UNT students to engage with accessibility concepts interactively."
             tags={["React", "Tailwind CSS", "Firebase", "Redux"]}
             imageUrl="/projects/a11ygame/thumbnail.png"
             liveUrl="https://a11ygamification.vercel.app"
             githubUrl="https://github.com/ghantapavan93/A11yPDF"
+            onLearnMore={() => setActiveProject(a11yGameLearnMore)}
+            learnMore={true}
+            highlight={true}
           />
 
 
