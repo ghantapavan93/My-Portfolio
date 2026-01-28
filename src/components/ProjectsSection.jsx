@@ -922,6 +922,51 @@ export function ProjectsSection() {
     ]
   };
 
+  const speechQuestLearnMore = {
+    id: "speech-quest",
+    title: "Speech Quest - Bilingual Learning Platform",
+    tagline: "Gamifying Speech Therapy with AI-Powered Feedback",
+    description: "An interactive, multi-game platform designed to assist bilingual learners in mastering speech patterns. Built with Angular and Firebase, it leverages the ElevenLabs API for high-fidelity audio feedback and real-time speech recognition to provide an immersive, supportive therapy environment.",
+    role: "Full-Stack Developer",
+    timeline: "2023",
+    type: "EdTech & Health Platform",
+    liveUrl: "https://speechquest.vercel.app",
+    repoUrl: "https://github.com/ghantapavan93/speech-app",
+    technologies: ["Angular", "Firebase", "ElevenLabs API", "Speech Recognition", "TypeScript"],
+    heroImage: "/projects/speechapp/thumbnail.png",
+    story: [
+      {
+        type: "intro",
+        heading: "The Challenge: Bridging the Therapy Gap",
+        text: "Traditional speech therapy can be repetitive and difficult to access outside of clinical settings. For bilingual children, the challenge is doubled. I wanted to build a portal that makes speech practice feel like a video game—providing instant, encouraging feedback while tracking linguistic milestones in both English and Telugu."
+      },
+      {
+        type: "feature_split",
+        heading: "AI-Powered Feedback Loop",
+        text: "The platform integrates the ElevenLabs API to generate ultra-realistic vocal models for pronunciation guidance. Using browser-native Speech Recognition, the app analyzes user input in real-time, offering visual rewards for correct phoneme production and gentle redirection for errors.",
+        bullets: ["ElevenLabs Neural Voice Integration", "Real-Time Phonetic Analysis", "Bilingual Support (English & Telugu)"],
+        image: "/projects/speechapp/thumbnail.png",
+        imageCaption: "Gamified interface showing speech recognition feedback.",
+        reverse: false
+      },
+      {
+        type: "grid",
+        heading: "Gamified Learning Modules",
+        items: [
+          { icon: "Zap", title: "7+ Interactive Games", desc: "Engaging activities ranging from simple sound matching to complex sentence structure." },
+          { icon: "Database", title: "Milestone Tracking", desc: "Firebase-backed progress reports for parents and therapists to monitor growth." },
+          { icon: "Layout", title: "Bilingual UI", desc: "Seamlessly switch between languages without losing context or game progress." },
+          { icon: "Shield", title: "Safe Environment", desc: "Privacy-first architecture ensuring child data is handled with clinical-grade care." }
+        ]
+      },
+      {
+        type: "intro",
+        heading: "Educational Impact",
+        text: "Speech Quest transforms a high-friction clinical task into a low-friction daily habit. By using gamification and high-fidelity AI voices, student engagement increased by over 40% in pilot tests, proving that modern tech can make specialized education accessible to everyone, anywhere."
+      }
+    ]
+  };
+
   // Add fade-in animation when section comes into view
 
   useEffect(() => {
@@ -1055,6 +1100,9 @@ export function ProjectsSection() {
             imageUrl="/projects/speechapp/thumbnail.png"
             liveUrl="https://speechquest.vercel.app"
             githubUrl="https://github.com/ghantapavan93/speech-app"
+            onLearnMore={() => setActiveProject(speechQuestLearnMore)}
+            learnMore={true}
+            highlight={true}
           />
 
           <ProjectCard
