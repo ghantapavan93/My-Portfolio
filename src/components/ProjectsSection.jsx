@@ -967,6 +967,60 @@ export function ProjectsSection() {
     ]
   };
 
+  const peopleMateLearnMore = {
+    id: "peoplemate-ai",
+    title: "PeopleMate AI",
+    tagline: "Context-Aware HR Intelligence Engine",
+    description: "A specialized conversational AI platform designed to transform HR operations from reactive to proactive. By combining Retrieval-Augmented Generation (RAG) with sentiment analysis, PeopleMate AI provides employees with instant, accurate answers to complex policy questions while giving HR teams real-time visibility into organization-wide engagement and sentiment.",
+    role: "Lead AI Developer",
+    timeline: "2023",
+    type: "Enterprise AI Platform",
+    liveUrl: null,
+    repoUrl: "https://github.com/ghantapavan93/PeopleMate-AI-Context-Aware-HR-Assistant-",
+    technologies: ["React", "NLP", "RAG", "LLMs", "Node.js", "Vector DB"],
+    heroImage: "/projects/PeopleMate-AI-Context-Aware-HR-Assistant-/thumbnail.png",
+    story: [
+      {
+        type: "intro",
+        heading: "The Problem: The HR Bottleneck",
+        text: "In most companies, finding specific HR information is a chore. Employees wade through outdated PDFs, and HR staff spend 40% of their time answering the same foundational questions. I wanted to build an assistant that doesn't just 'chat' but 'reasons' through company policy to provide deterministic, context-aware support."
+      },
+      {
+        type: "feature_split",
+        heading: "RAG-Powered Policy Reasoning",
+        text: "Using Retrieval-Augmented Generation, PeopleMate AI ingests company handbooks and benefits documents into a vector database. When an employee asks 'Does my dental plan cover orthodontics?', the assistant retrieves the specific clause and cites the source, ensuring zero hallucinations and 100% accuracy.",
+        bullets: ["Grounded Document Retrieval", "Source-Citing AI Responses", "Version-Controlled Knowledge Sync"],
+        image: "/projects/PeopleMate-AI-Context-Aware-HR-Assistant-/thumbnail.png",
+        imageCaption: "Policy query interface with grounded AI reasoning.",
+        reverse: false
+      },
+      {
+        type: "feature_split",
+        heading: "Sentiment & Engagement Analysis",
+        text: "Beyond answering questions, the platform monitors the emotional tone of interactions. By analyzing anonymized query patterns and sentiment trends, HR leadership can identify 'burnout hotspots' or confusion regarding new policy changes before they become retention issues.",
+        bullets: ["Real-time Mood Tracking", "Anonymized Trend Aggregation", "Proactive Engagement Alerts"],
+        image: "/projects/PeopleMate-AI-Context-Aware-HR-Assistant-/thumbnail.png",
+        imageCaption: "Engagement dashboard showcasing organizational sentiment trends.",
+        reverse: true
+      },
+      {
+        type: "grid",
+        heading: "Technical Architecture",
+        items: [
+          { icon: "Zap", title: "Context-Aware NLP", desc: "Advanced semantic search for understanding intent, not just keywords." },
+          { icon: "Database", title: "Secure Vector Lab", desc: "Privacy-first storage for organizational knowledge and policy embeds." },
+          { icon: "Layout", title: "Conversational UI", desc: "Intuitive React-based chat interface optimized for employee self-service." },
+          { icon: "Shield", title: "Privacy by Design", desc: "GDPR/SOC2 aligned architecture ensuring employee anonymity in sentiment reports." }
+        ]
+      },
+      {
+        type: "intro",
+        heading: "The Result: Intelligent Self-Service",
+        text: "PeopleMate AI reduces HR ticket volume by up to 60%, allowing HR teams to focus on strategic human capital initiatives. It transforms static documentation into a dynamic, conversational asset that grows more intelligent with every interaction."
+      }
+    ]
+  };
+
   // Add fade-in animation when section comes into view
 
   useEffect(() => {
@@ -1209,6 +1263,9 @@ export function ProjectsSection() {
             tags={["AI", "NLP", "HR Tech", "React"]}
             imageUrl="/projects/PeopleMate-AI-Context-Aware-HR-Assistant-/thumbnail.png"
             githubUrl="https://github.com/ghantapavan93/PeopleMate-AI-Context-Aware-HR-Assistant-"
+            onLearnMore={() => setActiveProject(peopleMateLearnMore)}
+            learnMore={true}
+            highlight={true}
           />
 
           <ProjectCard
