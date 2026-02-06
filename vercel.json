@@ -8,5 +8,11 @@
         "env": {
             "GIT_LFS_SKIP_SMUDGE": "0"
         }
-    }
+    },
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/"
+        }
+    ]
 }
