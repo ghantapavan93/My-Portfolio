@@ -908,150 +908,6 @@ export function ProjectsSection() {
     ]
   };
 
-  const a11yGameLearnMore = {
-    id: "a11y-game",
-    title: "A11yGame - Accessibility Game Portal",
-    tagline: "Gamifying Inclusive Design for the Next Generation",
-    description: "A multi-game education portal designed to teach web accessibility (WCAG) concepts through interactive gameplay. Built for UNT students, it transforms dry technical standards into engaging challenges that build empathy and practical skills.",
-    role: "Lead Developer",
-    timeline: "2023",
-    type: "Education Tech",
-    liveUrl: "https://a11ygamification.vercel.app",
-    repoUrl: "https://github.com/ghantapavan93/A11yPDF",
-    technologies: ["React", "Firebase", "Redux", "Tailwind CSS", "WCAG 2.1"],
-    heroImage: "/projects/a11ygame/thumbnail.png",
-    story: [
-      {
-        type: "intro",
-        heading: "The Challenge: Making Standards Engaging",
-        text: "Web accessibility is often seen as a 'checklist item' rather than a design pillar. I wanted to move away from text-heavy manuals and create a sandbox where students could *feel* the impact of inaccessible design. The goal: 200+ students learning WCAG guidelines by playing, not just reading."
-      },
-      {
-        type: "feature_split",
-        heading: "Interactive Learning Modules",
-        text: "The portal features custom-built games targeting specific WCAG criteria. From 'Keyboard navigation obstacle courses' to 'Color contrast puzzles,' each module tracks player progress and provides immediate feedback on accessibility violations.",
-        bullets: ["Real-time WCAG Feedback", "Progressive Difficulty Levels", "Empowerment through Empathy"],
-        image: "/projects/a11ygame/thumbnail.png",
-        imageCaption: "A portal showcasing interactive accessibility challenges.",
-        reverse: false
-      },
-      {
-        type: "grid",
-        heading: "Platform Architecture",
-        items: [
-          { icon: "Layout", title: "React Frontend", desc: "Fully accessible UI following the very standards it teaches." },
-          { icon: "Database", title: "Firebase Backend", desc: "Real-time leaderboard and student progress persistence." },
-          { icon: "Zap", title: "Redux State", desc: "Centralized management for cross-game achievements and stats." },
-          { icon: "Shield", title: "WCAG Compliance", desc: "Built to AA/AAA standards to serve as a living example." }
-        ]
-      },
-      {
-        type: "intro",
-        heading: "Impact & Scale",
-        text: "The platform was successfully integrated into the University of North Texas curriculum, serving over 200 students. It proved that gamification can significantly increase student engagement with technical accessibility standards, turning a complex requirement into a competitive learning outcome."
-      }
-    ]
-  };
-
-  const speechQuestLearnMore = {
-    id: "speech-quest",
-    title: "Speech Quest - Bilingual Learning Platform",
-    tagline: "Gamifying Speech Therapy with AI-Powered Feedback",
-    description: "An interactive, multi-game platform designed to assist bilingual learners in mastering speech patterns. Built with Angular and Firebase, it leverages the ElevenLabs API for high-fidelity audio feedback and real-time speech recognition to provide an immersive, supportive therapy environment.",
-    role: "Full-Stack Developer",
-    timeline: "2023",
-    type: "EdTech & Health Platform",
-    liveUrl: "https://speechquest.vercel.app",
-    repoUrl: "https://github.com/ghantapavan93/speech-app",
-    technologies: ["Angular", "Firebase", "ElevenLabs API", "Speech Recognition", "TypeScript"],
-    heroImage: "/projects/speechapp/thumbnail.png",
-    story: [
-      {
-        type: "intro",
-        heading: "The Challenge: Bridging the Therapy Gap",
-        text: "Traditional speech therapy can be repetitive and difficult to access outside of clinical settings. For bilingual children, the challenge is doubled. I wanted to build a portal that makes speech practice feel like a video game—providing instant, encouraging feedback while tracking linguistic milestones in both English and Telugu."
-      },
-      {
-        type: "feature_split",
-        heading: "AI-Powered Feedback Loop",
-        text: "The platform integrates the ElevenLabs API to generate ultra-realistic vocal models for pronunciation guidance. Using browser-native Speech Recognition, the app analyzes user input in real-time, offering visual rewards for correct phoneme production and gentle redirection for errors.",
-        bullets: ["ElevenLabs Neural Voice Integration", "Real-Time Phonetic Analysis", "Bilingual Support (English & Telugu)"],
-        image: "/projects/speechapp/thumbnail.png",
-        imageCaption: "Gamified interface showing speech recognition feedback.",
-        reverse: false
-      },
-      {
-        type: "grid",
-        heading: "Gamified Learning Modules",
-        items: [
-          { icon: "Zap", title: "7+ Interactive Games", desc: "Engaging activities ranging from simple sound matching to complex sentence structure." },
-          { icon: "Database", title: "Milestone Tracking", desc: "Firebase-backed progress reports for parents and therapists to monitor growth." },
-          { icon: "Layout", title: "Bilingual UI", desc: "Seamlessly switch between languages without losing context or game progress." },
-          { icon: "Shield", title: "Safe Environment", desc: "Privacy-first architecture ensuring child data is handled with clinical-grade care." }
-        ]
-      },
-      {
-        type: "intro",
-        heading: "Educational Impact",
-        text: "Speech Quest transforms a high-friction clinical task into a low-friction daily habit. By using gamification and high-fidelity AI voices, student engagement increased by over 40% in pilot tests, proving that modern tech can make specialized education accessible to everyone, anywhere."
-      }
-    ]
-  };
-
-  const peopleMateLearnMore = {
-    id: "peoplemate-ai",
-    title: "PeopleMate AI",
-    tagline: "Context-Aware HR Intelligence Engine",
-    description: "A specialized conversational AI platform designed to transform HR operations from reactive to proactive. By combining Retrieval-Augmented Generation (RAG) with sentiment analysis, PeopleMate AI provides employees with instant, accurate answers to complex policy questions while giving HR teams real-time visibility into organization-wide engagement and sentiment.",
-    role: "Lead AI Developer",
-    timeline: "2023",
-    type: "Enterprise AI Platform",
-    liveUrl: null,
-    repoUrl: "https://github.com/ghantapavan93/PeopleMate-AI-Context-Aware-HR-Assistant-",
-    technologies: ["React", "NLP", "RAG", "LLMs", "Node.js", "Vector DB"],
-    heroImage: "/projects/PeopleMate-AI-Context-Aware-HR-Assistant-/thumbnail.png",
-    story: [
-      {
-        type: "intro",
-        heading: "The Problem: The HR Bottleneck",
-        text: "In most companies, finding specific HR information is a chore. Employees wade through outdated PDFs, and HR staff spend 40% of their time answering the same foundational questions. I wanted to build an assistant that doesn't just 'chat' but 'reasons' through company policy to provide deterministic, context-aware support."
-      },
-      {
-        type: "feature_split",
-        heading: "RAG-Powered Policy Reasoning",
-        text: "Using Retrieval-Augmented Generation, PeopleMate AI ingests company handbooks and benefits documents into a vector database. When an employee asks 'Does my dental plan cover orthodontics?', the assistant retrieves the specific clause and cites the source, ensuring zero hallucinations and 100% accuracy.",
-        bullets: ["Grounded Document Retrieval", "Source-Citing AI Responses", "Version-Controlled Knowledge Sync"],
-        image: "/projects/PeopleMate-AI-Context-Aware-HR-Assistant-/thumbnail.png",
-        imageCaption: "Policy query interface with grounded AI reasoning.",
-        reverse: false
-      },
-      {
-        type: "feature_split",
-        heading: "Sentiment & Engagement Analysis",
-        text: "Beyond answering questions, the platform monitors the emotional tone of interactions. By analyzing anonymized query patterns and sentiment trends, HR leadership can identify 'burnout hotspots' or confusion regarding new policy changes before they become retention issues.",
-        bullets: ["Real-time Mood Tracking", "Anonymized Trend Aggregation", "Proactive Engagement Alerts"],
-        image: "/projects/PeopleMate-AI-Context-Aware-HR-Assistant-/thumbnail.png",
-        imageCaption: "Engagement dashboard showcasing organizational sentiment trends.",
-        reverse: true
-      },
-      {
-        type: "grid",
-        heading: "Technical Architecture",
-        items: [
-          { icon: "Zap", title: "Context-Aware NLP", desc: "Advanced semantic search for understanding intent, not just keywords." },
-          { icon: "Database", title: "Secure Vector Lab", desc: "Privacy-first storage for organizational knowledge and policy embeds." },
-          { icon: "Layout", title: "Conversational UI", desc: "Intuitive React-based chat interface optimized for employee self-service." },
-          { icon: "Shield", title: "Privacy by Design", desc: "GDPR/SOC2 aligned architecture ensuring employee anonymity in sentiment reports." }
-        ]
-      },
-      {
-        type: "intro",
-        heading: "The Result: Intelligent Self-Service",
-        text: "PeopleMate AI reduces HR ticket volume by up to 60%, allowing HR teams to focus on strategic human capital initiatives. It transforms static documentation into a dynamic, conversational asset that grows more intelligent with every interaction."
-      }
-    ]
-  };
-
   // Add fade-in animation when section comes into view
 
   useEffect(() => {
@@ -1176,6 +1032,15 @@ export function ProjectsSection() {
             imageUrl="/projects/postera11y/thumbnail.png"
             liveUrl="https://poster-a11y.vercel.app"
             githubUrl="https://github.com/ghantapavan93/poster-evaluation-a11y"
+          />
+
+          <ProjectCard
+            title="Poster Accessibility Evaluation Tool"
+            description="Web app leveraging YOLOv10 and Gemini 1.5 Flash to assess academic posters for accessibility, providing actionable insights on WCAG compliance metrics."
+            tags={["YOLOv10", "Gemini 1.5", "Accessibility", "WCAG"]}
+            imageUrl="/projects/postera11y/thumbnail.png"
+            liveUrl="https://poster-a11y.vercel.app"
+            githubUrl="https://github.com/ghantapavan93/poster-evaluation-a11y"
             onLearnMore={() => setActiveProject(posterA11yLearnMore)}
             learnMore={true}
             caseStudyUrl="/case-studies/poster-accessibility-eval"
@@ -1189,21 +1054,15 @@ export function ProjectsSection() {
             imageUrl="/projects/speechapp/thumbnail.png"
             liveUrl="https://speechquest.vercel.app"
             githubUrl="https://github.com/ghantapavan93/speech-app"
-            onLearnMore={() => setActiveProject(speechQuestLearnMore)}
-            learnMore={true}
-            highlight={true}
           />
 
           <ProjectCard
-            title="A11y Game - Accessibility Game Portal"
+            title="A11yGame - Accessibility Game Portal"
             description="Multi-game accessibility learning portal built with React and Firebase, used by 200+ UNT students to engage with accessibility concepts interactively."
             tags={["React", "Tailwind CSS", "Firebase", "Redux"]}
             imageUrl="/projects/a11ygame/thumbnail.png"
             liveUrl="https://a11ygamification.vercel.app"
             githubUrl="https://github.com/ghantapavan93/A11yPDF"
-            onLearnMore={() => setActiveProject(a11yGameLearnMore)}
-            learnMore={true}
-            highlight={true}
           />
 
 
@@ -1298,9 +1157,6 @@ export function ProjectsSection() {
             tags={["AI", "NLP", "HR Tech", "React"]}
             imageUrl="/projects/PeopleMate-AI-Context-Aware-HR-Assistant-/thumbnail.png"
             githubUrl="https://github.com/ghantapavan93/PeopleMate-AI-Context-Aware-HR-Assistant-"
-            onLearnMore={() => setActiveProject(peopleMateLearnMore)}
-            learnMore={true}
-            highlight={true}
           />
 
           <ProjectCard
@@ -1680,7 +1536,7 @@ function ProjectCard({ title, description, tags, imageUrl, githubUrl, liveUrl, h
             </Button>
           )}
 
-          {/* Modal Quick View (Legacy "Learn More" logic) */}
+          {/* Modal View (renamed for projects with a case study) */}
           {learnMore && onLearnMore && (
             <Button
               variant={caseStudyUrl ? "outline" : "default"}
@@ -1696,8 +1552,14 @@ function ProjectCard({ title, description, tags, imageUrl, githubUrl, liveUrl, h
             </Button>
           )}
 
-          {!caseStudyUrl && !learnMore && liveUrl && (
-            <Button variant="outline" size="sm" className="flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-xs h-7 sm:h-8 px-2 sm:px-2.5 group flex-1" asChild>
+          {/* Website Button */}
+          {liveUrl && (
+            <Button
+              variant="outline"
+              size="sm"
+              className={`flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-xs h-7 sm:h-8 px-2 sm:px-2.5 group ${caseStudyUrl ? 'w-10 px-0 justify-center shrink-0 flex-none' : 'flex-1'}`}
+              asChild
+            >
               <a
                 href={liveUrl}
                 target="_blank"
@@ -1705,27 +1567,31 @@ function ProjectCard({ title, description, tags, imageUrl, githubUrl, liveUrl, h
                 aria-label={`Visit ${title} website (opens in new tab)`}
               >
                 <Globe className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-primary" aria-hidden="true" />
-                <span>Visit Site</span>
-                <ExternalLink className="h-2 w-2 sm:h-2.5 sm:w-2.5 ml-0.5 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" aria-hidden="true" />
+                {!caseStudyUrl && <span>Visit Site</span>}
+                {!caseStudyUrl && <ExternalLink className="h-2 w-2 sm:h-2.5 sm:w-2.5 ml-0.5 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" aria-hidden="true" />}
               </a>
             </Button>
           )}
 
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex items-center justify-center p-0 w-7 h-7 sm:w-8 sm:h-8 group shrink-0"
-            asChild
-          >
-            <a
-              href={githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`View ${title} source code on GitHub (opens in new tab)`}
+          {/* Github Button */}
+          {githubUrl && (
+            <Button
+              variant="outline"
+              size="sm"
+              className={`flex items-center justify-center text-[10px] sm:text-xs h-7 sm:h-8 px-2 sm:px-2.5 ${caseStudyUrl ? 'w-10 px-0 shrink-0 flex-none' : 'flex-1 gap-1 sm:gap-1.5'}`}
+              asChild
             >
-              <Github className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform group-hover:scale-110" />
-            </a>
-          </Button>
+              <a
+                href={githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`View ${title} source code on GitHub (opens in new tab)`}
+              >
+                <Github className="h-2.5 w-2.5 sm:h-3 sm:w-3" aria-hidden="true" />
+                {!caseStudyUrl && <span>View Code</span>}
+              </a>
+            </Button>
+          )}
         </div>
       </CardContent>
     </Card>
