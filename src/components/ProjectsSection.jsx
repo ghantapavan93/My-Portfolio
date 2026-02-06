@@ -1032,15 +1032,6 @@ export function ProjectsSection() {
             imageUrl="/projects/postera11y/thumbnail.png"
             liveUrl="https://poster-a11y.vercel.app"
             githubUrl="https://github.com/ghantapavan93/poster-evaluation-a11y"
-          />
-
-          <ProjectCard
-            title="Poster Accessibility Evaluation Tool"
-            description="Web app leveraging YOLOv10 and Gemini 1.5 Flash to assess academic posters for accessibility, providing actionable insights on WCAG compliance metrics."
-            tags={["YOLOv10", "Gemini 1.5", "Accessibility", "WCAG"]}
-            imageUrl="/projects/postera11y/thumbnail.png"
-            liveUrl="https://poster-a11y.vercel.app"
-            githubUrl="https://github.com/ghantapavan93/poster-evaluation-a11y"
             onLearnMore={() => setActiveProject(posterA11yLearnMore)}
             learnMore={true}
             caseStudyUrl="/case-studies/poster-accessibility-eval"
@@ -1557,7 +1548,7 @@ function ProjectCard({ title, description, tags, imageUrl, githubUrl, liveUrl, h
             <Button
               variant="outline"
               size="sm"
-              className={`flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-xs h-7 sm:h-8 px-2 sm:px-2.5 group ${caseStudyUrl ? 'w-10 px-0 justify-center shrink-0 flex-none' : 'flex-1'}`}
+              className="flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-xs h-7 sm:h-8 px-2 sm:px-2.5 group flex-1"
               asChild
             >
               <a
@@ -1567,7 +1558,7 @@ function ProjectCard({ title, description, tags, imageUrl, githubUrl, liveUrl, h
                 aria-label={`Visit ${title} website (opens in new tab)`}
               >
                 <Globe className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-primary" aria-hidden="true" />
-                {!caseStudyUrl && <span>Visit Site</span>}
+                <span>{caseStudyUrl ? 'Visit Website' : 'Visit Site'}</span>
                 {!caseStudyUrl && <ExternalLink className="h-2 w-2 sm:h-2.5 sm:w-2.5 ml-0.5 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" aria-hidden="true" />}
               </a>
             </Button>
@@ -1578,7 +1569,7 @@ function ProjectCard({ title, description, tags, imageUrl, githubUrl, liveUrl, h
             <Button
               variant="outline"
               size="sm"
-              className={`flex items-center justify-center text-[10px] sm:text-xs h-7 sm:h-8 px-2 sm:px-2.5 ${caseStudyUrl ? 'w-10 px-0 shrink-0 flex-none' : 'flex-1 gap-1 sm:gap-1.5'}`}
+              className="flex items-center justify-center text-[10px] sm:text-xs h-7 sm:h-8 px-2 sm:px-2.5 flex-1 gap-1 sm:gap-1.5"
               asChild
             >
               <a
@@ -1588,7 +1579,7 @@ function ProjectCard({ title, description, tags, imageUrl, githubUrl, liveUrl, h
                 aria-label={`View ${title} source code on GitHub (opens in new tab)`}
               >
                 <Github className="h-2.5 w-2.5 sm:h-3 sm:w-3" aria-hidden="true" />
-                {!caseStudyUrl && <span>View Code</span>}
+                <span>View Code</span>
               </a>
             </Button>
           )}
