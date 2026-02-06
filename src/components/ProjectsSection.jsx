@@ -608,6 +608,37 @@ export function ProjectsSection() {
     ]
   };
 
+  // Data for Poster Accessibility Evaluation Tool
+  const posterA11yLearnMore = {
+    id: "poster-a11y",
+    title: "Poster Accessibility Evaluation Tool",
+    tagline: "WCAG-Style Reports in Seconds for Static Media",
+    description: "An AI-powered evaluation system that assesses academic posters for accessibility compliance. By combining YOLOv10 object detection with Gemini 1.5 Flash reasoning, it provides instant, actionable feedback on color contrast, hierarchy, and semantic structure.",
+    role: "Lead Developer & AI Researcher",
+    timeline: "2024",
+    type: "Accessibility AI Tool",
+    liveUrl: "https://poster-a11y.vercel.app",
+    repoUrl: "https://github.com/ghantapavan93/poster-evaluation-a11y",
+    technologies: ["YOLOv10", "Gemini 1.5 Flash", "React", "Python", "Computer Vision"],
+    heroImage: "/projects/postera11y/thumbnail.png",
+    story: [
+      {
+        type: "intro",
+        heading: "The Challenge: Static Media Blindspots",
+        text: "Academic posters are essential research tools but often completely inaccessible to millions. Manual audits are slow and subjective. I wanted to build a tool that makes PDF/Static media audits as fast as a web scan—grounding accessibility advice in visual spatial context."
+      },
+      {
+        type: "feature_split",
+        heading: "Dual-Model Architecture",
+        text: "The tool uses YOLOv10 to first 'see' the layout—detecting charts, text blocks, and QR codes. Then, Gemini 1.5 Flash 'reasons' through the content to evaluate contrast, reading order, and alt-text quality, providing a comprehensive WCAG-aligned report.",
+        bullets: ["Spatial Detection via YOLOv10", "Semantic Reasoning via Gemini 1.5", "Automated Remedy Suggestions"],
+        image: "/projects/postera11y/thumbnail.png",
+        imageCaption: "Audit pipeline showing detected regions and AI insights.",
+        reverse: false
+      }
+    ]
+  };
+
   // Data for AetherLabs
   const aetherLabsLearnMore = {
     id: "aetherlabs",
@@ -1145,6 +1176,10 @@ export function ProjectsSection() {
             imageUrl="/projects/postera11y/thumbnail.png"
             liveUrl="https://poster-a11y.vercel.app"
             githubUrl="https://github.com/ghantapavan93/poster-evaluation-a11y"
+            onLearnMore={() => setActiveProject(posterA11yLearnMore)}
+            learnMore={true}
+            caseStudyUrl="/case-studies/poster-accessibility-eval"
+            highlight={true}
           />
 
           <ProjectCard
@@ -1543,7 +1578,7 @@ export function ProjectsSection() {
   )
 }
 
-function ProjectCard({ title, description, tags, imageUrl, githubUrl, liveUrl, highlight = false, learnMore = null, onLearnMore = null }) {
+function ProjectCard({ title, description, tags, imageUrl, githubUrl, liveUrl, highlight = false, learnMore = null, onLearnMore = null, caseStudyUrl = null }) {
   // Support both string and array for imageUrl
   const images = Array.isArray(imageUrl) ? imageUrl : [imageUrl];
   const [current, setCurrent] = useState(0);
@@ -1564,11 +1599,11 @@ function ProjectCard({ title, description, tags, imageUrl, githubUrl, liveUrl, h
     >
       {/* Clickable image area - improved accessibility */}
       <a
-        href={liveUrl || githubUrl}
+        href={caseStudyUrl || liveUrl || githubUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="block h-32 sm:h-40 bg-muted overflow-hidden relative group focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-inset"
-        aria-label={`View ${title} ${liveUrl ? 'website' : 'project'}`}
+        aria-label={`View ${title} ${caseStudyUrl ? 'case study' : liveUrl ? 'website' : 'project'}`}
       >
         <img
           src={images[current].replace('/public', '')}
@@ -1590,7 +1625,7 @@ function ProjectCard({ title, description, tags, imageUrl, githubUrl, liveUrl, h
         {/* Overlay with preview text */}
         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300 flex items-center justify-center">
           <div className="text-white font-medium px-3 py-1.5 text-xs sm:text-sm rounded-md border border-white/30 backdrop-blur-sm">
-            {liveUrl ? 'Visit Website' : 'View Project'}
+            {caseStudyUrl ? 'Learn More' : liveUrl ? 'Visit Website' : 'View Project'}
           </div>
         </div>
 
@@ -1629,22 +1664,39 @@ function ProjectCard({ title, description, tags, imageUrl, githubUrl, liveUrl, h
           )}
         </div>
 
-        <div className="flex gap-1.5 sm:gap-2 mt-auto">
-          {learnMore && onLearnMore && (
+        <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-auto">
+          {/* Real Route Case Study Link (Premium "Learn More") */}
+          {caseStudyUrl && (
             <Button
               variant="default"
               size="sm"
               className="flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-xs h-7 sm:h-8 px-3 sm:px-3.5 flex-1 bg-primary/90 hover:bg-primary shadow-sm hover:shadow-primary/20"
+              asChild
+            >
+              <a href={caseStudyUrl} target="_blank" rel="noopener noreferrer">
+                <span>Learn More</span>
+                <ExternalLink className="h-2.5 w-2.5 sm:h-3 sm:w-3 opacity-80" />
+              </a>
+            </Button>
+          )}
+
+          {/* Modal Quick View (Legacy "Learn More" logic) */}
+          {learnMore && onLearnMore && (
+            <Button
+              variant={caseStudyUrl ? "outline" : "default"}
+              size="sm"
+              className={`flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-xs h-7 sm:h-8 px-3 sm:px-3.5 flex-1 ${!caseStudyUrl ? 'bg-primary/90 hover:bg-primary shadow-sm hover:shadow-primary/20' : ''}`}
               onClick={(e) => {
                 e.preventDefault();
                 onLearnMore();
               }}
             >
-              <span>Learn More</span>
+              <span>{caseStudyUrl ? 'Quick View' : 'Learn More'}</span>
               <ChevronRight className="h-2.5 w-2.5 sm:h-3 sm:w-3 opacity-80" />
             </Button>
           )}
-          {liveUrl && (
+
+          {!caseStudyUrl && !learnMore && liveUrl && (
             <Button variant="outline" size="sm" className="flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-xs h-7 sm:h-8 px-2 sm:px-2.5 group flex-1" asChild>
               <a
                 href={liveUrl}
@@ -1659,19 +1711,21 @@ function ProjectCard({ title, description, tags, imageUrl, githubUrl, liveUrl, h
             </Button>
           )}
 
-          {githubUrl && (
-            <Button variant="outline" size="sm" className="flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-xs h-7 sm:h-8 px-2 sm:px-2.5 flex-1" asChild>
-              <a
-                href={githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`View ${title} source code on GitHub (opens in new tab)`}
-              >
-                <Github className="h-2.5 w-2.5 sm:h-3 sm:w-3" aria-hidden="true" />
-                <span>View Code</span>
-              </a>
-            </Button>
-          )}
+          <Button
+            variant="outline"
+            size="sm"
+            className="flex items-center justify-center p-0 w-7 h-7 sm:w-8 sm:h-8 group shrink-0"
+            asChild
+          >
+            <a
+              href={githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`View ${title} source code on GitHub (opens in new tab)`}
+            >
+              <Github className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform group-hover:scale-110" />
+            </a>
+          </Button>
         </div>
       </CardContent>
     </Card>
