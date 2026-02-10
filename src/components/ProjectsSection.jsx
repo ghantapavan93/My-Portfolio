@@ -608,6 +608,37 @@ export function ProjectsSection() {
     ]
   };
 
+  // Data for Speech Quest
+  const speechQuestLearnMore = {
+    id: "speech-quest",
+    title: "Speech Quest",
+    tagline: "Bilingual Speech Therapy Platform",
+    description: "An interactive, bilingual speech learning platform built with Angular and Firebase. Features 7+ gamified modules for children to practice pronunciation with real-time feedback using the Web Speech API and ElevenLabs for natural-sounding audio models.",
+    role: "Full-Stack Developer",
+    timeline: "2024",
+    type: "EdTech & Health AI Platform",
+    liveUrl: "https://speechquest.vercel.app",
+    repoUrl: "https://github.com/ghantapavan93/speech-app",
+    technologies: ["Angular", "Firebase", "Web Speech API", "ElevenLabs API", "TypeScript"],
+    heroImage: "/projects/speechapp/thumbnail.png",
+    story: [
+      {
+        type: "intro",
+        heading: "Gamifying Speech Therapy",
+        text: "The goal of Speech Quest was to make repetitive speech practice engaging for children. By turning therapy into a bilingual 'Quest', we've seen increased engagement and better retention in both English and Spanish modules."
+      },
+      {
+        type: "feature_split",
+        heading: "Real-Time AI Feedback",
+        text: "Using the Web Speech API for recognition and ElevenLabs for realistic voice models, children receive instant, high-fidelity feedback on their pronunciation, helping them correct sounds in real-time.",
+        bullets: ["90%+ Recognition Accuracy", "Bilingual Support (EN/ES)", "Interactive Visual Feedback"],
+        image: "/projects/speechapp/thumbnail.png",
+        imageCaption: "A child interacting with the 'Phonetic Match' module.",
+        reverse: false
+      }
+    ]
+  };
+
   // Data for Poster Accessibility Evaluation Tool
   const posterA11yLearnMore = {
     id: "poster-a11y",
@@ -1045,6 +1076,10 @@ export function ProjectsSection() {
             imageUrl="/projects/speechapp/thumbnail.png"
             liveUrl="https://speechquest.vercel.app"
             githubUrl="https://github.com/ghantapavan93/speech-app"
+            onLearnMore={() => setActiveProject(speechQuestLearnMore)}
+            learnMore={true}
+            caseStudyUrl="/case-studies/speech-quest"
+            highlight={true}
           />
 
           <ProjectCard
