@@ -1089,6 +1089,8 @@ export function ProjectsSection() {
             imageUrl="/projects/a11ygame/thumbnail.png"
             liveUrl="https://a11ygamification.vercel.app"
             githubUrl="https://github.com/ghantapavan93/A11yPDF"
+            caseStudyUrl="/case-studies/a11y-game"
+            highlight={true}
           />
 
 

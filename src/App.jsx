@@ -12,6 +12,7 @@ import { ThemeProvider } from './components/ThemeProvider'
 import { ContributionsSection } from './components/ContributionsSection'
 import { PosterA11yCaseStudy } from './pages/case-studies/PosterA11yCaseStudy'
 import { SpeechQuestCaseStudy } from './pages/case-studies/SpeechQuestCaseStudy'
+import { A11yGameCaseStudy } from './pages/case-studies/A11yGameCaseStudy'
 
 function MainContent() {
   return (
@@ -58,6 +59,7 @@ function App() {
           <Route path="/" element={<MainContent />} />
           <Route path="/case-studies/poster-accessibility-eval" element={<PosterA11yCaseStudy />} />
           <Route path="/case-studies/speech-quest" element={<SpeechQuestCaseStudy />} />
+          <Route path="/case-studies/a11y-game" element={<A11yGameCaseStudy />} />
         </Routes>
       </div>
     </ThemeProvider>
