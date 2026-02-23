@@ -39,11 +39,10 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
           ? 'py-3 md:py-4 bg-background/95 backdrop-blur-sm shadow-sm'
           : 'py-4 md:py-6 bg-transparent'
-      }`}
+        }`}
       role="banner"
     >
       <div className="container mx-auto px-4">
@@ -73,6 +72,9 @@ export function Header() {
                 </li>
                 <li>
                   <NavLink href="#experience">Experience</NavLink>
+                </li>
+                <li>
+                  <NavLink href="#skills">Skills</NavLink>
                 </li>
                 <li>
                   <NavLink href="#contributions">Contributions</NavLink>
@@ -108,9 +110,8 @@ export function Header() {
       <div
         id="mobile-menu"
         ref={mobileMenuRef}
-        className={`fixed inset-0 bg-background/95 backdrop-blur-md flex flex-col justify-center items-center z-40 transition-all duration-300 ${
-          mobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'
-        }`}
+        className={`fixed inset-0 bg-background/95 backdrop-blur-md flex flex-col justify-center items-center z-40 transition-all duration-300 ${mobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'
+          }`}
       >
         <nav>
           <ul className="flex flex-col space-y-6 text-center">
@@ -127,6 +128,11 @@ export function Header() {
             <li>
               <MobileNavLink href="#experience" onClick={() => setMobileMenuOpen(false)}>
                 Experience
+              </MobileNavLink>
+            </li>
+            <li>
+              <MobileNavLink href="#skills" onClick={() => setMobileMenuOpen(false)}>
+                Skills
               </MobileNavLink>
             </li>
             <li>
@@ -184,13 +190,12 @@ function NavLink({ href, children, highlight = false, isExternal = false }) {
       target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noopener noreferrer' : undefined}
       onClick={!isExternal ? handleClick : undefined}
-      className={`text-sm font-medium relative transition-colors ${
-        highlight
+      className={`text-sm font-medium relative transition-colors ${highlight
           ? 'text-primary hover:text-primary/90'
           : isActive
-          ? 'text-primary'
-          : 'hover:text-primary'
-      }`}
+            ? 'text-primary'
+            : 'hover:text-primary'
+        }`}
     >
       {children}
       {isActive && !isExternal && (
@@ -220,9 +225,8 @@ function MobileNavLink({ href, children, highlight = false, isExternal = false, 
       target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noopener noreferrer' : undefined}
       onClick={!isExternal ? handleClick : undefined}
-      className={`text-lg font-medium py-2 px-4 block transition-colors ${
-        highlight ? 'text-primary hover:text-primary/90' : 'hover:text-primary'
-      }`}
+      className={`text-lg font-medium py-2 px-4 block transition-colors ${highlight ? 'text-primary hover:text-primary/90' : 'hover:text-primary'
+        }`}
     >
       {children}
     </a>
