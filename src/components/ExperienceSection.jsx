@@ -79,11 +79,19 @@ export function ExperienceSection() {
   }, []);
 
   const handleJump = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      setActiveRole(id); // Force update state immediately
-      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    setActiveRole(id); // Force update state immediately
+
+    // Use a small timeout to allow state changes to render before scrolling
+    setTimeout(() => {
+      const element = document.getElementById(id);
+      if (element) {
+        // Calculate a slight offset for the aesthetic header in cinematic mode
+        const yOffset = mode === 'cinematic' ? -150 : -80;
+        const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
+
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }, 50);
   };
 
   return (
@@ -98,11 +106,11 @@ export function ExperienceSection() {
         <div className="pt-32 mb-20 lg:pl-36">
           <span className="text-primary text-sm font-black uppercase tracking-[0.5em] mb-4 block animate-fade-in">Experience OS</span>
           <h2 className="text-6xl md:text-8xl font-black tracking-tighter text-foreground leading-[0.8] mb-8">
-            <span className="block italic opacity-50 uppercase">Professional</span>
-            <span className="block text-primary">JOURNEY.</span>
+            <span className="block italic opacity-50 uppercase">Work</span>
+            <span className="block text-primary">EXPERIENCE.</span>
           </h2>
           <p className="text-xl md:text-2xl text-muted-foreground font-medium max-w-2xl leading-snug animate-fade-up">
-            Building intelligent automation and mission-critical systems since 2019.
+            Building software with expertise in AI, ML, and Full Stack Development.
           </p>
         </div>
 

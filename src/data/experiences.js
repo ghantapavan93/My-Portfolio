@@ -1,5 +1,264 @@
 export const experiences = [
     {
+        id: "100mos",
+        company: "100 Miles of Summer",
+        role: "App Developer — Full Stack AI Engineer",
+        domainTags: ["Full-Stack", "AI/ML", "Real-time"],
+        dateRange: "Jan 2026 – Present",
+        location: "Remote (TX) — Chicago, IL (HQ)",
+        teamContext: "Startup. Working directly with founders and stakeholders to ship production iOS, Android, and web experiences for a fitness movement platform.",
+        hookLine: "Shipping production mobile apps, a reliability-first wearable sync pipeline, and an LLM-powered QUANTUM Health Coach for a fitness movement platform.",
+        proofMetrics: [
+            { label: "Sync Success", value: "~99%", hint: "Wearable data reconciliation across Apple Health, Fitbit, Garmin." },
+            { label: "Schema Valid.", value: "~99%", hint: "LLM structured output validation pass rate in QUANTUM Health Coach." },
+            { label: "Link Success", value: "~91%", hint: "Onboarding account-linking flow completion rate." }
+        ],
+        snapshotProof: [
+            "~99% Sync Success Rate",
+            "~0.5% Reconciliation Mismatches",
+            "~18% Duplicate Events Handled Safely",
+            "~91% Account-Link Success",
+            "~22% Setup Drop-off Reduction",
+            "~7 Min First Successful Sync",
+            "~99% Schema Validation Pass Rate",
+            "~97% Groundedness Score"
+        ],
+        heroMotif: {
+            emoji: "🏃",
+            title: "Movement Platform",
+            subtitle: "Full-Stack AI + Mobile"
+        },
+        theme: {
+            accent: "#FF6B2B",
+            motif: "pulse",
+            backgroundFx: "canvas",
+            iconSet: "duotone"
+        },
+        topStack: ["React Native", "Python", "FastAPI", "Docker", "LangChain", "PostgreSQL"],
+        groupedTechStack: {
+            "📱 Mobile & Frontend": ["React Native", "React", "TypeScript", "Expo"],
+            "⚙️ Backend & API": ["Python", "FastAPI", "Node.js", "REST APIs", "Webhooks"],
+            "🧠 AI & LLM": ["LangChain", "GPT-4", "RAG", "Structured Outputs", "Pydantic"],
+            "🔄 Data Pipeline": ["Idempotency Keys", "Deduplication Engine", "Reconciliation", "PostgreSQL"],
+            "☁️ DevOps & Infra": ["Docker", "CI/CD", "GitHub Actions", "Vercel"]
+        },
+        chapters: [
+            { id: "overview", title: "Overview" },
+            { id: "pipeline", title: "Data Pipeline" },
+            { id: "quantumCoach", title: "QUANTUM Health Coach" },
+            { id: "mobileOnboarding", title: "Mobile & Onboarding" },
+            { id: "opsConsole", title: "Ops Console" },
+            { id: "evalHarness", title: "Evaluation Harness" },
+            { id: "visuals", title: "Visuals" }
+        ],
+        narrativeSections: {
+            overview: {
+                title: "Mission: No Lost Miles",
+                paragraphs: [
+                    "100 Miles of Summer is a fitness movement platform where participants commit to walking, jogging, running, or rolling 100 miles over the summer. It's inclusive by design — all paces, all faces. The platform has a React Native mobile app for iOS and Android, a web prototype (Mirror+), and a Python backend powering data sync, AI coaching, and internal operations.",
+                    "As the App Developer and Full Stack AI Engineer, I own the entire technical stack: from shipping production mobile releases through CI/CD, to building the reliability-first wearable sync pipeline, to architecting the LLM-powered QUANTUM Health Coach with strict validation gates and deterministic fallback behavior."
+                ],
+                ownership: [
+                    "Production iOS & Android releases (React Native + Expo)",
+                    "Python backend services containerized with Docker",
+                    "Wearable data ingestion & reconciliation pipeline",
+                    "QUANTUM Health Coach AI layer (LLM + RAG)",
+                    "Internal operations console for sync monitoring",
+                    "Direct collaboration with founders on product direction"
+                ]
+            },
+            pipeline: {
+                title: "Reliability-First Data Pipeline",
+                problem: "Wearable providers (Apple Health, Fitbit, Garmin) emit noisy, unpredictable webhook events — ~18% of events are duplicates or replays. Without careful handling, these would cause double-counted miles, corrupted totals, and user trust erosion. The core promise is 'No Lost Miles', meaning every legitimate activity must be captured and zero duplicates can slip through.",
+                built: [
+                    "Designed and built the entire ingestion and reconciliation pipeline from scratch, using idempotency keys to guarantee exactly-once processing regardless of how many times a provider replays an event",
+                    "Implemented a deduplication engine that safely handles ~18% duplicate or replayed events without double-counting, drift, or corrupted totals",
+                    "Built source-of-truth aggregation that reconciles data from multiple wearable providers into a single, authoritative activity record per user"
+                ],
+                how: [
+                    "Used idempotency keys as the first gate — every incoming webhook is fingerprinted and checked against a processed-events index before any state mutation",
+                    "Implemented ordering safeguards to handle out-of-sequence events from providers that don't guarantee delivery order",
+                    "Built replay-safe processing that detects and discards provider retry storms without affecting legitimate data",
+                    "Designed a reconciliation module that compares ingested data against provider source-of-truth, maintaining ~0.5% mismatch rate"
+                ],
+                bullets: [
+                    {
+                        id: "pipe-01",
+                        label: "~99% Sync Success Rate",
+                        receipts: {
+                            metric: "~99%",
+                            layerTags: ["Pipeline", "Data"],
+                            proofs: ["Sustained ~99% sync success across real provider event conditions by building idempotency-keyed ingestion with deduplication, replay-safe processing, ordering safeguards, and source-of-truth aggregation", "Safely handled ~18% duplicate or replayed events without double-counting, drift, or corrupted totals — maintaining ~0.5% reconciliation mismatches"],
+                            tech: ["Python", "FastAPI", "PostgreSQL", "Webhooks"],
+                            src: "/100mos/thumbnail.png"
+                        }
+                    }
+                ]
+            },
+            quantumCoach: {
+                title: "QUANTUM Health Coach — Aether Technology Layer",
+                problem: "Users need personalized health coaching that is contextually aware, biometrically informed, and safe for production. LLMs are inherently unpredictable — they can hallucinate, produce malformed outputs, or give unsafe health advice. We needed structured, validated, and deterministic AI responses that never break the app or mislead users.",
+                built: [
+                    "Architected and built the Aether Technology Layer powering QUANTUM Health Coach — the AI backbone that delivers LLM + RAG features with schema-valid structured outputs",
+                    "Implemented strict validation gates using Pydantic schemas to ensure every AI response conforms to the expected structure before reaching the user",
+                    "Designed deterministic fallback behavior so the system degrades gracefully when the LLM produces invalid or uncertain outputs, keeping responses stable and safe in production"
+                ],
+                how: [
+                    "Used LangChain for LLM orchestration with structured output parsing that enforces Pydantic models at the response boundary",
+                    "Built RAG retrieval pipelines that ground coaching advice in verified health content rather than allowing pure generation",
+                    "Implemented a multi-layer validation stack: schema validation → content safety checks → groundedness verification → fallback routing",
+                    "Designed the system so that invalid outputs trigger a deterministic fallback response rather than surfacing raw LLM errors to users"
+                ],
+                bullets: [
+                    {
+                        id: "quantum-01",
+                        label: "~99% Schema Validation + ~97% Groundedness",
+                        receipts: {
+                            metric: "~99% Valid",
+                            layerTags: ["AI", "LLM"],
+                            proofs: ["Maintained ~99% schema validation pass rate by enforcing Pydantic structured outputs with strict type validation at every LLM response boundary", "Achieved ~97% groundedness on internal test sets by grounding all coaching responses in verified health content through RAG retrieval rather than pure generation"],
+                            tech: ["LangChain", "GPT-4", "Pydantic", "RAG"],
+                            src: "/100mos/thumbnail.png"
+                        }
+                    }
+                ]
+            },
+            mobileOnboarding: {
+                title: "Mobile Apps & Onboarding Flows",
+                problem: "User onboarding for a wearable-connected fitness app is notoriously fragile. Account linking with providers like Apple Health, Fitbit, and Garmin involves OAuth flows, permission grants, and initial sync — any failure point causes users to drop off before they've logged a single mile. We needed to make the path from download to first sync as frictionless as possible.",
+                built: [
+                    "Shipped production iOS and Android releases through React Native + Expo, containerized backend services with Docker, and deployed through CI/CD for repeatable, low-risk releases",
+                    "Owned the entire onboarding and account-linking flow — from wearable provider selection through OAuth to first successful sync",
+                    "Built an internal operations console that surfaces sync runs, reconciliation outcomes, and error states for the ops team"
+                ],
+                how: [
+                    "Designed progressive disclosure onboarding — users choose their provider, grant permissions, and see their first synced mile within ~7 minutes",
+                    "Implemented retry logic and clear error states for OAuth failures so users can self-recover without contacting support",
+                    "Used analytics and funnel tracking to identify and eliminate drop-off points, achieving ~22% reduction in setup abandonment",
+                    "Shipped with CI/CD pipelines for both mobile and backend, enabling rapid iteration without deployment risk"
+                ],
+                bullets: [
+                    {
+                        id: "mobile-01",
+                        label: "~91% Link Success, ~22% Drop-off Reduction",
+                        receipts: {
+                            metric: "~91% Link",
+                            layerTags: ["Mobile", "UX"],
+                            proofs: ["Improved wearable account-linking success to ~91% and reduced onboarding setup drop-off by ~22% through progressive disclosure design, retry logic, and clear error recovery flows", "Achieved first successful sync in ~7 minutes for typical users by optimizing the OAuth → permission → initial sync path end-to-end"],
+                            tech: ["React Native", "Expo", "Docker", "CI/CD"],
+                            src: "/100mos/thumbnail.png"
+                        }
+                    }
+                ]
+            },
+            opsConsole: {
+                title: "Internal Operations Console",
+                problem: "During peak summer season, the ops team needs real-time visibility into sync health, reconciliation outcomes, and error patterns across thousands of users and multiple wearable providers. Without a dedicated console, debugging sync issues meant SSH-ing into servers and grepping logs.",
+                built: [
+                    "Built a dedicated internal operations console that surfaces sync run history, reconciliation outcomes (success/mismatch/retry), and error state breakdowns",
+                    "Designed provider-level health monitoring showing per-provider sync success rates, latency, and error patterns",
+                    "Implemented quiet list monitoring for flagged users whose data needs manual review"
+                ],
+                how: [
+                    "Used React for the console frontend with real-time polling for sync status updates",
+                    "Built API endpoints that aggregate sync metrics across all providers and surface reconciliation details",
+                    "Designed the console for 'calm summer ops' — the team should be able to monitor the entire platform with minimal stress during peak season"
+                ],
+                bullets: [
+                    {
+                        id: "ops-01",
+                        label: "Calm Summer Ops Console",
+                        receipts: {
+                            metric: "Full Visibility",
+                            layerTags: ["Ops", "Internal"],
+                            proofs: ["Built an internal ops console that gives the team full visibility into sync runs, reconciliation outcomes, and error states — replacing manual log-grepping with a real-time dashboard", "Designed for 'calm summer ops' so the team can monitor thousands of users across multiple wearable providers with minimal stress during peak season"],
+                            tech: ["React", "FastAPI", "PostgreSQL"],
+                            src: "/100mos/thumbnail.png"
+                        }
+                    }
+                ]
+            },
+            evalHarness: {
+                title: "LLM Evaluation Harness",
+                problem: "LLM-powered features in a health app are high-stakes — a regression in output quality, a spike in invalid responses, or an increase in latency can directly harm user trust. We needed a rigorous evaluation framework that catches problems before they reach production, across every dimension: accuracy, safety, structure, and cost.",
+                built: [
+                    "Designed and built an evaluation harness with golden test sets and automated regression checks",
+                    "Tracked precision, recall, invalid-output rate, latency, and cost across prompt changes, retrieval changes, and model changes",
+                    "Implemented automated CI gates that block deployment if key metrics regress beyond defined thresholds"
+                ],
+                how: [
+                    "Created golden test sets from real user interactions and edge cases, covering diverse health contexts",
+                    "Built regression checks that run automatically on every PR that touches the AI layer",
+                    "Tracked schema validation pass rate (~99%), groundedness (~97%), and cost-per-query to ensure changes don't sacrifice quality for speed",
+                    "Used the harness to confidently iterate on prompts and retrieval strategies without fear of silent regressions"
+                ],
+                bullets: [
+                    {
+                        id: "eval-01",
+                        label: "Golden Test Sets + Regression Gates",
+                        receipts: {
+                            metric: "CI-Gated",
+                            layerTags: ["ML", "Eval"],
+                            proofs: ["Built an evaluation harness that tracks precision, recall, invalid-output rate, latency, and cost across every prompt, retrieval, and model change — maintaining ~99% schema validation pass rate and ~97% groundedness", "Implemented automated regression checks with golden test sets that run on every PR touching the AI layer, catching quality degradations before they reach production"],
+                            tech: ["Python", "Pydantic", "CI/CD", "Golden Sets"],
+                            src: "/100mos/thumbnail.png"
+                        }
+                    }
+                ]
+            },
+            visuals: {
+                images: [
+                    {
+                        src: "/100mos/hero.webp",
+                        alt: "100 Miles of Summer — Mirror+ Landing",
+                        caption: "The Mirror+ prototype landing page — 'THE MOMENT THAT GETS YOU MOVING.' We solved the challenge of making a fitness platform feel instantly inclusive and premium. The hero section communicates the core promise: all paces, all faces, no lost miles. Built with React and deployed on Vercel, it's the consumer-facing entry point to the entire ecosystem."
+                    }
+                ]
+            }
+        },
+        keyDecisions: [
+            { decision: "Idempotency-First Pipeline", why: "Wearable providers replay events unpredictably. Idempotency keys guarantee exactly-once processing regardless of provider behavior.", tradeoff: "Additional storage and lookup cost per event, justified by zero-tolerance for double-counted miles." },
+            { decision: "Strict LLM Output Validation", why: "Health coaching is high-stakes. Every LLM response must conform to a Pydantic schema before reaching users.", tradeoff: "Occasional fallback responses when the LLM produces novel but malformed outputs. Safety > flexibility." },
+            { decision: "Deterministic Fallbacks over Silent Failures", why: "When the AI layer fails or produces uncertain outputs, users get a safe, pre-validated response rather than an error or nothing.", tradeoff: "Fallback responses are less personalized, but the app never breaks and users never see raw errors." }
+        ],
+        bulletPoints: [
+            {
+                icon: "Smartphone",
+                headline: "Production Mobile Releases",
+                content: "Shipped production iOS and Android releases via React Native + Expo, with Python backend services containerized in Docker and deployed through CI/CD for repeatable, low-risk releases across both platforms.",
+                metric: "iOS + Android"
+            },
+            {
+                icon: "Database",
+                headline: "Reliability-First Data Pipeline",
+                content: "Built an ingestion and reconciliation pipeline using idempotency keys, deduplication, replay-safe processing, and source-of-truth aggregation — sustaining ~99% sync success with ~0.5% reconciliation mismatches under real provider conditions.",
+                metric: "~99% Sync"
+            },
+            {
+                icon: "Brain",
+                headline: "QUANTUM Health Coach AI",
+                content: "Architected the Aether Technology Layer delivering LLM + RAG features with Pydantic-validated structured outputs, strict validation gates, and deterministic fallback behavior — maintaining ~99% schema validation and ~97% groundedness.",
+                metric: "~99% Schema"
+            },
+            {
+                icon: "UserCheck",
+                headline: "Onboarding & Account Linking",
+                content: "Owned the full onboarding and wearable account-linking flow, improving link success to ~91%, reducing setup drop-off by ~22%, and achieving first successful sync in ~7 minutes for typical users.",
+                metric: "~91% Link"
+            },
+            {
+                icon: "BarChart3",
+                headline: "Evaluation Harness & Ops Console",
+                content: "Built an LLM evaluation harness with golden test sets and regression checks, plus an internal ops console for sync monitoring — enabling confident iteration and calm summer operations at scale.",
+                metric: "CI-Gated"
+            }
+        ],
+        links: {
+            live: "https://100mosproto.vercel.app",
+            caseStudy: "/experience/100mos"
+        }
+    },
+    {
         id: "vosyn",
         company: "Vosyn",
         role: "Machine Learning Intern — VosynCore Multimodal Localization",
@@ -379,265 +638,6 @@ export const experiences = [
         links: {
             live: "https://vosyn.ai",
             caseStudy: "/experience/vosyn"
-        }
-    },
-    {
-        id: "100mos",
-        company: "100 Miles of Summer",
-        role: "App Developer — Full Stack AI Engineer",
-        domainTags: ["Full-Stack", "AI/ML", "Real-time"],
-        dateRange: "Jan 2026 – Present",
-        location: "Remote (TX) — Chicago, IL (HQ)",
-        teamContext: "Startup. Working directly with founders and stakeholders to ship production iOS, Android, and web experiences for a fitness movement platform.",
-        hookLine: "Shipping production mobile apps, a reliability-first wearable sync pipeline, and an LLM-powered QUANTUM Health Coach for a fitness movement platform.",
-        proofMetrics: [
-            { label: "Sync Success", value: "~99%", hint: "Wearable data reconciliation across Apple Health, Fitbit, Garmin." },
-            { label: "Schema Valid.", value: "~99%", hint: "LLM structured output validation pass rate in QUANTUM Health Coach." },
-            { label: "Link Success", value: "~91%", hint: "Onboarding account-linking flow completion rate." }
-        ],
-        snapshotProof: [
-            "~99% Sync Success Rate",
-            "~0.5% Reconciliation Mismatches",
-            "~18% Duplicate Events Handled Safely",
-            "~91% Account-Link Success",
-            "~22% Setup Drop-off Reduction",
-            "~7 Min First Successful Sync",
-            "~99% Schema Validation Pass Rate",
-            "~97% Groundedness Score"
-        ],
-        heroMotif: {
-            emoji: "🏃",
-            title: "Movement Platform",
-            subtitle: "Full-Stack AI + Mobile"
-        },
-        theme: {
-            accent: "#FF6B2B",
-            motif: "pulse",
-            backgroundFx: "canvas",
-            iconSet: "duotone"
-        },
-        topStack: ["React Native", "Python", "FastAPI", "Docker", "LangChain", "PostgreSQL"],
-        groupedTechStack: {
-            "📱 Mobile & Frontend": ["React Native", "React", "TypeScript", "Expo"],
-            "⚙️ Backend & API": ["Python", "FastAPI", "Node.js", "REST APIs", "Webhooks"],
-            "🧠 AI & LLM": ["LangChain", "GPT-4", "RAG", "Structured Outputs", "Pydantic"],
-            "🔄 Data Pipeline": ["Idempotency Keys", "Deduplication Engine", "Reconciliation", "PostgreSQL"],
-            "☁️ DevOps & Infra": ["Docker", "CI/CD", "GitHub Actions", "Vercel"]
-        },
-        chapters: [
-            { id: "overview", title: "Overview" },
-            { id: "pipeline", title: "Data Pipeline" },
-            { id: "quantumCoach", title: "QUANTUM Health Coach" },
-            { id: "mobileOnboarding", title: "Mobile & Onboarding" },
-            { id: "opsConsole", title: "Ops Console" },
-            { id: "evalHarness", title: "Evaluation Harness" },
-            { id: "visuals", title: "Visuals" }
-        ],
-        narrativeSections: {
-            overview: {
-                title: "Mission: No Lost Miles",
-                paragraphs: [
-                    "100 Miles of Summer is a fitness movement platform where participants commit to walking, jogging, running, or rolling 100 miles over the summer. It's inclusive by design — all paces, all faces. The platform has a React Native mobile app for iOS and Android, a web prototype (Mirror+), and a Python backend powering data sync, AI coaching, and internal operations.",
-                    "As the App Developer and Full Stack AI Engineer, I own the entire technical stack: from shipping production mobile releases through CI/CD, to building the reliability-first wearable sync pipeline, to architecting the LLM-powered QUANTUM Health Coach with strict validation gates and deterministic fallback behavior."
-                ],
-                ownership: [
-                    "Production iOS & Android releases (React Native + Expo)",
-                    "Python backend services containerized with Docker",
-                    "Wearable data ingestion & reconciliation pipeline",
-                    "QUANTUM Health Coach AI layer (LLM + RAG)",
-                    "Internal operations console for sync monitoring",
-                    "Direct collaboration with founders on product direction"
-                ]
-            },
-            pipeline: {
-                title: "Reliability-First Data Pipeline",
-                problem: "Wearable providers (Apple Health, Fitbit, Garmin) emit noisy, unpredictable webhook events — ~18% of events are duplicates or replays. Without careful handling, these would cause double-counted miles, corrupted totals, and user trust erosion. The core promise is 'No Lost Miles', meaning every legitimate activity must be captured and zero duplicates can slip through.",
-                built: [
-                    "Designed and built the entire ingestion and reconciliation pipeline from scratch, using idempotency keys to guarantee exactly-once processing regardless of how many times a provider replays an event",
-                    "Implemented a deduplication engine that safely handles ~18% duplicate or replayed events without double-counting, drift, or corrupted totals",
-                    "Built source-of-truth aggregation that reconciles data from multiple wearable providers into a single, authoritative activity record per user"
-                ],
-                how: [
-                    "Used idempotency keys as the first gate — every incoming webhook is fingerprinted and checked against a processed-events index before any state mutation",
-                    "Implemented ordering safeguards to handle out-of-sequence events from providers that don't guarantee delivery order",
-                    "Built replay-safe processing that detects and discards provider retry storms without affecting legitimate data",
-                    "Designed a reconciliation module that compares ingested data against provider source-of-truth, maintaining ~0.5% mismatch rate"
-                ],
-                bullets: [
-                    {
-                        id: "pipe-01",
-                        label: "~99% Sync Success Rate",
-                        receipts: {
-                            metric: "~99%",
-                            layerTags: ["Pipeline", "Data"],
-                            proofs: ["Sustained ~99% sync success across real provider event conditions by building idempotency-keyed ingestion with deduplication, replay-safe processing, ordering safeguards, and source-of-truth aggregation", "Safely handled ~18% duplicate or replayed events without double-counting, drift, or corrupted totals — maintaining ~0.5% reconciliation mismatches"],
-                            tech: ["Python", "FastAPI", "PostgreSQL", "Webhooks"],
-                            src: "/100mos/thumbnail.png"
-                        }
-                    }
-                ]
-            },
-            quantumCoach: {
-                title: "QUANTUM Health Coach — Aether Technology Layer",
-                problem: "Users need personalized health coaching that is contextually aware, biometrically informed, and safe for production. LLMs are inherently unpredictable — they can hallucinate, produce malformed outputs, or give unsafe health advice. We needed structured, validated, and deterministic AI responses that never break the app or mislead users.",
-                built: [
-                    "Architected and built the Aether Technology Layer powering QUANTUM Health Coach — the AI backbone that delivers LLM + RAG features with schema-valid structured outputs",
-                    "Implemented strict validation gates using Pydantic schemas to ensure every AI response conforms to the expected structure before reaching the user",
-                    "Designed deterministic fallback behavior so the system degrades gracefully when the LLM produces invalid or uncertain outputs, keeping responses stable and safe in production"
-                ],
-                how: [
-                    "Used LangChain for LLM orchestration with structured output parsing that enforces Pydantic models at the response boundary",
-                    "Built RAG retrieval pipelines that ground coaching advice in verified health content rather than allowing pure generation",
-                    "Implemented a multi-layer validation stack: schema validation → content safety checks → groundedness verification → fallback routing",
-                    "Designed the system so that invalid outputs trigger a deterministic fallback response rather than surfacing raw LLM errors to users"
-                ],
-                bullets: [
-                    {
-                        id: "quantum-01",
-                        label: "~99% Schema Validation + ~97% Groundedness",
-                        receipts: {
-                            metric: "~99% Valid",
-                            layerTags: ["AI", "LLM"],
-                            proofs: ["Maintained ~99% schema validation pass rate by enforcing Pydantic structured outputs with strict type validation at every LLM response boundary", "Achieved ~97% groundedness on internal test sets by grounding all coaching responses in verified health content through RAG retrieval rather than pure generation"],
-                            tech: ["LangChain", "GPT-4", "Pydantic", "RAG"],
-                            src: "/100mos/thumbnail.png"
-                        }
-                    }
-                ]
-            },
-            mobileOnboarding: {
-                title: "Mobile Apps & Onboarding Flows",
-                problem: "User onboarding for a wearable-connected fitness app is notoriously fragile. Account linking with providers like Apple Health, Fitbit, and Garmin involves OAuth flows, permission grants, and initial sync — any failure point causes users to drop off before they've logged a single mile. We needed to make the path from download to first sync as frictionless as possible.",
-                built: [
-                    "Shipped production iOS and Android releases through React Native + Expo, containerized backend services with Docker, and deployed through CI/CD for repeatable, low-risk releases",
-                    "Owned the entire onboarding and account-linking flow — from wearable provider selection through OAuth to first successful sync",
-                    "Built an internal operations console that surfaces sync runs, reconciliation outcomes, and error states for the ops team"
-                ],
-                how: [
-                    "Designed progressive disclosure onboarding — users choose their provider, grant permissions, and see their first synced mile within ~7 minutes",
-                    "Implemented retry logic and clear error states for OAuth failures so users can self-recover without contacting support",
-                    "Used analytics and funnel tracking to identify and eliminate drop-off points, achieving ~22% reduction in setup abandonment",
-                    "Shipped with CI/CD pipelines for both mobile and backend, enabling rapid iteration without deployment risk"
-                ],
-                bullets: [
-                    {
-                        id: "mobile-01",
-                        label: "~91% Link Success, ~22% Drop-off Reduction",
-                        receipts: {
-                            metric: "~91% Link",
-                            layerTags: ["Mobile", "UX"],
-                            proofs: ["Improved wearable account-linking success to ~91% and reduced onboarding setup drop-off by ~22% through progressive disclosure design, retry logic, and clear error recovery flows", "Achieved first successful sync in ~7 minutes for typical users by optimizing the OAuth → permission → initial sync path end-to-end"],
-                            tech: ["React Native", "Expo", "Docker", "CI/CD"],
-                            src: "/100mos/thumbnail.png"
-                        }
-                    }
-                ]
-            },
-            opsConsole: {
-                title: "Internal Operations Console",
-                problem: "During peak summer season, the ops team needs real-time visibility into sync health, reconciliation outcomes, and error patterns across thousands of users and multiple wearable providers. Without a dedicated console, debugging sync issues meant SSH-ing into servers and grepping logs.",
-                built: [
-                    "Built a dedicated internal operations console that surfaces sync run history, reconciliation outcomes (success/mismatch/retry), and error state breakdowns",
-                    "Designed provider-level health monitoring showing per-provider sync success rates, latency, and error patterns",
-                    "Implemented quiet list monitoring for flagged users whose data needs manual review"
-                ],
-                how: [
-                    "Used React for the console frontend with real-time polling for sync status updates",
-                    "Built API endpoints that aggregate sync metrics across all providers and surface reconciliation details",
-                    "Designed the console for 'calm summer ops' — the team should be able to monitor the entire platform with minimal stress during peak season"
-                ],
-                bullets: [
-                    {
-                        id: "ops-01",
-                        label: "Calm Summer Ops Console",
-                        receipts: {
-                            metric: "Full Visibility",
-                            layerTags: ["Ops", "Internal"],
-                            proofs: ["Built an internal ops console that gives the team full visibility into sync runs, reconciliation outcomes, and error states — replacing manual log-grepping with a real-time dashboard", "Designed for 'calm summer ops' so the team can monitor thousands of users across multiple wearable providers with minimal stress during peak season"],
-                            tech: ["React", "FastAPI", "PostgreSQL"],
-                            src: "/100mos/thumbnail.png"
-                        }
-                    }
-                ]
-            },
-            evalHarness: {
-                title: "LLM Evaluation Harness",
-                problem: "LLM-powered features in a health app are high-stakes — a regression in output quality, a spike in invalid responses, or an increase in latency can directly harm user trust. We needed a rigorous evaluation framework that catches problems before they reach production, across every dimension: accuracy, safety, structure, and cost.",
-                built: [
-                    "Designed and built an evaluation harness with golden test sets and automated regression checks",
-                    "Tracked precision, recall, invalid-output rate, latency, and cost across prompt changes, retrieval changes, and model changes",
-                    "Implemented automated CI gates that block deployment if key metrics regress beyond defined thresholds"
-                ],
-                how: [
-                    "Created golden test sets from real user interactions and edge cases, covering diverse health contexts",
-                    "Built regression checks that run automatically on every PR that touches the AI layer",
-                    "Tracked schema validation pass rate (~99%), groundedness (~97%), and cost-per-query to ensure changes don't sacrifice quality for speed",
-                    "Used the harness to confidently iterate on prompts and retrieval strategies without fear of silent regressions"
-                ],
-                bullets: [
-                    {
-                        id: "eval-01",
-                        label: "Golden Test Sets + Regression Gates",
-                        receipts: {
-                            metric: "CI-Gated",
-                            layerTags: ["ML", "Eval"],
-                            proofs: ["Built an evaluation harness that tracks precision, recall, invalid-output rate, latency, and cost across every prompt, retrieval, and model change — maintaining ~99% schema validation pass rate and ~97% groundedness", "Implemented automated regression checks with golden test sets that run on every PR touching the AI layer, catching quality degradations before they reach production"],
-                            tech: ["Python", "Pydantic", "CI/CD", "Golden Sets"],
-                            src: "/100mos/thumbnail.png"
-                        }
-                    }
-                ]
-            },
-            visuals: {
-                images: [
-                    {
-                        src: "/100mos/hero.webp",
-                        alt: "100 Miles of Summer — Mirror+ Landing",
-                        caption: "The Mirror+ prototype landing page — 'THE MOMENT THAT GETS YOU MOVING.' We solved the challenge of making a fitness platform feel instantly inclusive and premium. The hero section communicates the core promise: all paces, all faces, no lost miles. Built with React and deployed on Vercel, it's the consumer-facing entry point to the entire ecosystem."
-                    }
-                ]
-            }
-        },
-        keyDecisions: [
-            { decision: "Idempotency-First Pipeline", why: "Wearable providers replay events unpredictably. Idempotency keys guarantee exactly-once processing regardless of provider behavior.", tradeoff: "Additional storage and lookup cost per event, justified by zero-tolerance for double-counted miles." },
-            { decision: "Strict LLM Output Validation", why: "Health coaching is high-stakes. Every LLM response must conform to a Pydantic schema before reaching users.", tradeoff: "Occasional fallback responses when the LLM produces novel but malformed outputs. Safety > flexibility." },
-            { decision: "Deterministic Fallbacks over Silent Failures", why: "When the AI layer fails or produces uncertain outputs, users get a safe, pre-validated response rather than an error or nothing.", tradeoff: "Fallback responses are less personalized, but the app never breaks and users never see raw errors." }
-        ],
-        bulletPoints: [
-            {
-                icon: "Smartphone",
-                headline: "Production Mobile Releases",
-                content: "Shipped production iOS and Android releases via React Native + Expo, with Python backend services containerized in Docker and deployed through CI/CD for repeatable, low-risk releases across both platforms.",
-                metric: "iOS + Android"
-            },
-            {
-                icon: "Database",
-                headline: "Reliability-First Data Pipeline",
-                content: "Built an ingestion and reconciliation pipeline using idempotency keys, deduplication, replay-safe processing, and source-of-truth aggregation — sustaining ~99% sync success with ~0.5% reconciliation mismatches under real provider conditions.",
-                metric: "~99% Sync"
-            },
-            {
-                icon: "Brain",
-                headline: "QUANTUM Health Coach AI",
-                content: "Architected the Aether Technology Layer delivering LLM + RAG features with Pydantic-validated structured outputs, strict validation gates, and deterministic fallback behavior — maintaining ~99% schema validation and ~97% groundedness.",
-                metric: "~99% Schema"
-            },
-            {
-                icon: "UserCheck",
-                headline: "Onboarding & Account Linking",
-                content: "Owned the full onboarding and wearable account-linking flow, improving link success to ~91%, reducing setup drop-off by ~22%, and achieving first successful sync in ~7 minutes for typical users.",
-                metric: "~91% Link"
-            },
-            {
-                icon: "BarChart3",
-                headline: "Evaluation Harness & Ops Console",
-                content: "Built an LLM evaluation harness with golden test sets and regression checks, plus an internal ops console for sync monitoring — enabling confident iteration and calm summer operations at scale.",
-                metric: "CI-Gated"
-            }
-        ],
-        links: {
-            live: "https://100mosproto.vercel.app",
-            caseStudy: "/experience/100mos"
         }
     },
     {

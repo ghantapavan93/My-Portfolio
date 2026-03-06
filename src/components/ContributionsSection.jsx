@@ -1,224 +1,250 @@
-import { useState } from 'react';
-import { Badge } from './ui/badge';
-import { ExternalLink } from 'lucide-react';
-
-const contributionsData = {
-  "Mentorship and Tutoring": [
-    {
-      title: "Workshop talk",
-      type: "video",
-      src: "/contributions/Mentorship and Tutoring/Workshop talk.mp4",
-      description: "Technical workshops on Python, C++, Java, ML, and GenAI foundations."
-    },
-  ],
-  "Research Papers": [
-    {
-      title: "SUDT Research Paper",
-      type: "image",
-      src: "/contributions/Research paper/SUDT.png",
-      link: "https://www.ijfmr.com/research-paper.php?id=12384",
-      description: "Published research paper on International Journal For MultiDisciplinary Research."
-    },
-  ],
-  "UNT Library Publications": [
-    {
-      title: "UNT Library Symposium Photo",
-      type: "image",
-      src: "/contributions/UNT Library Publication/Symposium photo.png",
-      link: "https://digital.library.unt.edu/ark:/67531/metadc2434846/",
-      description: "Achievement at UNT Library."
-    },
-  ],
-};
-
-const workshopPhotos = [
-  '/Workshops/outreach.jpeg',
-  '/Workshops/outreach1.jpeg',
-  '/Workshops/outreach2.jpeg',
-  '/Workshops/outreach3.jpg',
-  '/Workshops/outreach4.JPG',
-  '/Workshops/outreach5.jpeg',
-  '/Workshops/outreach6.jpeg',
-  '/Workshops/outreach7.jpeg',
-  '/Workshops/outreach8.jpeg',
-  '/Workshops/outreachmain.jpeg',
-];
-
-const linkedInPosts = [
-  {
-    title: 'My Experience in AI, Software Development & Mentorship',
-    type: "image",
-    src: "/contributions/Linkedin/My exp in AI.jpg",
-    link: 'https://www.linkedin.com/posts/pavankalyan-ghanta-b20115200_softwareengineering-ai-machinelearning-activity-7292416543970275328-8eUa',
-  },
-  {
-    title: 'Create with Python',
-    type: "image",
-    src: "/contributions/Linkedin/Create with python.jpg",
-    link: 'https://www.linkedin.com/posts/pavankalyan-ghanta-b20115200_python-softwareengineering-ai-activity-7298758761836331008-z51Q',
-  },
-  {
-    title: 'JavaScript Innovation at UNT',
-    type: "image",
-    src: "/contributions/Linkedin/Javascript.jpg",
-    link: 'https://www.linkedin.com/posts/pavankalyan-ghanta-b20115200_webdevelopment-javascript-frontenddevelopment-activity-7308894816111669248-60sD',
-  },
-  {
-    title: 'Bridging Code, Creativity, and Real Impact — One Workshop at a Time',
-    type: "image",
-    src: "/contributions/Linkedin/Bridging.jpg",
-    link: 'https://www.linkedin.com/posts/pavankalyan-ghanta-b20115200_opentowork-softwareengineering-machinelearning-activity-7318365589826072578-8mR5',
-  },
-  {
-    title: 'Multidisciplinary Research in Action - Hackathon',
-    type: "image",
-    src: "/contributions/Linkedin/Hackathon.jpg",
-    link: 'https://www.linkedin.com/posts/pavankalyan-ghanta-b20115200_gradinnohack2025-eagleeyeai-ai-activity-7315266190489047041-496I',
-  },
-];
+import { useState, useMemo, useEffect } from 'react';
+import { Filter, LayoutGrid, Network, X, PlayCircle } from 'lucide-react';
+import { contributionsData } from '../data/contributions';
+import { BentoGrid } from './contributions/BentoGrid';
+import { KnowledgeGraph } from './contributions/KnowledgeGraph';
+import { DetailsDrawer } from './contributions/DetailsDrawer';
 
 export function ContributionsSection() {
-  const [activeTab, setActiveTab] = useState(Object.keys(contributionsData)[0]);
+  const [activeMode, setActiveMode] = useState('bento'); // 'bento' | 'graph'
+  const [activeFilter, setActiveFilter] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const filters = ['All', 'Mentorship', 'Research', 'Publications', 'Workshops'];
+
+  // --- Hash Routing Logic ---
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash.startsWith('#contributions/')) {
+        const slug = hash.replace('#contributions/', '');
+        const item = contributionsData.find(c => c.slug === slug);
+        if (item) {
+          setSelectedItem(item);
+        }
+      } else {
+        setSelectedItem(null);
+      }
+    };
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const handleSelectItem = (item) => {
+    setSelectedItem(item);
+    window.history.pushState(null, null, `#contributions/\${item.slug}`);
+  };
+
+  const handleCloseDrawer = () => {
+    setSelectedItem(null);
+    window.history.pushState(null, null, '#contributions');
+  };
+  // --------------------------
+
+  // Filter & Sort Logic
+  const filteredData = useMemo(() => {
+    let data = contributionsData;
+    if (activeFilter !== 'All') data = data.filter(item => item.category === activeFilter);
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      data = data.filter(item => item.title.toLowerCase().includes(q) || item.impactHeadline.toLowerCase().includes(q));
+    }
+
+    // Preserve the curated array order from contributions.js
+    return data;
+  }, [activeFilter, searchQuery]);
+
+  // Featured Items for the Top Strip
+  const featuredStripItems = useMemo(() => {
+    return contributionsData.filter(c => c.featured).slice(0, 3);
+  }, []);
 
   return (
-    <section id="contributions" className="py-16">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-10">
-          <p className="text-primary font-medium uppercase tracking-wider mb-2">Contributions</p>
-          <h2 className="text-3xl font-semibold mb-4">My Work & Publications</h2>
+    <section id="contributions" className="py-32 relative bg-background overflow-hidden">
+      {/* Background Noise effect */}
+      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.15] mix-blend-overlay pointer-events-none -z-10" />
+
+      <div className="container mx-auto px-4 max-w-7xl relative z-10">
+
+        {/* Header & Recruiter Lens */}
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-12 mb-16 animate-fade-in">
+          <div className="space-y-4 max-w-2xl">
+            <span className="text-primary text-sm font-black uppercase tracking-[0.5em] block">Contributions OS</span>
+            <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-foreground leading-[0.9]">
+              Contributions & <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-indigo-500">Achievements.</span>
+            </h2>
+            <p className="text-xl md:text-2xl text-muted-foreground font-medium leading-snug">
+              Proof of how I show up: ship end-to-end, communicate clearly, and leave teams stronger than I found them.
+            </p>
+          </div>
+
+          {/* Recruiter Lens Block */}
+          <div className="bg-secondary/20 border border-border/50 rounded-3xl p-6 md:p-8 shrink-0 w-full lg:w-[480px] shadow-lg backdrop-blur-sm relative overflow-hidden group">
+            <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary via-indigo-500 to-purple-500 opacity-50 group-hover:opacity-100 transition-opacity" />
+
+            <div className="flex justify-between items-start mb-6">
+              <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground flex items-center gap-2">
+                <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-[10px] shadow-sm">
+                  🎯
+                </span>
+                What this section proves
+              </h3>
+            </div>
+
+            <ul className="space-y-3">
+              <li className="flex gap-3 items-start p-3 rounded-xl bg-white/5 dark:bg-black/10 backdrop-blur-sm border border-border/30 hover:border-blue-500/30 transition-all duration-300">
+                <span className="text-blue-500 mt-0.5 text-lg leading-none">▸</span>
+                <p className="text-sm text-foreground/90 leading-relaxed font-medium">
+                  <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-500">I ship end-to-end:</span> from messy requirements → implemented system → measurable outcomes → production-grade reliability.
+                </p>
+              </li>
+              <li className="flex gap-3 items-start p-3 rounded-xl bg-white/5 dark:bg-black/10 backdrop-blur-sm border border-border/30 hover:border-purple-500/30 transition-all duration-300">
+                <span className="text-purple-500 mt-0.5 text-lg leading-none">▸</span>
+                <p className="text-sm text-foreground/90 leading-relaxed font-medium">
+                  <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">I communicate at every level:</span> clear technical writing, workshops, demos, and stakeholder translation without losing rigor.
+                </p>
+              </li>
+              <li className="flex gap-3 items-start p-3 rounded-xl bg-white/5 dark:bg-black/10 backdrop-blur-sm border border-border/30 hover:border-emerald-500/30 transition-all duration-300">
+                <span className="text-emerald-500 mt-0.5 text-lg leading-none">▸</span>
+                <p className="text-sm text-foreground/90 leading-relaxed font-medium">
+                  <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-lime-500">I build repeatable playbooks:</span> templates, checklists, training materials, and “how we do it” workflows that scale beyond me.
+                </p>
+              </li>
+            </ul>
+            <div className="mt-6 pt-4 border-t border-border/30">
+              <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-black">
+                Everything here includes evidence: links, media, or artifacts.
+              </p>
+            </div>
+          </div>
         </div>
 
-        {/* Tabs */}
-        <div className="flex justify-center items-center gap-4 mb-8 flex-wrap">
-          {Object.keys(contributionsData).map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveTab(category)}
-              className={`px-4 py-2 rounded-full transition-all ${
-                activeTab === category
-                  ? 'bg-primary/10 text-primary font-semibold border border-primary/30 shadow-sm'
-                  : 'bg-secondary/40 text-muted-foreground hover:bg-secondary'
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-          <button
-            key="Technical Programming Workshops"
-            onClick={() => setActiveTab(null)}
-            className={`px-4 py-2 rounded-full transition-all ${
-              activeTab === null
-                ? 'bg-primary/10 text-primary font-semibold border border-primary/30 shadow-sm'
-                : 'bg-secondary/40 text-muted-foreground hover:bg-secondary'
-            }`}
-          >
-            Technical Programming Workshops
-          </button>
-        </div>
+        {/* Featured Proof Strip */}
+        <div className="mb-16">
+          <div className="mb-6">
+            <h3 className="text-lg font-black tracking-tight text-foreground">Featured PROOF</h3>
+            <p className="text-sm text-muted-foreground font-medium">A fast look at the work I’m most proud of — click to see the receipts.</p>
+          </div>
 
-        {/* Content */}
-        {activeTab !== null ? (
-          <div className="flex justify-center">
-            <div className="flex justify-center flex-wrap gap-6">
-              {contributionsData[activeTab].map((item, idx) => (
-                <div
-                  key={idx}
-                  className="bg-card rounded-xl p-4 shadow border border-primary/10 flex flex-col items-center h-80 w-full max-w-[300px] justify-between"
-                >
-                  {/* Media (Video/Image) */}
-                  {item.type === 'video' && (
-                    <div className="w-full aspect-video rounded-lg overflow-hidden mb-4">
-                      <video controls className="w-full h-full object-cover">
-                        <source src={item.src} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                    </div>
+          <div className="flex overflow-x-auto gap-4 pb-4 px-1 min-w-full scrollbar-hide snap-x">
+            {featuredStripItems.map((item, idx) => (
+              <button
+                key={idx}
+                onClick={() => handleSelectItem(item)}
+                className="flex flex-col sm:flex-row items-center gap-4 p-4 rounded-2xl border border-border/50 bg-secondary/10 hover:bg-secondary/30 transition-all hover:border-primary/50 group text-left w-[300px] sm:w-[400px] shrink-0 snap-start shadow-sm focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+              >
+                {/* Media Thumbnail */}
+                <div className="w-full sm:w-20 h-40 sm:h-20 rounded-xl overflow-hidden relative shrink-0">
+                  {item.media && item.media[0] ? (
+                    <>
+                      {item.media[0].type === 'video' ? (
+                        <img src={item.media[0].thumbnail} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                      ) : (
+                        <img src={item.media[0].url} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                      )}
+                    </>
+                  ) : (
+                    <div className="w-full h-full bg-primary/20" />
                   )}
-                  {item.type === 'image' && (
-                    <div className="w-full aspect-[4/3] rounded-lg overflow-hidden mb-4">
-                      <img
-                        src={item.src}
-                        alt={item.title}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
+                  {item.media && item.media[0] && item.media[0].type === 'video' && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                      <PlayCircle className="w-6 h-6 text-white drop-shadow-md" />
                     </div>
-                  )}
-
-                  {/* Title & Description */}
-                  <h3 className="font-semibold text-lg mb-2 text-center">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground text-center">{item.description}</p>
-
-                  {/* View More Link */}
-                  {item.link && (
-                    <a
-                      href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-3 inline-flex items-center gap-1 px-4 py-2 rounded bg-primary/10 text-primary font-medium hover:bg-primary/20 transition"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      View More
-                    </a>
                   )}
                 </div>
+                {/* Fast Info */}
+                <div className="flex-1 min-w-0 flex flex-col justify-center h-full">
+                  <h4 className="text-sm font-bold text-foreground truncate">{item.title}</h4>
+                  <p className="text-[10px] text-muted-foreground line-clamp-2 mt-1 mb-2 font-medium">{item.impactHeadline}</p>
+                  <div className="flex items-center justify-between mt-auto">
+                    {item.proofTags && item.proofTags.length > 0 && (
+                      <span className="text-[8px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded bg-background border border-border/50 text-foreground/70">
+                        {item.proofTags[0]}
+                      </span>
+                    )}
+                    <span className="text-[9px] font-black uppercase tracking-widest text-primary opacity-0 group-hover:opacity-100 transition-opacity -translate-x-2 group-hover:translate-x-0 ml-auto">
+                      Open →
+                    </span>
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Controls Engine */}
+        <div className="flex flex-col md:flex-row items-end md:items-center justify-between gap-6 py-6 border-b border-border/50 mb-12 relative z-20">
+
+          <div className="flex flex-col gap-2 w-full md:w-auto">
+            <span className="text-[9px] font-black uppercase tracking-widest text-muted-foreground ml-1">Filter</span>
+            {/* Category Filters */}
+            <div className="flex items-center gap-2 overflow-x-auto w-full pb-2 md:pb-0 scrollbar-hide">
+              <Filter className="w-3 h-3 text-muted-foreground shrink-0 hidden sm:block" />
+              {filters.map(f => (
+                <button
+                  key={f}
+                  onClick={() => setActiveFilter(f)}
+                  className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest border-2 transition-all whitespace-nowrap focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none ${activeFilter === f ? 'bg-primary border-primary text-white shadow-lg shadow-primary/30' : 'bg-card border-border text-foreground hover:border-primary hover:bg-primary/10'}`}
+                >
+                  {f}
+                </button>
               ))}
             </div>
           </div>
-        ) : (
-          <div>
-            {/* Workshop Photos Grid */}
-            <h3 className="text-xl font-semibold mb-6 text-center">Technical Programming Workshops</h3>
-            <div className="flex justify-center mb-10">
-              <div className="flex justify-center flex-wrap gap-6">
-                {workshopPhotos.map((photo, idx) => (
-                  <div
-                    key={idx}
-                    className="rounded-lg overflow-hidden shadow border border-primary/10 w-full max-w-[300px] h-64 flex items-center justify-center"
-                  >
-                    <img
-                      src={photo}
-                      alt={`Workshop photo ${idx + 1}`}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-                ))}
-              </div>
+
+          <div className="flex flex-col sm:flex-row items-end sm:items-center justify-between w-full md:w-auto gap-4">
+
+            <div className="flex flex-col items-end sm:items-start gap-2 hidden lg:flex mr-4">
+              <span className="text-[9px] font-black uppercase tracking-widest text-muted-foreground opacity-0">Helper</span>
+              <span className="text-[10px] font-medium text-muted-foreground italic h-7 flex items-center">
+                Click any tile to open the full story + receipts.
+              </span>
             </div>
 
-            {/* LinkedIn Posts */}
-            <h3 className="text-xl font-semibold mb-6 text-center">My Workshop LinkedIn Posts</h3>
-            <div className="flex justify-center">
-              <div className="flex justify-center flex-wrap gap-6">
-                {linkedInPosts.map((post, idx) => (
-                  <a
-                    key={idx}
-                    href={post.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block border border-primary/20 rounded-lg overflow-hidden shadow hover:shadow-lg transition hover:scale-105 h-[350px] w-full max-w-[300px] flex flex-col justify-between"
-                  >
-                    <img
-                      src={post.src}
-                      alt={post.title}
-                      className="w-full h-48 object-cover"
-                      loading="lazy"
-                    />
-                    <div className="p-4 flex flex-col justify-between flex-grow">
-                      <h4 className="font-semibold text-lg text-center">{post.title}</h4>
-                      <div className="mt-2 flex items-center justify-center text-primary">
-                        <ExternalLink className="w-4 h-4 mr-1" />
-                        <span className="underline">View Post</span>
-                      </div>
-                    </div>
-                  </a>
-                ))}
+            <div className="flex flex-col gap-2">
+              <span className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">View</span>
+              {/* View Mode Toggle */}
+              <div className="flex items-center gap-1 p-1 bg-secondary/20 rounded-xl border border-border/50 shrink-0">
+                <button
+                  onClick={() => setActiveMode('bento')}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none \${activeMode === 'bento' ? 'bg-background text-primary shadow-sm border border-border/50' : 'text-muted-foreground hover:text-foreground border border-transparent'}`}
+                >
+                  <LayoutGrid className="w-3 h-3" />
+                  <span>Bento <span className="text-[8px] font-medium lowercase italic text-muted-foreground hidden lg:inline ml-1">(recommended)</span></span>
+                </button>
+                <button
+                  onClick={() => setActiveMode('graph')}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none \${activeMode === 'graph' ? 'bg-background text-primary shadow-sm border border-border/50' : 'text-muted-foreground hover:text-foreground border border-transparent'}`}
+                >
+                  <Network className="w-3 h-3" />
+                  <span>Graph <span className="text-[8px] font-medium lowercase italic text-muted-foreground hidden lg:inline ml-1">(Explore)</span></span>
+                </button>
               </div>
             </div>
           </div>
-        )}
+        </div>
+
+        {/* View Renderer */}
+        <div className="min-h-[600px] relative z-10 w-full">
+          {activeMode === 'bento' ? (
+            <BentoGrid items={filteredData} onSelect={handleSelectItem} />
+          ) : (
+            <KnowledgeGraph items={filteredData} onSelect={handleSelectItem} />
+          )}
+        </div>
+
       </div>
+
+      {/* Shared Details Drawer */}
+      <DetailsDrawer
+        item={selectedItem}
+        isOpen={selectedItem !== null}
+        onClose={handleCloseDrawer}
+      />
+
     </section>
   );
 }
