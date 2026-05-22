@@ -84,6 +84,152 @@ export function ProjectsSection() {
     ]
   };
 
+  const nexusWatchLearnMore = {
+    id: "nexuswatch",
+    title: "NexusWatch",
+    tagline: "AI Decision Support Console for Invoice Exposure Review",
+    description: "A full-stack operational intelligence platform for reviewing invoice exposure against state-level thresholds. NexusWatch combines OCR-assisted invoice intake, Supabase-backed review queues, configurable state rules, and AI-generated decision briefs so teams can move from scattered invoice records to audit-ready approval workflows.",
+    role: "Full-Stack AI Engineer",
+    timeline: "2026",
+    type: "FinOps / Decision Support Platform",
+    liveUrl: "https://nexus-watch-xem.vercel.app",
+    repoUrl: "https://github.com/ghantapavan93/NexusWatch-MVP",
+    technologies: ["Next.js", "Supabase", "AI Workflow", "OCR", "TypeScript", "Tailwind CSS", "Decision Support"],
+    heroImage: "/projects/nexuswatch/thumbnail.svg",
+    gallery: [
+      "/projects/nexuswatch/thumbnail.svg"
+    ],
+    story: [
+      {
+        type: "intro",
+        heading: "Why It Matters",
+        text: "Invoice review gets risky when teams rely on spreadsheets, email handoffs, and manual threshold checks. NexusWatch turns that process into a command center: uploaded invoices are tracked, state exposure rules are monitored, and review queues make it clear what needs human attention before anything is exported."
+      },
+      {
+        type: "feature_split",
+        heading: "Exposure Command Center",
+        text: "The dashboard gives operators a real-time view of states monitored, healthy states, invoices needing review, accounting-review items, warning bands, threshold crossings, and export readiness. Recruiters can immediately see the product thinking: this is not just a CRUD app, it is an operational workflow built around risk, review, and accountability.",
+        bullets: ["State-level threshold monitoring", "Review queue and accounting-review workflow", "Decision support metrics for fast scanning"],
+        image: "/projects/nexuswatch/thumbnail.svg",
+        imageCaption: "NexusWatch exposure command center",
+        reverse: false
+      },
+      {
+        type: "feature_split",
+        heading: "AI-Assisted Invoice Review",
+        text: "NexusWatch is designed around decision support, not blind automation. OCR-detected fields can be reviewed before approval, AI briefs summarize the state of the workspace, and exports stay gated so only approved invoices move forward.",
+        bullets: ["OCR-assisted invoice intake", "AI brief for review context", "Human-in-the-loop approval safety"],
+        image: "/projects/nexuswatch/thumbnail.svg",
+        imageCaption: "Review-first workflow for invoice operations",
+        reverse: true
+      },
+      {
+        type: "grid",
+        heading: "Technical Architecture",
+        items: [
+          { title: "Frontend", desc: "Polished command-center UI built for dense operational scanning and repeated review workflows.", icon: "Layout" },
+          { title: "Data Layer", desc: "Supabase-backed workspace data for invoices, state rules, queue status, and review history.", icon: "Database" },
+          { title: "AI Workflow", desc: "AI-assisted decision briefs and OCR field review help operators understand risk before approval.", icon: "Zap" },
+          { title: "Safety", desc: "Approval gates keep exports audit-ready and make the product clear about decision support boundaries.", icon: "Shield" }
+        ]
+      },
+      {
+        type: "grid",
+        heading: "Recruiter Signal",
+        items: [
+          { title: "Product Judgment", desc: "Shows the ability to turn messy business rules into a focused operational console.", icon: "CheckCircle2" },
+          { title: "Full-Stack Range", desc: "Combines frontend UX, backend persistence, file upload flows, and AI-assisted workflows.", icon: "Layers" },
+          { title: "Domain Thinking", desc: "Handles invoice exposure, thresholds, state rules, review states, and export readiness.", icon: "Database" },
+          { title: "Responsible AI", desc: "Keeps the system human-reviewed instead of presenting AI as automatic final judgment.", icon: "Shield" }
+        ]
+      }
+    ]
+  };
+
+  const designRoomLearnMore = {
+    id: "design-room",
+    title: "Design Room",
+    tagline: "AI-Powered Exterior Design and Proposal Platform",
+    description: "A full-stack design collaboration platform that turns home photos into interactive exterior design sessions. Design Room helps homeowners, contractors, and insurance professionals visualize materials, compare before/after concepts, collaborate live, and export polished proposal-ready views before ground breaks.",
+    role: "Full-Stack Developer",
+    timeline: "2026",
+    type: "AI Design / PropTech Platform",
+    liveUrl: "https://design-room-five.vercel.app/",
+    repoUrl: "https://github.com/ghantapavan93/Design-Room",
+    technologies: ["React", "AI Segmentation", "Real-Time Collaboration", "Design Systems", "Proposal Workflow", "Vercel"],
+    heroImage: "/projects/design-room/hero.png",
+    gallery: [
+      "/projects/design-room/hero.png",
+      "/projects/design-room/ideas.png",
+      "/projects/design-room/process.png",
+      "/projects/design-room/roles.png",
+      "/projects/design-room/editor.png"
+    ],
+    story: [
+      {
+        type: "intro",
+        heading: "The Product Idea",
+        text: "Renovation decisions are hard because clients, contractors, and stakeholders rarely see the same vision at the same time. Design Room turns exterior photos into a shared design workspace where teams can explore styles, preview real materials, compare before/after options, and move toward a proposal with less back-and-forth."
+      },
+      {
+        type: "feature_split",
+        heading: "Before/After AI Design Preview",
+        text: "The landing experience makes the value clear immediately: upload or inspect a home photo, compare the original with an AI-designed version, and understand the transformation before committing to materials or scope.",
+        bullets: ["Before/after visual comparison", "Exterior-focused AI design workflow", "Fast path from concept to client confidence"],
+        image: "/projects/design-room/hero.png",
+        imageCaption: "Design Room hero with before/after exterior preview",
+        reverse: false
+      },
+      {
+        type: "feature_split",
+        heading: "Style Gallery and Guided Selection",
+        text: "The ideas view presents curated design directions like Contemporary, Farmhouse, Japanese Modern, Coastal, Traditional, and Monochrome. This makes the product feel usable for real clients: visual choices are organized, searchable, and ready to open in the editor.",
+        bullets: ["Curated exterior style catalog", "Search and category filters", "Editor handoff from inspiration to design"],
+        image: "/projects/design-room/ideas.png",
+        imageCaption: "Design style gallery with multiple exterior directions",
+        reverse: true
+      },
+      {
+        type: "feature_split",
+        heading: "Photo to Proposal Workflow",
+        text: "The product frames the workflow in four steps: upload a property photo, let AI segment key regions, apply real-world materials in a collaborative editor, then export a polished proposal. It is built around a contractor-friendly flow, not just a visual demo.",
+        bullets: ["Photo upload and segmentation path", "Material application workflow", "Proposal-ready export concept"],
+        image: "/projects/design-room/process.png",
+        imageCaption: "Process section showing photo to proposal flow",
+        reverse: false
+      },
+      {
+        type: "feature_split",
+        heading: "Real-Time Editor for Contractors",
+        text: "The editor experience supports region selection, material application, save options, compare mode, locking regions, takeoff, export, and live collaboration. The project shows strong product depth because it considers how actual project teams review, approve, and share design decisions.",
+        bullets: ["Region-based material editing", "Live collaboration presence", "Compare, approve, takeoff, and export actions"],
+        image: "/projects/design-room/editor.png",
+        imageCaption: "Interactive editor with selected front door region",
+        reverse: true
+      },
+      {
+        type: "grid",
+        heading: "Technical Architecture",
+        items: [
+          { title: "Design UI", desc: "High-fidelity React interface for browsing ideas, editing regions, comparing views, and presenting proposals.", icon: "Layout" },
+          { title: "AI Workflow", desc: "Segmentation-first product flow that maps photo regions to editable surfaces like roof, siding, trim, doors, and windows.", icon: "Zap" },
+          { title: "Collaboration", desc: "Multi-role experience for homeowners, contractors, and insurance professionals with approval-oriented states.", icon: "Layers" },
+          { title: "Proposal Flow", desc: "Built around real project outcomes: material selection, approvals, takeoff context, and export readiness.", icon: "CheckCircle2" }
+        ]
+      },
+      {
+        type: "grid",
+        heading: "Recruiter Signal",
+        items: [
+          { title: "Product Taste", desc: "Shows strong ability to make an AI product feel polished, useful, and understandable in the first viewport.", icon: "CheckCircle2" },
+          { title: "Complex UX", desc: "Handles galleries, role-based surfaces, region selection, compare mode, and editor workflow without feeling scattered.", icon: "Layout" },
+          { title: "Domain Thinking", desc: "Targets a real workflow for contractors and property teams: visualization, approval, documentation, and proposals.", icon: "Database" },
+          { title: "Full-Stack Framing", desc: "Connects AI segmentation concepts with usable UI, collaborative states, and production deployment.", icon: "Server" }
+        ]
+      }
+    ]
+  };
+
   // Data for Get Towed Learn More
   // Data for Get Towed - Premium Case Study Structure
   const getTowedLearnMore = {
@@ -991,6 +1137,36 @@ export function ProjectsSection() {
             githubUrl="https://github.com/ghantapavan93/project-h"
             highlight={true}
             onLearnMore={() => setActiveProject(projectHLearnMore)}
+            learnMore={true}
+          />
+
+          <ProjectCard
+            title="NexusWatch"
+            description="AI decision-support console for invoice exposure review. Tracks state thresholds, OCR review items, approval safety, and audit-ready exports through a Supabase-backed operations dashboard."
+            tags={["Next.js", "Supabase", "AI Workflow", "OCR", "FinOps"]}
+            imageUrl="/projects/nexuswatch/thumbnail.svg"
+            liveUrl="https://nexus-watch-xem.vercel.app"
+            githubUrl="https://github.com/ghantapavan93/NexusWatch-MVP"
+            highlight={true}
+            onLearnMore={() => setActiveProject(nexusWatchLearnMore)}
+            learnMore={true}
+          />
+
+          <ProjectCard
+            title="Design Room"
+            description="AI-powered exterior design platform that turns home photos into interactive design sessions with style galleries, region-based material editing, live collaboration, before/after comparison, and proposal-ready export workflows."
+            tags={["React", "AI Segmentation", "Design Tool", "Collaboration", "PropTech"]}
+            imageUrl={[
+              "/projects/design-room/hero.png",
+              "/projects/design-room/ideas.png",
+              "/projects/design-room/process.png",
+              "/projects/design-room/roles.png",
+              "/projects/design-room/editor.png"
+            ]}
+            liveUrl="https://design-room-five.vercel.app/"
+            githubUrl="https://github.com/ghantapavan93/Design-Room"
+            highlight={true}
+            onLearnMore={() => setActiveProject(designRoomLearnMore)}
             learnMore={true}
           />
 

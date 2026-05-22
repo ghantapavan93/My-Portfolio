@@ -2,7 +2,7 @@ export const experiences = [
     {
         id: "100mos",
         company: "100 Miles of Summer",
-        role: "App Developer — Full Stack AI Engineer",
+        role: "Software Engineer — Full Stack AI",
         domainTags: ["Full-Stack", "AI/ML", "Real-time"],
         dateRange: "Jan 2026 – Present",
         location: "Remote (TX) — Chicago, IL (HQ)",
@@ -56,7 +56,7 @@ export const experiences = [
                 title: "Mission: No Lost Miles",
                 paragraphs: [
                     "100 Miles of Summer is a fitness movement platform where participants commit to walking, jogging, running, or rolling 100 miles over the summer. It's inclusive by design — all paces, all faces. The platform has a React Native mobile app for iOS and Android, a web prototype (Mirror+), and a Python backend powering data sync, AI coaching, and internal operations.",
-                    "As the App Developer and Full Stack AI Engineer, I own the entire technical stack: from shipping production mobile releases through CI/CD, to building the reliability-first wearable sync pipeline, to architecting the LLM-powered QUANTUM Health Coach with strict validation gates and deterministic fallback behavior."
+                    "As a Software Engineer focused on Full Stack AI, I own the entire technical stack: from shipping production mobile releases through CI/CD, to building the reliability-first wearable sync pipeline, to architecting the LLM-powered QUANTUM Health Coach with strict validation gates and deterministic fallback behavior."
                 ],
                 ownership: [
                     "Production iOS & Android releases (React Native + Expo)",
@@ -263,7 +263,7 @@ export const experiences = [
         company: "Vosyn",
         role: "Machine Learning Intern — VosynCore Multimodal Localization",
         domainTags: ["AI/ML", "Infra/MLOps", "Backend"],
-        dateRange: "Aug 2025 – Present",
+        dateRange: "Aug 2025 – Jan 2026",
         location: "Remote",
         teamContext: "Team: Voice cloning and text to speech, multimodal localization platform (voice, text, video), production inference and quality gates.",
         hookLine: "Built shared AI services for VosynCore, cutting ETL setup time by 51% and API latency by 45%.",
@@ -1619,10 +1619,10 @@ export const experiences = [
     {
         id: "lineysha",
         company: "Lineysha & Thevan Technologies",
-        role: "AI Engineer — Applied ML & Edge AI",
+        role: "AI/ML Engineer — Applied ML & Edge AI",
         domainTags: ["AI/ML", "Research", "IoT"],
         dateRange: "Jan 2021 – Feb 2023",
-        location: "India",
+        location: "Vijayawada, India",
         hookLine: "Reduced false positives in anomaly detection by 65% through hybrid LSTM-ARIMA models.",
         proofMetrics: [
             { label: "Data records", value: "50,000+", hint: "Sensor data processing." },
@@ -1659,7 +1659,7 @@ export const experiences = [
             overview: {
                 paragraphs: [
                     "Lineysha & Thevan Technologies provided an intensive environment for applied ML research. My role centered on time-series forecasting and anomaly detection for industrial sensor data—specifically reducing the 'noise' that often leads to false positives in automated monitoring systems.",
-                    "As an AI Engineer, I worked on the bridge between raw experimental models and field-deployable edge solutions, ensuring that research insights could survive the constraints of low-power hardware like the NVIDIA Jetson Nano."
+                    "As an AI/ML Engineer, I worked on the bridge between raw experimental models and field-deployable edge solutions, ensuring that research insights could survive the constraints of low-power hardware like the NVIDIA Jetson Nano."
                 ],
                 ownership: [
                     "Developed and evaluated hybrid LSTM-ARIMA models for time-series forecasting",
@@ -1857,8 +1857,8 @@ export const experiences = [
     },
     {
         id: "alweb",
-        company: "Alweb.ai",
-        role: "AI Intern — Prompt-driven UI generation",
+        company: "Al Web",
+        role: "Full Stack Developer Intern",
         domainTags: ["AI/ML", "Web", "Design"],
         dateRange: "Jul 2019 – Jul 2020",
         location: "Remote",
@@ -1871,7 +1871,7 @@ export const experiences = [
         ],
         heroMotif: {
             emoji: "🌐",
-            title: "Alweb AI",
+            title: "Al Web",
             subtitle: "Semantic UI generation"
         },
         theme: {
@@ -1899,8 +1899,8 @@ export const experiences = [
         narrativeSections: {
             overview: {
                 paragraphs: [
-                    "Alweb.ai was one of the early pioneers in the 'AI Website Builder' space. Long before tools like Framer or Wix ADI became household names, we were experimenting with how GPT-3 could convert a simple marketing sentence into a fully structured, SEO-optimized web layout.",
-                    "As an AI Intern, my role centered on the bridge between raw LLM completions and render-ready HTML structures. I helped define the mapping logic that ensured AI-generated content didn't just 'look' good, but also followed strict semantic and SEO rules."
+                    "Al Web was one of the early pioneers in the 'AI Website Builder' space. Long before tools like Framer or Wix ADI became household names, we were experimenting with how GPT-3 could convert a simple marketing sentence into a fully structured, SEO-optimized web layout.",
+                    "As a Full Stack Developer Intern, my role centered on the bridge between raw LLM completions and render-ready HTML structures. I helped define the mapping logic that ensured AI-generated content didn't just 'look' good, but also followed strict semantic and SEO rules."
                 ],
                 ownership: [
                     "Developed Flask inference APIs for real-time UI generation",
