@@ -35,7 +35,7 @@ export function ContributionsSection() {
 
   const handleSelectItem = (item) => {
     setSelectedItem(item);
-    window.history.pushState(null, null, `#contributions/\${item.slug}`);
+    window.history.pushState(null, null, `#contributions/${item.slug}`);
   };
 
   const handleCloseDrawer = () => {
@@ -210,14 +210,14 @@ export function ContributionsSection() {
               <div className="flex items-center gap-1 p-1 bg-secondary/20 rounded-xl border border-border/50 shrink-0">
                 <button
                   onClick={() => setActiveMode('bento')}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none \${activeMode === 'bento' ? 'bg-background text-primary shadow-sm border border-border/50' : 'text-muted-foreground hover:text-foreground border border-transparent'}`}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none ${activeMode === 'bento' ? 'bg-background text-primary shadow-sm border border-border/50' : 'text-muted-foreground hover:text-foreground border border-transparent'}`}
                 >
                   <LayoutGrid className="w-3 h-3" />
                   <span>Bento <span className="text-[8px] font-medium lowercase italic text-muted-foreground hidden lg:inline ml-1">(recommended)</span></span>
                 </button>
                 <button
                   onClick={() => setActiveMode('graph')}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none \${activeMode === 'graph' ? 'bg-background text-primary shadow-sm border border-border/50' : 'text-muted-foreground hover:text-foreground border border-transparent'}`}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none ${activeMode === 'graph' ? 'bg-background text-primary shadow-sm border border-border/50' : 'text-muted-foreground hover:text-foreground border border-transparent'}`}
                 >
                   <Network className="w-3 h-3" />
                   <span>Graph <span className="text-[8px] font-medium lowercase italic text-muted-foreground hidden lg:inline ml-1">(Explore)</span></span>
