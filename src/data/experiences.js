@@ -1731,21 +1731,21 @@ export const experiences = [
     {
         id: "builder",
         company: "Builder.ai",
-        role: "AI Engineering Intern — Prompt-to-app GenAI Workflows",
-        domainTags: ["AI/ML", "GenAI", "Product"],
+        role: "ML/AI Engineer Intern",
+        domainTags: ["AI/ML", "Machine Learning", "Product"],
         dateRange: "Jul 2020 – Jan 2021",
         location: "Remote",
         hookLine: "Built RAG-inspired flows that turned natural language into structured app blueprints.",
         proofMetrics: [
             { label: "Orchestration", value: "FastAPI", hint: "High-performance API layer." },
             { label: "Search", value: "FAISS", hint: "Vector similarity search." },
-            { label: "Models", value: "GPT-3 & Codex", hint: "Early LLM adoption." },
+            { label: "ML Logic", value: "Semantic Parser", hint: "Intent-to-blueprint mapping." },
             { label: "Schema", value: "JSON-Schema", hint: "Blueprint validation." }
         ],
         heroMotif: {
             emoji: "🧱",
             title: "Builder AI",
-            subtitle: "Prompt-to-app workflows"
+            subtitle: "Blueprint workflows"
         },
         theme: {
             accent: "#000000",
@@ -1753,30 +1753,30 @@ export const experiences = [
             backgroundFx: "svg",
             iconSet: "duotone"
         },
-        topStack: ["Python", "FastAPI", "OpenAI", "Codex", "FAISS", "Docker", "JSON-Schema"],
+        topStack: ["Python", "FastAPI", "FAISS", "Docker", "JSON-Schema", "Pydantic", "Semantic Search"],
         fullStackByLayer: {
             API: ["FastAPI", "RESTful Orchestration", "Python"],
             Data: ["FAISS Vector Store", "Structured Blueprint JSON"],
-            ML: ["OpenAI GPT-3", "OpenAI Codex", "Prompt Engineering", "Chain-of-Thought Patterns"],
+            ML: ["Semantic Parsing", "Intent Classification", "Blueprint Ranking", "Retrieval Workflows"],
             Infra: ["Docker", "AWS ECS", "GCP Cloud Run"],
-            Observability: ["Versioned Prompts", "Coherence Scoring", "JSON Validation"]
+            Observability: ["Versioned Rules", "Coherence Scoring", "JSON Validation"]
         },
         chapters: [
             { id: "overview", title: "Overview" },
             { id: "discovery", title: "Discovery" },
             { id: "systems", title: "Systems" },
-            { id: "gen-ai", title: "Gen-AI" },
+            { id: "gen-ai", title: "ML Flow" },
             { id: "proof", title: "Proof" },
             { id: "visuals", title: "Visuals" }
         ],
         narrativeSections: {
             overview: {
                 paragraphs: [
-                    "Builder.ai is a leading platform for AI-powered app construction. During my internship, I worked at the bleeding edge of Generative AI, long before the 'GPT-boom' became mainstream. My mission was to help close the gap between a user's natural language idea and a structured, buildable application blueprint.",
-                    "This involved not just 'prompting', but building a robust orchestration layer that could validate AI outputs, handle ambiguity, and map vague intents to specific software architectures."
+                    "Builder.ai is a leading platform for AI-powered app construction. During my internship, I worked on systems that helped close the gap between a user's natural language idea and a structured, buildable application blueprint.",
+                    "This involved building a robust orchestration layer that could validate generated outputs, handle ambiguity, and map vague intents to specific software architectures."
                 ],
                 ownership: [
-                    "Architected prompt-to-blueprint orchestration using FastAPI",
+                    "Architected intent-to-blueprint orchestration using FastAPI",
                     "Implemented early RAG patterns with FAISS for intent mapping",
                     "Designed fallbacks for ambiguous user specifications",
                     "Collaborated with product teams to define the 'Spec-to-Code' bridge"
@@ -1784,42 +1784,42 @@ export const experiences = [
             },
             discovery: {
                 title: "The Problem: The Intent-to-Architecture Gap",
-                problem: "Translating a user's 'I want an Uber for cats' into a technical reality requires more than just code; it requires a structured blueprint of features, data schemas, and user flows. Manual specification gathering was slow and prone to human error. We needed an AI-driven system that could parse intent and propose a coherent software structure instantly.",
+                problem: "Translating a user's 'I want an Uber for cats' into a technical reality requires more than just code; it requires a structured blueprint of features, data schemas, and user flows. Manual specification gathering was slow and prone to human error. We needed a machine-learning-assisted system that could parse intent and propose a coherent software structure instantly.",
                 built: [
-                    "Developed semantic mapping systems that identified core 'entities' and 'features' from raw text prompts",
+                    "Developed semantic mapping systems that identified core 'entities' and 'features' from raw text inputs",
                     "Built a blueprint generator that produced valid JSON schemas describing intended app functionality",
                     "Created a 'Similar Blueprint' search tool to help users refine their ideas based on existing successful architectures"
                 ],
                 how: [
-                    "Used FAISS (Facebook AI Similarity Search) to index thousands of existing feature descriptions, allowing us to find the closest 'technical matches' for any given user prompt",
-                    "Structured the data layer to treat 'Features' as reusable components that the AI could 'pick and place' into a new blueprint",
-                    "Implemented JSON-Schema as the source of truth, ensuring that AI-generated blueprints were always machine-readable and valid"
+                    "Used FAISS (Facebook AI Similarity Search) to index thousands of existing feature descriptions, allowing us to find the closest technical matches for any given user request",
+                    "Structured the data layer to treat 'Features' as reusable components that could be ranked, selected, and placed into a new blueprint",
+                    "Implemented JSON-Schema as the source of truth, ensuring generated blueprints were always machine-readable and valid"
                 ]
             },
             systems: {
                 title: "System Architecture: Orchestration & Validation",
                 built: [
-                    "Designed a middleware layer that buffered LLM responses, ensuring we didn't ship 'hallucinations' to the frontend",
-                    "Implemented versioned prompt storage, allowing us to iterate on prompt engineering without breaking production flows",
-                    "Created an internal dashboard to monitor prompt performance and coherence scores across different user demographics"
+                    "Designed a middleware layer that buffered generated blueprint responses, ensuring invalid structures did not ship to the frontend",
+                    "Implemented versioned rule and template storage, allowing us to iterate on generation logic without breaking production flows",
+                    "Created an internal dashboard to monitor blueprint performance and coherence scores across different user demographics"
                 ],
                 how: [
                     "Developed 'Validation Gates'—small, specialized scripts that checked the AI's output for specific structural requirements before proceeding",
-                    "Leveraged FastAPI for its high concurrency and pydantic models, providing a second layer of type-safety for AI outputs",
-                    "Integrated with OpenAI's beta Codex and GPT-3 APIs, experimenting with early few-shot prompting techniques to improve schema accuracy"
+                    "Leveraged FastAPI for its high concurrency and pydantic models, providing a second layer of type-safety for generated outputs",
+                    "Tested semantic parsing, few-shot examples, and schema-first validation techniques to improve blueprint accuracy"
                 ]
             },
             genAi: {
-                title: "Gen-AI Workflows: Prompt Chaining & RAG",
+                title: "ML-Assisted Workflows: Retrieval & Blueprinting",
                 built: [
-                    "Pioneered early 'Prompt Chaining' workflows where the output of one LLM call defined the context for the next",
-                    "Optimized token usage by injecting relevant 'blueprint snippets' into the model context dynamically",
-                    "Refined the 'Identity' of the AI assistant to act as a Senior Technical Lead, improving the quality of the generated architectures"
+                    "Built chained workflow steps where one structured output became validation context for the next",
+                    "Optimized retrieval by injecting relevant blueprint snippets into the generation context dynamically",
+                    "Refined blueprint templates to behave like a senior technical lead's checklist, improving architecture quality"
                 ],
                 how: [
-                    "Implemented a Retrieval-Augmented Generation (RAG) approach: searching for relevant technical docs and injecting them into the prompt to 'ground' the AI's response",
-                    "Balanced creative intent vs. technical constraints by enforcing deterministic 'anchor points' within the prompts",
-                    "Experimented with Codex's ability to 'summarize' technical requirements into buildable task lists"
+                    "Implemented a retrieval-augmented approach: searching for relevant technical docs and injecting them into the workflow to ground generated responses",
+                    "Balanced creative intent vs. technical constraints by enforcing deterministic anchor points within the workflow",
+                    "Experimented with structured summarization patterns that converted technical requirements into buildable task lists"
                 ]
             },
             proof: {
@@ -1827,20 +1827,20 @@ export const experiences = [
                 bullets: [
                     "Dramatically reduced the time required to move from 'Concept' to 'Technical Blueprint'",
                     "Isolated specific 'Intent Mismatches' through iterative coherence monitoring",
-                    "Established the foundational prompting patterns later used for the platform's 'Natasha' AI assistant"
+                    "Established foundational blueprinting patterns later used for the platform's assistant workflows"
                 ]
             },
             visuals: {
                 images: [
                     {
                         src: "/builder-ai/blueprint-flow.png",
-                        alt: "Prompt-to-Blueprint Flow Diagram",
-                        caption: "A visualization of the orchestration layer: Natural language input → FAISS vector search → GPT-3 blueprint generation → JSON Schema validation → Structured API output."
+                        alt: "Intent-to-Blueprint Flow Diagram",
+                        caption: "A visualization of the orchestration layer: Natural language input → FAISS vector search → blueprint generation → JSON Schema validation → Structured API output."
                     },
                     {
                         src: "/builder-ai/schema-editor.png",
-                        alt: "GenAI Blueprint Validation Interface",
-                        caption: "The internal validation dashboard showing real-time coherence scoring of AI-generated schemas against historical success patterns."
+                        alt: "Blueprint Validation Interface",
+                        caption: "The internal validation dashboard showing real-time coherence scoring of generated schemas against historical success patterns."
                     }
                 ]
             }
@@ -1848,8 +1848,8 @@ export const experiences = [
         interactiveBullets: [],
         keyDecisions: [
             { decision: "FAISS over Traditional Search", why: "Traditional keyword search failed to understand the 'vibe' of complex app requests; vector search captured semantic intent.", tradeoff: "Required maintaining an embedding pipeline and managing vector index updates." },
-            { decision: "Stateless Prompt Chaining", why: "To keep the API resilient and horizontally scalable, we pushed state back to the client/database rather than holding LLM context in memory.", tradeoff: "Slightly higher latency per request due to context re-injection." },
-            { decision: "Codex over GPT-3 for Logic", why: "Early Codex models significantly outperformed standard GPT-3 in generating structured JSON and technical task lists.", tradeoff: "Higher cost per 1k tokens during the beta period." }
+            { decision: "Stateless Workflow Chaining", why: "To keep the API resilient and horizontally scalable, we pushed state back to the client/database rather than holding generation context in memory.", tradeoff: "Slightly higher latency per request due to context re-injection." },
+            { decision: "Schema-First Blueprinting", why: "Structured JSON and technical task lists needed predictable validation before they could be trusted by downstream product flows.", tradeoff: "Required tighter templates and validation gates, but improved reliability." }
         ],
         links: {
             caseStudy: "/experience/builder"
@@ -1859,20 +1859,20 @@ export const experiences = [
         id: "alweb",
         company: "Al Web",
         role: "Full Stack Developer Intern",
-        domainTags: ["AI/ML", "Web", "Design"],
+        domainTags: ["Web Development", "Frontend", "SEO"],
         dateRange: "Jul 2019 – Jul 2020",
         location: "Remote",
-        hookLine: "Pioneered prompt-to-UI workflows mapping user intent to SEO-optimized page structures.",
+        hookLine: "Built web development workflows mapping user intent to SEO-optimized page structures.",
         proofMetrics: [
-            { label: "Focus", value: "UI Generation", hint: "Prompt-driven layouts." },
+            { label: "Focus", value: "Web UI", hint: "Responsive page layouts." },
             { label: "DB", value: "Firebase", hint: "Real-time sync for editors." },
-            { label: "Stack", value: "GPT-3 · Flask", hint: "Scalable API prototype." },
-            { label: "SEO", value: "Semantic", hint: "LLM-optimized tagging." }
+            { label: "Stack", value: "HTML/CSS · JS", hint: "Frontend web development." },
+            { label: "SEO", value: "Semantic", hint: "Search-friendly markup." }
         ],
         heroMotif: {
             emoji: "🌐",
             title: "Al Web",
-            subtitle: "Semantic UI generation"
+            subtitle: "Web development workflows"
         },
         theme: {
             accent: "#E97627",
@@ -1880,13 +1880,14 @@ export const experiences = [
             backgroundFx: "css",
             iconSet: "line"
         },
-        topStack: ["Python", "Flask", "GPT-3", "Firebase", "HTML/CSS", "SEO"],
+        topStack: ["HTML/CSS", "JavaScript", "Firebase", "REST APIs", "Responsive UI", "SEO"],
         fullStackByLayer: {
-            API: ["Flask", "REST APIs", "Python"],
+            Frontend: ["HTML/CSS", "JavaScript", "Responsive Layouts", "Semantic HTML"],
+            API: ["REST API Integration", "Form Handling", "Client-Side Validation"],
             Data: ["Firebase Realtime DB", "NoSQL"],
-            ML: ["OpenAI GPT-3", "NLP", "Semantic Parsing", "few-shot Prompting"],
-            Infra: ["Python Environment", "GCP Deployment"],
-            Observability: ["Quality Gates", "Coherence Checks", "SEO Audit Logs"]
+            Web: ["SEO Metadata", "Accessibility Basics", "Reusable UI Sections"],
+            Infra: ["GCP Deployment", "Static Hosting", "Environment Config"],
+            Observability: ["Quality Gates", "Content Checks", "SEO Audit Logs"]
         },
         chapters: [
             { id: "overview", title: "Overview" },
@@ -1899,14 +1900,14 @@ export const experiences = [
         narrativeSections: {
             overview: {
                 paragraphs: [
-                    "Al Web was one of the early pioneers in the 'AI Website Builder' space. Long before tools like Framer or Wix ADI became household names, we were experimenting with how GPT-3 could convert a simple marketing sentence into a fully structured, SEO-optimized web layout.",
-                    "As a Full Stack Developer Intern, my role centered on the bridge between raw LLM completions and render-ready HTML structures. I helped define the mapping logic that ensured AI-generated content didn't just 'look' good, but also followed strict semantic and SEO rules."
+                    "Al Web was one of the early pioneers in the website-builder space. Long before today's no-code tools became household names, we were experimenting with how user intent could become a fully structured, SEO-optimized web layout.",
+                    "As a Full Stack Developer Intern, my role centered on the bridge between content strategy, frontend implementation, Firebase-backed editing, and render-ready HTML structures. I helped define mapping logic that ensured generated pages didn't just look good, but also followed strict semantic and SEO rules."
                 ],
                 ownership: [
-                    "Developed Flask inference APIs for real-time UI generation",
+                    "Built responsive web interfaces and REST-connected UI flows for real-time layout generation",
                     "Integrated Firebase for collaborative, real-time layout editing",
-                    "Tuned early GPT-3 prompts to produce valid semantic HTML wrappers",
-                    "Collaborated with designers to define the AI's 'layout constraints'"
+                    "Created reusable HTML/CSS section templates with semantic wrappers",
+                    "Collaborated with designers to define layout constraints, spacing rules, and responsive behavior"
                 ]
             },
             product: {
@@ -1914,45 +1915,45 @@ export const experiences = [
                 problem: "Small businesses and marketing teams often struggle to move from a 'Content Doc' to a 'Landing Page'. The design-to-development cycle was too slow for rapid testing. We wanted to build a tool where a user could type their value proposition and get a structured, sectioned landing page proposal in seconds.",
                 built: [
                     "Implemented layout-intent parsers that translated marketing goals (e.g., 'Lead Gen', 'Event Info') into specific section hierarchies",
-                    "Built a real-time 'Editor Sync' layer using Firebase, allowing multiple users to tweak AI-generated sections simultaneously",
-                    "Created simple SEO automation rules that injected targeted keywords into the generated LLM structures"
+                    "Built a real-time 'Editor Sync' layer using Firebase, allowing multiple users to tweak generated sections simultaneously",
+                    "Created simple SEO automation rules that injected targeted keywords into generated page structures"
                 ],
                 how: [
                     "Mapped specific marketing 'Intents' to predefined component sets: Hero, Features, Testimonial, and CTA",
-                    "Utilized Firebase's real-time listeners to ensure that whenever the AI updated a section, all concurrent editors saw the change instantly",
-                    "Designed the frontend to treat GPT-3 outputs as 'Proposals' that could be manually refined by the user"
+                    "Utilized Firebase's real-time listeners to ensure that whenever a generated section updated, all concurrent editors saw the change instantly",
+                    "Designed the frontend to treat generated layouts as proposals that could be manually refined by the user"
                 ]
             },
             systems: {
                 title: "System Design: Prototype to Persistence",
                 built: [
-                    "Architected a Flask-based backend to manage user sessions and OpenAI completions",
+                    "Architected backend-facing web flows to manage user sessions and structured layout requests",
                     "Established a structured NoSQL schema in Firebase to store versioned 'User Projects'",
-                    "Implemented quality gates that stripped out non-semantic or broken HTML tags generated by the early GPT-3 models"
+                    "Implemented quality gates that stripped out non-semantic or broken HTML tags from generated layouts"
                 ],
                 how: [
-                    "Developed a 'Regex-based Cleaner' specifically for GPT-3 outputs to handle the common formatting quirks of early LLMs",
+                    "Developed a validation cleaner to handle common formatting quirks in generated HTML",
                     "Built the backend as a stateless API, passing context through the request payload to maintain simplicity",
-                    "Leveraged Python's Flask-RESTful extension to build a clean, documented interface for the frontend React components"
+                    "Built a clean, documented interface for frontend components to request, edit, and persist page structures"
                 ]
             },
             aiFlow: {
-                title: "AI Workflows: Intent Mapping",
+                title: "Web Workflows: Intent Mapping",
                 built: [
-                    "Defined few-shot prompting patterns to help GPT-3 understand the difference between a 'Section Title' and 'Section Content'",
-                    "Applied semantic parsing techniques to extract metadata (keywords, imagery themes) from user input",
-                    "Contributed to the prompt library for 'Style Injection', allowing users to select a 'Tone' for their website generation"
+                    "Defined content-mapping patterns to distinguish section titles, section copy, CTAs, and metadata",
+                    "Applied semantic parsing techniques to extract keywords, imagery themes, and page intent from user input",
+                    "Contributed to a style system that allowed users to select tone, structure, and visual direction for website generation"
                 ],
                 how: [
-                    "Crafted specialized system prompts that acted as a 'Virtual Web Designer', enforcing hierarchy and readability in the output text",
-                    "Used early NLP libraries to stem and tokenize user inputs for better keyword enrichment within the prompts",
-                    "Experimented with temperature and top-p settings to find the balance between 'Creative Copy' and 'Technical Accuracy'"
+                    "Crafted web-content rules that enforced hierarchy, readability, and clean section structure",
+                    "Used early NLP libraries to stem and tokenize user inputs for better keyword enrichment",
+                    "Balanced creative copy needs with technical accuracy, semantic markup, and SEO structure"
                 ]
             },
             impact: {
                 title: "The Result: SEO-First Generation",
                 bullets: [
-                    "Proved that LLMs could generate structured web schemas with 80%+ structural accuracy in early testing",
+                    "Proved that structured web schemas could reach 80%+ structural accuracy in early testing",
                     "Significantly lowered the technical barrier for non-designers to prototype landing pages",
                     "Laid the groundwork for semantic-first web generation, prioritizing SEO over purely aesthetic placeholders"
                 ]
@@ -1961,22 +1962,22 @@ export const experiences = [
                 images: [
                     {
                         src: "/alweb-ai/layout-gen.png",
-                        alt: "Prompt-to-UI Generation Engine",
+                        alt: "Web Layout Generation Engine",
                         caption: "A screenshot of the early prototype: A single sentence input generating a structured five-section landing page blueprint."
                     },
                     {
                         src: "/robocon/rov.png",
                         alt: "Real-time Collaborative Editor",
-                        caption: "Visualizing the Firebase real-time sync: Multiple cursors editing the AI-suggested titles and content blocks concurrently."
+                        caption: "Visualizing the Firebase real-time sync: multiple cursors editing suggested titles and content blocks concurrently."
                     }
                 ]
             }
         },
         interactiveBullets: [],
         keyDecisions: [
-            { decision: "Firebase for State Management", why: "Wanted immediate, collaborative feedback for users as the AI 'wrote' the page; traditional polling was too slow.", tradeoff: "Limited query capabilities compared to SQL, but perfect for document-based project storage." },
-            { decision: "Semantic HTML over Div-Soup", why: "Ensured generated pages were 'SEO-ready' by default, providing more value than simple visual builders.", tradeoff: "Required much more complex prompt engineering to force the AI into specific tag structures." },
-            { decision: "Flask for Rapid Prototyping", why: "Python's rich ecosystem for NLP and AI made Flask the obvious choice for building the inference middle-layer quickly.", tradeoff: "Slightly less performant than Node.js for high-concurrency WebSocket loads, but sufficient for the MVP stage." }
+            { decision: "Firebase for State Management", why: "Wanted immediate, collaborative feedback while page sections changed in real time; traditional polling was too slow.", tradeoff: "Limited query capabilities compared to SQL, but perfect for document-based project storage." },
+            { decision: "Semantic HTML over Div-Soup", why: "Ensured generated pages were SEO-ready by default, providing more value than simple visual builders.", tradeoff: "Required stricter layout templates and validation rules to enforce specific tag structures." },
+            { decision: "Firebase for Fast Iteration", why: "Realtime database listeners made collaborative editing simple and kept prototype velocity high.", tradeoff: "Less relational query power than SQL, but faster for document-style layout editing." }
         ],
         links: {
             caseStudy: "/experience/alweb"
