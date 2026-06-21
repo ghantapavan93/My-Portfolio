@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import { Header } from './components/Header'
+import { CinematicHero } from './components/CinematicHero'
 import { HeroSection } from './components/HeroSection'
 import { ProjectShowcase } from './components/ProjectShowcase'
 import { YoutubeShowcase } from './components/YoutubeShowcase'
@@ -10,6 +11,7 @@ import { ContactSection } from './components/ContactSection'
 import { Footer } from './components/Footer'
 import { ThemeProvider } from './components/ThemeProvider'
 import { ContributionsSection } from './components/ContributionsSection'
+import { AIAgent } from './components/AIAgent'
 import { PosterA11yCaseStudy } from './pages/case-studies/PosterA11yCaseStudy'
 import { SpeechQuestCaseStudy } from './pages/case-studies/SpeechQuestCaseStudy'
 import { A11yGameCaseStudy } from './pages/case-studies/A11yGameCaseStudy'
@@ -19,6 +21,7 @@ function MainContent() {
     <>
       <Header />
       <main>
+        <CinematicHero />
         <HeroSection />
 
         {/* ✅ Projects Section */}
@@ -61,6 +64,7 @@ function App() {
           <Route path="/case-studies/speech-quest" element={<SpeechQuestCaseStudy />} />
           <Route path="/case-studies/a11y-game" element={<A11yGameCaseStudy />} />
         </Routes>
+        <AIAgent />
       </div>
     </ThemeProvider>
   )
