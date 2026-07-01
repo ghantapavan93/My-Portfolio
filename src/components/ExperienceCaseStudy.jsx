@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { X, ExternalLink, Copy, Share2, Check, ChevronDown, ListTree, ArrowDown } from 'lucide-react';
+import { X, ExternalLink, Copy, Share2, Check, ChevronDown, ListTree, ArrowDown, Maximize2 } from 'lucide-react';
 import { experiences } from '../data/experiences';
 import { ReceiptsDock } from './experience/ReceiptsDock';
 import { StackMap } from './experience/StackMap';
@@ -15,6 +15,7 @@ export const ExperienceCaseStudy = ({ id, onClose }) => {
     const [activeReceipt, setActiveReceipt] = useState(null);
     const [copied, setCopied] = useState(false);
     const [isReceiptsExpanded, setIsReceiptsExpanded] = useState(false); // Mobile only
+    const [lightboxImg, setLightboxImg] = useState(null);
 
     const scrollContainerRef = useRef(null);
     const chapterRefs = useRef({});
@@ -337,13 +338,23 @@ export const ExperienceCaseStudy = ({ id, onClose }) => {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     {exp.narrativeSections.visuals.images.map((img, i) => (
                                         <div key={i} className="group space-y-4">
-                                            <div className="aspect-video rounded-3xl overflow-hidden border border-border/50 bg-card group-hover:border-primary/50 transition-all duration-700">
+                                            <button
+                                                type="button"
+                                                onClick={() => setLightboxImg(img)}
+                                                aria-label={`Open ${img.alt}`}
+                                                className="relative aspect-video w-full rounded-3xl overflow-hidden border border-border/50 bg-card group-hover:border-primary/50 transition-all duration-700 cursor-zoom-in"
+                                            >
                                                 <img
                                                     src={img.src}
                                                     alt={img.alt}
                                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                                                 />
-                                            </div>
+                                                <span className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-colors duration-500">
+                                                    <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 text-black text-xs font-semibold shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                                        <Maximize2 className="w-3.5 h-3.5" /> Click to expand
+                                                    </span>
+                                                </span>
+                                            </button>
                                             <p className="text-xs text-muted-foreground italic pl-4 border-l border-primary/30">{img.caption}</p>
                                         </div>
                                     ))}
@@ -375,6 +386,33 @@ export const ExperienceCaseStudy = ({ id, onClose }) => {
                     </div>
                 </div>
             </div>
+
+            {/* Lightbox — click any gallery image to open it full-size */}
+            {lightboxImg && (
+                <div
+                    onClick={() => setLightboxImg(null)}
+                    className="fixed inset-0 z-[110] bg-black/90 backdrop-blur-sm flex flex-col items-center justify-center p-4 md:p-10 animate-in fade-in duration-300"
+                >
+                    <button
+                        onClick={() => setLightboxImg(null)}
+                        aria-label="Close"
+                        className="absolute top-5 right-5 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+                    >
+                        <X className="w-6 h-6" />
+                    </button>
+                    <img
+                        src={lightboxImg.src}
+                        alt={lightboxImg.alt}
+                        onClick={(e) => e.stopPropagation()}
+                        className="max-w-full max-h-[80vh] object-contain rounded-2xl shadow-2xl"
+                    />
+                    {lightboxImg.caption && (
+                        <p onClick={(e) => e.stopPropagation()} className="mt-4 max-w-2xl text-center text-sm text-white/80 italic px-4">
+                            {lightboxImg.caption}
+                        </p>
+                    )}
+                </div>
+            )}
         </div>
     );
 };

@@ -1185,7 +1185,7 @@ export const experiences = [
                         caption: "Scrappy, the UNT Academic Assistant — a grounded, source-cited AI companion for academics and campus life. Built as a core contributor within a five-person, faculty-supported team, it turns distributed institutional knowledge into accessible, verifiable answers with guided quick-actions (professor emails, research, academic concepts, campus resources)."
                     },
                     {
-                        src: "/contributions/Scrappy/scrappy-chat.png",
+                        src: "/contributions/Scrappy/scrappy-chat.jpg",
                         alt: "Scrappy AI Assistant — chat interface",
                         caption: "Scrappy's chat experience: students ask academic questions, draft professional emails to professors, find research and citations, and explore campus resources — every answer grounded in UNT-trusted sources with privacy-first handling."
                     },
