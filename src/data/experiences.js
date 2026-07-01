@@ -1180,6 +1180,16 @@ export const experiences = [
             visuals: {
                 images: [
                     {
+                        src: "/contributions/Scrappy/scrappy-landing.png",
+                        alt: "Scrappy AI Assistant — UNT Academic Assistant landing page",
+                        caption: "Scrappy, the UNT Academic Assistant — a grounded, source-cited AI companion for academics and campus life. Built as a core contributor within a five-person, faculty-supported team, it turns distributed institutional knowledge into accessible, verifiable answers with guided quick-actions (professor emails, research, academic concepts, campus resources)."
+                    },
+                    {
+                        src: "/contributions/Scrappy/scrappy-chat.png",
+                        alt: "Scrappy AI Assistant — chat interface",
+                        caption: "Scrappy's chat experience: students ask academic questions, draft professional emails to professors, find research and citations, and explore campus resources — every answer grounded in UNT-trusted sources with privacy-first handling."
+                    },
+                    {
                         src: "/Workshops/outreachmain.jpeg?v=1",
                         alt: "AI-First Discovery Initiative — Main Outreach",
                         caption: "The heart of the AI-First Discovery Initiative at UNT's Discovery Park Library. This is where we ran the applied AI studio — translating cross-disciplinary needs from faculty and students into shipped AI solutions. We solved the problem of making AI tangible and accessible in an academic environment where most learners had zero hands-on experience."
@@ -1319,6 +1329,18 @@ export const experiences = [
                 headline: "LLM & RAG Assistants",
                 content: "Built end-to-end LLM and RAG assistants using FastAPI, PostgreSQL, and vector search with embeddings — reducing query resolution time by 40.18% and improving human-rated answer quality by 21.36%.",
                 metric: "−40% Resolution"
+            },
+            {
+                icon: "Brain",
+                headline: "Scrappy AI Assistant",
+                content: "Developed the Scrappy AI Assistant for the University of North Texas as a core contributor within a five-person, faculty-supported team — transforming distributed institutional knowledge into grounded, accessible AI-assisted experiences for students and staff.",
+                metric: "5-Person Team"
+            },
+            {
+                icon: "ShieldCheck",
+                headline: "Grounded, Source-Cited Companion",
+                content: "Designed Scrappy to answer from UNT-trusted sources with verifiable citations and privacy-first handling — pairing RAG retrieval with guided quick-actions (professor emails, research assistance, academic concepts, campus resources) so students get accurate, verifiable answers instead of generic chatbot guesses.",
+                metric: "Grounded"
             },
             {
                 icon: "Users",
