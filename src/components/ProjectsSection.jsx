@@ -1182,6 +1182,47 @@ export function ProjectsSection() {
             learnMore={true}
           />
 
+          {/* New: senior systems + AI agent prototypes */}
+          <ProjectCard
+            title="ShelfTrace"
+            description="Reliability control plane for approved retail price execution — a transactional outbox, deterministic reconciliation across shelf, POS, and ecommerce, canary containment, and audit-verified recovery. Independent prototype."
+            tags={["Reliability Engineering", "Transactional Outbox", "Reconciliation", "Retail Systems", "Canary"]}
+            imageUrl="/projects/shelftrace/thumbnail.png"
+            liveUrl="https://shelf-trace.vercel.app"
+            githubUrl="https://github.com/ghantapavan93/ShelfTrace"
+            highlight={true}
+          />
+
+          <ProjectCard
+            title="FanFlow AI"
+            description="Post-purchase, event-day intelligence for StubHub fans — turns a ticket confirmation into a personalized arrival plan, live fan/staff signals, and AI-explained recommendations. Rules decide, AI explains; it picks up where ChatGPT discovery ends."
+            tags={["AI Agent", "Event Intelligence", "Recommendations", "Rules + LLM", "StubHub"]}
+            imageUrl="/projects/fanflow/thumbnail.png"
+            liveUrl="https://fan-flow-ai.vercel.app"
+            githubUrl="https://github.com/ghantapavan93/FanFlow-AI"
+            highlight={true}
+          />
+
+          <ProjectCard
+            title="EfficastVRA — Proof of Recovery"
+            description="An AI agent that verifies a manufacturing line actually recovered after a fix — not just that the work order closed — and reopens on relapse. Independent, Efficast-aligned prototype on synthetic data (not affiliated with Efficast)."
+            tags={["AI Agent", "Manufacturing", "Recovery Verification", "Anomaly Detection", "Prototype"]}
+            imageUrl="/projects/efficastvra/thumbnail.png"
+            liveUrl="https://efficast-vra.vercel.app"
+            githubUrl="https://github.com/ghantapavan93/EfficastVRA"
+            highlight={true}
+          />
+
+          <ProjectCard
+            title="AirLock"
+            description="Preflight layer that validates marketplace print-on-demand orders against 14 real Dreamship rejection rules, then intercepts, fixes, and replays failures before the immutable Accepted lock."
+            tags={["Django", "DRF", "Celery", "Postgres", "React"]}
+            imageUrl="/projects/airlock/thumbnail.png"
+            liveUrl="https://air-lock.vercel.app"
+            githubUrl="https://github.com/ghantapavan93/AirLock"
+            highlight={true}
+          />
+
           {/* New: Censys Summarization Agent (appears right after Project-H) */}
           <ProjectCard
             title="Censys Summarization Agent"
@@ -1642,6 +1683,7 @@ function ProjectCard({ title, description, tags, imageUrl, githubUrl, liveUrl, h
   // Support both string and array for imageUrl
   const images = Array.isArray(imageUrl) ? imageUrl : [imageUrl];
   const [current, setCurrent] = useState(0);
+  const [imgError, setImgError] = useState(false);
 
   // Slideshow effect for multiple images
   useEffect(() => {
@@ -1665,12 +1707,19 @@ function ProjectCard({ title, description, tags, imageUrl, githubUrl, liveUrl, h
         className="block h-32 sm:h-40 bg-muted overflow-hidden relative group focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-inset"
         aria-label={`View ${title} ${caseStudyUrl ? 'case study' : liveUrl ? 'website' : 'project'}`}
       >
-        <img
-          src={images[current].replace('/public', '')}
-          alt={`Screenshot of ${title}`}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 group-focus:scale-105"
-          loading="lazy"
-        />
+        {imgError ? (
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/10 via-purple-500/10 to-pink-500/10 px-4 text-center">
+            <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">{title}</span>
+          </div>
+        ) : (
+          <img
+            src={images[current].replace('/public', '')}
+            alt={`Screenshot of ${title}`}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 group-focus:scale-105"
+            loading="lazy"
+            onError={() => setImgError(true)}
+          />
+        )}
         {images.length > 1 && (
           <div className="absolute bottom-2 right-2 flex gap-1">
             {images.map((_, idx) => (
