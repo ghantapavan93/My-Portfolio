@@ -1187,7 +1187,13 @@ export function ProjectsSection() {
             title="ShelfTrace"
             description="Reliability control plane for approved retail price execution — a transactional outbox, deterministic reconciliation across shelf, POS, and ecommerce, canary containment, and audit-verified recovery. Independent prototype."
             tags={["Reliability Engineering", "Transactional Outbox", "Reconciliation", "Retail Systems", "Canary"]}
-            imageUrl="/projects/shelftrace/thumbnail.png"
+            imageUrl={[
+              "/projects/shelftrace/1.png",
+              "/projects/shelftrace/2.png",
+              "/projects/shelftrace/3.png",
+              "/projects/shelftrace/4.png",
+              "/projects/shelftrace/5.png"
+            ]}
             liveUrl="https://shelf-trace.vercel.app"
             githubUrl="https://github.com/ghantapavan93/ShelfTrace"
             highlight={true}
@@ -1197,7 +1203,13 @@ export function ProjectsSection() {
             title="FanFlow AI"
             description="Post-purchase, event-day intelligence for StubHub fans — turns a ticket confirmation into a personalized arrival plan, live fan/staff signals, and AI-explained recommendations. Rules decide, AI explains; it picks up where ChatGPT discovery ends."
             tags={["AI Agent", "Event Intelligence", "Recommendations", "Rules + LLM", "StubHub"]}
-            imageUrl="/projects/fanflow/thumbnail.png"
+            imageUrl={[
+              "/projects/fanflow/1.png",
+              "/projects/fanflow/2.png",
+              "/projects/fanflow/3.png",
+              "/projects/fanflow/4.png",
+              "/projects/fanflow/5.png"
+            ]}
             liveUrl="https://fan-flow-ai.vercel.app"
             githubUrl="https://github.com/ghantapavan93/FanFlow-AI"
             highlight={true}
@@ -1207,7 +1219,12 @@ export function ProjectsSection() {
             title="EfficastVRA — Proof of Recovery"
             description="An AI agent that verifies a manufacturing line actually recovered after a fix — not just that the work order closed — and reopens on relapse. Independent, Efficast-aligned prototype on synthetic data (not affiliated with Efficast)."
             tags={["AI Agent", "Manufacturing", "Recovery Verification", "Anomaly Detection", "Prototype"]}
-            imageUrl="/projects/efficastvra/thumbnail.png"
+            imageUrl={[
+              "/projects/efficastvra/1.png",
+              "/projects/efficastvra/2.png",
+              "/projects/efficastvra/3.png",
+              "/projects/efficastvra/4.png"
+            ]}
             liveUrl="https://efficast-vra.vercel.app"
             githubUrl="https://github.com/ghantapavan93/EfficastVRA"
             highlight={true}
@@ -1217,7 +1234,11 @@ export function ProjectsSection() {
             title="AirLock"
             description="Preflight layer that validates marketplace print-on-demand orders against 14 real Dreamship rejection rules, then intercepts, fixes, and replays failures before the immutable Accepted lock."
             tags={["Django", "DRF", "Celery", "Postgres", "React"]}
-            imageUrl="/projects/airlock/thumbnail.png"
+            imageUrl={[
+              "/projects/airlock/1.png",
+              "/projects/airlock/2.png",
+              "/projects/airlock/3.png"
+            ]}
             liveUrl="https://air-lock.vercel.app"
             githubUrl="https://github.com/ghantapavan93/AirLock"
             highlight={true}
@@ -1690,7 +1711,7 @@ function ProjectCard({ title, description, tags, imageUrl, githubUrl, liveUrl, h
     if (images.length <= 1) return;
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
-    }, 10000); // 10 seconds
+    }, 6000); // 6 seconds
     return () => clearInterval(timer);
   }, [images.length]);
 
