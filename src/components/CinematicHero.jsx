@@ -28,19 +28,11 @@ export function CinematicHero() {
   const [hovered, setHovered] = useState(false);
   const [speaking, setSpeaking] = useState(false);
   const audioRef = useRef(null);
+  const videoRef = useRef(null);
 
   useEffect(() => () => audioRef.current?.pause(), []);
 
-  // Tap to meet me: play the cloned-voice intro; when it ends, open the chat.
-  // Tap again while speaking = skip straight to the chat. If audio can't play
-  // (file missing / blocked), fall back to opening the chat directly.
-  const meetMe = () => {
-    if (speaking) {
-      audioRef.current?.pause();
-      setSpeaking(false);
-      openAgent();
-      return;
-    }
+  const playIntroAudio = () => {
     try {
       const audio = new Audio(INTRO_AUDIO);
       audioRef.current = audio;
@@ -52,12 +44,51 @@ export function CinematicHero() {
     }
   };
 
+  // Tap to meet me:
+  // • With a talking AVATAR_VIDEO: restart it UNMUTED (lips + voice in sync),
+  //   then return to the silent loop and open the chat when it ends.
+  // • Without video: play the cloned-voice intro audio.
+  // Tap again while speaking = skip straight to the chat.
+  const meetMe = () => {
+    const v = videoRef.current;
+
+    if (speaking) {
+      if (v) { v.muted = true; v.loop = true; v.play().catch(() => {}); }
+      audioRef.current?.pause();
+      setSpeaking(false);
+      openAgent();
+      return;
+    }
+
+    if (AVATAR_VIDEO && v) {
+      try {
+        v.currentTime = 0;
+        v.muted = false;
+        v.loop = false;
+        v.onended = () => {
+          v.muted = true;
+          v.loop = true;
+          v.play().catch(() => {});
+          setSpeaking(false);
+          openAgent();
+        };
+        v.play().then(() => setSpeaking(true)).catch(() => playIntroAudio());
+      } catch {
+        playIntroAudio();
+      }
+      return;
+    }
+
+    playIntroAudio();
+  };
+
   return (
     <section className="relative min-h-[100svh] w-full overflow-hidden bg-zinc-950 text-white">
       {/* ── Avatar layer (full-bleed, right-weighted) ───────────────────────── */}
       <div className="absolute inset-0">
         {AVATAR_VIDEO ? (
           <video
+            ref={videoRef}
             className="absolute inset-0 h-full w-full object-cover object-[center_20%] md:object-[75%_20%] opacity-90"
             src={AVATAR_VIDEO}
             autoPlay
