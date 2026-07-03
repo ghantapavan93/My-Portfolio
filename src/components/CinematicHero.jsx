@@ -1,17 +1,18 @@
-import { useState } from 'react';
-import { Play, ArrowDown, MessageSquare, Sparkles } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { Play, Square, ArrowDown, MessageSquare, Sparkles } from 'lucide-react';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CinematicHero — full-screen "meet me" hero, in the spirit of Harsh Goyal's site.
 //
-// PLACEHOLDER: it currently uses /Pavan_Profile_Pic.jpg. Swap AVATAR_IMAGE for
-// your 3D-avatar render when ready, and (later) drop a talking <video> in the
-// avatar layer for the lip-synced welcome. The "Talk to me" / play controls
-// dispatch a global "open-ai-agent" event that AIAgent.jsx listens for.
+// "Tap to meet me" plays INTRO_AUDIO (Pavan's cloned voice) and opens the AI
+// agent when the intro finishes. Swap AVATAR_IMAGE for the 3D-avatar render
+// when ready, and AVATAR_VIDEO for the lip-synced talking clip (it will play
+// muted/looped as the backdrop, like a video reel).
 // ─────────────────────────────────────────────────────────────────────────────
 
 const AVATAR_IMAGE = '/Pavan_Profile_Pic.jpg'; // ← replace with /avatar-3d.png later
 const AVATAR_VIDEO = null; // ← later: '/avatar-welcome.mp4' (talking clip in your voice)
+const INTRO_AUDIO = '/voice/intro.wav'; // Pavan's cloned-voice welcome
 
 function openAgent() {
   window.dispatchEvent(new Event('open-ai-agent'));
@@ -25,6 +26,31 @@ function scrollToContent() {
 
 export function CinematicHero() {
   const [hovered, setHovered] = useState(false);
+  const [speaking, setSpeaking] = useState(false);
+  const audioRef = useRef(null);
+
+  useEffect(() => () => audioRef.current?.pause(), []);
+
+  // Tap to meet me: play the cloned-voice intro; when it ends, open the chat.
+  // Tap again while speaking = skip straight to the chat. If audio can't play
+  // (file missing / blocked), fall back to opening the chat directly.
+  const meetMe = () => {
+    if (speaking) {
+      audioRef.current?.pause();
+      setSpeaking(false);
+      openAgent();
+      return;
+    }
+    try {
+      const audio = new Audio(INTRO_AUDIO);
+      audioRef.current = audio;
+      audio.onended = () => { setSpeaking(false); openAgent(); };
+      audio.onerror = () => { setSpeaking(false); openAgent(); };
+      audio.play().then(() => setSpeaking(true)).catch(() => openAgent());
+    } catch {
+      openAgent();
+    }
+  };
 
   return (
     <section className="relative min-h-[100svh] w-full overflow-hidden bg-zinc-950 text-white">
@@ -57,18 +83,34 @@ export function CinematicHero() {
 
       {/* ── "Tap to meet me" affordance over the avatar ─────────────────────── */}
       <button
-        onClick={openAgent}
+        onClick={meetMe}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         className="group absolute right-6 md:right-[14%] top-1/2 -translate-y-1/2 z-20 flex flex-col items-center gap-3"
-        aria-label="Meet my AI — talk to me"
+        aria-label={speaking ? 'Skip intro and open chat' : 'Meet me — hear my welcome in my own voice'}
       >
-        <span className="relative flex h-16 w-16 items-center justify-center rounded-full bg-white/10 backdrop-blur-md border border-white/30 shadow-2xl transition-all duration-300 group-hover:scale-110 group-hover:bg-white/20">
-          <span className="absolute inset-0 rounded-full bg-white/20 animate-ping opacity-60" />
-          <Play className="relative h-6 w-6 translate-x-0.5 fill-white" />
+        <span className={`relative flex h-16 w-16 items-center justify-center rounded-full backdrop-blur-md border shadow-2xl transition-all duration-300 group-hover:scale-110 ${
+          speaking
+            ? 'bg-gradient-to-br from-blue-500/40 to-purple-500/40 border-blue-300/60 shadow-blue-500/40'
+            : 'bg-white/10 border-white/30 group-hover:bg-white/20'
+        }`}>
+          <span className={`absolute inset-0 rounded-full animate-ping ${speaking ? 'bg-blue-400/30 opacity-90' : 'bg-white/20 opacity-60'}`} />
+          {speaking ? (
+            <span className="relative flex items-end gap-[3px] h-6" aria-hidden="true">
+              {[0, 1, 2, 3].map((i) => (
+                <span
+                  key={i}
+                  className="w-[3px] rounded-full bg-white"
+                  style={{ animation: `pulse 0.${6 + i}s ease-in-out infinite alternate`, height: `${8 + (i % 3) * 6}px` }}
+                />
+              ))}
+            </span>
+          ) : (
+            <Play className="relative h-6 w-6 translate-x-0.5 fill-white" />
+          )}
         </span>
-        <span className={`text-xs font-medium tracking-wider uppercase transition-opacity duration-300 ${hovered ? 'opacity-100' : 'opacity-70'}`}>
-          Tap to meet me
+        <span className={`text-xs font-medium tracking-wider uppercase transition-opacity duration-300 ${hovered || speaking ? 'opacity-100' : 'opacity-70'}`}>
+          {speaking ? 'Speaking — tap to skip' : 'Tap to meet me'}
         </span>
       </button>
 

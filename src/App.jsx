@@ -12,6 +12,7 @@ import { Footer } from './components/Footer'
 import { ThemeProvider } from './components/ThemeProvider'
 import { ContributionsSection } from './components/ContributionsSection'
 import { AIAgent } from './components/AIAgent'
+import { Preloader } from './components/Preloader'
 import { PosterA11yCaseStudy } from './pages/case-studies/PosterA11yCaseStudy'
 import { SpeechQuestCaseStudy } from './pages/case-studies/SpeechQuestCaseStudy'
 import { A11yGameCaseStudy } from './pages/case-studies/A11yGameCaseStudy'
@@ -19,6 +20,7 @@ import { A11yGameCaseStudy } from './pages/case-studies/A11yGameCaseStudy'
 function MainContent() {
   return (
     <>
+      <Preloader />
       <Header />
       <main>
         <CinematicHero />
