@@ -10,7 +10,7 @@ import { Play, Square, ArrowDown, MessageSquare, Sparkles } from 'lucide-react';
 // muted/looped as the backdrop, like a video reel).
 // ─────────────────────────────────────────────────────────────────────────────
 
-const AVATAR_IMAGE = '/Pavan_Profile_Pic.jpg'; // ← replace with /avatar-3d.png later
+const AVATAR_IMAGE = '/avatar-hero.webp'; // cinematic desk render (AI-generated from his photo)
 const AVATAR_VIDEO = null; // ← later: '/avatar-welcome.mp4' (background clip)
 // true  = the video is a lip-synced TALKING clip (HeyGen/SadTalker): tap replays it unmuted.
 // false = the video is AMBIENT motion (Google Flow): it keeps looping silently and the
@@ -104,7 +104,7 @@ export function CinematicHero() {
           <img
             src={AVATAR_IMAGE}
             alt="Pavan Kalyan Ghanta"
-            className="absolute inset-0 h-full w-full object-cover object-[center_15%] md:object-[78%_20%] opacity-90"
+            className="absolute inset-0 h-full w-full object-cover object-[62%_30%] md:object-[center_30%] opacity-90"
             loading="eager"
           />
         )}
