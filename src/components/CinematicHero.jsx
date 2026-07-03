@@ -11,7 +11,8 @@ import { Play, Square, ArrowDown, MessageSquare, Sparkles } from 'lucide-react';
 // ─────────────────────────────────────────────────────────────────────────────
 
 const AVATAR_IMAGE = '/avatar-hero.webp'; // cinematic desk render (AI-generated from his photo)
-const AVATAR_VIDEO = null; // ← later: '/avatar-welcome.mp4' (background clip)
+const AVATAR_VIDEO = '/avatar-welcome.mp4'; // welcome video — fades in over the photo
+const VIDEO_START_MS = 5000; // photo shows first; video starts (muted) after this delay
 // true  = the video is a lip-synced TALKING clip (HeyGen/SadTalker): tap replays it unmuted.
 // false = the video is AMBIENT motion (Google Flow): it keeps looping silently and the
 //         cloned-voice intro.wav plays over it on tap.
@@ -31,10 +32,23 @@ function scrollToContent() {
 export function CinematicHero() {
   const [hovered, setHovered] = useState(false);
   const [speaking, setSpeaking] = useState(false);
+  const [videoLive, setVideoLive] = useState(false);
+  const [videoFailed, setVideoFailed] = useState(false);
   const audioRef = useRef(null);
   const videoRef = useRef(null);
 
   useEffect(() => () => audioRef.current?.pause(), []);
+
+  // The photo shows first; after VIDEO_START_MS the welcome video fades in and
+  // plays muted (browsers block un-muted autoplay — sound comes on tap).
+  useEffect(() => {
+    if (!AVATAR_VIDEO) return;
+    const t = setTimeout(() => {
+      setVideoLive(true);
+      videoRef.current?.play().catch(() => setVideoFailed(true));
+    }, VIDEO_START_MS);
+    return () => clearTimeout(t);
+  }, []);
 
   const playIntroAudio = () => {
     try {
@@ -64,8 +78,9 @@ export function CinematicHero() {
       return;
     }
 
-    if (AVATAR_VIDEO && v && AVATAR_VIDEO_TALKS) {
+    if (AVATAR_VIDEO && v && AVATAR_VIDEO_TALKS && !videoFailed) {
       try {
+        setVideoLive(true); // tapped before the 5s fade-in? bring the video up now
         v.currentTime = 0;
         v.muted = false;
         v.loop = false;
@@ -90,22 +105,27 @@ export function CinematicHero() {
     <section className="relative min-h-[100svh] w-full overflow-hidden bg-zinc-950 text-white">
       {/* ── Avatar layer (full-bleed, right-weighted) ───────────────────────── */}
       <div className="absolute inset-0">
-        {AVATAR_VIDEO ? (
+        {/* Base layer: the cinematic photo (always present — also the video fallback) */}
+        <img
+          src={AVATAR_IMAGE}
+          alt="Pavan Kalyan Ghanta"
+          className="absolute inset-0 h-full w-full object-cover object-[62%_30%] md:object-[center_30%] opacity-90"
+          loading="eager"
+        />
+
+        {/* Welcome video: fades in over the photo after VIDEO_START_MS */}
+        {AVATAR_VIDEO && !videoFailed && (
           <video
             ref={videoRef}
-            className="absolute inset-0 h-full w-full object-cover object-[center_20%] md:object-[75%_20%] opacity-90"
+            className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-[1500ms] ease-out ${
+              videoLive ? 'opacity-90' : 'opacity-0'
+            }`}
             src={AVATAR_VIDEO}
-            autoPlay
             muted
             loop
             playsInline
-          />
-        ) : (
-          <img
-            src={AVATAR_IMAGE}
-            alt="Pavan Kalyan Ghanta"
-            className="absolute inset-0 h-full w-full object-cover object-[62%_30%] md:object-[center_30%] opacity-90"
-            loading="eager"
+            preload="auto"
+            onError={() => setVideoFailed(true)}
           />
         )}
 
