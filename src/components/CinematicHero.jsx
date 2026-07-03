@@ -11,7 +11,11 @@ import { Play, Square, ArrowDown, MessageSquare, Sparkles } from 'lucide-react';
 // ─────────────────────────────────────────────────────────────────────────────
 
 const AVATAR_IMAGE = '/Pavan_Profile_Pic.jpg'; // ← replace with /avatar-3d.png later
-const AVATAR_VIDEO = null; // ← later: '/avatar-welcome.mp4' (talking clip in your voice)
+const AVATAR_VIDEO = null; // ← later: '/avatar-welcome.mp4' (background clip)
+// true  = the video is a lip-synced TALKING clip (HeyGen/SadTalker): tap replays it unmuted.
+// false = the video is AMBIENT motion (Google Flow): it keeps looping silently and the
+//         cloned-voice intro.wav plays over it on tap.
+const AVATAR_VIDEO_TALKS = true;
 const INTRO_AUDIO = '/voice/intro.wav'; // Pavan's cloned-voice welcome
 
 function openAgent() {
@@ -60,7 +64,7 @@ export function CinematicHero() {
       return;
     }
 
-    if (AVATAR_VIDEO && v) {
+    if (AVATAR_VIDEO && v && AVATAR_VIDEO_TALKS) {
       try {
         v.currentTime = 0;
         v.muted = false;
