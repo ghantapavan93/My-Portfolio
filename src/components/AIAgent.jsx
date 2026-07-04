@@ -30,12 +30,14 @@ const QUESTION_CLIPS = {
 
 // Contextual follow-ups shown after an answer — the conversation never dead-ends.
 const FOLLOW_UPS = {
-  'Introduce yourself': ["What's your strongest project?", 'What are you working on right now?', 'Why should we hire you?'],
+  'Introduce yourself': ["What's your strongest project?", 'Tell me about your education', 'Why should we hire you?'],
   'What are you working on right now?': ["What's your strongest project?", 'Why should we hire you?', 'How does this assistant work?'],
-  "What's your strongest project?": ['How did you cut the false positives?', "What's the hardest problem you've solved?", 'Why should we hire you?'],
+  "What's your strongest project?": ['How did you cut the false positives?', 'Tell me about a production incident', 'Why should we hire you?'],
   'Why should we hire you?': ['Do you need visa sponsorship?', "What's your technical background?", 'How do I reach Pavan?'],
   'Do you need visa sponsorship?': ['Why should we hire you?', 'How do I reach Pavan?'],
-  "What's the hardest problem you've solved?": ['Experience with RAG, agents & LangGraph?', "What's your strongest project?"],
+  "What's the hardest problem you've solved?": ['Tell me about a production incident', 'Experience with RAG, agents & LangGraph?'],
+  'Tell me about a production incident': ["What's the hardest problem you've solved?", 'Why should we hire you?'],
+  'Tell me about your education': ['What are you working on right now?', "What's your technical background?"],
   'Experience with RAG, agents & LangGraph?': ['How does this assistant work?', '🧪 Try to make me hallucinate'],
   'How does this assistant work?': ['🧪 Try to make me hallucinate', 'Why should we hire you?'],
 };
@@ -53,7 +55,11 @@ const OFFLINE_ANSWERS = {
   "What's the hardest problem you've solved?":
     "Making an LLM trustworthy enough to ship. At Vosyn our agent hallucinated about 8% of the time — fine in a demo, a liability in production. I rebuilt the retrieval and added guardrails until it hit **2%**, which cut human escalations by 42%. The lesson that stuck: the model is the easy part — the system that keeps it honest is the real work.",
   "What's your technical background?":
-    "Full-stack with an AI core. Python and TypeScript daily; LLMs, RAG, and agents with LangChain and LangGraph; PyTorch when models need training; FastAPI and Node on the back, React and React Native on the front; AWS, Docker, and Kubernetes to keep it alive — plus evals and observability, because **AI you can't measure is AI you can't trust.** Which layer do you want to go deep on?",
+    "Full-stack with an AI core. Python and TypeScript daily; LLMs, RAG, and agents with LangChain and LangGraph; FastAPI and Node on the back, React and React Native on the front; AWS, Docker, and Kubernetes to keep it alive — plus evals and observability, because **AI you can't measure is AI you can't trust.** And here's the honest part: in small teams I never got to say \"that's not my layer\" — **I'm not broad because I'm unfocused; real products forced me to become useful wherever the fire was.** Which layer do you want to go deep on?",
+  'Tell me about your education':
+    "Master's in Computer Science from the University of North Texas, and a bachelor's in Electronics & Communication Engineering from SRM in India. The bachelor's gave me the engineering mindset — systems, signals, discipline; the master's pulled me deep into software and AI. But the best part of my education wasn't the classroom: at UNT I was simultaneously building AI assistants, mentoring 200+ students, and running 20+ workshops. **I didn't just study CS — I built with it, taught it, broke things with it, and learned to make it useful for real people.**",
+  'Tell me about a production incident':
+    "Krowd Guide, live event night, 10 p.m. — my founder calls: \"something is breaking.\" That sentence wakes an engineer faster than coffee. ☕ The twist: it was breaking for the best reason — way more people were using it than we planned, and real attendees depended on it for safer routes. Burst traffic was choking the backend and the AI pipeline, which still had prototype-level limits. I isolated the failure domain, scaled past the free-tier constraints, spread traffic across pods, and moved hot paths to cached insights and fallbacks instead of full reasoning. **Stable by 2 a.m.** Before that night, scale was something I planned for. After it, scale became something I respect.",
   'How did you cut the false positives?':
     "Two-stage gating. Stage one: signals and heuristics — motion, trajectory, physics — build a candidate event. Stage two: a threat lexicon filters it before anyone gets pinged. For low-light and blur, I bundle multi-frame context and peak-motion keyframes as **evidence**, so even when model confidence drops, a human can verify in seconds. Alerts went from noise to something a security team actually acts on.",
   'How does this assistant work?':
