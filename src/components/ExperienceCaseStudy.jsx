@@ -8,6 +8,14 @@ import { ImpactSlider } from './experience/ImpactSlider';
 import { InteractiveBulletList } from './experience/InteractiveBulletList';
 import { ThematicBackground } from './experience/ThematicBackground';
 import { VosynLatencyDial, KrowdOpsPlayback } from './experience/SignatureScenes';
+import { VoiceButton } from './VoiceButton';
+
+// Roles with a recorded "hear it from me" story in Pavan's cloned voice.
+const EXPERIENCE_CLIPS = {
+    '100mos': 'faq-100mos',
+    'krowd': 'faq-krowdguide',
+    'unt-ai-first': 'faq-unt',
+};
 
 export const ExperienceCaseStudy = ({ id, onClose }) => {
     const exp = experiences.find(e => e.id === id);
@@ -115,6 +123,9 @@ export const ExperienceCaseStudy = ({ id, onClose }) => {
                             Case Study / {exp.id}
                         </p>
                     </div>
+                    {EXPERIENCE_CLIPS[exp.id] && (
+                        <VoiceButton clip={EXPERIENCE_CLIPS[exp.id]} size="sm" label="Hear it from me" className="ml-1" />
+                    )}
                 </div>
 
                 {/* Progress Timeline */}

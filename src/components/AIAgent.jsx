@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Send, X, Sparkles } from 'lucide-react';
+import { playVoice, stopVoice, VOICE_SCRIPTS } from '../lib/voice';
 
 // Starter chips (safe to expose; the real brain + knowledge base live server-side in /api/chat).
 const SUGGESTED = [
@@ -8,6 +9,14 @@ const SUGGESTED = [
   "Why should we hire you?",
   "Experience with RAG, agents & LangGraph?",
 ];
+
+// Questions that have a pre-recorded answer in Pavan's cloned voice: clicking
+// these chips speaks the answer while the text renders.
+const QUESTION_CLIPS = {
+  "What's your strongest project?": 'faq-strongest-project',
+  'Why should we hire you?': 'faq-why-strong-engineer',
+  'Experience with RAG, agents & LangGraph?': 'faq-ai-engineer-fit',
+};
 
 const GREETING = {
   role: 'assistant',
@@ -65,9 +74,17 @@ export function AIAgent() {
     return () => window.removeEventListener('open-ai-agent', openHandler);
   }, []);
 
+  // Closing the panel stops any clip that's mid-sentence.
+  useEffect(() => {
+    if (!open) stopVoice();
+  }, [open]);
+
   const ask = async (question) => {
     const q = question.trim();
     if (!q || loading) return;
+    // Speak the answer in Pavan's cloned voice when we have a recorded clip for it.
+    const clip = QUESTION_CLIPS[q];
+    if (clip) playVoice(clip);
     const history = messages.filter((m) => m !== GREETING).map(({ role, content }) => ({ role, content }));
     setMessages((prev) => [...prev, { role: 'user', content: q }]);
     setInput('');
@@ -87,14 +104,15 @@ export function AIAgent() {
         setMessages((prev) => [...prev, { role: 'assistant', content: data.answer }]);
       }
     } catch {
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: 'assistant',
-          content:
-            "My live brain isn't connected in this environment yet. In the meantime, reach Pavan via the Contact section or LinkedIn — he'd love to talk.",
-        },
-      ]);
+      // Live brain unreachable. If this question has a recorded clip (already
+      // playing), show its exact transcript so voice and text match; otherwise
+      // answer with the recorded fallback line in his voice.
+      let content = VOICE_SCRIPTS[clip];
+      if (!content) {
+        playVoice('fallback');
+        content = VOICE_SCRIPTS.fallback;
+      }
+      setMessages((prev) => [...prev, { role: 'assistant', content }]);
     } finally {
       setLoading(false);
     }

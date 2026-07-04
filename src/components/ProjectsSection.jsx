@@ -2,6 +2,7 @@ import { Card, CardContent } from './ui/card'
 import { ArrowRight, Github, ExternalLink, Globe, X, ChevronRight, Database, Layout, Server, Shield, Zap, Layers, CheckCircle2, Play } from 'lucide-react'
 import { Button } from './ui/button'
 import { useRef, useEffect, useState } from 'react'
+import { VoiceButton } from './VoiceButton'
 
 export function ProjectsSection() {
   const sectionRef = useRef(null);
@@ -1125,6 +1126,9 @@ export function ProjectsSection() {
           <p className="text-muted-foreground max-w-2xl mx-auto text-sm md:text-base">
             All projects are deployed and ready to explore
           </p>
+          <div className="mt-4 flex justify-center">
+            <VoiceButton clip="faq-other-projects" label="Let me walk you through these" />
+          </div>
         </div>
 
         <div ref={sectionRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
@@ -1405,6 +1409,7 @@ export function ProjectsSection() {
             liveUrl="https://fardeen210-eagle-eye-ai-streamlitapp-cebf0r.streamlit.app/"
             onLearnMore={() => setActiveProject(eagleEyeLearnMore)}
             learnMore={true}
+            voiceClip="faq-strongest-project"
           />
 
           <ProjectCard
@@ -1700,7 +1705,7 @@ export function ProjectsSection() {
   )
 }
 
-function ProjectCard({ title, description, tags, imageUrl, githubUrl, liveUrl, highlight = false, learnMore = null, onLearnMore = null, caseStudyUrl = null }) {
+function ProjectCard({ title, description, tags, imageUrl, githubUrl, liveUrl, highlight = false, learnMore = null, onLearnMore = null, caseStudyUrl = null, voiceClip = null }) {
   // Support both string and array for imageUrl
   const images = Array.isArray(imageUrl) ? imageUrl : [imageUrl];
   const [current, setCurrent] = useState(0);
@@ -1794,7 +1799,8 @@ function ProjectCard({ title, description, tags, imageUrl, githubUrl, liveUrl, h
           )}
         </div>
 
-        <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-auto">
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mt-auto">
+          {voiceClip && <VoiceButton clip={voiceClip} size="sm" label="Hear it" />}
           {/* Real Route Case Study Link (Premium "Learn More") */}
           {caseStudyUrl && (
             <Button
