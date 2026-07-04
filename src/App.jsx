@@ -1,13 +1,9 @@
 import { Routes, Route } from 'react-router-dom'
 import { Header } from './components/Header'
 import { CinematicHero } from './components/CinematicHero'
-import { Manifesto } from './components/story/Manifesto'
-import { MissionControl } from './components/story/MissionControl'
-import { CapabilitiesRide } from './components/story/CapabilitiesRide'
-import { TechMarquee } from './components/story/TechMarquee'
+import { HeroSection } from './components/HeroSection'
 import { Incident } from './components/story/Incident'
 import { CommandPalette } from './components/CommandPalette'
-import { ScrollProgress } from './components/ScrollProgress'
 import { ProjectShowcase } from './components/ProjectShowcase'
 import { YoutubeShowcase } from './components/YoutubeShowcase'
 import { ProjectsSection } from './components/ProjectsSection'
@@ -27,14 +23,10 @@ function MainContent() {
   return (
     <>
       <Preloader />
-      <ScrollProgress />
       <Header />
       <main>
         <CinematicHero />
-        <Manifesto />
-        <MissionControl />
-        <CapabilitiesRide />
-        <TechMarquee />
+        <HeroSection />
         <Incident />
 
         {/* ✅ Projects Section */}

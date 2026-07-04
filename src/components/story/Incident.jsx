@@ -74,7 +74,7 @@ export function Incident() {
     <section ref={root} className="relative min-h-screen w-full bg-zinc-950 text-white flex items-center overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-red-950/20 via-transparent to-emerald-950/20 pointer-events-none" />
       <div className="relative mx-auto max-w-6xl px-6 md:px-12 py-24 w-full">
-        <p className="text-[10px] md:text-xs font-semibold tracking-[0.4em] uppercase text-white/35 mb-3">Chapter 04 · A true story</p>
+        <p className="text-[10px] md:text-xs font-semibold tracking-[0.4em] uppercase text-white/35 mb-3">A true story · 10 PM → 2 AM</p>
         <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-10">
           The <span className="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">Incident</span>
         </h2>
