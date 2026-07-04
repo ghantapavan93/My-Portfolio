@@ -1,7 +1,8 @@
 import { Routes, Route } from 'react-router-dom'
 import { Header } from './components/Header'
 import { CinematicHero } from './components/CinematicHero'
-import { HeroSection } from './components/HeroSection'
+import { IntroCinema } from './components/story/IntroCinema'
+import { CapabilitiesSection } from './components/CapabilitiesSection'
 import { Incident } from './components/story/Incident'
 import { CommandPalette } from './components/CommandPalette'
 import { ProjectShowcase } from './components/ProjectShowcase'
@@ -26,7 +27,8 @@ function MainContent() {
       <Header />
       <main>
         <CinematicHero />
-        <HeroSection />
+        <IntroCinema />
+        <CapabilitiesSection />
         <Incident />
 
         {/* ✅ Projects Section */}
