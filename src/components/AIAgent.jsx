@@ -130,6 +130,7 @@ export function AIAgent() {
   const [followUps, setFollowUps] = useState(null); // chips shown after an answer
   const [voiceOn, setVoiceOn] = useState(true);
   const [speakingClip, setSpeakingClip] = useState(null);
+  const [pendingAsk, setPendingAsk] = useState(null);
   const scrollRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -149,9 +150,23 @@ export function AIAgent() {
 
   useEffect(() => {
     const openHandler = () => setOpen(true);
+    const askHandler = (e) => { setOpen(true); setPendingAsk(e.detail); };
     window.addEventListener('open-ai-agent', openHandler);
-    return () => window.removeEventListener('open-ai-agent', openHandler);
+    window.addEventListener('ask-gpk', askHandler);
+    return () => {
+      window.removeEventListener('open-ai-agent', openHandler);
+      window.removeEventListener('ask-gpk', askHandler);
+    };
   }, []);
+
+  // A question handed over from the command palette — ask it once the panel is up.
+  useEffect(() => {
+    if (open && pendingAsk) {
+      const q = pendingAsk;
+      setPendingAsk(null);
+      setTimeout(() => ask(q), 250);
+    }
+  }, [open, pendingAsk]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => { if (!open) stopVoice(); }, [open]);
 
