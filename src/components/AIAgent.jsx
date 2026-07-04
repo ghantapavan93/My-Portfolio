@@ -2,12 +2,15 @@ import { useState, useRef, useEffect } from 'react';
 import { Send, X, Sparkles } from 'lucide-react';
 import { playVoice, stopVoice, VOICE_SCRIPTS } from '../lib/voice';
 
-// Starter chips (safe to expose; the real brain + knowledge base live server-side in /api/chat).
+// Starter chips — the questions people actually ask (safe to expose; the real
+// brain + knowledge base live server-side in /api/chat).
 const SUGGESTED = [
+  'What are you working on right now?',
   "What's your strongest project?",
+  'Why should we hire you?',
+  'Do you need visa sponsorship?',
   "What's the hardest problem you've solved?",
-  "Why should we hire you?",
-  "Experience with RAG, agents & LangGraph?",
+  'Experience with RAG, agents & LangGraph?',
 ];
 
 // Questions that have a pre-recorded answer in Pavan's cloned voice: clicking
@@ -18,10 +21,21 @@ const QUESTION_CLIPS = {
   'Experience with RAG, agents & LangGraph?': 'faq-ai-engineer-fit',
 };
 
+// Pre-written answers (his words) for chips without a voice clip yet — shown
+// when the live brain is unreachable so the assistant never feels broken.
+const OFFLINE_ANSWERS = {
+  'What are you working on right now?':
+    "Right now I'm the full-stack AI engineer at 100 Miles of Summer — I was the first to bring AI into the company. I built QUANTUM, an AI health coach grounded in real wearable data, and the platform it runs on — now serving 270,000+ people. And yes, this assistant you're talking to? Also me. Well… us. 😄",
+  'Do you need visa sponsorship?':
+    "Short version: not today. I'm on F-1 STEM OPT — fully authorized to work in the US right now, so you could hire me tomorrow with zero paperwork, and there's a multi-year runway before sponsorship is even a conversation. My plan for when it matters is simple: by then I'll have shipped enough that it's the easiest yes you'll sign. For exact dates, grab me via the contact section.",
+  "What's the hardest problem you've solved?":
+    "Making an LLM trustworthy enough to ship. At Vosyn our agent hallucinated about 8% of the time — fine in a demo, a liability in production. I rebuilt the retrieval and added guardrails until it hit 2%, which cut human escalations by 42%. The lesson that stuck: the model is the easy part — the system that keeps it honest is the real work.",
+};
+
 const GREETING = {
   role: 'assistant',
   content:
-    "Hey — I'm Pavan's AI (yes, genuinely an AI, grounded in his real work). Ask me about his projects, experience, or whether he's a fit for your team. What are you curious about?",
+    "Hey — I'm GPK, Pavan's AI twin. Real stories, real numbers, zero fluff. Ask me anything — my projects, how I build, whether I'm the engineer you're looking for. I'll keep it short and human. Shoot. 🎯",
 };
 
 // The reactive orb — pure CSS/SVG, no deps. Reacts to agent state.
@@ -104,10 +118,9 @@ export function AIAgent() {
         setMessages((prev) => [...prev, { role: 'assistant', content: data.answer }]);
       }
     } catch {
-      // Live brain unreachable. If this question has a recorded clip (already
-      // playing), show its exact transcript so voice and text match; otherwise
-      // answer with the recorded fallback line in his voice.
-      let content = VOICE_SCRIPTS[clip];
+      // Live brain unreachable. Answer chain: exact clip transcript (voice is
+      // already playing) → pre-written answer → recorded fallback line.
+      let content = VOICE_SCRIPTS[clip] || OFFLINE_ANSWERS[q];
       if (!content) {
         playVoice('fallback');
         content = VOICE_SCRIPTS.fallback;
@@ -129,7 +142,7 @@ export function AIAgent() {
         >
           <Orb state="idle" size={44} />
           <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-            Ask my AI
+            Ask GPK
           </span>
         </button>
       )}
@@ -142,9 +155,9 @@ export function AIAgent() {
             <div className="flex items-center gap-3">
               <Orb state={loading ? 'thinking' : 'idle'} size={40} />
               <div>
-                <p className="text-sm font-bold leading-tight">Pavan's AI</p>
+                <p className="text-sm font-bold leading-tight">GPK</p>
                 <p className="text-[11px] text-muted-foreground leading-tight">
-                  {loading ? 'thinking…' : 'grounded in his real work'}
+                  {loading ? 'thinking…' : "Pavan's AI twin · real answers, zero fluff"}
                 </p>
               </div>
             </div>
