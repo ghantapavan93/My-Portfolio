@@ -5,6 +5,7 @@ import { playVoice, stopVoice, VOICE_SCRIPTS } from '../lib/voice';
 // Starter chips — the questions people actually ask (safe to expose; the real
 // brain + knowledge base live server-side in /api/chat).
 const SUGGESTED = [
+  'Introduce yourself',
   'What are you working on right now?',
   "What's your strongest project?",
   'Why should we hire you?',
@@ -24,10 +25,12 @@ const QUESTION_CLIPS = {
 // Pre-written answers (his words) for chips without a voice clip yet — shown
 // when the live brain is unreachable so the assistant never feels broken.
 const OFFLINE_ANSWERS = {
+  'Introduce yourself':
+    "I'm Pavan — an AI engineer who ships. The quick version: I was the first person to bring AI into 100 Miles of Summer, where I built an AI health coach now in front of 270,000+ people. Before that I was founding engineer on a crowd-safety platform that protected 20,000 people live at AfroTech. I own the whole pipeline — data, model, backend, frontend, deploy — and my rule is simple: it's not done until real people rely on it. Ask me anything — the stories are better than the resume. 😄",
   'What are you working on right now?':
     "Right now I'm the full-stack AI engineer at 100 Miles of Summer — I was the first to bring AI into the company. I built QUANTUM, an AI health coach grounded in real wearable data, and the platform it runs on — now serving 270,000+ people. And yes, this assistant you're talking to? Also me. Well… us. 😄",
   'Do you need visa sponsorship?':
-    "Short version: not today. I'm on F-1 STEM OPT — fully authorized to work in the US right now, so you could hire me tomorrow with zero paperwork, and there's a multi-year runway before sponsorship is even a conversation. My plan for when it matters is simple: by then I'll have shipped enough that it's the easiest yes you'll sign. For exact dates, grab me via the contact section.",
+    "Short version: I don't need sponsorship until mid-2028. My STEM OPT runs through June 2028 — you could hire me tomorrow with zero paperwork, and you get two full years to judge me on shipped work before sponsorship is even a conversation. And honestly, that's my favorite part of the deal: someone with everything to prove brings a level of ownership that comfort can't buy. By 2028, my plan is for the H-1B to be the easiest yes you'll ever sign — backed by two years of receipts, not promises.",
   "What's the hardest problem you've solved?":
     "Making an LLM trustworthy enough to ship. At Vosyn our agent hallucinated about 8% of the time — fine in a demo, a liability in production. I rebuilt the retrieval and added guardrails until it hit 2%, which cut human escalations by 42%. The lesson that stuck: the model is the easy part — the system that keeps it honest is the real work.",
 };
