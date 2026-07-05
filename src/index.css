@@ -327,3 +327,15 @@ html {
     transition-duration: 300ms;
   }
 }
+/* ── GPK: animated gradient roles (Vercel "Develop. Preview. Ship." style) ── */
+@keyframes gpk-grad-cycle {
+  0%, 21% { opacity: 1; }
+  33%, 88% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.gpk-role-grad {
+  animation: gpk-grad-cycle 9s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .gpk-role-grad { animation: none; opacity: 1; }
+}

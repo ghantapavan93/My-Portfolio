@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { Plus } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -20,11 +21,21 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 // in favor of an instant readable paragraph.
 // ─────────────────────────────────────────────────────────────────────────────
 
-const KICKER = 'AI Engineer · Full-Stack Developer · Product Builder';
+// The three roles, Vercel "Develop. Preview. Ship." style — each word carries an
+// animated gradient overlay (.gpk-role-grad in index.css) cycling on a 9s loop,
+// staggered so the sweep travels across the line even when nobody scrolls.
+const ROLES = [
+  { t: 'AI Engineer', grad: 'from-[#007cf0] to-[#00dfd8]', delay: '0s' },
+  { t: 'Full-Stack Developer', grad: 'from-[#7928ca] to-[#ff0080]', delay: '3s' },
+  { t: 'Product Builder', grad: 'from-[#ff4d4d] to-[#f9cb28]', delay: '6s' },
+];
 
-const HEADLINE_WORDS = 'Turning real-world problems into deployed AI products and full-stack platforms across real-world domains.'.split(' ');
-const HEADLINE_GRADIENT_FROM = 6; // "deployed" — index where the gradient begins
-const HEADLINE_GRADIENT_TO = 9; // "products" — index where it ends (inclusive)
+const HEADLINE_TEXT = 'Turning real-world problems into deployed AI products and full-stack platforms across real-world domains.';
+// Word indexes that get the gradient ("deployed AI products") — applied during
+// splitInto, NOT as JSX spans: splitInto rebuilds the element from textContent,
+// which destroys any pre-rendered child spans, so styling must happen post-split.
+const HEADLINE_GRADIENT_WORDS = [4, 5, 6];
+const HEADLINE_GRADIENT_CLASSES = ['bg-gradient-to-r', 'from-blue-500', 'via-purple-500', 'to-pink-500', 'bg-clip-text', 'text-transparent'];
 
 const INTRO_PARAGRAPH =
   "I'm an AI Engineer and Full-Stack Developer focused on taking real problems people face and turning them into deployed products. My motivation is simple: use technology to quietly reduce everyday friction.";
@@ -63,12 +74,13 @@ const RESUME_URL = 'https://drive.google.com/file/d/1ZzsEtDdGER8rRoCCX9zFI3qQSAg
 // characters are appended as plain text nodes — an inline-block span whose
 // entire content is a single space collapses to zero width in most browsers,
 // which was gluing words together ("AI Engineer" -> "AIEngineer").
-function splitInto(el, unit) {
-  const text = el.textContent;
+function splitInto(el, unit, gradientWords = [], gradientClasses = []) {
+  const text = el.textContent.trim();
   el.textContent = '';
   const frag = document.createDocumentFragment();
-  const pieces = unit === 'word' ? text.split(' ') : [...text];
+  const pieces = unit === 'word' ? text.split(/\s+/) : [...text];
   pieces.forEach((p, i) => {
+    if (p === '') return;
     if (unit === 'char' && p === ' ') {
       frag.appendChild(document.createTextNode(' '));
       return;
@@ -77,6 +89,7 @@ function splitInto(el, unit) {
     s.textContent = p;
     s.dataset.piece = '';
     s.className = 'inline-block will-change-transform';
+    if (unit === 'word' && gradientWords.includes(i)) s.classList.add(...gradientClasses);
     frag.appendChild(s);
     if (unit === 'word' && i < pieces.length - 1) frag.appendChild(document.createTextNode(' '));
   });
@@ -91,30 +104,35 @@ export function IntroCinema() {
       const q = gsap.utils.selector(root);
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      // Ambient background — floating badges + ghosted photo, always alive
+      // Ambient background — always alive, scroll or no scroll: badges drift and
+      // sway, the ghost portrait slowly breathes, the glow blobs wander.
       if (!reduced) {
         q('[data-badge]').forEach((el, i) => {
           gsap.to(el, {
-            y: i % 2 === 0 ? -16 : 16,
-            rotate: i % 2 === 0 ? 6 : -6,
-            duration: 3.4 + i * 0.4,
+            y: i % 2 === 0 ? -26 : 26,
+            x: i % 3 === 0 ? 14 : -12,
+            rotate: i % 2 === 0 ? 10 : -10,
+            duration: 3.2 + i * 0.55,
+            delay: i * 0.3,
             ease: 'sine.inOut',
             repeat: -1,
             yoyo: true,
           });
         });
         gsap.to(q('[data-ghost]'), {
-          scale: 1.08,
-          duration: 12,
+          scale: 1.1,
+          duration: 14,
           ease: 'sine.inOut',
           repeat: -1,
           yoyo: true,
         });
+        gsap.to(q('[data-glow-a]'), { x: -44, y: 32, duration: 9, ease: 'sine.inOut', repeat: -1, yoyo: true });
+        gsap.to(q('[data-glow-b]'), { x: 38, y: -26, duration: 11, ease: 'sine.inOut', repeat: -1, yoyo: true });
       }
 
-      // Per-letter / per-word spring reveal — the "STUNNING" effect
-      splitInto(q('[data-kicker-text]')[0], 'char');
-      splitInto(q('[data-headline]')[0], 'word');
+      // Per-word spring reveal — the "STUNNING" effect (headline only; the roles
+      // line animates via its own CSS gradient cycle + a whole-word spring pop)
+      splitInto(q('[data-headline]')[0], 'word', HEADLINE_GRADIENT_WORDS, HEADLINE_GRADIENT_CLASSES);
 
       const mm = gsap.matchMedia();
 
@@ -129,6 +147,8 @@ export function IntroCinema() {
       // drives the rest (typewriter → metrics → systems → closing).
       mm.add('(min-width: 768px) and (prefers-reduced-motion: no-preference)', () => {
         gsap.set(q('[data-kicker-avail]'), { autoAlpha: 0, y: 10 });
+        gsap.set(q('[data-roles-frame]'), { autoAlpha: 0, y: 14 });
+        gsap.set(q('[data-role]'), { scale: 0.4, autoAlpha: 0 });
         gsap.set(q('[data-piece]'), { scale: 0, autoAlpha: 0 });
         gsap.set(q('[data-beat]'), { position: 'absolute', left: 0, right: 0, top: 0, autoAlpha: 0 });
         gsap.set(q('[data-beat-intro]'), { autoAlpha: 1 });
@@ -143,8 +163,9 @@ export function IntroCinema() {
           burst?.kill();
           burst = gsap
             .timeline()
-            .to(q('[data-kicker-avail]'), { autoAlpha: 1, y: 0, duration: 0.35 })
-            .to(q('[data-kicker-text] [data-piece]'), { scale: 1, autoAlpha: 1, duration: 0.45, ease: 'back.out(2.2)', stagger: 0.016 }, '<')
+            .to(q('[data-kicker-avail]'), { autoAlpha: 1, y: 0, duration: 0.3 })
+            .to(q('[data-roles-frame]'), { autoAlpha: 1, y: 0, duration: 0.35 }, '<+=0.05')
+            .to(q('[data-role]'), { scale: 1, autoAlpha: 1, duration: 0.5, ease: 'back.out(2.2)', stagger: 0.14 }, '<+=0.1')
             .to(q('h2 [data-piece]'), { scale: 1, autoAlpha: 1, duration: 0.4, ease: 'back.out(1.8)', stagger: 0.03 }, '-=0.15');
         };
 
@@ -208,7 +229,7 @@ export function IntroCinema() {
 
       // ── Mobile / reduced-motion: natural stacked flow ─────────────────────
       mm.add('(max-width: 767px), (prefers-reduced-motion: reduce)', () => {
-        gsap.set(q('[data-piece],[data-kicker-avail]'), { autoAlpha: 1, scale: 1, y: 0 });
+        gsap.set(q('[data-piece],[data-kicker-avail],[data-role],[data-roles-frame]'), { autoAlpha: 1, scale: 1, y: 0 });
         const typeEl = q('[data-typewriter]')[0];
         typeEl.textContent = INTRO_PARAGRAPH;
         q('[data-count]').forEach((el, i) => (el.textContent = STATS[i].fmt(STATS[i].end)));
@@ -240,7 +261,7 @@ export function IntroCinema() {
           style={{
             backgroundImage: "url('/avatar-hero.webp')",
             backgroundPosition: '62% 30%',
-            opacity: 0.035,
+            opacity: 0.05,
             filter: 'grayscale(1) blur(6px)',
           }}
         />
@@ -249,13 +270,13 @@ export function IntroCinema() {
             key={i}
             data-badge
             className="absolute text-3xl md:text-5xl select-none hidden sm:block"
-            style={{ top: b.top, left: b.left, opacity: 0.07, filter: 'grayscale(0.6)' }}
+            style={{ top: b.top, left: b.left, opacity: 0.16, filter: 'grayscale(0.35)' }}
           >
             {b.emoji}
           </span>
         ))}
-        <div className="absolute -top-24 right-[8%] w-[420px] h-[420px] rounded-full bg-gradient-to-br from-blue-500/8 to-purple-500/8 blur-3xl" />
-        <div className="absolute bottom-0 left-[4%] w-[360px] h-[360px] rounded-full bg-gradient-to-tr from-pink-500/6 to-cyan-500/6 blur-3xl" />
+        <div data-glow-a className="absolute -top-24 right-[8%] w-[420px] h-[420px] rounded-full bg-gradient-to-br from-blue-500/12 to-purple-500/12 blur-3xl" />
+        <div data-glow-b className="absolute bottom-0 left-[4%] w-[360px] h-[360px] rounded-full bg-gradient-to-tr from-pink-500/10 to-cyan-500/10 blur-3xl" />
         {/* Spotlight — guarantees the text column stays readable over the art */}
         <div
           className="absolute inset-0"
@@ -263,32 +284,51 @@ export function IntroCinema() {
         />
       </div>
 
-      <div className="relative mx-auto max-w-3xl px-6 md:px-8 md:min-h-screen md:flex md:flex-col md:justify-center">
-        {/* Kicker + headline — always visible, never part of a beat */}
-        <p data-mreveal className="flex items-center justify-center gap-2.5 text-xs md:text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-5 text-center">
-          <span data-kicker-avail className="flex items-center gap-2">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-60 animate-ping" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
-            </span>
-            Available for hire ·
+      <div className="relative mx-auto max-w-5xl px-6 md:px-8 md:min-h-screen md:flex md:flex-col md:justify-center">
+        {/* Kicker + roles + headline — always visible, never part of a beat */}
+        <p data-kicker-avail data-mreveal className="flex items-center justify-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-4">
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-60 animate-ping" />
+            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
           </span>
-          <span data-kicker-text className="text-primary">{KICKER}</span>
+          Available for hire
         </p>
 
-        <h2 data-headline data-mreveal className="text-center text-2xl md:text-4xl lg:text-[2.75rem] font-black tracking-tight leading-[1.15] mb-10 md:mb-14">
-          {HEADLINE_WORDS.map((w, i) => (
-            <span key={i} className={i >= HEADLINE_GRADIENT_FROM && i <= HEADLINE_GRADIENT_TO ? 'bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent' : ''}>
-              {w}{' '}
-            </span>
-          ))}
+        {/* Roles — framed, Plus corners, animated cycling gradients */}
+        <div
+          data-roles-frame
+          data-mreveal
+          className="relative mx-auto mb-7 md:mb-9 w-fit max-w-full border border-border/70 px-5 py-3 md:px-9 md:py-4 [mask-image:radial-gradient(120rem_22rem_at_center,white,transparent)]"
+        >
+          <Plus className="absolute -left-3 -top-3 h-5 w-5 md:h-6 md:w-6 text-primary" aria-hidden="true" />
+          <Plus className="absolute -bottom-3 -left-3 h-5 w-5 md:h-6 md:w-6 text-primary" aria-hidden="true" />
+          <Plus className="absolute -right-3 -top-3 h-5 w-5 md:h-6 md:w-6 text-primary" aria-hidden="true" />
+          <Plus className="absolute -bottom-3 -right-3 h-5 w-5 md:h-6 md:w-6 text-primary" aria-hidden="true" />
+          <div className="flex flex-col items-center justify-center text-center text-xl md:flex-row md:gap-1 md:text-2xl lg:text-3xl font-extrabold tracking-tighter leading-tight select-none">
+            {ROLES.map((r) => (
+              <span key={r.t} data-role className="relative inline-block px-1.5">
+                <span className="text-foreground/90">{r.t}.</span>
+                <span
+                  aria-hidden="true"
+                  className={`gpk-role-grad pointer-events-none absolute inset-0 px-1.5 bg-gradient-to-r ${r.grad} bg-clip-text text-transparent`}
+                  style={{ animationDelay: r.delay }}
+                >
+                  {r.t}.
+                </span>
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <h2 data-headline data-mreveal className="text-center text-3xl sm:text-5xl lg:text-6xl xl:text-[4.25rem] font-black tracking-tighter leading-[0.98] mb-8 md:mb-12">
+          {HEADLINE_TEXT}
         </h2>
 
         {/* Storyline stage — beats stack on desktop (absolute), flow on mobile */}
         <div className="relative md:min-h-[210px]">
           {/* BEAT 1 — typewriter intro */}
           <div data-beat data-beat-intro data-mreveal className="md:absolute md:inset-0 mb-10 md:mb-0">
-            <p className="text-center text-base md:text-lg lg:text-xl font-medium text-muted-foreground leading-relaxed">
+            <p className="mx-auto max-w-2xl text-center text-base md:text-lg lg:text-xl font-medium text-muted-foreground leading-relaxed">
               <span data-typewriter />
               <span className="inline-block w-[2px] h-[1em] bg-primary/70 ml-0.5 align-middle animate-pulse md:hidden" />
             </p>
@@ -296,7 +336,7 @@ export function IntroCinema() {
 
           {/* BEAT 2 — impact metrics */}
           <div data-beat data-beat-metrics className="md:absolute md:inset-0 mb-10 md:mb-0">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="mx-auto max-w-3xl grid grid-cols-1 sm:grid-cols-3 gap-4">
               {STATS.map((s, i) => (
                 <div key={i} data-panel data-mreveal className="rounded-2xl border border-border/60 bg-card/60 backdrop-blur-sm p-5 text-center">
                   <div data-count className={`text-3xl md:text-4xl font-black tabular-nums bg-gradient-to-r ${s.grad} bg-clip-text text-transparent`}>0</div>
