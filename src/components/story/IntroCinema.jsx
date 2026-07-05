@@ -180,6 +180,7 @@ export function IntroCinema() {
             .to(q('h2 [data-piece]'), { scale: 1, autoAlpha: 1, duration: 0.4, ease: 'back.out(1.8)', stagger: 0.03 }, '-=0.15');
         };
 
+        const stage = q('[data-stage]')[0];
         const hState = { n: 0 };
         const sState = { typed: 0 };
         const counts = STATS.map(() => ({ v: 0 }));
@@ -188,10 +189,12 @@ export function IntroCinema() {
           .timeline({
             defaults: { ease: 'power3.out' },
             scrollTrigger: {
-              trigger: root.current,
+              // Pin ONLY the cinematic stage — so when it releases, the resolved
+              // view below scrolls in normally as one complete section.
+              trigger: stage,
               start: 'top top',
               end: '+=480%',
-              pin: true,
+              pin: stage,
               scrub: 0.6,
               anticipatePin: 1,
               onEnter: playBurst,
@@ -234,6 +237,18 @@ export function IntroCinema() {
           .to(q('[data-cline]'), { autoAlpha: 1, y: 0, stagger: 0.18, duration: 0.55, ease: 'power2.out' })
           .to(q('[data-ctas]'), { autoAlpha: 1, y: 0, duration: 0.5 }, '-=0.1')
           .to({}, { duration: 0.7 });
+
+        // Resolved view — the whole section shown as one, normally, once the
+        // cinematic has released the pin. Each block fades up as it enters.
+        gsap.utils.toArray(q('[data-areveal]')).forEach((el) => {
+          gsap.from(el, {
+            autoAlpha: 0,
+            y: 28,
+            duration: 0.6,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: el, start: 'top 85%', once: true },
+          });
+        });
       });
 
       // ── Mobile / reduced-motion: everything settled, natural stacked flow ──
@@ -264,9 +279,11 @@ export function IntroCinema() {
   );
 
   return (
-    <section ref={root} className="relative w-full overflow-hidden bg-background text-foreground py-20 md:py-0">
-      {/* Ambient background — ghosted photo + floating domain badges */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <section ref={root} className="relative w-full overflow-hidden bg-background text-foreground">
+      {/* ═══ PINNED cinematic stage — plays the five beats one at a time ═══ */}
+      <div data-stage className="relative overflow-hidden">
+        {/* Ambient background — inside the stage so it stays put during the pin */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div className="absolute inset-0 opacity-30 dark:opacity-20" style={{ backgroundImage: 'radial-gradient(circle, rgba(99,102,241,0.13) 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
         <div
           data-ghost
@@ -284,10 +301,9 @@ export function IntroCinema() {
         <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 62% 66% at center, var(--background) 45%, transparent 80%)' }} />
       </div>
 
-      <div className="relative mx-auto max-w-5xl px-6 md:px-8">
-        {/* Full-screen stage — on desktop every beat is an absolute centred layer
-            (one lit at a time); on mobile they flow naturally, top to bottom. */}
-        <div className="relative md:h-screen md:flex md:items-center md:justify-center">
+        {/* Content holder — h-screen & centred on desktop; normal flow on mobile.
+            The five beats stack absolutely; only one is lit at a time. */}
+        <div className="relative mx-auto max-w-5xl px-6 md:px-8 py-20 md:py-0 md:h-screen md:flex md:items-center md:justify-center">
           {/* BEAT 0 — HERO: kicker + framed roles + big spring headline */}
           <div data-beat data-beat-hero className="md:absolute md:inset-0 md:flex md:flex-col md:items-center md:justify-center mb-16 md:mb-0">
             <p data-kicker-avail data-mreveal className="flex items-center justify-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-4">
@@ -390,6 +406,77 @@ export function IntroCinema() {
                   Download Resume
                 </a>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ═══ RESOLVED VIEW — after the cinematic, the whole section shows as ONE,
+          normally, like a calm about-block. Desktop only; on mobile the stacked
+          beats above already serve this role. All plain text → fully crawlable. ═══ */}
+      <div className="hidden md:block relative border-t border-border/40 py-28">
+        <div className="absolute inset-0 pointer-events-none opacity-30 dark:opacity-20" style={{ backgroundImage: 'radial-gradient(circle, rgba(99,102,241,0.10) 1px, transparent 1px)', backgroundSize: '32px 32px' }} aria-hidden="true" />
+        <div className="relative mx-auto max-w-4xl px-8 text-center space-y-16">
+          {/* headline */}
+          <div data-areveal>
+            <p className="mb-5 flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-60 animate-ping" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+              </span>
+              Available for hire · AI Engineer · Full-Stack Developer · Product Builder
+            </p>
+            <h2 className="text-4xl lg:text-5xl font-black tracking-tighter leading-[1.05]">
+              Turning real-world problems into{' '}
+              <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">deployed AI products</span>{' '}
+              and full-stack platforms across real-world domains.
+            </h2>
+          </div>
+
+          {/* intro statement */}
+          <p data-areveal className="mx-auto max-w-2xl text-lg text-muted-foreground leading-relaxed">
+            {INTRO_LINES.map((l) => l.t).join(' ')}
+          </p>
+
+          {/* impact metrics */}
+          <div data-areveal className="grid grid-cols-3 gap-5">
+            {STATS.map((s, i) => (
+              <div key={i} className="rounded-2xl border border-border/60 bg-card/60 p-6">
+                <div className={`text-4xl font-black tabular-nums bg-gradient-to-r ${s.grad} bg-clip-text text-transparent`}>{s.fmt(s.end)}</div>
+                <p className="mt-2 text-xs font-medium text-muted-foreground leading-snug">{s.label}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* systems shipped */}
+          <div data-areveal>
+            <p className="text-xs font-semibold tracking-[0.28em] uppercase text-muted-foreground mb-5">
+              <span aria-hidden="true">🚀 </span>{SYS_HEADING}
+            </p>
+            <ul className="space-y-3 max-w-xl mx-auto text-left">
+              {RECEIPTS.map((r, i) => (
+                <li key={i} className="flex items-start gap-3 text-[15px] font-semibold text-foreground/90">
+                  <span className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-r from-blue-500 to-purple-500" />
+                  {r}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* closing */}
+          <div data-areveal>
+            <h3 className="text-2xl font-bold tracking-tight mb-4">
+              How I turn problems into products,{' '}
+              <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">end-to-end</span>
+            </h3>
+            <p className="gpk-shimmer mx-auto max-w-2xl text-lg font-medium leading-relaxed">{CLOSING_PARAGRAPH}</p>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <a href="#projects" className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary/25 hover:scale-[1.03] transition-transform">
+                Explore Projects
+              </a>
+              <a href={RESUME_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-6 py-2.5 text-sm font-semibold hover:border-primary/50 hover:bg-primary/10 transition-colors">
+                Download Resume
+              </a>
             </div>
           </div>
         </div>
