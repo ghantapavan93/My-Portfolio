@@ -369,17 +369,19 @@ export function IntroCinema() {
             </div>
           </div>
 
-          {/* BEAT 4 — NEON closing + CTAs.
-              The whole paragraph glows as neon (.gpk-neon) on a dark "neon-sign"
-              plate so it pops in both light and dark themes. Plain text in one
-              <p> → real spaces, copyable, screen-reader & crawler friendly. */}
+          {/* BEAT 4 — closing: heading + TEXT-SHIMMER paragraph + CTAs.
+              The paragraph is one plain <p> (real spaces → copyable, crawler &
+              screen-reader friendly) styled with .gpk-shimmer: an indigo base
+              with a lighter indigo band sweeping across it. */}
           <div data-beat data-beat-closing className="md:absolute md:inset-0 md:flex md:items-center md:justify-center">
-            <div className="w-full max-w-2xl mx-auto">
-              <div className="relative rounded-3xl border border-cyan-400/25 bg-zinc-950 px-7 py-8 md:px-10 md:py-9 shadow-[0_0_50px_rgba(34,211,238,0.16)]">
-                <p data-cline data-mreveal className="gpk-neon text-center text-[15px] md:text-lg font-semibold leading-relaxed md:leading-loose">
-                  {CLOSING_PARAGRAPH}
-                </p>
-              </div>
+            <div className="w-full max-w-2xl mx-auto text-center">
+              <h3 data-cline data-mreveal className="text-xl md:text-2xl font-bold tracking-tight mb-5">
+                How I turn problems into products,{' '}
+                <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">end-to-end</span>
+              </h3>
+              <p data-cline data-mreveal className="gpk-shimmer text-[15px] md:text-lg font-medium leading-relaxed md:leading-loose">
+                {CLOSING_PARAGRAPH}
+              </p>
               <div data-ctas data-mreveal className="mt-8 flex flex-wrap items-center justify-center gap-3">
                 <a href="#projects" className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary/25 hover:scale-[1.03] transition-transform">
                   Explore Projects
