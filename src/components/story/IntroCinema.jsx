@@ -167,7 +167,7 @@ export function IntroCinema() {
         twEls.forEach((el) => (el.textContent = ''));
         twLines.forEach((el) => (el.style.opacity = '0'));
         heading.textContent = '';
-        gsap.set(q('[data-cword]'), { autoAlpha: 0, filter: 'blur(12px)', y: 14 });
+        gsap.set(q('[data-cline]'), { autoAlpha: 0, y: 18 });
         gsap.set(q('[data-ctas]'), { autoAlpha: 0, y: 18 });
 
         // Letter/roles spring reveal fires as a one-shot burst when the section
@@ -232,9 +232,9 @@ export function IntroCinema() {
           .to(sState, { typed: SYS_TOTAL, duration: 2.0, ease: 'none', onUpdate: () => typeStream(sState) })
           .to({}, { duration: 0.7 })
           .to(q('[data-beat-systems]'), { autoAlpha: 0, y: -24, duration: 0.5 })
-          // BEAT 4 — TEXT-ANIMATION: closing line un-blurs word by word
+          // BEAT 4 — TEXT-ANIMATION: closing lines rise in, punchline shadow lands
           .set(q('[data-beat-closing]'), { autoAlpha: 1 })
-          .to(q('[data-cword]'), { autoAlpha: 1, filter: 'blur(0px)', y: 0, stagger: 0.045, duration: 0.5, ease: 'power2.out' })
+          .to(q('[data-cline]'), { autoAlpha: 1, y: 0, stagger: 0.18, duration: 0.55, ease: 'power2.out' })
           .to(q('[data-ctas]'), { autoAlpha: 1, y: 0, duration: 0.5 }, '-=0.1')
           .to({}, { duration: 0.7 });
       });
@@ -244,7 +244,7 @@ export function IntroCinema() {
         gsap.set(q('[data-beat]'), { autoAlpha: 1 });
         gsap.set(q('[data-piece],[data-kicker-avail],[data-role],[data-roles-frame]'), { autoAlpha: 1, scale: 1, y: 0 });
         gsap.set(q('[data-iline]'), { clipPath: 'inset(0 0 0 0)', filter: 'blur(0px)', yPercent: 0, autoAlpha: 1 });
-        gsap.set(q('[data-cword]'), { autoAlpha: 1, filter: 'blur(0px)', y: 0 });
+        gsap.set(q('[data-cline]'), { autoAlpha: 1, y: 0 });
         gsap.set(caret, { display: 'none' });
         heading.textContent = SYS_HEADING;
         twEls.forEach((el, i) => (el.textContent = RECEIPTS[i]));
@@ -372,18 +372,22 @@ export function IntroCinema() {
             </div>
           </div>
 
-          {/* BEAT 4 — TEXT-ANIMATION closing + CTAs */}
+          {/* BEAT 4 — TEXT-ANIMATION closing + CTAs.
+              Lines are plain text (real spaces → copyable, screen-reader &
+              crawler friendly). The payoff line carries the TextAnimation look:
+              a colour with a matching lower-opacity offset shadow (.gpk-textanim).
+              Kept small + calm on the setup lines so only the punchline pops. */}
           <div data-beat data-beat-closing className="md:absolute md:inset-0 md:flex md:items-center md:justify-center">
-            <div className="text-center w-full">
-              {CLOSING_LINES.map((line, li) => (
-                <p key={li} className="text-base md:text-xl italic text-muted-foreground leading-relaxed">
-                  {line.split(' ').map((w, wi) => (
-                    <span key={wi} data-cword data-mreveal className="inline-block will-change-[filter,transform] mr-[0.28em]">
-                      {w}
-                    </span>
-                  ))}
-                </p>
-              ))}
+            <div className="text-center w-full max-w-2xl mx-auto">
+              <p data-cline data-mreveal className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                {CLOSING_LINES[0]}
+              </p>
+              <p data-cline data-mreveal className="mt-1 text-base md:text-lg italic text-muted-foreground/90 leading-relaxed">
+                {CLOSING_LINES[1]}
+              </p>
+              <p data-cline data-mreveal className="gpk-textanim mt-4 text-lg md:text-xl font-bold tracking-tight leading-snug">
+                {CLOSING_LINES[2]}
+              </p>
               <div data-ctas data-mreveal className="mt-8 flex flex-wrap items-center justify-center gap-3">
                 <a href="#projects" className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary/25 hover:scale-[1.03] transition-transform">
                   Explore Projects

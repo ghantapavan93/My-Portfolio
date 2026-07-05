@@ -344,3 +344,8 @@ html {
 @keyframes gpk-caret { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
 .gpk-caret { animation: gpk-caret 0.9s steps(1) infinite; }
 @media (prefers-reduced-motion: reduce) { .gpk-caret { display: none; } }
+
+/* ── GPK: TextAnimation — shadow colour matches the text colour at lower opacity ── */
+:root { --gpk-anim-text: #4f46e5; --gpk-anim-shadow: rgba(79, 70, 229, 0.22); }
+.dark { --gpk-anim-text: #a5b4fc; --gpk-anim-shadow: rgba(165, 180, 252, 0.26); }
+.gpk-textanim { color: var(--gpk-anim-text); text-shadow: 3px 3px 0 var(--gpk-anim-shadow); }
