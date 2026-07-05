@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Plus } from 'lucide-react';
+import { Plus, Check } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -411,61 +411,69 @@ export function IntroCinema() {
         </div>
       </div>
 
-      {/* ═══ RESOLVED VIEW — after the cinematic, the whole section shows as ONE,
-          normally, like a calm about-block. Desktop only; on mobile the stacked
-          beats above already serve this role. All plain text → fully crawlable. ═══ */}
-      <div className="hidden md:block relative border-t border-border/40 py-28">
-        <div className="absolute inset-0 pointer-events-none opacity-30 dark:opacity-20" style={{ backgroundImage: 'radial-gradient(circle, rgba(99,102,241,0.10) 1px, transparent 1px)', backgroundSize: '32px 32px' }} aria-hidden="true" />
-        <div className="relative mx-auto max-w-4xl px-8 text-center space-y-16">
-          {/* headline */}
-          <div data-areveal>
-            <p className="mb-5 flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+      {/* ═══ RESOLVED VIEW — after the cinematic, the whole section resolves into
+          ONE polished "at a glance" card: header + a glass panel grouping the
+          metrics & shipped systems + the closing. Desktop only (mobile's stacked
+          beats already serve this). All plain text → fully crawlable. ═══ */}
+      <div className="hidden md:block relative border-t border-border/40 py-28 overflow-hidden">
+        {/* backdrop — dot grid + a soft centred gradient glow */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <div className="absolute inset-0 opacity-25 dark:opacity-15" style={{ backgroundImage: 'radial-gradient(circle, rgba(99,102,241,0.12) 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
+          <div className="absolute left-1/2 top-8 -translate-x-1/2 w-[760px] h-[420px] rounded-full bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 blur-3xl" />
+        </div>
+
+        <div className="relative mx-auto max-w-4xl px-8">
+          {/* header — pill + dual-gradient headline + intro */}
+          <div data-areveal className="text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card/60 backdrop-blur px-4 py-1.5 text-[11px] font-semibold uppercase tracking-widest text-foreground/70">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-60 animate-ping" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
               </span>
-              Available for hire · AI Engineer · Full-Stack Developer · Product Builder
-            </p>
-            <h2 className="text-4xl lg:text-5xl font-black tracking-tighter leading-[1.05]">
+              Available for hire · AI Engineer · Full-Stack · Product
+            </span>
+            <h2 className="mt-6 text-4xl lg:text-[3.25rem] font-black tracking-tighter leading-[1.08] text-foreground">
               Turning real-world problems into{' '}
               <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">deployed AI products</span>{' '}
-              and full-stack platforms across real-world domains.
+              and{' '}
+              <span className="bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent">full-stack platforms</span>{' '}
+              across real-world domains.
             </h2>
-          </div>
-
-          {/* intro statement */}
-          <p data-areveal className="mx-auto max-w-2xl text-lg text-muted-foreground leading-relaxed">
-            {INTRO_LINES.map((l) => l.t).join(' ')}
-          </p>
-
-          {/* impact metrics */}
-          <div data-areveal className="grid grid-cols-3 gap-5">
-            {STATS.map((s, i) => (
-              <div key={i} className="rounded-2xl border border-border/60 bg-card/60 p-6">
-                <div className={`text-4xl font-black tabular-nums bg-gradient-to-r ${s.grad} bg-clip-text text-transparent`}>{s.fmt(s.end)}</div>
-                <p className="mt-2 text-xs font-medium text-muted-foreground leading-snug">{s.label}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* systems shipped */}
-          <div data-areveal>
-            <p className="text-xs font-semibold tracking-[0.28em] uppercase text-muted-foreground mb-5">
-              <span aria-hidden="true">🚀 </span>{SYS_HEADING}
+            <p className="mt-6 mx-auto max-w-2xl text-lg text-foreground/70 leading-relaxed">
+              {INTRO_LINES.map((l) => l.t).join(' ')}
             </p>
-            <ul className="space-y-3 max-w-xl mx-auto text-left">
-              {RECEIPTS.map((r, i) => (
-                <li key={i} className="flex items-start gap-3 text-[15px] font-semibold text-foreground/90">
-                  <span className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-r from-blue-500 to-purple-500" />
-                  {r}
-                </li>
-              ))}
-            </ul>
           </div>
 
-          {/* closing */}
-          <div data-areveal>
-            <h3 className="text-2xl font-bold tracking-tight mb-4">
+          {/* grouped glass card — metrics on top, shipped systems below */}
+          <div data-areveal className="mt-12 rounded-[2rem] border border-border/60 bg-card/50 backdrop-blur-xl shadow-2xl shadow-primary/[0.06] overflow-hidden">
+            <div className="grid grid-cols-3 divide-x divide-border/50">
+              {STATS.map((s, i) => (
+                <div key={i} className="px-6 py-8 text-center">
+                  <div className={`text-4xl lg:text-5xl font-black tabular-nums bg-gradient-to-r ${s.grad} bg-clip-text text-transparent`}>{s.fmt(s.end)}</div>
+                  <p className="mt-2 text-xs font-medium text-muted-foreground leading-snug">{s.label}</p>
+                </div>
+              ))}
+            </div>
+            <div className="border-t border-border/50 bg-muted/20 px-8 py-8">
+              <p className="text-center text-[11px] font-semibold tracking-[0.28em] uppercase text-muted-foreground mb-6">
+                <span aria-hidden="true">🚀 </span>{SYS_HEADING}
+              </p>
+              <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+                {RECEIPTS.map((r, i) => (
+                  <div key={i} className="flex items-start gap-3 text-[15px] font-semibold text-foreground/90 text-left">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
+                      <Check className="h-3 w-3" strokeWidth={3} />
+                    </span>
+                    {r}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* closing — heading + shimmer + CTAs */}
+          <div data-areveal className="mt-12 text-center">
+            <h3 className="text-2xl font-bold tracking-tight mb-4 text-foreground">
               How I turn problems into products,{' '}
               <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">end-to-end</span>
             </h3>
