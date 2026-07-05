@@ -349,3 +349,19 @@ html {
 :root { --gpk-anim-text: #4f46e5; --gpk-anim-shadow: rgba(79, 70, 229, 0.22); }
 .dark { --gpk-anim-text: #a5b4fc; --gpk-anim-shadow: rgba(165, 180, 252, 0.26); }
 .gpk-textanim { color: var(--gpk-anim-text); text-shadow: 3px 3px 0 var(--gpk-anim-shadow); }
+
+/* ── GPK: neon text — near-cyan core with a layered cyan glow + subtle flicker ── */
+.gpk-neon {
+  color: #a5f3fc;
+  text-shadow:
+    0 0 5px rgba(34, 211, 238, 0.85),
+    0 0 12px rgba(34, 211, 238, 0.6),
+    0 0 22px rgba(34, 211, 238, 0.45),
+    0 0 40px rgba(34, 211, 238, 0.25);
+  animation: gpk-neon-flicker 5.5s linear infinite;
+}
+@keyframes gpk-neon-flicker {
+  0%, 17%, 21%, 51%, 55%, 100% { opacity: 1; }
+  19%, 53% { opacity: 0.86; }
+}
+@media (prefers-reduced-motion: reduce) { .gpk-neon { animation: none; } }

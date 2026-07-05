@@ -54,11 +54,8 @@ const RECEIPTS = [
 ];
 const SYS_TOTAL = RECEIPTS.reduce((n, r) => n + r.length, 0);
 
-const CLOSING_LINES = [
-  "Most of what I build starts as a pain point I've seen firsthand —",
-  'confusing medical info, unsafe public spaces, overwhelming admin work —',
-  'and ends as a product real teams actually rely on.',
-];
+const CLOSING_PARAGRAPH =
+  'Most of what I build starts as a personal or observed pain point—confusing medical information, unsafe public spaces, overwhelming admin work—and ends as a working product with real users. I enjoy the full lifecycle: listening to problems, shaping them into clear product ideas, designing data and AI workflows, building the backend and UI, wiring in observability, and iterating until the solution genuinely helps people and the teams who run it.';
 
 const DOMAIN_BADGES = [
   { emoji: '❤️', top: '12%', left: '8%' },
@@ -372,22 +369,17 @@ export function IntroCinema() {
             </div>
           </div>
 
-          {/* BEAT 4 — TEXT-ANIMATION closing + CTAs.
-              Lines are plain text (real spaces → copyable, screen-reader &
-              crawler friendly). The payoff line carries the TextAnimation look:
-              a colour with a matching lower-opacity offset shadow (.gpk-textanim).
-              Kept small + calm on the setup lines so only the punchline pops. */}
+          {/* BEAT 4 — NEON closing + CTAs.
+              The whole paragraph glows as neon (.gpk-neon) on a dark "neon-sign"
+              plate so it pops in both light and dark themes. Plain text in one
+              <p> → real spaces, copyable, screen-reader & crawler friendly. */}
           <div data-beat data-beat-closing className="md:absolute md:inset-0 md:flex md:items-center md:justify-center">
-            <div className="text-center w-full max-w-2xl mx-auto">
-              <p data-cline data-mreveal className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                {CLOSING_LINES[0]}
-              </p>
-              <p data-cline data-mreveal className="mt-1 text-base md:text-lg italic text-muted-foreground/90 leading-relaxed">
-                {CLOSING_LINES[1]}
-              </p>
-              <p data-cline data-mreveal className="gpk-textanim mt-4 text-lg md:text-xl font-bold tracking-tight leading-snug">
-                {CLOSING_LINES[2]}
-              </p>
+            <div className="w-full max-w-2xl mx-auto">
+              <div className="relative rounded-3xl border border-cyan-400/25 bg-zinc-950 px-7 py-8 md:px-10 md:py-9 shadow-[0_0_50px_rgba(34,211,238,0.16)]">
+                <p data-cline data-mreveal className="gpk-neon text-center text-[15px] md:text-lg font-semibold leading-relaxed md:leading-loose">
+                  {CLOSING_PARAGRAPH}
+                </p>
+              </div>
               <div data-ctas data-mreveal className="mt-8 flex flex-wrap items-center justify-center gap-3">
                 <a href="#projects" className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary/25 hover:scale-[1.03] transition-transform">
                   Explore Projects
