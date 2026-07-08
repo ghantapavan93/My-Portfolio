@@ -1,5 +1,6 @@
 import { ArrowUpRight, Users, ExternalLink } from 'lucide-react'
 import { useEffect, useRef } from 'react'
+import { VoiceButton } from './VoiceButton'
 
 export function ProjectShowcase() {
   const componentRef = useRef(null);
@@ -106,6 +107,8 @@ export function ProjectShowcase() {
                   Visit Project-H
                   <ExternalLink className="ml-1 w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true" />
                 </a>
+
+                <VoiceButton clip="faq-project-h" label="Hear the story" />
 
                 <div className="flex items-center text-xs sm:text-sm text-muted-foreground">
                   <Users size={14} className="mr-1.5 text-[#3E7B27]" aria-hidden="true" />

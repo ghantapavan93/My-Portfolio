@@ -1,6 +1,10 @@
 import { Routes, Route } from 'react-router-dom'
 import { Header } from './components/Header'
-import { HeroSection } from './components/HeroSection'
+import { CinematicHero } from './components/CinematicHero'
+import { IntroCinema } from './components/story/IntroCinema'
+import { CapabilitiesSection } from './components/CapabilitiesSection'
+import { Incident } from './components/story/Incident'
+import { CommandPalette } from './components/CommandPalette'
 import { ProjectShowcase } from './components/ProjectShowcase'
 import { YoutubeShowcase } from './components/YoutubeShowcase'
 import { ProjectsSection } from './components/ProjectsSection'
@@ -10,6 +14,8 @@ import { ContactSection } from './components/ContactSection'
 import { Footer } from './components/Footer'
 import { ThemeProvider } from './components/ThemeProvider'
 import { ContributionsSection } from './components/ContributionsSection'
+import { AIAgent } from './components/AIAgent'
+import { Preloader } from './components/Preloader'
 import { PosterA11yCaseStudy } from './pages/case-studies/PosterA11yCaseStudy'
 import { SpeechQuestCaseStudy } from './pages/case-studies/SpeechQuestCaseStudy'
 import { A11yGameCaseStudy } from './pages/case-studies/A11yGameCaseStudy'
@@ -17,9 +23,13 @@ import { A11yGameCaseStudy } from './pages/case-studies/A11yGameCaseStudy'
 function MainContent() {
   return (
     <>
+      <Preloader />
       <Header />
       <main>
-        <HeroSection />
+        <CinematicHero />
+        <IntroCinema />
+        <CapabilitiesSection />
+        <Incident />
 
         {/* ✅ Projects Section */}
         <section id="projects">
@@ -61,6 +71,8 @@ function App() {
           <Route path="/case-studies/speech-quest" element={<SpeechQuestCaseStudy />} />
           <Route path="/case-studies/a11y-game" element={<A11yGameCaseStudy />} />
         </Routes>
+        <AIAgent />
+        <CommandPalette />
       </div>
     </ThemeProvider>
   )
