@@ -3,7 +3,7 @@ import { ArrowLeft, Github, Globe, Copy, Check, ExternalLink } from 'lucide-reac
 import { useState } from 'react'
 import { Button } from '../ui/button'
 
-export function CaseStudyShell({ children, title, url, githubUrl, liveUrl }) {
+export function CaseStudyShell({ children, url, githubUrl, liveUrl }) {
     const navigate = useNavigate();
     const [copied, setCopied] = useState(false);
 

@@ -1,13 +1,14 @@
 import { Github, Linkedin, Mail, FileText, ExternalLink } from 'lucide-react'
 import { Button } from './ui/button'
+import { EMAIL, RESUME_URL } from '../lib/links'
 
 export function Footer() {
-  const resumeLink = "https://drive.google.com/file/d/192fUVmZz4lZ9m5NTxJaKGoc5UfPOEqd6/view?usp=drive_link";
+  const resumeLink = RESUME_URL;
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer 
-      id="contact" 
+    <footer
+      id="footer"
       className="bg-gradient-to-r from-black/95 to-gray-900/95 text-white py-6 md:py-8 border-t border-white/10"
       aria-labelledby="footer-heading"
     >
@@ -19,12 +20,12 @@ export function Footer() {
               Get in touch
             </h2>
             <a 
-              href="mailto:ghantapavan93@gmail.com" 
+              href={`mailto:${EMAIL}`} 
               className="text-white/80 hover:text-primary transition-all duration-200 inline-flex items-center gap-1.5 text-xs md:text-sm group focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-gray-900 rounded-sm p-0.5"
               aria-label="Email Pavan Kalyan Ghanta"
             >
               <Mail className="h-3 w-3 md:h-3.5 md:w-3.5 text-primary" aria-hidden="true" />
-              <span>ghantapavan93@gmail.com</span>
+              <span>{EMAIL}</span>
               <ExternalLink className="h-2.5 w-2.5 md:h-3 md:w-3 opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true" />
             </a>
           </div>

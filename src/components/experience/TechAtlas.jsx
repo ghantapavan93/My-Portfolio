@@ -20,21 +20,21 @@ export const TechAtlas = ({ atlas, activeTech = [], roleTheme, onOpenFullStack }
                     style={{ color: roleTheme.accent }}
                 >
                     <Maximize2 className="w-3 h-3" />
-                    Explorer Deep Dive
+                    Full stack deep dive
                 </button>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
                 {Object.entries(atlas).map(([category, tech]) => {
                     const Icon = icons[category] || Server;
                     return (
                         <div
                             key={category}
-                            className="p-4 rounded-2xl bg-secondary/5 border border-white/5 transition-all duration-500"
+                            className="min-w-0 p-4 rounded-2xl bg-secondary/5 border border-border/60 transition-all duration-500"
                         >
                             <div className="flex items-center gap-2 mb-3">
-                                <Icon className="w-3 h-3 text-muted-foreground/60" />
-                                <span className="text-[8px] font-black uppercase tracking-widest text-muted-foreground">{category}</span>
+                                <Icon className="w-3 h-3 shrink-0 text-muted-foreground/60" />
+                                <span className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">{category}</span>
                             </div>
 
                             <div className="flex flex-wrap gap-1.5">
@@ -44,7 +44,7 @@ export const TechAtlas = ({ atlas, activeTech = [], roleTheme, onOpenFullStack }
                                         <Badge
                                             key={t}
                                             variant="secondary"
-                                            className={`text-[8px] px-1.5 py-0 border transition-all duration-300 ${isActive ? 'bg-primary border-primary text-white shadow-[0_0_10px_rgba(66,133,244,0.3)]' : 'bg-card/50 border-white/5 text-muted-foreground'}`}
+                                            className={`max-w-full whitespace-normal break-words text-left text-[10px] px-1.5 py-0.5 border transition-all duration-300 ${isActive ? 'bg-primary border-primary text-white shadow-[0_0_10px_rgba(66,133,244,0.3)]' : 'bg-card/50 border-border/60 text-muted-foreground'}`}
                                             style={isActive ? { backgroundColor: roleTheme.accent, borderColor: roleTheme.accent } : {}}
                                         >
                                             {t}

@@ -65,7 +65,7 @@ export const ReceiptsDock = ({ activeReceipt, roleTheme, experience }) => {
     }
 
     // 2. RECEIPT MODE (When a bullet is selected)
-    const { metric, layerTags, src, label, proofs, tech, artifacts } = activeReceipt;
+    const { metric, src, label, proofs, tech } = activeReceipt;
 
     return (
         <div className="sticky top-32 w-full space-y-8 animate-in fade-in slide-in-from-right-10 duration-500">
@@ -79,6 +79,7 @@ export const ReceiptsDock = ({ activeReceipt, roleTheme, experience }) => {
                         <img
                             src={src}
                             alt={label}
+                            onError={(e) => { e.currentTarget.style.display = 'none'; }}
                             className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s] ease-out"
                         />
                     )}

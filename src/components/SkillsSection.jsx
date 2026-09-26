@@ -299,7 +299,7 @@ export function SkillsSection() {
       <div className="absolute -top-[20%] -right-[10%] w-[1000px] h-[1000px] bg-primary/10 blur-[250px] rounded-full animate-mesh-1 -z-10" />
       <div className="absolute -bottom-[20%] -left-[10%] w-[1000px] h-[1000px] bg-blue-600/10 blur-[250px] rounded-full animate-mesh-2 -z-10" />
 
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none -z-10" />
+      <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none -z-10" />
 
       <div className="container mx-auto px-4 max-w-7xl relative z-10">
         <div className="text-center mb-28 space-y-6 flex flex-col items-center animate-fade-up">

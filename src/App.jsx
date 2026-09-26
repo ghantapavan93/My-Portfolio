@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { Header } from './components/Header'
 import { CinematicHero } from './components/CinematicHero'
@@ -16,9 +17,14 @@ import { ThemeProvider } from './components/ThemeProvider'
 import { ContributionsSection } from './components/ContributionsSection'
 import { AIAgent } from './components/AIAgent'
 import { Preloader } from './components/Preloader'
-import { PosterA11yCaseStudy } from './pages/case-studies/PosterA11yCaseStudy'
-import { SpeechQuestCaseStudy } from './pages/case-studies/SpeechQuestCaseStudy'
-import { A11yGameCaseStudy } from './pages/case-studies/A11yGameCaseStudy'
+
+// Case-study pages are separate routes — load them only when visited.
+const PosterA11yCaseStudy = lazy(() =>
+  import('./pages/case-studies/PosterA11yCaseStudy').then(m => ({ default: m.PosterA11yCaseStudy })))
+const SpeechQuestCaseStudy = lazy(() =>
+  import('./pages/case-studies/SpeechQuestCaseStudy').then(m => ({ default: m.SpeechQuestCaseStudy })))
+const A11yGameCaseStudy = lazy(() =>
+  import('./pages/case-studies/A11yGameCaseStudy').then(m => ({ default: m.A11yGameCaseStudy })))
 
 function MainContent() {
   return (
@@ -31,30 +37,21 @@ function MainContent() {
         <CapabilitiesSection />
         <Incident />
 
-        {/* ✅ Projects Section */}
+        {/* #projects wraps the showcase + the full grid so "Projects" lands at the top. */}
         <section id="projects">
           <ProjectShowcase />
           <ProjectsSection />
         </section>
 
-        {/* ✅ Contributions Section */}
-        <section id="contributions">
-          <ContributionsSection />
-        </section>
-
-        {/* ✅ Experience Section */}
-        <section id="experience">
-          <ExperienceSection />
-        </section>
+        {/* These sections carry their own ids (#contributions, #experience). */}
+        <ContributionsSection />
+        <ExperienceSection />
 
         {/* ✅ Other Sections (Optional but kept for completeness) */}
         <SkillsSection />
         <YoutubeShowcase />
 
-        {/* ✅ Contact Section */}
-        <section id="contact">
-          <ContactSection />
-        </section>
+        <ContactSection />
       </main>
       <Footer />
     </>
@@ -65,12 +62,14 @@ function App() {
   return (
     <ThemeProvider>
       <div className="min-h-screen bg-background text-foreground">
-        <Routes>
-          <Route path="/" element={<MainContent />} />
-          <Route path="/case-studies/poster-accessibility-eval" element={<PosterA11yCaseStudy />} />
-          <Route path="/case-studies/speech-quest" element={<SpeechQuestCaseStudy />} />
-          <Route path="/case-studies/a11y-game" element={<A11yGameCaseStudy />} />
-        </Routes>
+        <Suspense fallback={<div className="min-h-screen" aria-busy="true" />}>
+          <Routes>
+            <Route path="/" element={<MainContent />} />
+            <Route path="/case-studies/poster-accessibility-eval" element={<PosterA11yCaseStudy />} />
+            <Route path="/case-studies/speech-quest" element={<SpeechQuestCaseStudy />} />
+            <Route path="/case-studies/a11y-game" element={<A11yGameCaseStudy />} />
+          </Routes>
+        </Suspense>
         <AIAgent />
         <CommandPalette />
       </div>

@@ -1,14 +1,13 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Send, X, Sparkles, FileText, Linkedin, Mail, Volume2, VolumeX } from 'lucide-react';
 import { playVoice, stopVoice, currentVoice, subscribeVoice, VOICE_SCRIPTS } from '../lib/voice';
+import { RESUME_URL, LINKEDIN_URL } from '../lib/links';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // GPK — Pavan's AI twin. Typewriter answers, cloned-voice playback, contextual
 // follow-ups, and grounded offline answers so it never feels broken.
 // ─────────────────────────────────────────────────────────────────────────────
 
-const RESUME_URL = 'https://drive.google.com/file/d/1ZzsEtDdGER8rRoCCX9zFI3qQSAgfj50z/view?usp=sharing';
-const LINKEDIN_URL = 'https://www.linkedin.com/in/pavankalyan-ghanta-b20115200/';
 
 // Starter chips — the questions people actually ask.
 const SUGGESTED = [
@@ -63,7 +62,7 @@ const OFFLINE_ANSWERS = {
   'How did you cut the false positives?':
     "Two-stage gating. Stage one: signals and heuristics — motion, trajectory, physics — build a candidate event. Stage two: a threat lexicon filters it before anyone gets pinged. For low-light and blur, I bundle multi-frame context and peak-motion keyframes as **evidence**, so even when model confidence drops, a human can verify in seconds. Alerts went from noise to something a security team actually acts on.",
   'How does this assistant work?':
-    "Glad you asked — **I'm his work, not just his words.** Under the hood: a LangGraph agent (retrieve → generate) on a serverless function, Gemini with automatic Groq fallback so one rate limit never kills me, answering only from a grounded knowledge base of his real projects — same discipline he ships professionally: grounding, guardrails, honest refusals. The voice? His real voice, AI-cloned, pre-generated so it's instant and free. Go ahead — try to break me. 😄",
+    "Glad you asked — **I'm his work, not just his words.** Under the hood: a LangGraph agent (retrieve → generate) on a serverless function, running free open models (Qwen, gpt-oss) with automatic provider fallback so one rate limit never kills me, answering only from a grounded knowledge base of his real projects — same discipline he ships professionally: grounding, guardrails, honest refusals. The voice? His real voice, AI-cloned, pre-generated so it's instant and free. Go ahead — try to break me. 😄",
   '🧪 Try to make me hallucinate':
     "Love it — you're my favorite kind of visitor. 😄 Here's the deal: I only answer from Pavan's real, verified work. Ask me if he worked at Google (he didn't), whether he has 20 years of experience (he doesn't), or about some framework he's never touched — **I'll tell you the truth every time.** Honesty under pressure is the whole demo. Fire away.",
   'How do I reach Pavan?':
@@ -184,6 +183,12 @@ export function AIAgent() {
     const history = messages.filter(m => m !== GREETING).map(({ role, content }) => ({ role, content }));
     setMessages(prev => [...prev, { role: 'user', content: q, done: true }]);
     setInput('');
+    // Voice-backed questions answer from the clip's exact transcript, so what you
+    // hear always matches what you read (and it's instant — no API call).
+    if (clip && VOICE_SCRIPTS[clip]) {
+      setMessages(prev => [...prev, { role: 'assistant', content: VOICE_SCRIPTS[clip], clip, question: q }]);
+      return;
+    }
     setLoading(true);
     try {
       const res = await fetch('/api/chat', {

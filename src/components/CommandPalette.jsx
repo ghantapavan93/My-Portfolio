@@ -1,12 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Search, Command, ArrowRight, Sparkles, FileText, Linkedin, Github, X } from 'lucide-react';
+import { RESUME_URL } from '../lib/links';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // ⌘K — the portfolio behaves like a product. Jump anywhere, ask GPK anything,
 // grab the resume. A floating hint teaches the shortcut once.
 // ─────────────────────────────────────────────────────────────────────────────
-
-const RESUME_URL = 'https://drive.google.com/file/d/1ZzsEtDdGER8rRoCCX9zFI3qQSAgfj50z/view?usp=sharing';
 
 const GPK_QUESTIONS = [
   'Introduce yourself',

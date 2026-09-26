@@ -3,6 +3,7 @@ import { Plus, Check } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { RESUME_URL } from '../../lib/links';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -65,8 +66,6 @@ const DOMAIN_BADGES = [
   { emoji: '♿', top: '6%', left: '48%' },
   { emoji: '✈️', top: '92%', left: '52%' },
 ];
-
-const RESUME_URL = 'https://drive.google.com/file/d/1ZzsEtDdGER8rRoCCX9zFI3qQSAgfj50z/view?usp=sharing';
 
 // Wrap each word of an element in a span for the spring pop. Spaces stay as text
 // nodes (an inline-block span holding only a space collapses to zero width and

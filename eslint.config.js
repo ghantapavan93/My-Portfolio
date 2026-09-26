@@ -4,7 +4,7 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 
 export default [
-  { ignores: ['dist'] },
+  { ignores: ['dist', 'node_modules'] },
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
@@ -26,8 +26,14 @@ export default [
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
       'react-refresh/only-export-components': [
         'warn',
-        { allowConstantExport: true },
+        // shadcn variant helpers + the theme hook live beside their components.
+        { allowConstantExport: true, allowExportNames: ['badgeVariants', 'buttonVariants', 'useTheme'] },
       ],
     },
+  },
+  {
+    // Server-side / build-time code runs on Node, not in the browser.
+    files: ['api/**/*.js', 'lib/**/*.js', 'vite.config.js', 'eslint.config.js'],
+    languageOptions: { globals: { ...globals.node } },
   },
 ]

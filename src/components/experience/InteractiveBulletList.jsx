@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { ChevronRight, CircleDot } from 'lucide-react';
 
 export const InteractiveBulletList = ({ heading, bullets, onBulletSelect, activeBulletId, roleTheme }) => {

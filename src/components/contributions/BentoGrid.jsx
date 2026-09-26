@@ -1,5 +1,4 @@
 import { ExternalLink, PlayCircle, Image as ImageIcon, BookOpen, User, ChevronRight, AlertTriangle, Lightbulb, Target } from 'lucide-react';
-import { useState, useRef, useEffect } from 'react';
 
 const getIconForCategory = (category) => {
     switch (category) {
@@ -16,17 +15,6 @@ const getIconForCategory = (category) => {
    Now supports extendedDescription for deep-dives (e.g. Eagle Eye AI)
    ═══════════════════════════════════════════════════════════════ */
 const ExpandedSection = ({ item, onClick }) => {
-    const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-    const videoRef = useRef(null);
-
-    useEffect(() => {
-        const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-        setPrefersReducedMotion(mq.matches);
-        const h = (e) => setPrefersReducedMotion(e.matches);
-        mq.addEventListener('change', h);
-        return () => mq.removeEventListener('change', h);
-    }, []);
-
     const videoMedia = item.media?.find(m => m.type === 'video');
     const imageMedia = item.media?.filter(m => m.type === 'image') || [];
     const ext = item.extendedDescription;
@@ -179,7 +167,6 @@ const ExpandedSection = ({ item, onClick }) => {
             {videoMedia && (
                 <div className="relative w-full aspect-video bg-black">
                     <video
-                        ref={videoRef}
                         controls
                         poster={videoMedia.thumbnail}
                         preload="none"

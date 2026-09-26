@@ -8,7 +8,7 @@ import { DetailsDrawer } from './contributions/DetailsDrawer';
 export function ContributionsSection() {
   const [activeMode, setActiveMode] = useState('bento'); // 'bento' | 'graph'
   const [activeFilter, setActiveFilter] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery] = useState('');
   const [selectedItem, setSelectedItem] = useState(null);
 
   const filters = ['All', 'Mentorship', 'Research', 'Publications', 'Workshops'];
@@ -65,7 +65,7 @@ export function ContributionsSection() {
   return (
     <section id="contributions" className="py-32 relative bg-background overflow-hidden">
       {/* Background Noise effect */}
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.15] mix-blend-overlay pointer-events-none -z-10" />
+      <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-[0.15] mix-blend-overlay pointer-events-none -z-10" />
 
       <div className="container mx-auto px-4 max-w-7xl relative z-10">
 

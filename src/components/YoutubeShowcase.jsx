@@ -18,9 +18,7 @@ export function YoutubeShowcase() {
       observer.observe(componentRef.current);
     }
 
-    return () => {
-      if (componentRef.current) observer.unobserve(componentRef.current);
-    };
+    return () => observer.disconnect();
   }, []);
 
   return (

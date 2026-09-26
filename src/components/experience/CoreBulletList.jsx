@@ -14,19 +14,19 @@ export const CoreBulletList = ({ bullets, roleTheme }) => {
                     return (
                         <div
                             key={i}
-                            className="group flex gap-4 p-4 rounded-2xl bg-secondary/5 border border-white/5 hover:border-white/10 transition-all duration-300"
+                            className="group flex gap-4 p-4 rounded-2xl bg-secondary/5 border border-border/60 hover:border-primary/30 transition-all duration-300"
                         >
                             <div
-                                className="w-10 h-10 rounded-xl flex items-center justify-center border border-white/5 bg-card shrink-0 group-hover:scale-110 transition-transform duration-500"
+                                className="w-10 h-10 rounded-xl flex items-center justify-center border border-border/60 bg-card shrink-0"
                                 style={{ color: roleTheme.accent }}
                             >
                                 <Icon className="w-5 h-5" />
                             </div>
-                            <div className="space-y-1">
-                                <div className="flex items-center gap-3">
+                            <div className="space-y-1 min-w-0">
+                                <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
                                     <h5 className="text-sm font-black text-foreground tracking-tight">{bullet.headline}</h5>
                                     {bullet.metric && (
-                                        <span className="text-[8px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded bg-primary/10 text-primary border border-primary/20" style={{ backgroundColor: `${roleTheme.accent}15`, color: roleTheme.accent, borderColor: `${roleTheme.accent}30` }}>
+                                        <span className="text-[9px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded whitespace-nowrap bg-primary/10 text-primary border border-primary/20" style={{ backgroundColor: `${roleTheme.accent}15`, color: roleTheme.accent, borderColor: `${roleTheme.accent}30` }}>
                                             {bullet.metric}
                                         </span>
                                     )}
