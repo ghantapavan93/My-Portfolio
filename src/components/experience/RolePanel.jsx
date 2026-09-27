@@ -3,6 +3,7 @@ import { MapPin, Calendar, ArrowRight, Sparkles } from 'lucide-react';
 import { Badge } from '../ui/badge';
 import { TechAtlas } from './TechAtlas';
 import { CoreBulletList } from './CoreBulletList';
+import { EngagementList } from './EngagementList';
 
 const CountUp = ({ value, label, hint }) => {
     const nodeRef = useRef(null);
@@ -66,6 +67,11 @@ export const RolePanel = ({ experience, isActive, onEnter, mode }) => {
                     <span className="text-sm text-muted-foreground font-medium">{experience.dateRange}</span>
                 </div>
                 <p className="text-base font-semibold text-foreground/90 mb-2">{experience.role}</p>
+                {experience.engagements && (
+                    <p className="text-sm text-muted-foreground mb-2">
+                        Engagements: {experience.engagements.map(e => e.client).join(' · ')}
+                    </p>
+                )}
                 <div className="flex flex-wrap gap-4 mb-4">
                     {experience.proofMetrics.map((m, i) => (
                         <div key={i} className="flex items-center gap-2">
@@ -133,6 +139,12 @@ export const RolePanel = ({ experience, isActive, onEnter, mode }) => {
                         </div>
                     )}
                 </div>
+
+                {experience.engagements && (
+                    <div className="mb-12">
+                        <EngagementList engagements={experience.engagements} roleTheme={experience.theme} />
+                    </div>
+                )}
 
                 <div className={`grid grid-cols-1 gap-4 mb-12 ${METRIC_COLS[experience.proofMetrics.length] || 'sm:grid-cols-3'}`}>
                     {experience.proofMetrics.map((metric, i) => (

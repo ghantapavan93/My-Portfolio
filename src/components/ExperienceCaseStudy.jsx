@@ -103,6 +103,8 @@ export const ExperienceCaseStudy = ({ id, onClose }) => {
 
     // Only list chapters that actually render — a "Visuals" entry with no images
     // would otherwise be a dead link in both navs.
+    const headline = exp.overviewHeadline || ['Building the', exp.heroMotif.title];
+
     const chapters = exp.chapters.filter(c =>
         c.id === 'visuals' ? exp.narrativeSections.visuals?.images?.length : exp.narrativeSections[c.id]
     );
@@ -216,6 +218,8 @@ export const ExperienceCaseStudy = ({ id, onClose }) => {
                     <div className="max-w-4xl mx-auto space-y-16">
                         {/* Dynamic Narrative Chapters */}
                         {exp.chapters.map((chapter) => {
+                            // The gallery renders separately below as its own "visuals" section.
+                            if (chapter.id === 'visuals') return null;
                             const sectionData = exp.narrativeSections[chapter.id];
                             if (!sectionData) return null;
 
@@ -232,9 +236,9 @@ export const ExperienceCaseStudy = ({ id, onClose }) => {
                                             <div className="space-y-6">
                                                 <span className="text-[10px] font-black uppercase tracking-[0.3em] text-primary" style={{ color: exp.theme.accent }}>System Overview</span>
                                                 <h1 className="text-4xl @2xl:text-6xl font-black tracking-tighter text-foreground leading-[0.95] break-words">
-                                                    Building the <br />
+                                                    {headline[0]} <br />
                                                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-indigo-600" style={{ backgroundImage: `linear-gradient(to right, ${exp.theme.accent}, #6366f1)` }}>
-                                                        {exp.heroMotif.title}
+                                                        {headline[1]}
                                                     </span>
                                                 </h1>
                                                 <div className="flex flex-wrap gap-4 pt-4">

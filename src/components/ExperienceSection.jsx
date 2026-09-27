@@ -147,7 +147,7 @@ export function ExperienceSection() {
                           className={`absolute -left-[7px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 transition-colors duration-300 ${isActive ? 'bg-primary border-primary' : 'bg-background border-border group-hover:border-primary/60'}`}
                         />
                         <span className={`block text-sm leading-tight truncate transition-colors duration-300 ${isActive ? 'font-bold text-foreground' : 'font-medium text-muted-foreground group-hover:text-foreground'}`}>
-                          {exp.company}
+                          {exp.shortName || exp.company}
                         </span>
                         <span className={`block text-[11px] mt-0.5 tabular-nums ${isActive ? 'text-primary font-semibold' : 'text-muted-foreground/80'}`}>
                           {yearSpan(exp.dateRange)}

@@ -202,7 +202,7 @@ const SkillCard = ({ name }) => {
 
   return (
     <div
-      className="group relative h-32 md:h-44 flex flex-col items-center justify-center p-4 rounded-3xl transition-all duration-500 active:scale-90 touch-none overflow-hidden bg-card border border-border hover:border-primary/20 hover:shadow-[0_0_40px_rgba(0,0,0,0.05)] shadow-sm cursor-pointer"
+      className="group relative h-32 md:h-44 flex flex-col items-center justify-center p-4 rounded-3xl transition-all duration-500 overflow-hidden bg-card border border-border hover:border-primary/20 hover:shadow-[0_0_40px_rgba(0,0,0,0.05)] shadow-sm"
     >
       <div
         className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-700 blur-[40px] pointer-events-none"

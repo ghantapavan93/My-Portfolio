@@ -1,4 +1,7 @@
-export const experiences = [
+// Detailed source records, one per role / engagement. The four SRM-era records
+// (robocon, lineysha, builder, alweb) are not listed on their own — they are
+// composed into a single SRM IST tenure at the bottom of this file.
+const roleRecords = [
     {
         id: "100mos",
         company: "100 Miles of Summer",
@@ -1989,4 +1992,118 @@ export const experiences = [
             caseStudy: "/experience/alweb"
         }
     }
+];
+
+const byId = Object.fromEntries(roleRecords.map((r) => [r.id, r]));
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SRM Institute of Science and Technology, Jul 2019 – Feb 2023.
+// One continuous tenure: industry client projects contracted through the
+// institute, alongside SRM Team Robocon (the institute's robotics team).
+// Shown as ONE role with engagements, not four separate jobs.
+// ─────────────────────────────────────────────────────────────────────────────
+const SRM_ENGAGEMENTS = [
+    { id: "lineysha", client: "Lineysha & Thevan Technologies", focus: "Applied ML & edge AI", kind: "Client project", icon: "Brain", metric: "−65% false positives" },
+    { id: "robocon", client: "SRM Team Robocon", focus: "Real-time vision & autonomy", kind: "Institute robotics team", icon: "Zap", metric: "10+ robots" },
+    { id: "builder", client: "Builder.ai", focus: "Natural language → app blueprints", kind: "Client project", icon: "Layers", metric: "RAG + FAISS" },
+    { id: "alweb", client: "Al Web", focus: "Full-stack web platform", kind: "Client project", icon: "ShieldCheck", metric: "Firebase · SEO" },
+];
+
+const DEEP_DIVE_CHAPTER = { lineysha: "research", robocon: "rosRover", builder: "discovery", alweb: "product" };
+
+// Images that belong to another engagement (alweb reused a Robocon ROV photo).
+const MISPLACED_IMAGES = new Set(["alweb:/robocon/rov.png"]);
+
+function srmTenure() {
+    const engagements = SRM_ENGAGEMENTS.map((e) => ({
+        ...e,
+        dateRange: byId[e.id].dateRange,
+        outcome: byId[e.id].hookLine,
+    }));
+
+    const narrativeSections = {
+        overview: {
+            title: "One Institution, Four Engagements",
+            paragraphs: [
+                "From 2019 to 2023 I worked through SRM Institute of Science and Technology on industry client projects the institute took on — Al Web, then Builder.ai, then Lineysha & Thevan Technologies — while building with SRM Team Robocon, the institute's competition robotics team.",
+                "The common thread: take a fuzzy real-world problem and ship something that runs under hard constraints — noisy sensor data, low-power edge hardware, and ambiguous user intent.",
+            ],
+            ownership: engagements.map((e) => `${e.client} — ${e.outcome}`),
+        },
+        visuals: {
+            images: SRM_ENGAGEMENTS.flatMap(({ id }) =>
+                (byId[id].narrativeSections.visuals?.images || []).filter((img) => !MISPLACED_IMAGES.has(`${id}:${img.src}`))
+            ),
+        },
+    };
+    for (const e of engagements) {
+        const src = byId[e.id].narrativeSections;
+        const deep = src[DEEP_DIVE_CHAPTER[e.id]] || {};
+        narrativeSections[`srm-${e.id}`] = {
+            title: `${e.client} — ${e.focus}`,
+            problem: src.overview.paragraphs[0],
+            built: src.overview.ownership,
+            how: deep.how,
+        };
+    }
+
+    return {
+        id: "srm",
+        company: "SRM Institute of Science and Technology",
+        shortName: "SRM IST",
+        role: "AI & Software Engineer — Industry Client Projects & Robotics",
+        domainTags: [...new Set(SRM_ENGAGEMENTS.flatMap(({ id }) => byId[id].domainTags))],
+        dateRange: "Jul 2019 – Feb 2023",
+        location: "Chennai, India",
+        teamContext:
+            "One continuous tenure: industry client projects contracted through SRM IST (Lineysha & Thevan Technologies, Builder.ai, Al Web), alongside SRM Team Robocon, the institute's competition robotics team.",
+        hookLine:
+            "Four years at one institution — shipping ML and full-stack work for SRM's industry clients while building real-time vision and autonomy for SRM Team Robocon.",
+        proofMetrics: [
+            { label: "False Positives", value: "−65%", hint: "Hybrid LSTM-ARIMA anomaly detection for Lineysha & Thevan Technologies." },
+            { label: "Robot Builds", value: "10+", hint: "Competition-grade robots with SRM Team Robocon (ABU Robocon, SIH, Technoaxian)." },
+            { label: "Edge Vision", value: "30fps", hint: "Real-time YOLOv4 on Raspberry Pi and STM32." },
+        ],
+        snapshotProof: [
+            "−65% anomaly false positives (hybrid LSTM-ARIMA)",
+            "50,000+ sensor records processed",
+            "10+ competition-grade robots shipped",
+            "Real-time 30fps edge inference",
+            "NL → app-blueprint orchestration (FastAPI + FAISS)",
+            "Firebase-backed real-time web editing",
+        ],
+        overviewHeadline: ["One institution,", "four engagements."],
+        heroMotif: { emoji: "🎓", title: "Industry Client Projects", subtitle: "ML, full-stack & robotics through SRM IST" },
+        theme: byId.robocon.theme,
+        topStack: ["Python", "TensorFlow", "OpenCV", "FastAPI", "ROS", "Docker"],
+        groupedTechStack: byId.robocon.groupedTechStack,
+        engagements,
+        bulletPoints: engagements.map((e) => ({
+            icon: e.icon,
+            headline: e.client,
+            metric: e.metric,
+            content: `${e.kind} · ${e.dateRange}. ${e.outcome}`,
+        })),
+        chapters: [
+            { id: "overview", title: "Overview" },
+            ...engagements.map((e) => ({ id: `srm-${e.id}`, title: e.client })),
+            { id: "visuals", title: "Visuals" },
+        ],
+        narrativeSections,
+        keyDecisions: [
+            ...byId.robocon.keyDecisions.slice(0, 2),
+            ...byId.lineysha.keyDecisions.slice(0, 1),
+            ...byId.builder.keyDecisions.slice(0, 1),
+            ...byId.alweb.keyDecisions.slice(0, 1),
+        ],
+        links: { caseStudy: "/experience/srm", website: byId.robocon.links?.website },
+    };
+}
+
+export const experiences = [
+    byId["100mos"],
+    byId.vosyn,
+    byId.krowd,
+    byId["unt-ai-first"],
+    srmTenure(),
 ];

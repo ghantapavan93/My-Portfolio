@@ -1,5 +1,20 @@
 import { ExternalLink, PlayCircle, Image as ImageIcon, BookOpen, User, ChevronRight, AlertTriangle, Lightbulb, Target } from 'lucide-react';
 
+// Card-sized click targets that open the details drawer: keyboard- and
+// screen-reader-reachable like a button, without nesting interactive markup.
+const pressable = (onActivate, label) => ({
+    role: 'button',
+    tabIndex: 0,
+    'aria-label': label,
+    onClick: onActivate,
+    onKeyDown: (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            onActivate();
+        }
+    },
+});
+
 const getIconForCategory = (category) => {
     switch (category) {
         case 'Mentorship': return <User className="w-4 h-4" />;
@@ -193,8 +208,8 @@ const ExpandedSection = ({ item, onClick }) => {
                     {imageMedia.map((media, i) => (
                         <div
                             key={i}
-                            className="relative rounded-2xl overflow-hidden border border-border/30 bg-secondary/10 group/img cursor-pointer shadow-sm hover:shadow-md transition-all"
-                            onClick={() => onClick(item)}
+                            {...pressable(() => onClick(item), `Open ${item.title}`)}
+                            className="relative rounded-2xl overflow-hidden border border-border/30 bg-secondary/10 group/img cursor-pointer shadow-sm hover:shadow-md transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                         >
                             <div className={`w-full ${imageMedia.length <= 2 ? 'aspect-[16/10]' : 'aspect-square'} relative`}>
                                 <img
@@ -222,8 +237,8 @@ const ExpandedSection = ({ item, onClick }) => {
 const MediumCard = ({ item, onClick }) => {
     return (
         <div
-            onClick={() => onClick(item)}
-            className="relative group rounded-2xl overflow-hidden bg-card border border-border/50 hover:border-primary/50 transition-all duration-500 cursor-pointer shadow-sm hover:shadow-[0_0_30px_rgba(66,133,244,0.15)] flex flex-col"
+            {...pressable(() => onClick(item), `Open ${item.title}`)}
+            className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary relative group rounded-2xl overflow-hidden bg-card border border-border/50 hover:border-primary/50 transition-all duration-500 cursor-pointer shadow-sm hover:shadow-[0_0_30px_rgba(66,133,244,0.15)] flex flex-col"
         >
             {/* Image Area — large and prominent */}
             {item.media?.[0] && (
@@ -289,8 +304,8 @@ const MediumCard = ({ item, onClick }) => {
 const HeroHackathonCard = ({ item, onClick }) => {
     return (
         <div
-            onClick={() => onClick(item)}
-            className="relative group rounded-3xl overflow-hidden bg-card border-2 border-primary/30 hover:border-primary transition-all duration-500 cursor-pointer shadow-md hover:shadow-[0_0_40px_rgba(66,133,244,0.2)]"
+            {...pressable(() => onClick(item), `Open ${item.title}`)}
+            className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary relative group rounded-3xl overflow-hidden bg-card border-2 border-primary/30 hover:border-primary transition-all duration-500 cursor-pointer shadow-md hover:shadow-[0_0_40px_rgba(66,133,244,0.2)]"
         >
             <div className="flex flex-col md:flex-row">
                 {/* Image — large left side */}

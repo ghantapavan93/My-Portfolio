@@ -176,31 +176,31 @@ export function CinematicHero() {
         )}
       </div>
 
-      {/* ── Overlay content — ghost-quiet, brightens on hover ──────────────── */}
+      {/* ── Overlay content — ghost-quiet, brightens on hover (always full on touch) ── */}
       <div className="relative z-10 flex min-h-[100svh] flex-col justify-center px-6 md:px-12 lg:px-20 max-w-7xl mx-auto">
-        <div className="mb-5 opacity-40 group-hover/hero:opacity-90 transition-opacity duration-700">
+        <div className="mb-5 opacity-40 group-hover/hero:opacity-90 [@media(hover:none)]:opacity-100 transition-opacity duration-700">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-white/[0.04] backdrop-blur-sm border border-white/10 px-3 py-1.5 text-[10px] font-medium tracking-[0.3em] uppercase text-white/70">
             <Sparkles className="h-3 w-3 text-blue-300/80" />
             AI avatar · my real voice
           </span>
         </div>
 
-        <p className="text-xs font-medium tracking-[0.35em] uppercase text-white/30 mb-4 opacity-70 group-hover/hero:opacity-100 transition-opacity duration-700">
+        <p className="text-xs font-medium tracking-[0.35em] uppercase text-white/30 mb-4 opacity-70 group-hover/hero:opacity-100 [@media(hover:none)]:opacity-100 transition-opacity duration-700">
           Portfolio · 2026
         </p>
 
-        <h1 className="font-black tracking-tighter leading-[0.85] text-5xl md:text-7xl lg:text-8xl opacity-85 group-hover/hero:opacity-100 transition-opacity duration-700">
+        <h1 className="font-black tracking-tighter leading-[0.85] text-5xl md:text-7xl lg:text-8xl opacity-85 group-hover/hero:opacity-100 [@media(hover:none)]:opacity-100 transition-opacity duration-700">
           <span className="block text-white/90">Pavan</span>
           <span className="block pb-[0.14em] bg-gradient-to-r from-blue-400/90 via-purple-400/90 to-pink-400/90 bg-clip-text text-transparent">
             Kalyan Ghanta
           </span>
         </h1>
 
-        <p className="mt-5 text-xs md:text-sm font-semibold tracking-[0.3em] uppercase text-white/40 opacity-80 group-hover/hero:opacity-100 transition-opacity duration-700">
+        <p className="mt-5 text-xs md:text-sm font-semibold tracking-[0.3em] uppercase text-white/40 opacity-80 group-hover/hero:opacity-100 [@media(hover:none)]:opacity-100 transition-opacity duration-700">
           AI Engineer · Full-Stack Developer · GenAI
         </p>
 
-        <div className="mt-8 flex flex-wrap items-center gap-3 opacity-60 group-hover/hero:opacity-100 transition-opacity duration-700">
+        <div className="mt-8 flex flex-wrap items-center gap-3 opacity-60 group-hover/hero:opacity-100 [@media(hover:none)]:opacity-100 transition-opacity duration-700">
           <button
             onClick={openAgent}
             className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.06] backdrop-blur-md px-5 py-2.5 text-xs font-semibold tracking-wide text-white/90 transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-600/80 hover:to-purple-600/80 hover:border-transparent hover:scale-[1.03]"
