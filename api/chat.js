@@ -2,8 +2,18 @@
 // api/chat.js — Vercel Node serverless function. The "brain" of the portfolio AI.
 //
 // Architecture (the part that shows the AI-engineering skill):
-//   client ──POST /api/chat──> LangGraph StateGraph ──> open-model provider chain
-//                               (retrieve → generate)    (first healthy one wins)
+//
+//   client ──POST /api/chat──> retrieve ──(model configured?)──yes──> generate ──ok──> answer
+//                                  │                                     │ all providers failed
+//                                  │ no                                  ▼
+//                                  └────────────────────────────────> extract ──> answer
+//
+// • retrieve: picks the relevant knowledge-base sections for the LLM AND ranks
+//   the curated answer bank (lib/retrieval.js, BM25) in one pass.
+// • generate: an open model writes the answer from the retrieved sections.
+// • extract: no model (or every provider down) → return the best verified answer
+//   from the bank verbatim, or an honest "no verified answer". Works with zero
+//   API keys, costs nothing, and cannot hallucinate.
 //
 // • Runs as a NODE serverless function (not Edge) — LangGraph's runtime is too
 //   heavy for Edge cold-starts.
@@ -22,6 +32,7 @@ import { StateGraph, Annotation, START, END } from "@langchain/langgraph";
 import { ChatOpenAI } from "@langchain/openai";
 import { SystemMessage, HumanMessage, AIMessage } from "@langchain/core/messages";
 import { SYSTEM_RULES, KNOWLEDGE_BASE } from "../lib/persona.js";
+import { answerQuestion } from "../lib/retrieval.js";
 
 // ── Provider chain ───────────────────────────────────────────────────────────
 // Model IDs are env-overridable because free-tier catalogs change often.
@@ -113,7 +124,7 @@ function contentToText(content) {
 
 async function callModel(messages, deadline) {
   const chain = providerChain();
-  if (!chain.length) throw new NoProviderError();
+  if (!chain.length) throw new Error("No LLM provider configured.");
 
   const failures = [];
   for (const p of chain) {
@@ -142,13 +153,6 @@ async function callModel(messages, deadline) {
     }
   }
   throw new Error(`All providers failed → ${failures.join(" | ")}`);
-}
-
-class NoProviderError extends Error {
-  constructor() {
-    super("No LLM provider configured.");
-    this.name = "NoProviderError";
-  }
 }
 
 // ── Retrieval over the knowledge base ────────────────────────────────────────
@@ -249,13 +253,17 @@ const AgentState = Annotation.Root({
   context: Annotation(),
   sources: Annotation(),
   deadline: Annotation(),
+  bank: Annotation(), // answer-bank retrieval result (lib/retrieval.js)
   answer: Annotation(),
   provider: Annotation(),
 });
 
 // ── Node 1: retrieve ─────────────────────────────────────────────────────────
 function retrieveNode(state) {
-  return buildContext(state.question, state.history);
+  return {
+    ...buildContext(state.question, state.history),
+    bank: answerQuestion(state.question, state.history),
+  };
 }
 
 // ── Node 2: generate ─────────────────────────────────────────────────────────
@@ -272,16 +280,32 @@ async function generateNode(state) {
     ...toMessages(state.history),
     new HumanMessage(state.question),
   ];
-  return callModel(messages, state.deadline);
+  try {
+    return await callModel(messages, state.deadline);
+  } catch (err) {
+    console.warn("[chat] generation unavailable, answering from the bank:", err?.message || err);
+    return {}; // no answer → the graph routes to extract
+  }
+}
+
+// ── Node 3: extract (zero-key fallback) ──────────────────────────────────────
+function extractNode({ bank }) {
+  return {
+    answer: bank.answer,
+    provider: "retrieval",
+    sources: bank.entryId ? [bank.entryId] : [],
+  };
 }
 
 // ── Compile the graph once (module scope = reused across warm invocations) ─────
 const agent = new StateGraph(AgentState)
   .addNode("retrieve", retrieveNode)
   .addNode("generate", generateNode)
+  .addNode("extract", extractNode)
   .addEdge(START, "retrieve")
-  .addEdge("retrieve", "generate")
-  .addEdge("generate", END)
+  .addConditionalEdges("retrieve", () => (providerChain().length ? "generate" : "extract"), ["generate", "extract"])
+  .addConditionalEdges("generate", (state) => (state.answer ? END : "extract"), [END, "extract"])
+  .addEdge("extract", END)
   .compile();
 
 // ── Abuse / cost protection ───────────────────────────────────────────────────
@@ -341,7 +365,6 @@ function withTimeout(promise, ms, label) {
   ]).finally(() => clearTimeout(timer));
 }
 
-const OFFLINE_MESSAGE = "The live assistant is taking a break — here's a pre-written answer instead.";
 const REQUEST_BUDGET_MS = 28_000;
 
 // ── HTTP handler ─────────────────────────────────────────────────────────────
@@ -382,13 +405,20 @@ export default async function handler(req, res) {
       REQUEST_BUDGET_MS + 1_000,
       "Agent"
     );
+    return res.status(200).json({
+      answer: result.answer,
+      provider: result.provider,
+      sources: result.sources,
+      related: result.bank?.related || [],
+      grounded: result.provider === "retrieval" ? result.bank.grounded : true,
+    });
+  } catch (err) {
+    // Details go to the server log only. Even a failed graph run still answers
+    // from the verified bank rather than showing the visitor an error.
+    console.error("[chat]", err?.message || err);
+    const bank = answerQuestion(question, history);
     return res
       .status(200)
-      .json({ answer: result.answer, provider: result.provider, sources: result.sources });
-  } catch (err) {
-    // Details go to the server log only — visitors get a neutral message and the
-    // client falls back to its pre-written answers.
-    console.error("[chat]", err?.message || err);
-    return res.status(503).json({ error: OFFLINE_MESSAGE, offline: true });
+      .json({ answer: bank.answer, provider: "retrieval", sources: [], related: bank.related, grounded: bank.grounded });
   }
 }

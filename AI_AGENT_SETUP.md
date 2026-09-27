@@ -13,6 +13,18 @@ models** (Qwen, gpt-oss) through a provider chain. All keys stay server-side.
 | `vite.config.js` | Dev-only middleware so `npm run dev` also serves `/api/chat` |
 | `.env.example` | Every supported provider (copy to `.env.local`) |
 
+## Zero-key mode (works out of the box)
+With **no API keys at all**, GPK still answers every question instantly. The graph routes
+`retrieve → extract`: `lib/retrieval.js` ranks a curated bank of verified, first-person answers
+(`lib/answer-bank.js`) with BM25 and returns the best one verbatim. If the question isn't covered
+well enough, it says so honestly and suggests the closest topics — it cannot invent anything.
+
+- Add or edit answers in `lib/answer-bank.js` (facts must come from `lib/persona.js`).
+- Run the regression eval after any change: `npm run eval:chat` (fails below 90%).
+- If `/api/chat` is unreachable, the browser runs the same retrieval itself.
+- When a model key is added, the graph routes `retrieve → generate` instead, and still falls back
+  to `extract` if every provider fails.
+
 ## Provider chain (tried in order, all OpenAI-compatible)
 | # | Provider | Cost | Env vars |
 |---|----------|------|----------|
@@ -23,7 +35,7 @@ models** (Qwen, gpt-oss) through a provider chain. All keys stay server-side.
 | 5 | Gemini | free tier | `GEMINI_API_KEY` |
 
 A 429 / 5xx / timeout on one provider falls through to the next. If all fail (or none are
-set) the API returns `503` and the UI shows the pre-written answers — never a raw error.
+set), the answer comes from zero-key mode — never a raw error.
 
 **Recommended for production:** a free Groq key (+ Cloudflare as backup). Groq's free tier
 is 8K tokens/min per model, which is why retrieval trims each request to ~4K tokens.
