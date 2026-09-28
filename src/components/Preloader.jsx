@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 // Name rises in letter-by-letter with a gradient shimmer, a light sweep line,
 // then the whole curtain lifts to reveal the cinematic hero underneath.
 // Click anywhere (or press Esc) to skip. Respects prefers-reduced-motion.
+// Not shown for deep links (/#projects …): the visitor asked for a section, and
+// the scroll lock would stop the page from jumping to it.
 // ─────────────────────────────────────────────────────────────────────────────
 
 const HOLD_MS = 2100;  // how long the intro plays before the curtain lifts
@@ -14,9 +16,10 @@ const NAME = 'PAVAN KALYAN GHANTA';
 
 export function Preloader() {
   const [exiting, setExiting] = useState(false);
-  const [gone, setGone] = useState(false);
+  const [gone, setGone] = useState(() => Boolean(window.location.hash));
 
   useEffect(() => {
+    if (gone) return;
     // Skip the show entirely for users who prefer reduced motion
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const hold = reduced ? 150 : HOLD_MS;
@@ -35,7 +38,7 @@ export function Preloader() {
       window.removeEventListener('keydown', onKey);
       document.body.style.overflow = '';
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps -- runs once on mount by design
 
   // Re-enable scroll + finish unmount once the exit transition ends
   useEffect(() => {
