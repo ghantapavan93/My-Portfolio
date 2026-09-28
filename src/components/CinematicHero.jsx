@@ -23,9 +23,6 @@ function openAgent() {
   window.dispatchEvent(new Event('open-ai-agent'));
 }
 
-const prefersReducedMotion = () =>
-  typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-
 function scrollToContent() {
   const el = document.getElementById('projects') || window;
   el === window ? window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })
@@ -36,9 +33,10 @@ export function CinematicHero() {
   const [soundOn, setSoundOn] = useState(false);
   const [videoLive, setVideoLive] = useState(false);
   const [videoFailed, setVideoFailed] = useState(false);
-  // Reduced-motion visitors get the still poster until they press play (WCAG 2.2.2).
-  const [reducedMotion] = useState(prefersReducedMotion);
-  const [paused, setPaused] = useState(reducedMotion);
+  // The welcome video always plays (muted). The pause button next to the speaker
+  // lets anyone stop it (WCAG 2.2.2) — it is not gated on prefers-reduced-motion,
+  // which many laptops and phones have on by default and which hid the video.
+  const [paused, setPaused] = useState(false);
   const audioRef = useRef(null);
   const videoRef = useRef(null);
 
@@ -124,12 +122,15 @@ export function CinematicHero() {
               videoLive ? 'opacity-100' : 'opacity-0'
             }`}
             src={AVATAR_VIDEO}
-            autoPlay={!reducedMotion}
+            autoPlay
             muted
             loop
             playsInline
             preload="auto"
             onPlaying={() => { setVideoLive(true); setPaused(false); }}
+            // Fallback: a cached video can start before 'playing' is observed,
+            // leaving it running invisibly behind the poster. Any time progress reveals it.
+            onTimeUpdate={videoLive ? undefined : () => setVideoLive(true)}
             onError={() => setVideoFailed(true)}
           />
         )}
