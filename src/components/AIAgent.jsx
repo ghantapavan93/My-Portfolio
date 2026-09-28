@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { Send, X, Sparkles, FileText, Linkedin, Mail, Volume2, VolumeX } from 'lucide-react';
+import { Send, X, Sparkles, FileText, Linkedin, Mail, Volume2, VolumeX, MessageSquare } from 'lucide-react';
 import { playVoice, stopVoice, currentVoice, subscribeVoice, VOICE_SCRIPTS } from '../lib/voice';
 import { RESUME_URL, LINKEDIN_URL } from '../lib/links';
 
@@ -23,8 +23,9 @@ const SUGGESTED = [
 ];
 
 // Questions with a pre-recorded answer in Pavan's cloned voice.
+// ("What's your strongest project?" is not mapped: its recording describes
+// EagleEye's designed architecture as if it were built — re-record before re-adding.)
 const QUESTION_CLIPS = {
-  "What's your strongest project?": 'faq-strongest-project',
   'Why should we hire you?': 'faq-why-strong-engineer',
   'Experience with RAG, agents & LangGraph?': 'faq-ai-engineer-fit',
 };
@@ -39,15 +40,15 @@ const FOLLOW_UPS = {
   "What's the hardest problem you've solved?": ['Tell me about a production incident', 'Experience with RAG, agents & LangGraph?'],
   'Tell me about a production incident': ["What's the hardest problem you've solved?", 'Why should we hire you?'],
   'Tell me about your education': ['What are you working on right now?', "What's your technical background?"],
-  'Experience with RAG, agents & LangGraph?': ['How does this assistant work?', '🧪 Try to make me hallucinate'],
-  'How does this assistant work?': ['🧪 Try to make me hallucinate', 'Why should we hire you?'],
+  'Experience with RAG, agents & LangGraph?': ['How does this assistant work?', 'Try to make me hallucinate'],
+  'How does this assistant work?': ['Try to make me hallucinate', 'Why should we hire you?'],
 };
 const DEFAULT_FOLLOW_UPS = ['Why should we hire you?', "What's your strongest project?", 'How do I reach Pavan?'];
 
 const GREETING = {
   role: 'assistant',
   content:
-    "Hey — I'm GPK, Pavan's AI twin. Real stories, real numbers, zero fluff. Ask me anything — my projects, how I build, whether I'm the engineer you're looking for. I'll keep it short and human. Shoot. 🎯",
+    "Hey — I'm GPK, Pavan's AI twin. Real stories, real numbers, zero fluff. Ask me anything — my projects, how I build, whether I'm the engineer you're looking for. I'll keep it short and human.",
   done: true,
 };
 
@@ -96,7 +97,12 @@ function Orb({ state = 'idle', size = 56 }) {
   );
 }
 
-export function AIAgent() {
+/**
+ * @param {{ variant?: 'cinematic' | 'plain' }} props
+ *   plain — the restrained launcher used on the hiring portfolio (no gradients).
+ */
+export function AIAgent({ variant = 'cinematic' }) {
+  const plain = variant === 'plain';
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([GREETING]);
   const [input, setInput] = useState('');
@@ -215,7 +221,17 @@ export function AIAgent() {
   return (
     <>
       {/* Launcher */}
-      {!open && (
+      {!open && plain && (
+        <button
+          onClick={() => setOpen(true)}
+          className="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-zinc-900 px-4 py-3 text-sm font-medium text-white shadow-lg transition-colors hover:bg-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-2"
+          aria-label="Open the AI assistant — ask about Pavan's work"
+        >
+          <MessageSquare className="h-4 w-4" aria-hidden="true" />
+          Ask my AI assistant
+        </button>
+      )}
+      {!open && !plain && (
         <button
           onClick={() => setOpen(true)}
           className="fixed bottom-6 right-6 z-50 group flex items-center gap-3 pl-2 pr-5 py-2 rounded-full bg-background/70 backdrop-blur-xl border border-white/15 shadow-2xl shadow-primary/20 hover:shadow-primary/40 hover:scale-105 transition-all duration-300"
@@ -236,17 +252,17 @@ export function AIAgent() {
             <div className="flex items-center gap-3">
               <span className="relative">
                 <img
-                  src="/avatar-hero.webp"
+                  src={plain ? '/pavan-portrait.webp' : '/avatar-hero.webp'}
                   alt=""
                   className="h-10 w-10 rounded-full object-cover border border-white/20"
-                  style={{ objectPosition: '62% 22%' }}
+                  style={plain ? undefined : { objectPosition: '62% 22%' }}
                 />
                 <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-green-500 border-2 border-background animate-pulse" />
               </span>
               <div>
                 <p className="text-sm font-bold leading-tight">GPK</p>
                 <p className="text-[11px] text-muted-foreground leading-tight">
-                  {loading ? 'thinking…' : speakingClip ? '🔊 speaking — my real voice' : "Pavan's AI twin · real answers, zero fluff"}
+                  {loading ? 'thinking…' : speakingClip ? 'speaking — my real voice' : "Pavan's AI twin · real answers, zero fluff"}
                 </p>
               </div>
             </div>

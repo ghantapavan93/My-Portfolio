@@ -1,24 +1,13 @@
-import { lazy, Suspense } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import { Header } from './components/Header'
-import { CinematicHero } from './components/CinematicHero'
-import { IntroCinema } from './components/story/IntroCinema'
-import { CapabilitiesSection } from './components/CapabilitiesSection'
-import { Incident } from './components/story/Incident'
-import { CommandPalette } from './components/CommandPalette'
-import { ProjectShowcase } from './components/ProjectShowcase'
-import { YoutubeShowcase } from './components/YoutubeShowcase'
-import { ProjectsSection } from './components/ProjectsSection'
-import { ExperienceSection } from './components/ExperienceSection'
-import { SkillsSection } from './components/SkillsSection'
-import { ContactSection } from './components/ContactSection'
-import { Footer } from './components/Footer'
+import { lazy, Suspense, useEffect, useState } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { HireHome } from './hire/HireHome'
+import { CaseStudyPage } from './hire/CaseStudyPage'
 import { ThemeProvider } from './components/ThemeProvider'
-import { ContributionsSection } from './components/ContributionsSection'
 import { AIAgent } from './components/AIAgent'
-import { Preloader } from './components/Preloader'
 
-// Case-study pages are separate routes — load them only when visited.
+// The hiring portfolio (/ and /work/:slug) is imported eagerly so it can be
+// prerendered to static HTML. Everything else loads only when visited.
+const CreativePortfolio = lazy(() => import('./creative/CreativePortfolio'))
 const PosterA11yCaseStudy = lazy(() =>
   import('./pages/case-studies/PosterA11yCaseStudy').then(m => ({ default: m.PosterA11yCaseStudy })))
 const SpeechQuestCaseStudy = lazy(() =>
@@ -26,54 +15,52 @@ const SpeechQuestCaseStudy = lazy(() =>
 const A11yGameCaseStudy = lazy(() =>
   import('./pages/case-studies/A11yGameCaseStudy').then(m => ({ default: m.A11yGameCaseStudy })))
 
-function MainContent() {
-  return (
-    <>
-      <Preloader />
-      <Header />
-      <main>
-        <CinematicHero />
-        <IntroCinema />
-        <CapabilitiesSection />
-        <Incident />
+/** On navigation: jump to the #hash target if there is one, otherwise to the top. */
+function ScrollManager() {
+  const { pathname, hash } = useLocation()
+  useEffect(() => {
+    if (hash) {
+      const target = document.getElementById(decodeURIComponent(hash.slice(1)))
+      if (target) {
+        target.scrollIntoView({ behavior: 'instant' })
+        return
+      }
+    }
+    // Instant: the global smooth-scroll CSS would otherwise animate across the old page.
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [pathname, hash])
+  return null
+}
 
-        {/* #projects wraps the showcase + the full grid so "Projects" lands at the top. */}
-        <section id="projects">
-          <ProjectShowcase />
-          <ProjectsSection />
-        </section>
-
-        {/* These sections carry their own ids (#contributions, #experience). */}
-        <ContributionsSection />
-        <ExperienceSection />
-
-        {/* ✅ Other Sections (Optional but kept for completeness) */}
-        <SkillsSection />
-        <YoutubeShowcase />
-
-        <ContactSection />
-      </main>
-      <Footer />
-    </>
-  )
+/** Renders children only after mount, so prerendered HTML and the first client render match. */
+function ClientOnly({ children }) {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+  return mounted ? children : null
 }
 
 function App() {
+  const { pathname } = useLocation()
+  const hiringPage = pathname === '/' || pathname.startsWith('/work/')
+
   return (
-    <ThemeProvider>
-      <div className="min-h-screen bg-background text-foreground">
-        <Suspense fallback={<div className="min-h-screen" aria-busy="true" />}>
-          <Routes>
-            <Route path="/" element={<MainContent />} />
-            <Route path="/case-studies/poster-accessibility-eval" element={<PosterA11yCaseStudy />} />
-            <Route path="/case-studies/speech-quest" element={<SpeechQuestCaseStudy />} />
-            <Route path="/case-studies/a11y-game" element={<A11yGameCaseStudy />} />
-          </Routes>
-        </Suspense>
-        <AIAgent />
-        <CommandPalette />
-      </div>
-    </ThemeProvider>
+    <>
+      <ScrollManager />
+      <Suspense fallback={<div className="min-h-screen" aria-busy="true" />}>
+        <Routes>
+          <Route path="/" element={<HireHome />} />
+          <Route path="/work/:slug" element={<CaseStudyPage />} />
+          <Route path="/creative" element={<CreativePortfolio />} />
+          <Route path="/case-studies/poster-accessibility-eval" element={<ThemeProvider><PosterA11yCaseStudy /></ThemeProvider>} />
+          <Route path="/case-studies/speech-quest" element={<ThemeProvider><SpeechQuestCaseStudy /></ThemeProvider>} />
+          <Route path="/case-studies/a11y-game" element={<ThemeProvider><A11yGameCaseStudy /></ThemeProvider>} />
+          <Route path="*" element={<HireHome />} />
+        </Routes>
+      </Suspense>
+      <ClientOnly>
+        <AIAgent variant={hiringPage ? 'plain' : 'cinematic'} />
+      </ClientOnly>
+    </>
   )
 }
 

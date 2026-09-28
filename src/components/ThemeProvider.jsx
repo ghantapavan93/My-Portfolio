@@ -9,6 +9,7 @@ const ThemeContext = createContext({
 export function ThemeProvider({ children, defaultTheme = "light", storageKey = "theme" }) {
   const [theme, setTheme] = useState(() => {
     // Check if theme exists in localStorage
+    if (typeof window === "undefined") return defaultTheme
     const storedTheme = localStorage.getItem(storageKey)
     
     // If preference exists in localStorage, use it

@@ -40,7 +40,10 @@ const CASES = [
 
   // projects
   ['which project are you proudest of', 'strongest-project'],
-  ['explain eagleeye', 'strongest-project'],
+  ['explain eagleeye', 'eagleeye'],
+  ['what did you build in move relay', 'move-relay'],
+  ['how do you prevent duplicate orders when a reply is lost', 'move-relay'],
+  ['walk me through your best backend work', 'move-relay'],
   ['how do you reduce false alarms', 'false-positives'],
   ['what is oats', 'project-h'],
   ['tell me about your health and fitness app', 'project-h'],
@@ -128,7 +131,8 @@ for (const [question, expected] of CASES) {
 // Multi-turn: "tell me more" must go deeper on the previous answer, never jump topics.
 const byId = Object.fromEntries(ANSWER_BANK.map((e) => [e.id, e]));
 const FOLLOW_UPS = [
-  ['strongest-project', 'tell me more', byId['strongest-project'].more],
+  ['eagleeye', 'tell me more', byId.eagleeye.more],
+  ['move-relay', 'go deeper', byId['move-relay'].more],
   ['current', 'go deeper', byId.current.more],
   ['krowd', 'elaborate', byId.krowd.more],
 ];

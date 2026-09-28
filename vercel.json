@@ -11,8 +11,12 @@
     },
     "rewrites": [
         {
-            "source": "/(.*)",
-            "destination": "/"
+            "source": "/work/:slug",
+            "destination": "/work/:slug/index.html"
+        },
+        {
+            "source": "/((?!api/).*)",
+            "destination": "/index.html"
         }
     ]
 }
