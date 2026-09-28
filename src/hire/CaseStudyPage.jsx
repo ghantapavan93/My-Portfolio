@@ -25,8 +25,8 @@ function NotFound() {
     <HireLayout>
       <div className={`${CONTAINER} py-24`}>
         <h1 className="text-3xl font-semibold tracking-tight">That case study doesn’t exist.</h1>
-        <Link to="/#work" className="mt-6 inline-flex items-center gap-1.5 text-blue-700 hover:underline">
-          <ArrowLeft className="h-4 w-4" aria-hidden="true" /> Back to selected work
+        <Link to="/#projects" className="mt-6 inline-flex items-center gap-1.5 text-blue-700 hover:underline">
+          <ArrowLeft className="h-4 w-4" aria-hidden="true" /> Back to projects
         </Link>
       </div>
     </HireLayout>
@@ -48,8 +48,8 @@ export function CaseStudyPage() {
     <HireLayout>
       <article className={`${CONTAINER} pb-16`}>
         <nav aria-label="Breadcrumb" className="pt-8">
-          <Link to="/#work" className="inline-flex items-center gap-1.5 text-sm text-zinc-600 hover:text-zinc-900">
-            <ArrowLeft className="h-4 w-4" aria-hidden="true" /> Selected work
+          <Link to="/#projects" className="inline-flex items-center gap-1.5 text-sm text-zinc-600 hover:text-zinc-900">
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" /> All projects
           </Link>
         </nav>
 
@@ -59,7 +59,9 @@ export function CaseStudyPage() {
               <Tag key={c}>{c}</Tag>
             ))}
           </div>
-          <h1 className="mt-4 text-4xl sm:text-5xl font-semibold tracking-tight text-zinc-900">{project.title}</h1>
+          <h1 className="mt-4 pb-1 text-4xl sm:text-5xl font-semibold tracking-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            {project.title}
+          </h1>
           <p className="mt-5 max-w-3xl text-lg text-zinc-700 leading-relaxed">{project.summary}</p>
           <dl className="mt-8 grid gap-6 text-sm sm:grid-cols-3">
             <div>

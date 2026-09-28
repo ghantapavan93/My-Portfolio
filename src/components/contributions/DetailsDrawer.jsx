@@ -136,7 +136,7 @@ Skills: \${item.skills ? item.skills.slice(0, 6).join(' · ') : 'N/A'}
                     {/* Extended Deep-Dive (e.g. Eagle Eye AI hackathon) */}
                     {item.extendedDescription && (
                         <section className="space-y-6">
-                            <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">🏆 Hackathon Deep-Dive</h3>
+                            <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">Hackathon Deep-Dive</h3>
 
                             {item.extendedDescription.problemStatement && (
                                 <div className="space-y-2 p-5 rounded-xl bg-red-500/5 border border-red-500/15">
@@ -193,7 +193,7 @@ Skills: \${item.skills ? item.skills.slice(0, 6).join(' · ') : 'N/A'}
                     {/* Platforms Grid (for full-stack showcase) */}
                     {item.extendedDescription?.platforms?.length > 0 && (
                         <section className="space-y-4">
-                            <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">🚀 Platforms Built — Pain Point → Solution</h3>
+                            <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">Platforms Built — Pain Point → Solution</h3>
                             <div className="space-y-3">
                                 {item.extendedDescription.platforms.map((p, i) => (
                                     <a

@@ -2,12 +2,12 @@ import { Badge } from '../ui/badge';
 import { Database, Zap, Cpu, Activity, Info, ShieldCheck, Cloud, Server, Maximize2, Layers } from 'lucide-react';
 
 const icons = {
-    "🧠 ML & Accel": Cpu,
-    "🛰️ Serving": Server,
-    "📊 Data & Retrieval": Database,
-    "⚙️ Infra & Ops": Cloud,
-    "🔭 Observability": Activity,
-    "🔐 Security & Access": ShieldCheck
+    "ML & Accel": Cpu,
+    "Serving": Server,
+    "Data & Retrieval": Database,
+    "Infra & Ops": Cloud,
+    "Observability": Activity,
+    "Security & Access": ShieldCheck
 };
 
 export const ReceiptsDock = ({ activeReceipt, roleTheme, experience }) => {

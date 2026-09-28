@@ -27,7 +27,6 @@ const roleRecords = [
             "~97% Groundedness Score"
         ],
         heroMotif: {
-            emoji: "🏃",
             title: "Movement Platform",
             subtitle: "Full-Stack AI + Mobile"
         },
@@ -39,11 +38,11 @@ const roleRecords = [
         },
         topStack: ["React Native", "Python", "FastAPI", "Docker", "LangChain", "PostgreSQL"],
         groupedTechStack: {
-            "📱 Mobile & Frontend": ["React Native", "React", "TypeScript", "Expo"],
-            "⚙️ Backend & API": ["Python", "FastAPI", "Node.js", "REST APIs", "Webhooks"],
-            "🧠 AI & LLM": ["LangChain", "GPT-4", "RAG", "Structured Outputs", "Pydantic"],
-            "🔄 Data Pipeline": ["Idempotency Keys", "Deduplication Engine", "Reconciliation", "PostgreSQL"],
-            "☁️ DevOps & Infra": ["Docker", "CI/CD", "GitHub Actions", "Vercel"]
+            "Mobile & Frontend": ["React Native", "React", "TypeScript", "Expo"],
+            "Backend & API": ["Python", "FastAPI", "Node.js", "REST APIs", "Webhooks"],
+            "AI & LLM": ["LangChain", "GPT-4", "RAG", "Structured Outputs", "Pydantic"],
+            "Data Pipeline": ["Idempotency Keys", "Deduplication Engine", "Reconciliation", "PostgreSQL"],
+            "DevOps & Infra": ["Docker", "CI/CD", "GitHub Actions", "Vercel"]
         },
         chapters: [
             { id: "overview", title: "Overview" },
@@ -276,7 +275,6 @@ const roleRecords = [
             { label: "Tail Latency", value: "−32%", hint: "Reduced p99 spikes via TensorRT/CUDA optimization." }
         ],
         heroMotif: {
-            emoji: "🎧",
             title: "Multimodal localization",
             subtitle: "Voice & video AI"
         },
@@ -426,12 +424,12 @@ const roleRecords = [
             "Escalations: -42% per 10k"
         ],
         groupedTechStack: {
-            "🧠 ML & Accel": ["PyTorch", "TensorFlow", "CUDA", "TensorRT", "ONNX Runtime"],
-            "🛰️ Serving": ["FastAPI", "gRPC", "NGINX"],
-            "📊 Data & Retrieval": ["FAISS", "Pinecone", "ChromaDB", "pgvector", "PostgreSQL"],
-            "⚙️ Infra & Ops": ["Docker", "Kubernetes", "AWS EKS", "Terraform", "GitHub Actions", "ArgoCD"],
-            "🔭 Observability": ["Prometheus", "OpenTelemetry"],
-            "🔐 Security & Access": ["IAM", "Service Roles", "Secrets Manager"]
+            "ML & Accel": ["PyTorch", "TensorFlow", "CUDA", "TensorRT", "ONNX Runtime"],
+            "Serving": ["FastAPI", "gRPC", "NGINX"],
+            "Data & Retrieval": ["FAISS", "Pinecone", "ChromaDB", "pgvector", "PostgreSQL"],
+            "Infra & Ops": ["Docker", "Kubernetes", "AWS EKS", "Terraform", "GitHub Actions", "ArgoCD"],
+            "Observability": ["Prometheus", "OpenTelemetry"],
+            "Security & Access": ["IAM", "Service Roles", "Secrets Manager"]
         },
         chapters: [
             { id: "overview", title: "Overview" },
@@ -649,7 +647,6 @@ const roleRecords = [
             "99.95% System Uptime"
         ],
         heroMotif: {
-            emoji: "🛰️",
             title: "Crowd Intelligence",
             subtitle: "Real-time Safety"
         },
@@ -661,11 +658,11 @@ const roleRecords = [
         },
         topStack: ["Python", "FastAPI", "React", "Terraform", "LangChain", "Kubernetes"],
         groupedTechStack: {
-            "🧠 AI & ML": ["PyTorch", "TensorFlow", "Keras", "vLLM", "DeepSpeed"],
-            "🤖 Agents & RAG": ["LangChain", "LangGraph", "LlamaIndex", "Pinecone", "ChromaDB"],
-            "⚙️ Backend & API": ["FastAPI", "Node.js", "TypeScript", "Docker", "Kubernetes"],
-            "☁️ Cloud & DevOps": ["AWS", "GCP", "Azure", "Terraform", "GitHub Actions"],
-            "🔭 Observability": ["Prometheus", "OpenTelemetry", "Langfuse", "Evidently AI", "MLflow"]
+            "AI & ML": ["PyTorch", "TensorFlow", "Keras", "vLLM", "DeepSpeed"],
+            "Agents & RAG": ["LangChain", "LangGraph", "LlamaIndex", "Pinecone", "ChromaDB"],
+            "Backend & API": ["FastAPI", "Node.js", "TypeScript", "Docker", "Kubernetes"],
+            "Cloud & DevOps": ["AWS", "GCP", "Azure", "Terraform", "GitHub Actions"],
+            "Observability": ["Prometheus", "OpenTelemetry", "Langfuse", "Evidently AI", "MLflow"]
         },
         chapters: [
             { id: "overview", title: "Overview" },
@@ -952,7 +949,6 @@ const roleRecords = [
             "−31% Environment Setup Issues"
         ],
         heroMotif: {
-            emoji: "🧠",
             title: "AI-First Discovery",
             subtitle: "Applied AI Studio"
         },
@@ -964,11 +960,11 @@ const roleRecords = [
         },
         topStack: ["Python", "FastAPI", "LangChain", "PostgreSQL", "Docker", "Apache Airflow"],
         groupedTechStack: {
-            "🧠 AI & LLM": ["LangChain", "LangGraph", "GPT-4", "RAG", "Vector Search", "Embeddings", "Pydantic"],
-            "⚙️ Backend & API": ["Python", "FastAPI", "PostgreSQL", "REST APIs"],
-            "🔄 Pipeline & Automation": ["Apache Airflow", "Prefect", "CI/CD", "GitHub Actions"],
-            "📊 Evaluation": ["Golden Test Sets", "Rubric Scoring", "Regression Checks", "A/B Testing"],
-            "☁️ Infra": ["Docker", "AWS", "GCP", "Vertex AI", "Linux Servers"]
+            "AI & LLM": ["LangChain", "LangGraph", "GPT-4", "RAG", "Vector Search", "Embeddings", "Pydantic"],
+            "Backend & API": ["Python", "FastAPI", "PostgreSQL", "REST APIs"],
+            "Pipeline & Automation": ["Apache Airflow", "Prefect", "CI/CD", "GitHub Actions"],
+            "Evaluation": ["Golden Test Sets", "Rubric Scoring", "Regression Checks", "A/B Testing"],
+            "Infra": ["Docker", "AWS", "GCP", "Vertex AI", "Linux Servers"]
         },
         chapters: [
             { id: "overview", title: "Overview" },
@@ -1376,7 +1372,6 @@ const roleRecords = [
             "Environmental Monitoring IoT Systems"
         ],
         heroMotif: {
-            emoji: "🤖",
             title: "SRM Robocon",
             subtitle: "Robotics & Edge AI"
         },
@@ -1388,11 +1383,11 @@ const roleRecords = [
         },
         topStack: ["Python", "OpenCV", "YOLOv4", "ROS", "C++", "STM32"],
         groupedTechStack: {
-            "🤖 Robotics & Control": ["ROS", "SLAM", "Path Planning", "PID Control", "Kinematics"],
-            "🧠 AI & Vision": ["YOLOv4", "OpenCV", "TensorFlow", "Face Recognition", "Object Detection"],
-            "⚡ Embedded": ["Raspberry Pi", "STM32", "Arduino Nano", "ESP8266", "Teensy"],
-            "🔌 Sensors & IoT": ["Rplidar", "IMU", "BME680", "IR Sensor Arrays", "Pulse Oximeter"],
-            "🛠️ Hardware": ["Custom PCB Design", "3D Printing", "SolidWorks", "Motor Drivers"]
+            "Robotics & Control": ["ROS", "SLAM", "Path Planning", "PID Control", "Kinematics"],
+            "AI & Vision": ["YOLOv4", "OpenCV", "TensorFlow", "Face Recognition", "Object Detection"],
+            "Embedded": ["Raspberry Pi", "STM32", "Arduino Nano", "ESP8266", "Teensy"],
+            "Sensors & IoT": ["Rplidar", "IMU", "BME680", "IR Sensor Arrays", "Pulse Oximeter"],
+            "Hardware": ["Custom PCB Design", "3D Printing", "SolidWorks", "Motor Drivers"]
         },
         chapters: [
             { id: "overview", title: "Overview" },
@@ -1639,7 +1634,6 @@ const roleRecords = [
             { label: "False positives", value: "−65%", hint: "Via hybrid modeling." }
         ],
         heroMotif: {
-            emoji: "🔬",
             title: "Edge AI Research",
             subtitle: "Time-series & Anomaly detection"
         },
@@ -1752,7 +1746,6 @@ const roleRecords = [
             { label: "Schema", value: "JSON-Schema", hint: "Blueprint validation." }
         ],
         heroMotif: {
-            emoji: "🧱",
             title: "Builder AI",
             subtitle: "Blueprint workflows"
         },
@@ -1879,7 +1872,6 @@ const roleRecords = [
             { label: "SEO", value: "Semantic", hint: "Search-friendly markup." }
         ],
         heroMotif: {
-            emoji: "🌐",
             title: "Al Web",
             subtitle: "Web development workflows"
         },
@@ -2073,7 +2065,7 @@ function srmTenure() {
             "Firebase-backed real-time web editing",
         ],
         overviewHeadline: ["One institution,", "four engagements."],
-        heroMotif: { emoji: "🎓", title: "Industry Client Projects", subtitle: "ML, full-stack & robotics through SRM IST" },
+        heroMotif: { title: "Industry Client Projects", subtitle: "ML, full-stack & robotics through SRM IST" },
         theme: byId.robocon.theme,
         topStack: ["Python", "TensorFlow", "OpenCV", "FastAPI", "ROS", "Docker"],
         groupedTechStack: byId.robocon.groupedTechStack,

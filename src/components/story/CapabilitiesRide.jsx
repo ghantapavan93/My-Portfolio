@@ -18,10 +18,10 @@ const PANELS = [
     accent: 'from-blue-400 to-cyan-400',
     bar: 'from-blue-500 to-cyan-400',
     chips: [
-      '❤️ HealthTech & Wellness', '🏥 Healthcare & Clinical AI', '🔐 Cybersecurity & Threat Intel',
-      '👥 HR Tech & People Ops', '📚 EdTech & Learning', '♿ Accessibility & Inclusive Design',
-      '✈️ Travel, Transit & Events', '💳 Finance & Pricing Systems', '🗺️ Real Estate & Location Intel',
-      '🛠️ Developer Platforms', '🏗️ Engineering & Infrastructure', '🌍 Open to New Domains',
+      'HealthTech & Wellness', 'Healthcare & Clinical AI', 'Cybersecurity & Threat Intel',
+      'HR Tech & People Ops', 'EdTech & Learning', 'Accessibility & Inclusive Design',
+      'Travel, Transit & Events', 'Finance & Pricing Systems', 'Real Estate & Location Intel',
+      'Developer Platforms', 'Engineering & Infrastructure', 'Open to New Domains',
     ],
   },
   {
@@ -30,9 +30,9 @@ const PANELS = [
     accent: 'from-purple-400 to-pink-400',
     bar: 'from-purple-500 to-pink-500',
     chips: [
-      '🤖 AI Copilots & Assistants', '📚 RAG Systems & Knowledge Engines', '📊 Real-Time Dashboards',
-      '🧩 Internal Tools & Admin Portals', '🧠 ML/LLM-Powered APIs', '🚀 Full-Stack MVPs & Platforms',
-      '🌉 API & Data Integrations',
+      'AI Copilots & Assistants', 'RAG Systems & Knowledge Engines', 'Real-Time Dashboards',
+      'Internal Tools & Admin Portals', 'ML/LLM-Powered APIs', 'Full-Stack MVPs & Platforms',
+      'API & Data Integrations',
     ],
   },
   {
@@ -41,8 +41,8 @@ const PANELS = [
     accent: 'from-emerald-400 to-lime-400',
     bar: 'from-emerald-500 to-lime-400',
     chips: [
-      '🧑‍🤝‍🧑 Human-Centered & Empathy-Driven', '✅ Production-Ready & Tested', '🛰️ Observability-First',
-      '🔐 Privacy & Security Conscious', '📏 Data-Driven & Metric-Focused', '🔁 Iterate Fast, Learn From Users',
+      'Human-Centered & Empathy-Driven', 'Production-Ready & Tested', 'Observability-First',
+      'Privacy & Security Conscious', 'Data-Driven & Metric-Focused', 'Iterate Fast, Learn From Users',
     ],
   },
 ];

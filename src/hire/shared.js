@@ -29,7 +29,3 @@ export const resumeLinkProps = /\.pdf$/i.test(RESUME_URL)
   : { href: RESUME_URL, target: '_blank', rel: 'noopener noreferrer' };
 
 export const caseStudyTitle = (project) => `${project.title} — case study · Pavan Kalyan Ghanta`;
-
-export const HOME_TITLE = 'Pavan Kalyan Ghanta — AI Engineer & Full-Stack Developer';
-export const HOME_DESCRIPTION =
-  'AI engineer and full-stack developer building AI systems that hold up in production: grounded LLM products, reliable backends, and the interfaces around them.';

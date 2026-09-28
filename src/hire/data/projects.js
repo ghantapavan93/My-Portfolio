@@ -1,6 +1,8 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // Project catalogue for the hiring portfolio.
 //
+// `badge` is the small status pill ("Proof of concept" / "In progress") shown on cards.
+//
 // Rules for every entry (checked before adding one):
 //   • proof   — only facts stated in the project's repo, README, or persona.js.
 //               If there is no number, say what can be verified (live, tests…).
@@ -16,6 +18,7 @@ export const PROJECTS = [
   // ── Featured (full case studies at /work/:slug) ────────────────────────────
   {
     slug: 'move-relay',
+    badge: 'Proof of concept',
     title: 'Move Relay',
     summary:
       'Handoff infrastructure for home-services moves. One move arrives on three channels that disagree; the system reconciles them into one auditable record — and refuses to guess when a provider’s reply is lost.',
@@ -38,6 +41,7 @@ export const PROJECTS = [
   },
   {
     slug: 'eagleeye-ai',
+    badge: 'Proof of concept',
     title: 'EagleEye AI',
     summary:
       'Turns CCTV footage into reviewable alerts: YOLOv8 finds people, a vision model describes the scene, a keyword gate decides what is flagged, and suspects are matched from a text description.',
@@ -59,6 +63,7 @@ export const PROJECTS = [
   },
   {
     slug: 'project-h',
+    badge: 'In progress',
     title: 'Project-H',
     summary:
       'My founder project: an AI fitness coach with personalised workout and diet plans and sleep analytics, built on one onboarding profile.',
@@ -79,6 +84,7 @@ export const PROJECTS = [
   // ── Reliability systems ────────────────────────────────────────────────────
   {
     slug: 'shelftrace',
+    badge: 'Proof of concept',
     title: 'ShelfTrace',
     summary:
       'A reliability control plane for retail price changes: transactional outbox, deterministic reconciliation across shelf, POS and ecommerce, canary containment, and audit-verified recovery.',
@@ -93,6 +99,7 @@ export const PROJECTS = [
   },
   {
     slug: 'efficastvra',
+    badge: 'Proof of concept',
     title: 'EfficastVRA — Proof of Recovery',
     summary:
       'An agent that checks whether a manufacturing line actually recovered after a fix — not just that the work order closed — and reopens it on relapse.',
@@ -107,6 +114,7 @@ export const PROJECTS = [
   },
   {
     slug: 'airlock',
+    badge: 'Proof of concept',
     title: 'AirLock',
     summary:
       'A preflight layer for print-on-demand orders: checks each order against Dreamship’s documented rejection causes, then intercepts, fixes and replays failures before the order becomes immutable.',

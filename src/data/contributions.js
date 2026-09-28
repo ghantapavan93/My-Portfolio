@@ -48,7 +48,7 @@ export const contributionsData = [
     {
         id: "eagle-eye-ai",
         slug: "eagle-eye-ai",
-        title: "🏆 GradInnoHack 2025 — Eagle Eye AI",
+        title: "GradInnoHack 2025 — Eagle Eye AI",
         category: "Research",
         featured: true,
         bentoSize: "medium",

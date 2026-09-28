@@ -30,7 +30,7 @@ function localApi(env) {
   }
 }
 
-export default defineConfig(({ mode, isSsrBuild }) => ({
+export default defineConfig(({ mode }) => ({
   plugins: [react(), tailwindcss(), localApi(loadEnv(mode, process.cwd(), ''))],
   resolve: {
     alias: {
@@ -40,8 +40,7 @@ export default defineConfig(({ mode, isSsrBuild }) => ({
   build: {
     rollupOptions: {
       // Vendor code changes rarely — separate chunks stay cached across deploys.
-      // (Not for the SSR prerender bundle, which keeps node_modules external.)
-      output: isSsrBuild ? {} : {
+      output: {
         manualChunks: {
           react: ['react', 'react-dom', 'react-router-dom'],
           gsap: ['gsap', '@gsap/react'],

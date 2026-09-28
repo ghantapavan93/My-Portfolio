@@ -87,8 +87,8 @@ export function ContributionsSection() {
 
             <div className="flex justify-between items-start mb-6">
               <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground flex items-center gap-2">
-                <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-[10px] shadow-sm">
-                  🎯
+                <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 shadow-sm" aria-hidden="true">
+                  <span className="h-1.5 w-1.5 rounded-full bg-white" />
                 </span>
                 What this section proves
               </h3>

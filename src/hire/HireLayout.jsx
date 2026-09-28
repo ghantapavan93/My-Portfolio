@@ -3,10 +3,11 @@ import { FileText } from 'lucide-react';
 import { CONTAINER, buttonClass, resumeLinkProps } from './shared';
 import { EMAIL, LINKEDIN_URL, GITHUB_URL } from '../lib/links';
 
+// Case-study pages link back into the main portfolio's sections.
 const NAV = [
-  { label: 'Work', hash: 'work' },
-  { label: 'How I build', hash: 'approach' },
+  { label: 'Projects', hash: 'projects' },
   { label: 'Experience', hash: 'experience' },
+  { label: 'Skills', hash: 'skills' },
   { label: 'Contact', hash: 'contact' },
 ];
 
@@ -65,11 +66,6 @@ function SiteFooter() {
           <li><a href={`mailto:${EMAIL}`} className="hover:text-zinc-900">Email</a></li>
           <li><a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="hover:text-zinc-900">LinkedIn</a></li>
           <li><a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="hover:text-zinc-900">GitHub</a></li>
-          <li>
-            <Link to="/creative" className="hover:text-zinc-900">
-              Creative portfolio
-            </Link>
-          </li>
         </ul>
       </div>
     </footer>
@@ -86,6 +82,7 @@ export function HireLayout({ children, onHome = false }) {
         Skip to content
       </a>
       <SiteHeader onHome={onHome} />
+      <div aria-hidden="true" className="h-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
       <main id="main">{children}</main>
       <SiteFooter />
     </div>

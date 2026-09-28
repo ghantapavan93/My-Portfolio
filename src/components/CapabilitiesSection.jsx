@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { Globe, Server, BrainCircuit, Container } from 'lucide-react';
+import {
+  Globe, Server, BrainCircuit, Container, Accessibility, BarChart3, BookOpen, Bot, Building2, CheckCircle2, CreditCard, Earth, Heart, HeartHandshake, Hospital, Lock, Map as MapIcon, Network, Settings2, Plane, Puzzle, Radar, RefreshCw, Rocket, Ruler, Users, Wrench,
+} from 'lucide-react';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Capabilities snapshot + tech stack — extracted verbatim from the original
@@ -9,37 +11,37 @@ import { Globe, Server, BrainCircuit, Container } from 'lucide-react';
 // ─────────────────────────────────────────────────────────────────────────────
 
 const buildingAcrossChips = [
-  { id: 'healthtech', icon: '❤️', label: 'HealthTech & Wellness' },
-  { id: 'healthcare', icon: '🏥', label: 'Healthcare & Clinical AI' },
-  { id: 'cybersecurity', icon: '🔐', label: 'Cybersecurity & Threat Intelligence' },
-  { id: 'hrtech', icon: '👥', label: 'HR Tech & People Ops' },
-  { id: 'edtech', icon: '📚', label: 'EdTech & Learning Platforms' },
-  { id: 'accessibility', icon: '♿', label: 'Accessibility & Inclusive Design' },
-  { id: 'travel', icon: '✈️', label: 'Travel, Transit & Events' },
-  { id: 'finance', icon: '💳', label: 'Finance, Payments & Pricing Systems' },
-  { id: 'realestate', icon: '🗺️', label: 'Real Estate & Location Intelligence' },
-  { id: 'devtools', icon: '🛠️', label: 'Developer Platforms & Internal Tools' },
-  { id: 'engineering', icon: '🏗️', label: 'Engineering & Infrastructure' },
-  { id: 'openai', icon: '🌍', label: 'Open to Applied AI Across New Domains' },
+  { id: 'healthtech', icon: Heart, label: 'HealthTech & Wellness' },
+  { id: 'healthcare', icon: Hospital, label: 'Healthcare & Clinical AI' },
+  { id: 'cybersecurity', icon: Lock, label: 'Cybersecurity & Threat Intelligence' },
+  { id: 'hrtech', icon: Users, label: 'HR Tech & People Ops' },
+  { id: 'edtech', icon: BookOpen, label: 'EdTech & Learning Platforms' },
+  { id: 'accessibility', icon: Accessibility, label: 'Accessibility & Inclusive Design' },
+  { id: 'travel', icon: Plane, label: 'Travel, Transit & Events' },
+  { id: 'finance', icon: CreditCard, label: 'Finance, Payments & Pricing Systems' },
+  { id: 'realestate', icon: MapIcon, label: 'Real Estate & Location Intelligence' },
+  { id: 'devtools', icon: Wrench, label: 'Developer Platforms & Internal Tools' },
+  { id: 'engineering', icon: Building2, label: 'Engineering & Infrastructure' },
+  { id: 'openai', icon: Earth, label: 'Open to Applied AI Across New Domains' },
 ];
 
 const whatIBuildChips = [
-  { icon: '🤖', label: 'AI Copilots & Assistants' },
-  { icon: '📚', label: 'RAG Systems & Knowledge Engines' },
-  { icon: '📊', label: 'Real-Time Dashboards & Analytics' },
-  { icon: '🧩', label: 'Internal Tools & Admin Portals' },
-  { icon: '🧠', label: 'ML/LLM-Powered APIs & Services' },
-  { icon: '🚀', label: 'Full-Stack MVPs & Platforms' },
-  { icon: '🌉', label: 'API & Data Integrations' },
+  { icon: Bot, label: 'AI Copilots & Assistants' },
+  { icon: BookOpen, label: 'RAG Systems & Knowledge Engines' },
+  { icon: BarChart3, label: 'Real-Time Dashboards & Analytics' },
+  { icon: Puzzle, label: 'Internal Tools & Admin Portals' },
+  { icon: BrainCircuit, label: 'ML/LLM-Powered APIs & Services' },
+  { icon: Rocket, label: 'Full-Stack MVPs & Platforms' },
+  { icon: Network, label: 'API & Data Integrations' },
 ];
 
 const howIWorkChips = [
-  { icon: '🧑‍🤝‍🧑', label: 'Human-Centered & Empathy-Driven' },
-  { icon: '✅', label: 'Production-Ready & Tested' },
-  { icon: '🛰️', label: 'Observability-First' },
-  { icon: '🔐', label: 'Privacy & Security Conscious' },
-  { icon: '📏', label: 'Data-Driven & Metric-Focused' },
-  { icon: '🔁', label: 'Iterate Fast, Learn From Users' },
+  { icon: HeartHandshake, label: 'Human-Centered & Empathy-Driven' },
+  { icon: CheckCircle2, label: 'Production-Ready & Tested' },
+  { icon: Radar, label: 'Observability-First' },
+  { icon: Lock, label: 'Privacy & Security Conscious' },
+  { icon: Ruler, label: 'Data-Driven & Metric-Focused' },
+  { icon: RefreshCw, label: 'Iterate Fast, Learn From Users' },
 ];
 
 const techStackGroups = [
@@ -117,8 +119,8 @@ export function CapabilitiesSection() {
           {/* Header row with animated counters */}
           <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-10">
             <div className="flex items-center gap-3">
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 text-base shadow-lg shadow-primary/30 animate-pulse">
-                ⚙️
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 shadow-lg shadow-primary/30 animate-pulse" aria-hidden="true">
+                <Settings2 className="h-5 w-5 text-white" />
               </span>
               <h2 className="text-base md:text-lg font-bold tracking-[0.25em] uppercase bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
                 Capabilities snapshot
@@ -161,7 +163,7 @@ export function CapabilitiesSection() {
                     }`}
                     style={{ animationDelay: capVisible ? `${idx * 40}ms` : '0ms', animationFillMode: 'both' }}
                   >
-                    <span className="mr-1">{chip.icon}</span>
+                    <chip.icon className="mr-1.5 inline h-3.5 w-3.5 -translate-y-px" aria-hidden="true" />
                     {chip.label}
                   </span>
                 ))}
@@ -184,7 +186,7 @@ export function CapabilitiesSection() {
                     } bg-white/5 dark:bg-black/10 border-white/10 hover:border-purple-400/50 hover:bg-purple-500/10 hover:text-purple-300 hover:scale-105`}
                     style={{ animationDelay: capVisible ? `${200 + idx * 40}ms` : '0ms', animationFillMode: 'both' }}
                   >
-                    <span className="mr-1">{chip.icon}</span>
+                    <chip.icon className="mr-1.5 inline h-3.5 w-3.5 -translate-y-px" aria-hidden="true" />
                     {chip.label}
                   </span>
                 ))}
@@ -207,7 +209,7 @@ export function CapabilitiesSection() {
                     } bg-white/5 dark:bg-black/10 border-white/10 hover:border-emerald-400/50 hover:bg-emerald-500/10 hover:text-emerald-300 hover:scale-105`}
                     style={{ animationDelay: capVisible ? `${400 + idx * 40}ms` : '0ms', animationFillMode: 'both' }}
                   >
-                    <span className="mr-1">{chip.icon}</span>
+                    <chip.icon className="mr-1.5 inline h-3.5 w-3.5 -translate-y-px" aria-hidden="true" />
                     {chip.label}
                   </span>
                 ))}

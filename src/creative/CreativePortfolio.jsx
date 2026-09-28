@@ -1,11 +1,10 @@
-// The original cinematic portfolio, kept intact at /creative for clients who
-// value visual experimentation. The hiring portfolio lives at / (src/hire).
+// The main portfolio at /. Featured projects link to case studies at /work/:slug.
 import { Header } from '../components/Header'
 import { CinematicHero } from '../components/CinematicHero'
 import { IntroCinema } from '../components/story/IntroCinema'
 import { CapabilitiesSection } from '../components/CapabilitiesSection'
 import { Incident } from '../components/story/Incident'
-import { ProjectShowcase } from '../components/ProjectShowcase'
+import { FeaturedProjects } from '../components/FeaturedProjects'
 import { ProjectsSection } from '../components/ProjectsSection'
 import { ExperienceSection } from '../components/ExperienceSection'
 import { SkillsSection } from '../components/SkillsSection'
@@ -28,9 +27,9 @@ export default function CreativePortfolio() {
           <CapabilitiesSection />
           <Incident />
 
-          {/* #projects wraps the showcase + the full grid so "Projects" lands at the top. */}
+          {/* #projects wraps the top 3 + the full grid so "Projects" lands at the top. */}
           <section id="projects">
-            <ProjectShowcase />
+            <FeaturedProjects />
             <ProjectsSection />
           </section>
 

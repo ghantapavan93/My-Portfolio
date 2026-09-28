@@ -1,12 +1,10 @@
-import { lazy, Suspense, useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
-import { HireHome } from './hire/HireHome'
 import { CaseStudyPage } from './hire/CaseStudyPage'
 import { ThemeProvider } from './components/ThemeProvider'
 import { AIAgent } from './components/AIAgent'
 
-// The hiring portfolio (/ and /work/:slug) is imported eagerly so it can be
-// prerendered to static HTML. Everything else loads only when visited.
+// The main portfolio is code-split so case-study pages load without it.
 const CreativePortfolio = lazy(() => import('./creative/CreativePortfolio'))
 const PosterA11yCaseStudy = lazy(() =>
   import('./pages/case-studies/PosterA11yCaseStudy').then(m => ({ default: m.PosterA11yCaseStudy })))
@@ -32,34 +30,21 @@ function ScrollManager() {
   return null
 }
 
-/** Renders children only after mount, so prerendered HTML and the first client render match. */
-function ClientOnly({ children }) {
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
-  return mounted ? children : null
-}
-
 function App() {
-  const { pathname } = useLocation()
-  const hiringPage = pathname === '/' || pathname.startsWith('/work/')
-
   return (
     <>
       <ScrollManager />
       <Suspense fallback={<div className="min-h-screen" aria-busy="true" />}>
         <Routes>
-          <Route path="/" element={<HireHome />} />
+          <Route path="/" element={<CreativePortfolio />} />
           <Route path="/work/:slug" element={<CaseStudyPage />} />
-          <Route path="/creative" element={<CreativePortfolio />} />
           <Route path="/case-studies/poster-accessibility-eval" element={<ThemeProvider><PosterA11yCaseStudy /></ThemeProvider>} />
           <Route path="/case-studies/speech-quest" element={<ThemeProvider><SpeechQuestCaseStudy /></ThemeProvider>} />
           <Route path="/case-studies/a11y-game" element={<ThemeProvider><A11yGameCaseStudy /></ThemeProvider>} />
-          <Route path="*" element={<HireHome />} />
+          <Route path="*" element={<CreativePortfolio />} />
         </Routes>
       </Suspense>
-      <ClientOnly>
-        <AIAgent variant={hiringPage ? 'plain' : 'cinematic'} />
-      </ClientOnly>
+      <AIAgent />
     </>
   )
 }
