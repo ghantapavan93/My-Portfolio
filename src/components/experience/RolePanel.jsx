@@ -3,9 +3,9 @@ import { MapPin, Calendar, ArrowRight, Sparkles } from 'lucide-react';
 import { Badge } from '../ui/badge';
 import { TechAtlas } from './TechAtlas';
 import { CoreBulletList } from './CoreBulletList';
+import { EngagementList } from './EngagementList';
 
 const CountUp = ({ value, label, hint }) => {
-    const [count, setCount] = useState(0);
     const nodeRef = useRef(null);
     const [hasAnimated, setHasAnimated] = useState(false);
 
@@ -28,17 +28,17 @@ const CountUp = ({ value, label, hint }) => {
     return (
         <div
             ref={nodeRef}
-            className={`p-4 rounded-2xl bg-secondary/20 border border-white/5 hover:border-primary/30 transition-all duration-700 group/metric ${hasAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+            className={`relative min-w-0 p-4 rounded-2xl bg-secondary/20 border border-border/60 hover:border-primary/30 transition-all duration-700 group/metric ${hasAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
         >
             <div className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground mb-1 group-hover/metric:text-primary transition-colors">
                 {label}
             </div>
-            <div className="text-xl md:text-2xl font-black tracking-tighter text-foreground">
+            <div className="text-xl md:text-2xl font-black tracking-tighter text-foreground break-words">
                 {value}
             </div>
             {hint && (
-                <div className="absolute inset-x-0 bottom-full mb-2 opacity-0 group-hover/metric:opacity-100 transition-opacity pointer-events-none">
-                    <div className="bg-popover text-popover-foreground text-[10px] px-2 py-1 rounded border border-border shadow-xl whitespace-nowrap">
+                <div className="absolute left-0 right-0 bottom-full mb-2 z-20 opacity-0 group-hover/metric:opacity-100 transition-opacity pointer-events-none">
+                    <div className="bg-popover text-popover-foreground text-[11px] leading-snug px-2 py-1 rounded border border-border shadow-xl">
                         {hint}
                     </div>
                 </div>
@@ -47,18 +47,31 @@ const CountUp = ({ value, label, hint }) => {
     );
 };
 
+// Metric cards fill the row evenly whether a role has 2, 3 or 4 of them.
+const METRIC_COLS = { 2: 'sm:grid-cols-2', 3: 'sm:grid-cols-3', 4: 'sm:grid-cols-2 xl:grid-cols-4' };
+
 export const RolePanel = ({ experience, isActive, onEnter, mode }) => {
     const isRecruiterMode = mode === 'recruiter';
-    const [activeTech, setActiveTech] = useState([]);
 
     if (isRecruiterMode) {
         return (
-            <div className="py-6 border-b border-border/50 group cursor-pointer" onClick={() => onEnter(experience.id)}>
+            <div
+                role="button"
+                tabIndex={0}
+                onClick={() => onEnter(experience.id)}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onEnter(experience.id); } }}
+                className="py-6 border-b border-border/50 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg"
+            >
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-2">
                     <h3 className="text-xl font-bold group-hover:text-primary transition-colors">{experience.company}</h3>
                     <span className="text-sm text-muted-foreground font-medium">{experience.dateRange}</span>
                 </div>
                 <p className="text-base font-semibold text-foreground/90 mb-2">{experience.role}</p>
+                {experience.engagements && (
+                    <p className="text-sm text-muted-foreground mb-2">
+                        Engagements: {experience.engagements.map(e => e.client).join(' · ')}
+                    </p>
+                )}
                 <div className="flex flex-wrap gap-4 mb-4">
                     {experience.proofMetrics.map((m, i) => (
                         <div key={i} className="flex items-center gap-2">
@@ -67,16 +80,16 @@ export const RolePanel = ({ experience, isActive, onEnter, mode }) => {
                         </div>
                     ))}
                 </div>
-                <button className="text-sm font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">
+                <span className="text-sm font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">
                     View Case Study <ArrowRight className="w-4 h-4" />
-                </button>
+                </span>
             </div>
         );
     }
 
     return (
         <div
-            className={`relative py-20 px-4 md:px-12 transition-all duration-700 ${isActive ? 'opacity-100 scale-100' : 'opacity-60 scale-[0.98]'}`}
+            className={`relative py-20 px-4 md:px-12 rounded-3xl transition-all duration-700 ${isActive ? 'opacity-100 scale-100' : 'opacity-60 scale-[0.98]'}`}
         >
             {/* Background Halo */}
             <div
@@ -88,13 +101,13 @@ export const RolePanel = ({ experience, isActive, onEnter, mode }) => {
 
             <div className="max-w-4xl">
                 <div className="flex flex-col md:flex-row md:items-end gap-4 mb-8">
-                    <div className="space-y-2">
+                    <div className="space-y-2 min-w-0">
                         <div className="flex items-center gap-2">
                             <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-black uppercase tracking-[0.2em] border border-primary/20">
-                                {experience.heroMotif.emoji} {experience.heroMotif.title}
+                                {experience.heroMotif.title}
                             </span>
                         </div>
-                        <h3 className="text-4xl md:text-6xl font-black tracking-tighter text-foreground leading-[0.9]">
+                        <h3 className="text-4xl md:text-6xl font-black tracking-tighter text-foreground leading-[0.95] break-words">
                             {experience.company}<span className="text-primary">.</span>
                         </h3>
                         <p className="text-xl md:text-2xl font-bold text-muted-foreground tracking-tight">
@@ -102,7 +115,7 @@ export const RolePanel = ({ experience, isActive, onEnter, mode }) => {
                         </p>
                     </div>
 
-                    <div className="flex flex-col md:items-end gap-1 md:ml-auto text-muted-foreground font-medium text-sm md:text-right">
+                    <div className="flex flex-col md:items-end gap-1 md:ml-auto shrink-0 text-muted-foreground font-medium text-sm md:text-right">
                         <div className="flex items-center gap-2">
                             <Calendar className="w-4 h-4 text-primary" />
                             <span>{experience.dateRange}</span>
@@ -127,7 +140,13 @@ export const RolePanel = ({ experience, isActive, onEnter, mode }) => {
                     )}
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
+                {experience.engagements && (
+                    <div className="mb-12">
+                        <EngagementList engagements={experience.engagements} roleTheme={experience.theme} />
+                    </div>
+                )}
+
+                <div className={`grid grid-cols-1 gap-4 mb-12 ${METRIC_COLS[experience.proofMetrics.length] || 'sm:grid-cols-3'}`}>
                     {experience.proofMetrics.map((metric, i) => (
                         <CountUp key={i} {...metric} />
                     ))}
@@ -140,7 +159,6 @@ export const RolePanel = ({ experience, isActive, onEnter, mode }) => {
                             atlas={experience.stackAtlas}
                             roleTheme={experience.theme}
                             onOpenFullStack={() => onEnter(experience.id)}
-                            activeTech={activeTech}
                         />
                     </div>
                 )}
@@ -155,7 +173,7 @@ export const RolePanel = ({ experience, isActive, onEnter, mode }) => {
                     </div>
                 )}
 
-                <div className="flex flex-wrap items-center gap-8 group/footer">
+                <div className="flex flex-wrap items-center gap-6 group/footer">
                     <div className="flex flex-wrap gap-2 max-w-md">
                         {experience.topStack.map((skill, i) => (
                             <Badge key={i} variant="secondary" className="bg-card/50 border-border/50 text-[10px] font-bold tracking-wider py-1">
@@ -166,7 +184,7 @@ export const RolePanel = ({ experience, isActive, onEnter, mode }) => {
 
                     <button
                         onClick={() => onEnter(experience.id)}
-                        className="ml-auto group/cta relative px-8 py-4 rounded-2xl bg-foreground text-background font-black uppercase tracking-[0.2em] text-xs transition-all hover:scale-105 active:scale-95 overflow-hidden"
+                        className="sm:ml-auto group/cta relative px-8 py-4 rounded-2xl bg-foreground text-background font-black uppercase tracking-[0.2em] text-xs transition-all hover:scale-105 active:scale-95 overflow-hidden"
                     >
                         <div className="absolute inset-0 bg-primary translate-y-full group-hover/cta:translate-y-0 transition-transform duration-500" style={{ backgroundColor: experience.theme.accent }} />
                         <span className="relative z-10 flex items-center gap-2">

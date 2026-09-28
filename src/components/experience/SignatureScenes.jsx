@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Activity, ShieldCheck, AlertCircle, Clock, Zap } from 'lucide-react';
 
 export const VosynLatencyDial = ({ active }) => {

@@ -8,7 +8,7 @@ import { DetailsDrawer } from './contributions/DetailsDrawer';
 export function ContributionsSection() {
   const [activeMode, setActiveMode] = useState('bento'); // 'bento' | 'graph'
   const [activeFilter, setActiveFilter] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery] = useState('');
   const [selectedItem, setSelectedItem] = useState(null);
 
   const filters = ['All', 'Mentorship', 'Research', 'Publications', 'Workshops'];
@@ -65,7 +65,7 @@ export function ContributionsSection() {
   return (
     <section id="contributions" className="py-32 relative bg-background overflow-hidden">
       {/* Background Noise effect */}
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.15] mix-blend-overlay pointer-events-none -z-10" />
+      <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-[0.15] mix-blend-overlay pointer-events-none -z-10" />
 
       <div className="container mx-auto px-4 max-w-7xl relative z-10">
 
@@ -87,8 +87,8 @@ export function ContributionsSection() {
 
             <div className="flex justify-between items-start mb-6">
               <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground flex items-center gap-2">
-                <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-[10px] shadow-sm">
-                  🎯
+                <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 shadow-sm" aria-hidden="true">
+                  <span className="h-1.5 w-1.5 rounded-full bg-white" />
                 </span>
                 What this section proves
               </h3>

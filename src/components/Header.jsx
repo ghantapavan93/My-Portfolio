@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { ThemeToggle } from './ThemeToggle';
 import { Menu, X } from 'lucide-react';
+import { RESUME_URL } from '../lib/links';
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef(null);
-  const resumeLink =
-    'https://drive.google.com/file/d/1ZzsEtDdGER8rRoCCX9zFI3qQSAgfj50z/view?usp=sharing';
+  const resumeLink = RESUME_URL;
 
   // ✅ Scroll effect for header
   useEffect(() => {
@@ -37,11 +37,15 @@ export function Header() {
     };
   }, [mobileMenuOpen]);
 
+  // At the very top the header floats over the dark video hero, so its text
+  // must be light in both themes (theme colours take over once scrolled).
+  const onHero = !scrolled && !mobileMenuOpen;
+
   return (
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
-          ? 'py-3 md:py-4 bg-background/95 backdrop-blur-sm shadow-sm'
-          : 'py-4 md:py-6 bg-transparent'
+          ? 'py-3 md:py-4 bg-background/95 backdrop-blur-sm shadow-sm text-foreground'
+          : `py-4 md:py-6 bg-transparent ${onHero ? 'text-white' : 'text-foreground'}`
         }`}
       role="banner"
     >
@@ -52,10 +56,10 @@ export function Header() {
             className="group relative z-50"
             aria-label="Pavan Kalyan Ghanta - Back to top"
           >
-            <h1 className="text-xl md:text-2xl lg:text-3xl font-bold tracking-tight">
+            <span className="block text-xl md:text-2xl lg:text-3xl font-bold tracking-tight">
               Pavan Kalyan Ghanta
               <span className="block h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></span>
-            </h1>
+            </span>
           </a>
 
           {/* ✅ Desktop Navigation */}
@@ -94,7 +98,7 @@ export function Header() {
             <ThemeToggle />
             <button
               type="button"
-              className="p-2.5 rounded-md text-foreground hover:bg-secondary/80 transition-colors"
+              className="p-2.5 rounded-md hover:bg-secondary/80 transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"

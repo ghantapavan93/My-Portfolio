@@ -1,48 +1,73 @@
 # 🤖 Pavan's Portfolio AI Agent — Setup
 
-A grounded, witty AI agent that answers recruiter/visitor questions about your work — built
-with **LangChain + LangGraph.js**, **Gemini 2.5 Flash** (free, Groq fallback), running on a
-**Vercel Node serverless function** with all keys kept server-side.
+A grounded AI agent that answers recruiter/visitor questions about your work — built with
+**LangChain + LangGraph.js** on a **Vercel Node serverless function**, running **free open
+models** (Qwen, gpt-oss) through a provider chain. All keys stay server-side.
 
 ## What's in the box
 | File | Role |
 |------|------|
-| `lib/persona.js` | Your knowledge base + the agent's personality (server-only, never shipped to browser) |
-| `api/chat.js` | The brain: LangGraph `retrieve → generate` graph, Gemini→Groq fallback |
-| `src/components/AIAgent.jsx` | The UI: floating reactive orb, chat panel, suggested-question chips |
-| `.env.example` | The keys you need (copy to `.env.local`) |
+| `lib/persona.js` | Knowledge base + personality (server-only, never shipped to the browser) |
+| `api/chat.js` | LangGraph `retrieve → generate`; retrieval sends only relevant KB sections; provider chain with fall-through |
+| `src/components/AIAgent.jsx` | Chat UI; voice-clip questions answer instantly from pre-written transcripts |
+| `vite.config.js` | Dev-only middleware so `npm run dev` also serves `/api/chat` |
+| `.env.example` | Every supported provider (copy to `.env.local`) |
 
-## 1. Get a free LLM key (2 min)
-- **Gemini (primary):** https://aistudio.google.com/apikey → create key.
-- *(Optional)* **Groq (fallback):** https://console.groq.com/keys → create key.
+## Zero-key mode (works out of the box)
+With **no API keys at all**, GPK still answers every question instantly. The graph routes
+`retrieve → extract`: `lib/retrieval.js` ranks a curated bank of verified, first-person answers
+(`lib/answer-bank.js`) with BM25 and returns the best one verbatim. If the question isn't covered
+well enough, it says so honestly and suggests the closest topics — it cannot invent anything.
 
-Copy `.env.example` → `.env.local` and paste the key(s) in. **Never** rename them to `VITE_…`.
+- Add or edit answers in `lib/answer-bank.js` (facts must come from `lib/persona.js`).
+- Run the regression eval after any change: `npm run eval:chat` (fails below 90%).
+- If `/api/chat` is unreachable, the browser runs the same retrieval itself.
+- When a model key is added, the graph routes `retrieve → generate` instead, and still falls back
+  to `extract` if every provider fails.
 
-## 2. Run it locally
-Plain `npm run dev` (Vite) shows the UI but **not** the `/api` brain. To run both:
+## Provider chain (tried in order, all OpenAI-compatible)
+| # | Provider | Cost | Env vars |
+|---|----------|------|----------|
+| 1 | Self-hosted (Ollama / vLLM / HF router) | free | `LLM_BASE_URL`, `LLM_MODEL`, `LLM_API_KEY` |
+| 2 | Groq — Qwen3, gpt-oss | free, no card | `GROQ_API_KEY` (`GROQ_MODELS` optional) |
+| 3 | Cloudflare Workers AI — Qwen3 | free 10K neurons/day | `CF_ACCOUNT_ID`, `CF_API_TOKEN` |
+| 4 | OpenRouter `:free` models | free, 50 req/day | `OPENROUTER_API_KEY` |
+| 5 | Gemini | free tier | `GEMINI_API_KEY` |
+
+A 429 / 5xx / timeout on one provider falls through to the next. If all fail (or none are
+set), the answer comes from zero-key mode — never a raw error.
+
+**Recommended for production:** a free Groq key (+ Cloudflare as backup). Groq's free tier
+is 8K tokens/min per model, which is why retrieval trims each request to ~4K tokens.
+
+## 1. Run it locally with Ollama (fully free, no accounts)
 ```bash
-npm i -g vercel      # once
-vercel dev           # serves the app AND /api/chat with your .env.local keys
+ollama pull qwen2.5:7b-instruct
 ```
-Open the site, click **“Ask my AI”** (bottom-right), and chat.
+Create `.env.local`:
+```
+LLM_BASE_URL=http://localhost:11434/v1
+LLM_MODEL=qwen2.5:7b-instruct
+```
+Then `npm run dev` and open the chat. (Small 3B models run faster but hallucinate more —
+use 7B+ for realistic answers.)
 
-> Without `vercel dev`/keys, the orb + panel still render and show a friendly
-> “brain not connected” message — so the UI is always demoable.
+## 2. Deploy
+Add `GROQ_API_KEY` (and optionally the Cloudflare pair) in
+**Vercel → Settings → Environment Variables**, then redeploy.
 
-## 3. Deploy
-Push to your Vercel project, then add `GOOGLE_API_KEY` (and optionally `GROQ_API_KEY`)
-in **Vercel → Settings → Environment Variables**. Done — it's live and free.
+Want your *own* model in production? Run Ollama or vLLM on any VM with a public HTTPS
+URL (or a Cloudflare Tunnel) and set `LLM_BASE_URL`/`LLM_MODEL`/`LLM_API_KEY` in Vercel.
 
-## 4. Keep it grounded
-Edit `lib/persona.js` to update facts. The agent answers **only** from that file and admits
-when it doesn't know — so add a fact rather than hoping it guesses. *(There's a TODO marker for
-your education details.)*
+## 3. Keep it grounded
+Edit `lib/persona.js` to update facts. Sections are split on `# HEADINGS` — keep each
+section focused so retrieval picks the right one. The agent answers **only** from what it
+retrieves and admits when it doesn't know.
 
-## 5. Abuse / cost safety (before sharing widely)
-Free tiers have rate limits. Recommended before a big launch:
-- add per-IP rate limiting to `api/chat.js`,
-- cache answers to the common FAQ,
-- keep the Groq fallback configured so one provider's limit doesn't take it down.
+## 4. Abuse / cost safety
+Already in `api/chat.js`: per-IP rate limit (12/min, 60/hr, in-memory), same-origin check,
+history sanitization, 1000-char input cap, 28s request budget. For durable limits across
+instances, swap the in-memory map for Upstash Redis / Vercel KV.
 
 ---
 

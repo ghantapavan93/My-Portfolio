@@ -1,14 +1,15 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Send, X, Sparkles, FileText, Linkedin, Mail, Volume2, VolumeX } from 'lucide-react';
 import { playVoice, stopVoice, currentVoice, subscribeVoice, VOICE_SCRIPTS } from '../lib/voice';
+import { RESUME_URL, LINKEDIN_URL } from '../lib/links';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // GPK — Pavan's AI twin. Typewriter answers, cloned-voice playback, contextual
-// follow-ups, and grounded offline answers so it never feels broken.
+// follow-ups. Answers come from /api/chat (generated when a model is configured,
+// otherwise retrieved verbatim from lib/answer-bank.js); if the API is
+// unreachable the same retrieval runs right here in the browser.
 // ─────────────────────────────────────────────────────────────────────────────
 
-const RESUME_URL = 'https://drive.google.com/file/d/1ZzsEtDdGER8rRoCCX9zFI3qQSAgfj50z/view?usp=sharing';
-const LINKEDIN_URL = 'https://www.linkedin.com/in/pavankalyan-ghanta-b20115200/';
 
 // Starter chips — the questions people actually ask.
 const SUGGESTED = [
@@ -22,8 +23,9 @@ const SUGGESTED = [
 ];
 
 // Questions with a pre-recorded answer in Pavan's cloned voice.
+// ("What's your strongest project?" is not mapped: its recording describes
+// EagleEye's designed architecture as if it were built — re-record before re-adding.)
 const QUESTION_CLIPS = {
-  "What's your strongest project?": 'faq-strongest-project',
   'Why should we hire you?': 'faq-why-strong-engineer',
   'Experience with RAG, agents & LangGraph?': 'faq-ai-engineer-fit',
 };
@@ -38,42 +40,15 @@ const FOLLOW_UPS = {
   "What's the hardest problem you've solved?": ['Tell me about a production incident', 'Experience with RAG, agents & LangGraph?'],
   'Tell me about a production incident': ["What's the hardest problem you've solved?", 'Why should we hire you?'],
   'Tell me about your education': ['What are you working on right now?', "What's your technical background?"],
-  'Experience with RAG, agents & LangGraph?': ['How does this assistant work?', '🧪 Try to make me hallucinate'],
-  'How does this assistant work?': ['🧪 Try to make me hallucinate', 'Why should we hire you?'],
+  'Experience with RAG, agents & LangGraph?': ['How does this assistant work?', 'Try to make me hallucinate'],
+  'How does this assistant work?': ['Try to make me hallucinate', 'Why should we hire you?'],
 };
 const DEFAULT_FOLLOW_UPS = ['Why should we hire you?', "What's your strongest project?", 'How do I reach Pavan?'];
-
-// Pre-written answers (his words) — used when the live brain is unreachable,
-// so every core question still lands perfectly.
-const OFFLINE_ANSWERS = {
-  'Introduce yourself':
-    "I'm Pavan — an AI engineer who ships. The quick version: I was the first person to bring AI into 100 Miles of Summer, where I built an AI health coach now in front of 270,000+ people. Before that I was founding engineer on a crowd-safety platform that protected 20,000 people live at AfroTech. I own the whole pipeline — data, model, backend, frontend, deploy — and my rule is simple: **it's not done until real people rely on it.** Ask me anything — the stories are better than the resume. 😄",
-  'What are you working on right now?':
-    "Right now I'm the full-stack AI engineer at 100 Miles of Summer — I was the first to bring AI into the company. I built QUANTUM, an AI health coach grounded in real wearable data, and the platform it runs on — now serving 270,000+ people. And yes, this assistant you're talking to? Also me. Well… us. 😄",
-  'Do you need visa sponsorship?':
-    "Short version: **I don't need sponsorship until mid-2028.** My STEM OPT runs through June 2028 — you could hire me tomorrow with zero paperwork, and you get two full years to judge me on shipped work before sponsorship is even a conversation. And honestly, that's my favorite part of the deal: someone with everything to prove brings a level of ownership that comfort can't buy. By 2028, my plan is for the H-1B to be the easiest yes you'll ever sign — backed by two years of receipts, not promises.",
-  "What's the hardest problem you've solved?":
-    "Making an LLM trustworthy enough to ship. At Vosyn our agent hallucinated about 8% of the time — fine in a demo, a liability in production. I rebuilt the retrieval and added guardrails until it hit **2%**, which cut human escalations by 42%. The lesson that stuck: the model is the easy part — the system that keeps it honest is the real work.",
-  "What's your technical background?":
-    "Full-stack with an AI core. Python and TypeScript daily; LLMs, RAG, and agents with LangChain and LangGraph; FastAPI and Node on the back, React and React Native on the front; AWS, Docker, and Kubernetes to keep it alive — plus evals and observability, because **AI you can't measure is AI you can't trust.** And here's the honest part: in small teams I never got to say \"that's not my layer\" — **I'm not broad because I'm unfocused; real products forced me to become useful wherever the fire was.** Which layer do you want to go deep on?",
-  'Tell me about your education':
-    "Master's in Computer Science from the University of North Texas, and a bachelor's in Electronics & Communication Engineering from SRM in India. The bachelor's gave me the engineering mindset — systems, signals, discipline; the master's pulled me deep into software and AI. But the best part of my education wasn't the classroom: at UNT I was simultaneously building AI assistants, mentoring 200+ students, and running 20+ workshops. **I didn't just study CS — I built with it, taught it, broke things with it, and learned to make it useful for real people.**",
-  'Tell me about a production incident':
-    "Krowd Guide, live event night, 10 p.m. — my founder calls: \"something is breaking.\" That sentence wakes an engineer faster than coffee. ☕ The twist: it was breaking for the best reason — way more people were using it than we planned, and real attendees depended on it for safer routes. Burst traffic was choking the backend and the AI pipeline, which still had prototype-level limits. I isolated the failure domain, scaled past the free-tier constraints, spread traffic across pods, and moved hot paths to cached insights and fallbacks instead of full reasoning. **Stable by 2 a.m.** Before that night, scale was something I planned for. After it, scale became something I respect.",
-  'How did you cut the false positives?':
-    "Two-stage gating. Stage one: signals and heuristics — motion, trajectory, physics — build a candidate event. Stage two: a threat lexicon filters it before anyone gets pinged. For low-light and blur, I bundle multi-frame context and peak-motion keyframes as **evidence**, so even when model confidence drops, a human can verify in seconds. Alerts went from noise to something a security team actually acts on.",
-  'How does this assistant work?':
-    "Glad you asked — **I'm his work, not just his words.** Under the hood: a LangGraph agent (retrieve → generate) on a serverless function, Gemini with automatic Groq fallback so one rate limit never kills me, answering only from a grounded knowledge base of his real projects — same discipline he ships professionally: grounding, guardrails, honest refusals. The voice? His real voice, AI-cloned, pre-generated so it's instant and free. Go ahead — try to break me. 😄",
-  '🧪 Try to make me hallucinate':
-    "Love it — you're my favorite kind of visitor. 😄 Here's the deal: I only answer from Pavan's real, verified work. Ask me if he worked at Google (he didn't), whether he has 20 years of experience (he doesn't), or about some framework he's never touched — **I'll tell you the truth every time.** Honesty under pressure is the whole demo. Fire away.",
-  'How do I reach Pavan?':
-    "Easiest ways: the **contact section** right on this site (he replies within a day), or **LinkedIn** — both buttons are right below this chat. If you're a recruiter with a role in mind, mention the team and stack and he'll come back with specifics, fast.",
-};
 
 const GREETING = {
   role: 'assistant',
   content:
-    "Hey — I'm GPK, Pavan's AI twin. Real stories, real numbers, zero fluff. Ask me anything — my projects, how I build, whether I'm the engineer you're looking for. I'll keep it short and human. Shoot. 🎯",
+    "Hey — I'm GPK, Pavan's AI twin. Real stories, real numbers, zero fluff. Ask me anything — my projects, how I build, whether I'm the engineer you're looking for. I'll keep it short and human.",
   done: true,
 };
 
@@ -170,9 +145,9 @@ export function AIAgent() {
 
   useEffect(() => { if (!open) stopVoice(); }, [open]);
 
-  const markDone = useCallback((idx, question) => {
+  const markDone = useCallback((idx, question, related) => {
     setMessages(prev => prev.map((m, i) => (i === idx ? { ...m, done: true } : m)));
-    setFollowUps(FOLLOW_UPS[question] || DEFAULT_FOLLOW_UPS);
+    setFollowUps(related?.length ? related : FOLLOW_UPS[question] || DEFAULT_FOLLOW_UPS);
   }, []);
 
   const ask = async (question) => {
@@ -184,6 +159,12 @@ export function AIAgent() {
     const history = messages.filter(m => m !== GREETING).map(({ role, content }) => ({ role, content }));
     setMessages(prev => [...prev, { role: 'user', content: q, done: true }]);
     setInput('');
+    // Voice-backed questions answer from the clip's exact transcript, so what you
+    // hear always matches what you read (and it's instant — no API call).
+    if (clip && VOICE_SCRIPTS[clip]) {
+      setMessages(prev => [...prev, { role: 'assistant', content: VOICE_SCRIPTS[clip], clip, question: q }]);
+      return;
+    }
     setLoading(true);
     try {
       const res = await fetch('/api/chat', {
@@ -198,18 +179,25 @@ export function AIAgent() {
       } else if (!res.ok || !data.answer) {
         throw new Error('bad response');
       } else {
-        setMessages(prev => [...prev, { role: 'assistant', content: data.answer, clip, question: q }]);
+        setMessages(prev => [...prev, {
+          role: 'assistant',
+          content: data.answer,
+          question: q,
+          related: data.related,
+          verified: data.provider === 'retrieval' && data.grounded,
+        }]);
       }
     } catch {
-      // Offline chain: clip transcript (voice already playing) → pre-written answer → fallback line.
-      let content = VOICE_SCRIPTS[clip] || OFFLINE_ANSWERS[q];
-      let usedClip = clip;
-      if (!content) {
-        if (voiceOn) playVoice('fallback');
-        content = VOICE_SCRIPTS.fallback;
-        usedClip = 'fallback';
+      // API unreachable (offline, blocked, static hosting): run the same
+      // retrieval in the browser. Only if that chunk can't load either do we
+      // fall back to the one generic line.
+      try {
+        const { answerQuestion } = await import('../../lib/retrieval.js');
+        const r = answerQuestion(q, history);
+        setMessages(prev => [...prev, { role: 'assistant', content: r.answer, question: q, related: r.related, verified: r.grounded }]);
+      } catch {
+        setMessages(prev => [...prev, { role: 'assistant', content: VOICE_SCRIPTS.fallback, question: q }]);
       }
-      setMessages(prev => [...prev, { role: 'assistant', content, clip: usedClip, question: q }]);
     } finally {
       setLoading(false);
     }
@@ -259,7 +247,7 @@ export function AIAgent() {
               <div>
                 <p className="text-sm font-bold leading-tight">GPK</p>
                 <p className="text-[11px] text-muted-foreground leading-tight">
-                  {loading ? 'thinking…' : speakingClip ? '🔊 speaking — my real voice' : "Pavan's AI twin · real answers, zero fluff"}
+                  {loading ? 'thinking…' : speakingClip ? 'speaking — my real voice' : "Pavan's AI twin · real answers, zero fluff"}
                 </p>
               </div>
             </div>
@@ -294,9 +282,14 @@ export function AIAgent() {
                   }`}
                 >
                   {m.role === 'assistant' && !m.done ? (
-                    <Typewriter text={m.content} onTick={scrollDown} onDone={() => markDone(i, m.question)} />
+                    <Typewriter text={m.content} onTick={scrollDown} onDone={() => markDone(i, m.question, m.related)} />
                   ) : (
                     renderRich(m.content)
+                  )}
+                  {m.role === 'assistant' && m.verified && m.done && (
+                    <p className="mt-1.5 text-[11px] text-muted-foreground">
+                      ✓ Verified answer — retrieved from Pavan's notes, not generated
+                    </p>
                   )}
                   {m.role === 'assistant' && m.clip && m.done && (
                     <button

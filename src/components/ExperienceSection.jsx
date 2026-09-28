@@ -1,8 +1,12 @@
-import { useState, useEffect, useRef } from 'react';
+import { lazy, Suspense, useState, useEffect, useMemo, useRef } from 'react';
 import { experiences } from '../data/experiences';
 import { RolePanel } from './experience/RolePanel';
 import { RecruiterControls } from './experience/RecruiterControls';
-import { ExperienceCaseStudy } from './ExperienceCaseStudy';
+import { yearSpan } from '../lib/dates';
+
+// The full-screen case study is heavy and only opens on click — load it on demand.
+const ExperienceCaseStudy = lazy(() =>
+  import('./ExperienceCaseStudy').then(m => ({ default: m.ExperienceCaseStudy })));
 
 export function ExperienceSection() {
   const [activeRole, setActiveRole] = useState(experiences[0].id);
@@ -15,9 +19,10 @@ export function ExperienceSection() {
 
   // Filter logic
   const domainFilters = ['All', 'AI/ML', 'Full-Stack', 'Infra/MLOps', 'Research', 'Real-time'];
-  const filteredExperiences = filter === 'All'
-    ? experiences
-    : experiences.filter(exp => exp.domainTags.includes(filter));
+  const filteredExperiences = useMemo(
+    () => (filter === 'All' ? experiences : experiences.filter(exp => exp.domainTags.includes(filter))),
+    [filter]
+  );
 
   // Intersection Observer for active role tracking (Center-band detection)
   useEffect(() => {
@@ -30,10 +35,7 @@ export function ExperienceSection() {
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveRole(entry.target.id);
-          window.history.replaceState(null, null, `#experience/${entry.target.id}`);
-        }
+        if (entry.isIntersecting) setActiveRole(entry.target.id);
       });
     }, options);
 
@@ -42,28 +44,6 @@ export function ExperienceSection() {
     });
 
     return () => observer.disconnect();
-  }, [mode, filteredExperiences]);
-
-  // Smooth Timeline Progress Tracking
-  const [scrollProgress, setScrollProgress] = useState(0);
-  useEffect(() => {
-    if (mode !== 'cinematic') return;
-
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-
-      // Calculate how far we've scrolled through the section
-      // 0 at top of section, 1 at bottom
-      const totalHeight = rect.height;
-      const scrolled = Math.max(0, Math.min(1, (viewportHeight / 2 - rect.top) / totalHeight));
-      setScrollProgress(scrolled * 100);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial check
-    return () => window.removeEventListener('scroll', handleScroll);
   }, [mode, filteredExperiences]);
 
   // Handle hash routing on load
@@ -78,6 +58,18 @@ export function ExperienceSection() {
     }
   }, []);
 
+  // Keep the active role valid when a filter hides it.
+  useEffect(() => {
+    if (filteredExperiences.length && !filteredExperiences.some(e => e.id === activeRole)) {
+      setActiveRole(filteredExperiences[0].id);
+    }
+  }, [filteredExperiences, activeRole]);
+
+  const activeIndex = Math.max(0, filteredExperiences.findIndex(e => e.id === activeRole));
+  const progress = filteredExperiences.length > 1
+    ? (activeIndex / (filteredExperiences.length - 1)) * 100
+    : 100;
+
   const handleJump = (id) => {
     setActiveRole(id); // Force update state immediately
 
@@ -86,7 +78,7 @@ export function ExperienceSection() {
       const element = document.getElementById(id);
       if (element) {
         // Calculate a slight offset for the aesthetic header in cinematic mode
-        const yOffset = mode === 'cinematic' ? -150 : -80;
+        const yOffset = mode === 'cinematic' ? -120 : -80;
         const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
 
         window.scrollTo({ top: y, behavior: 'smooth' });
@@ -103,7 +95,7 @@ export function ExperienceSection() {
 
       <div className="container mx-auto px-4 max-w-7xl relative z-10">
         {/* Header */}
-        <div className="pt-32 mb-20 lg:pl-36">
+        <div className="pt-32 mb-20 lg:pl-[13.5rem]">
           <span className="text-primary text-sm font-black uppercase tracking-[0.5em] mb-4 block animate-fade-in">Experience OS</span>
           <h2 className="text-6xl md:text-8xl font-black tracking-tighter text-foreground leading-[0.8] mb-8">
             <span className="block italic opacity-50 uppercase">Work</span>
@@ -114,7 +106,7 @@ export function ExperienceSection() {
           </p>
         </div>
 
-        <div className="lg:pl-36">
+        <div className="lg:pl-[13.5rem]">
           <RecruiterControls
             filters={domainFilters}
             activeFilter={filter}
@@ -122,57 +114,62 @@ export function ExperienceSection() {
             onJump={handleJump}
             mode={mode}
             onToggleMode={setMode}
-            experiences={experiences}
+            experiences={filteredExperiences}
           />
         </div>
 
         <div className="relative flex">
-          {/* Timeline Rail */}
-          {mode === 'cinematic' && (
-            <div className="hidden lg:block sticky top-[40vh] w-24 h-fit mr-12 shrink-0">
-              <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[2px] bg-border/20 rounded-full h-[70vh]">
-                {/* Active Progress Line Tracking Marker */}
+          {/* Timeline rail: company + years, readable at a glance. Sticky within the
+              viewport and scrollable on short screens so nothing hangs off-screen. */}
+          {mode === 'cinematic' && filteredExperiences.length > 0 && (
+            <nav
+              aria-label="Experience timeline"
+              className="hidden lg:block sticky top-28 self-start w-44 mr-10 shrink-0 max-h-[calc(100vh-8rem)] overflow-y-auto"
+            >
+              <ol className="relative ml-[5px] border-l-2 border-border/60">
                 <div
-                  className="absolute top-0 left-0 w-full bg-primary transition-all duration-500 rounded-full"
-                  style={{
-                    height: `${(experiences.findIndex(e => e.id === activeRole) / (experiences.length - 1)) * 100}%`
-                  }}
+                  aria-hidden="true"
+                  className="absolute -left-[2px] top-0 w-[2px] bg-primary rounded-full transition-all duration-500"
+                  style={{ height: `${progress}%` }}
                 />
-              </div>
-
-              {/* Nodes */}
-              <div className="relative flex flex-col items-center justify-between h-[70vh] py-0">
-                {experiences.map((exp) => {
+                {filteredExperiences.map((exp) => {
                   const isActive = activeRole === exp.id;
                   return (
-                    <button
-                      key={exp.id}
-                      onClick={() => handleJump(exp.id)}
-                      className={`group relative w-12 h-12 rounded-2xl bg-card border-2 flex items-center justify-center text-xl transition-all duration-500 z-10 
-                                 ${isActive
-                          ? 'border-primary scale-125 shadow-[0_0_30px_rgba(66,133,244,0.4)] z-20'
-                          : 'border-border/50 grayscale opacity-30 hover:opacity-100 hover:grayscale-0 hover:scale-110'}`}
-                    >
-                      <span className={`${isActive ? 'animate-pulse-subtle' : ''}`}>{exp.heroMotif.emoji}</span>
-
-                      {/* Traveling Glow Marker */}
-                      {isActive && (
-                        <div className="absolute inset-[-4px] rounded-2xl border-2 border-primary animate-ping opacity-20 pointer-events-none" />
-                      )}
-
-                      {/* Tooltip on Hover */}
-                      <div className="absolute left-full ml-4 px-3 py-1 bg-card border border-border rounded-lg text-[10px] font-black uppercase tracking-widest text-foreground opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                        {exp.company}
-                      </div>
-                    </button>
+                    <li key={exp.id}>
+                      <button
+                        onClick={() => handleJump(exp.id)}
+                        aria-current={isActive ? 'step' : undefined}
+                        title={exp.company}
+                        className="group relative block w-full text-left pl-5 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-r-lg"
+                      >
+                        <span
+                          aria-hidden="true"
+                          className={`absolute -left-[7px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 transition-colors duration-300 ${isActive ? 'bg-primary border-primary' : 'bg-background border-border group-hover:border-primary/60'}`}
+                        />
+                        <span className={`block text-sm leading-tight truncate transition-colors duration-300 ${isActive ? 'font-bold text-foreground' : 'font-medium text-muted-foreground group-hover:text-foreground'}`}>
+                          {exp.shortName || exp.company}
+                        </span>
+                        <span className={`block text-[11px] mt-0.5 tabular-nums ${isActive ? 'text-primary font-semibold' : 'text-muted-foreground/80'}`}>
+                          {yearSpan(exp.dateRange)}
+                        </span>
+                      </button>
+                    </li>
                   );
                 })}
-              </div>
-            </div>
+              </ol>
+            </nav>
           )}
 
           {/* Role Panels */}
-          <div className="flex-1 space-y-32">
+          <div className="flex-1 min-w-0 space-y-32">
+            {filteredExperiences.length === 0 && (
+              <p className="py-16 text-center text-muted-foreground">
+                No roles match this filter.{' '}
+                <button onClick={() => setFilter('All')} className="font-semibold text-primary underline-offset-4 hover:underline">
+                  Show all
+                </button>
+              </p>
+            )}
             {filteredExperiences.map((exp) => (
               <div
                 key={exp.id}
@@ -190,11 +187,11 @@ export function ExperienceSection() {
             ))}
           </div>
         </div>
-      </div >
+      </div>
 
       {/* Case Study Window */}
-      {
-        openCaseStudyId && (
+      {openCaseStudyId && (
+        <Suspense fallback={null}>
           <ExperienceCaseStudy
             id={openCaseStudyId}
             onClose={() => {
@@ -203,8 +200,8 @@ export function ExperienceSection() {
               window.history.replaceState(null, null, '#experience');
             }}
           />
-        )
-      }
-    </section >
+        </Suspense>
+      )}
+    </section>
   );
 }

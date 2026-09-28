@@ -202,7 +202,7 @@ const SkillCard = ({ name }) => {
 
   return (
     <div
-      className="group relative h-32 md:h-44 flex flex-col items-center justify-center p-4 rounded-3xl transition-all duration-500 active:scale-90 touch-none overflow-hidden bg-card border border-border hover:border-primary/20 hover:shadow-[0_0_40px_rgba(0,0,0,0.05)] shadow-sm cursor-pointer"
+      className="group relative h-32 md:h-44 flex flex-col items-center justify-center p-4 rounded-3xl transition-all duration-500 overflow-hidden bg-card border border-border hover:border-primary/20 hover:shadow-[0_0_40px_rgba(0,0,0,0.05)] shadow-sm"
     >
       <div
         className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-700 blur-[40px] pointer-events-none"
@@ -299,7 +299,7 @@ export function SkillsSection() {
       <div className="absolute -top-[20%] -right-[10%] w-[1000px] h-[1000px] bg-primary/10 blur-[250px] rounded-full animate-mesh-1 -z-10" />
       <div className="absolute -bottom-[20%] -left-[10%] w-[1000px] h-[1000px] bg-blue-600/10 blur-[250px] rounded-full animate-mesh-2 -z-10" />
 
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none -z-10" />
+      <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none -z-10" />
 
       <div className="container mx-auto px-4 max-w-7xl relative z-10">
         <div className="text-center mb-28 space-y-6 flex flex-col items-center animate-fade-up">

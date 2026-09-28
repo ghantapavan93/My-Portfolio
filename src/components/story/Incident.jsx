@@ -16,9 +16,9 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 const GRAPH_PATH = 'M0,168 L60,164 L110,158 L150,140 L185,96 L215,52 L245,30 L275,44 L305,26 L335,58 L365,38 L400,70 L440,104 L490,136 L540,156 L600,164';
 
 const ALERTS = [
-  { id: 'a1', text: '⚠ LATENCY ↑ 4×', cls: 'text-red-400 border-red-500/40 bg-red-500/10' },
-  { id: 'a2', text: '⚠ QUEUE BACKLOG', cls: 'text-red-400 border-red-500/40 bg-red-500/10' },
-  { id: 'a3', text: '⚠ USERS SURGING', cls: 'text-amber-400 border-amber-500/40 bg-amber-500/10' },
+  { id: 'a1', text: 'LATENCY ↑ 4×', cls: 'text-red-400 border-red-500/40 bg-red-500/10' },
+  { id: 'a2', text: 'QUEUE BACKLOG', cls: 'text-red-400 border-red-500/40 bg-red-500/10' },
+  { id: 'a3', text: 'USERS SURGING', cls: 'text-amber-400 border-amber-500/40 bg-amber-500/10' },
 ];
 const FIXES = [
   { id: 'f1', text: '✓ CACHE: ON' },

@@ -3,6 +3,7 @@ import { Send, Copy, Check, Mail, MessageSquare, User } from 'lucide-react'
 import { Button } from './ui/button'
 import confetti from 'canvas-confetti'
 import emailjs from '@emailjs/browser'
+import { EMAIL } from '../lib/links'
 
 export function ContactSection() {
   const [activeTab, setActiveTab] = useState('email');
@@ -13,7 +14,7 @@ export function ContactSection() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [sectionAnimated, setSectionAnimated] = useState(false);
   const sectionRef = useRef(null);
-  const contactEmail = "gpavankalyan1102@gmail.com";
+  const contactEmail = EMAIL;
   
   // Handle intersection animation
   useEffect(() => {
@@ -23,7 +24,7 @@ export function ContactSection() {
     );
     
     if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => sectionRef.current && observer.unobserve(sectionRef.current);
+    return () => observer.disconnect();
   }, [sectionAnimated]);
   
   // Copy email to clipboard

@@ -1,4 +1,5 @@
 import { Card, CardContent } from './ui/card'
+import { StatusBadge } from './FeaturedProjects';
 import { ArrowRight, Github, ExternalLink, Globe, X, ChevronRight, Database, Layout, Server, Shield, Zap, Layers, CheckCircle2, Play } from 'lucide-react'
 import { Button } from './ui/button'
 import { useRef, useEffect, useState } from 'react'
@@ -7,6 +8,7 @@ import { VoiceButton } from './VoiceButton'
 export function ProjectsSection() {
   const sectionRef = useRef(null);
   const [activeProject, setActiveProject] = useState(null); // For Learn More modal
+  const [filter, setFilter] = useState('All');
 
   // Data for Project-H: AI-Powered Health & Fitness Assistant
   const projectHLearnMore = {
@@ -20,9 +22,9 @@ export function ProjectsSection() {
     liveUrl: "https://projhealth.com",
     repoUrl: "https://github.com/ghantapavan93/project-h",
     technologies: ["React", "Flask", "OpenAI GPT-4o", "Tailwind CSS", "Apple HealthKit", "RAG", "Recharts", "Machine Learning"],
-    heroImage: "/projects/project-h/thumbnail.png",
+    heroImage: "/projects/project-h/thumbnail.webp",
     gallery: [
-      "/projects/project-h/thumbnail.png"
+      "/projects/project-h/thumbnail.webp"
     ],
     story: [
       {
@@ -35,7 +37,7 @@ export function ProjectsSection() {
         heading: "'Oats' — Your AI Health Coach",
         text: "Oats is powered by GPT-4o + RAG, trained on 20K+ biometric data points from Apple Watch and WHOOP APIs. Ask questions like 'Why am I tired today?' and get evidence-backed answers referencing your sleep stages, HRV, strain, and recovery. Multi-turn dialogue keeps context across the entire conversation.",
         bullets: ["LLM + RAG for Personalized Coaching", "20K+ Biometric Data Points", "Multi-Turn Context Awareness"],
-        image: "/projects/project-h/thumbnail.png",
+        image: "/projects/project-h/thumbnail.webp",
         imageCaption: "Oats AI Coach Interface",
         reverse: false
       },
@@ -44,7 +46,7 @@ export function ProjectsSection() {
         heading: "Sleep Intelligence Dashboard",
         text: "Visualize REM, Core, and Deep sleep with interactive pie charts and timelines. The system parses Apple Health XML to extract sleep stages, then correlates them with recovery scores and strain metrics. Users see exactly how their sleep quality impacts next-day performance.",
         bullets: ["Custom XML Parser for Apple Health", "REM/Core/Deep Visualizations", "Recovery Score Correlation"],
-        image: "/projects/project-h/thumbnail.png",
+        image: "/projects/project-h/thumbnail.webp",
         imageCaption: "Sleep Analytics Dashboard",
         reverse: true
       },
@@ -53,7 +55,7 @@ export function ProjectsSection() {
         heading: "Personalized Meal & Workout Plans",
         text: "The platform generates custom meal and workout plans based on your goals (weight loss, muscle gain, endurance) and current biometrics. Rule-based logic adapts suggestions in real-time: high strain? Suggest recovery meals. Low HRV? Recommend lighter workouts.",
         bullets: ["Goal-Based Plan Generation", "Real-Time Biometric Adaptation", "Nutrition + Workout Sync"],
-        image: "/projects/project-h/thumbnail.png",
+        image: "/projects/project-h/thumbnail.webp",
         imageCaption: "Custom Meal & Workout Planner",
         reverse: false
       },
@@ -158,13 +160,13 @@ export function ProjectsSection() {
     liveUrl: "https://design-room-five.vercel.app/",
     repoUrl: "https://github.com/ghantapavan93/Design-Room",
     technologies: ["React", "AI Segmentation", "Real-Time Collaboration", "Design Systems", "Proposal Workflow", "Vercel"],
-    heroImage: "/projects/design-room/hero.png",
+    heroImage: "/projects/design-room/hero.webp",
     gallery: [
-      "/projects/design-room/hero.png",
-      "/projects/design-room/ideas.png",
-      "/projects/design-room/process.png",
-      "/projects/design-room/roles.png",
-      "/projects/design-room/editor.png"
+      "/projects/design-room/hero.webp",
+      "/projects/design-room/ideas.webp",
+      "/projects/design-room/process.webp",
+      "/projects/design-room/roles.webp",
+      "/projects/design-room/editor.webp"
     ],
     story: [
       {
@@ -177,7 +179,7 @@ export function ProjectsSection() {
         heading: "Before/After AI Design Preview",
         text: "The landing experience makes the value clear immediately: upload or inspect a home photo, compare the original with an AI-designed version, and understand the transformation before committing to materials or scope.",
         bullets: ["Before/after visual comparison", "Exterior-focused AI design workflow", "Fast path from concept to client confidence"],
-        image: "/projects/design-room/hero.png",
+        image: "/projects/design-room/hero.webp",
         imageCaption: "Design Room hero with before/after exterior preview",
         reverse: false
       },
@@ -186,7 +188,7 @@ export function ProjectsSection() {
         heading: "Style Gallery and Guided Selection",
         text: "The ideas view presents curated design directions like Contemporary, Farmhouse, Japanese Modern, Coastal, Traditional, and Monochrome. This makes the product feel usable for real clients: visual choices are organized, searchable, and ready to open in the editor.",
         bullets: ["Curated exterior style catalog", "Search and category filters", "Editor handoff from inspiration to design"],
-        image: "/projects/design-room/ideas.png",
+        image: "/projects/design-room/ideas.webp",
         imageCaption: "Design style gallery with multiple exterior directions",
         reverse: true
       },
@@ -195,7 +197,7 @@ export function ProjectsSection() {
         heading: "Photo to Proposal Workflow",
         text: "The product frames the workflow in four steps: upload a property photo, let AI segment key regions, apply real-world materials in a collaborative editor, then export a polished proposal. It is built around a contractor-friendly flow, not just a visual demo.",
         bullets: ["Photo upload and segmentation path", "Material application workflow", "Proposal-ready export concept"],
-        image: "/projects/design-room/process.png",
+        image: "/projects/design-room/process.webp",
         imageCaption: "Process section showing photo to proposal flow",
         reverse: false
       },
@@ -204,7 +206,7 @@ export function ProjectsSection() {
         heading: "Real-Time Editor for Contractors",
         text: "The editor experience supports region selection, material application, save options, compare mode, locking regions, takeoff, export, and live collaboration. The project shows strong product depth because it considers how actual project teams review, approve, and share design decisions.",
         bullets: ["Region-based material editing", "Live collaboration presence", "Compare, approve, takeoff, and export actions"],
-        image: "/projects/design-room/editor.png",
+        image: "/projects/design-room/editor.webp",
         imageCaption: "Interactive editor with selected front door region",
         reverse: true
       },
@@ -244,19 +246,19 @@ export function ProjectsSection() {
     liveUrl: "https://aftab-x5sw.vercel.app/home",
     repoUrl: "https://github.com/ghantapavan93/GET-TOWED",
     technologies: ["React", "Flask", "SQLite", "Alembic", "SQLAlchemy"],
-    heroImage: "/projects/Get Towed/Main.png",
+    heroImage: "/projects/Get Towed/Main.webp",
     gallery: [
-      "/projects/Get Towed/towed-1.png",
+      "/projects/Get Towed/towed-1.webp",
       "/projects/Get Towed/towed-2.png",
-      "/projects/Get Towed/towed-3.png",
-      "/projects/Get Towed/towed-4.png",
+      "/projects/Get Towed/towed-3.webp",
+      "/projects/Get Towed/towed-4.webp",
       "/projects/Get Towed/towed-5.png",
       "/projects/Get Towed/towed-6.png",
-      "/projects/Get Towed/towed-7.png",
-      "/projects/Get Towed/towed-8.png",
+      "/projects/Get Towed/towed-7.webp",
+      "/projects/Get Towed/towed-8.webp",
       "/projects/Get Towed/towed-9.png",
-      "/projects/Get Towed/towed-10.png",
-      "/projects/Get Towed/towed-11.png"
+      "/projects/Get Towed/towed-10.webp",
+      "/projects/Get Towed/towed-11.webp"
     ],
     story: [
       {
@@ -269,7 +271,7 @@ export function ProjectsSection() {
         heading: "Public Owner Portal",
         text: "A transparent, user-friendly portal where owners can search by license plate to find their vehicle immediately. They can view clear tow details (reason, fine, location), securely pay fines, or file structured disputes if the tow was unjust.",
         bullets: ["Real-time License Plate Search", "Secure Payment Flow", "Structured Dispute Context"],
-        image: "/projects/Get Towed/towed-1.png",
+        image: "/projects/Get Towed/towed-1.webp",
         imageCaption: "Owner Portal: Search & Payment Interface",
         reverse: false
       },
@@ -278,7 +280,7 @@ export function ProjectsSection() {
         heading: "Towing Company Operations",
         text: "Gated access for towing providers to securely log in and create immutable tow records. Vehicles entered here become instantly searchable in the public portal, ensuring real-time cross-system consistency and preventing data poisoning.",
         bullets: ["Secure Authentication", "Instant Record Searchability", "Validation & Data Consistency"],
-        image: "/projects/Get Towed/towed-7.png",
+        image: "/projects/Get Towed/towed-7.webp",
         imageCaption: "Company Portal: Vehicle Record Management",
         reverse: true
       },
@@ -287,7 +289,7 @@ export function ProjectsSection() {
         heading: "Admin Command Center",
         text: "A central operational control plane to manage the entire lifecycle: users, vehicles, payments, disputes, and retrieval records. This ensures all actions are auditable and follow a defined state machine (e.g., Pending → Paid).",
         bullets: ["User & Role Management", "Payment Auditing & Analytics", "Dispute Resolution Queues"],
-        image: "/projects/Get Towed/towed-8.png",
+        image: "/projects/Get Towed/towed-8.webp",
         imageCaption: "Admin Dashboard: Payment Tracking & Analytics",
         reverse: false
       },
@@ -316,9 +318,9 @@ export function ProjectsSection() {
     liveUrl: null,
     repoUrl: "https://github.com/ghantapavan93/Medisync",
     technologies: ["React", "Node.js", "Express", "MongoDB", "JWT Auth", "REST API"],
-    heroImage: "/projects/Medisync/thumbnail.png",
+    heroImage: "/projects/Medisync/thumbnail.webp",
     gallery: [
-      "/projects/Medisync/thumbnail.png"
+      "/projects/Medisync/thumbnail.webp"
     ],
     story: [
       {
@@ -331,7 +333,7 @@ export function ProjectsSection() {
         heading: "Smart Prescription Hub",
         text: "Doctors can generate digital prescriptions with instant validation checks. These are immediately accessible to linked pharmacies and the patient's mobile-ready dashboard, eliminating paper waste and transcription errors.",
         bullets: ["Instant Digital Prescriptions", "Pharmacy Integration", "Error Reduction"],
-        image: "/projects/Medisync/thumbnail.png",
+        image: "/projects/Medisync/thumbnail.webp",
         imageCaption: "Doctor's Prescription Dashboard",
         reverse: false
       },
@@ -340,7 +342,7 @@ export function ProjectsSection() {
         heading: "Patient-Centric Portal",
         text: "Patients get a dedicated portal to view their medication history, track active prescriptions, and find nearby pharmacies. The interface is designed for accessibility, ensuring users of all ages can manage their health effectively.",
         bullets: ["Medication History Tracking", "Pharmacy Finder", "Accessible UI Design"],
-        image: "/projects/Medisync/thumbnail.png",
+        image: "/projects/Medisync/thumbnail.webp",
         imageCaption: "Patient Medical History View",
         reverse: true
       },
@@ -369,14 +371,14 @@ export function ProjectsSection() {
     liveUrl: null, // No live URL mentioned, only GitHub
     repoUrl: "https://github.com/ghantapavan93/EPISODE-COMPANION-AGENT",
     technologies: ["Python", "FastAPI", "Google Gemini", "ChromaDB", "React", "RAG"],
-    heroImage: "/Episode%20Companion%20Agent/Kochi-1.png",
+    heroImage: "/Episode%20Companion%20Agent/Kochi-1.webp",
     gallery: [
-      "/Episode%20Companion%20Agent/Kochi-1.png",
-      "/Episode%20Companion%20Agent/Kochi-2.png",
-      "/Episode%20Companion%20Agent/Kochi-3.png",
-      "/Episode%20Companion%20Agent/Kochi-4.png",
-      "/Episode%20Companion%20Agent/Kochi-5.png",
-      "/Episode%20Companion%20Agent/Kochi-6.png"
+      "/Episode%20Companion%20Agent/Kochi-1.webp",
+      "/Episode%20Companion%20Agent/Kochi-2.webp",
+      "/Episode%20Companion%20Agent/Kochi-3.webp",
+      "/Episode%20Companion%20Agent/Kochi-4.webp",
+      "/Episode%20Companion%20Agent/Kochi-5.webp",
+      "/Episode%20Companion%20Agent/Kochi-6.webp"
     ],
     story: [
       {
@@ -395,7 +397,7 @@ export function ProjectsSection() {
         heading: "Ingestion & RAG Pipeline",
         text: "The system automatically chunks and embeds episode scripts into a local vector store (ChromaDB). This enables Retrieval-Augmented Generation (RAG) to provide precise, context-aware answers to user queries, grounded in the actual content of the episode.",
         bullets: ["Automated Script Chunking", "Vector Store Embedding", "Context-Aware Retrieval"],
-        image: "/Episode%20Companion%20Agent/Kochi-2.png",
+        image: "/Episode%20Companion%20Agent/Kochi-2.webp",
         imageCaption: "RAG Pipeline Visualization",
         reverse: false
       },
@@ -404,7 +406,7 @@ export function ProjectsSection() {
         heading: "Structured Personas",
         text: "Users can interact with the content through different lenses. 'Plain English' simplifies complex topics, 'Founder Takeaway' focuses on market intent and product strategy, and 'Engineer Angle' dives into the architectural and technical details.",
         bullets: ["Multi-Persona RAG", "Business vs. Technical Views", "Tailored Insights"],
-        image: "/Episode%20Companion%20Agent/Kochi-3.png",
+        image: "/Episode%20Companion%20Agent/Kochi-3.webp",
         imageCaption: "Persona Selection Interface",
         reverse: true
       },
@@ -431,12 +433,12 @@ export function ProjectsSection() {
     role: "AI Engineer & Architect",
     timeline: "2024",
     type: "Enterprise Safety Platform",
-    liveUrl: "https://fardeen210-eagle-eye-ai-streamlitapp-cebf0r.streamlit.app/",
+    liveUrl: null, // the hosted Streamlit demo sits behind a sign-in wall
     repoUrl: "https://github.com/ghantapavan93/Eagle-Eye-AI/tree/main/Eagle-Eye-AI-main",
     technologies: ["Python", "FastAPI", "OpenCV", "PyTorch", "Docker", "AWS", "Multimodal LLM", "Vector Search"],
-    heroImage: "/projects/EagleEye AI/thumbnail.png",
+    heroImage: "/projects/EagleEye AI/thumbnail.webp",
     gallery: [
-      "/projects/EagleEye AI/thumbnail.png"
+      "/projects/EagleEye AI/thumbnail.webp"
     ],
     story: [
       {
@@ -464,7 +466,7 @@ export function ProjectsSection() {
         heading: "Solving Real-World Noise",
         text: "Challenge: 'Movement = Danger' causes false positives. Solution: A two-stage gating design. signals + heuristics build the event first, then a threat lexicon filter applies. For low-light/blur, we use multi-frame context and peak-motion keyframes, bundling evidence so human review is fast even if model confidence drops.",
         bullets: ["Two-Stage Gating", "Multi-Frame Context", "Evidence Bundling"],
-        image: "/projects/EagleEye AI/thumbnail.png",
+        image: "/projects/EagleEye AI/thumbnail.webp",
         imageCaption: "Noise Filtering & Evidence Bundling",
         reverse: false
       },
@@ -473,7 +475,7 @@ export function ProjectsSection() {
         heading: "Halt Hallucinations & Cost",
         text: "Surveillance AI cannot invent weapons. We use constrained prompts ('describe only visible') and force timestamp references. To manage compute cost, we use dynamic sampling—only 'promising' time windows get expensive reasoning, keeping throughput practical on modest infra.",
         bullets: ["Constrained Prompts", "Dynamic Sampling", "Visual-Only Grounding"],
-        image: "/projects/EagleEye AI/thumbnail.png",
+        image: "/projects/EagleEye AI/thumbnail.webp",
         imageCaption: "Cost-Aware AI Reasoning",
         reverse: true
       },
@@ -565,9 +567,9 @@ export function ProjectsSection() {
     liveUrl: null,
     repoUrl: "https://github.com/ghantapavan93/PhishBuster",
     technologies: ["Python", "Scikit-Learn", "Flask", "Pandas", "XGBoost", "React"],
-    heroImage: "/projects/phishingwebsite/thumbnail.png",
+    heroImage: "/projects/phishingwebsite/thumbnail.webp",
     gallery: [
-      "/projects/phishingwebsite/thumbnail.png"
+      "/projects/phishingwebsite/thumbnail.webp"
     ],
     story: [
       {
@@ -590,7 +592,7 @@ export function ProjectsSection() {
         heading: "High-Confidence Classification",
         text: "Leveraging ensemble models like Random Forest and XGBoost, the classifier achieves 98%+ accuracy. The system doesn't just give a yes/no; it calculates a probability score, allowing security teams to set custom thresholds for automated blocking vs. manual review.",
         bullets: ["98%+ Model Accuracy", "Probability-Based Scoring", "Ensemble Learning (XGBoost)"],
-        image: "/projects/phishingwebsite/thumbnail.png", // Assuming same thumbnail for now
+        image: "/projects/phishingwebsite/thumbnail.webp", // Assuming same thumbnail for now
         imageCaption: "Model Performance & Confusion Matrix",
         reverse: false
       },
@@ -599,7 +601,7 @@ export function ProjectsSection() {
         heading: "Real-Time Inference API",
         text: "Built with Flask, the inference API allows external systems to scan suspicious links programmatically. It handles request validation, feature extraction on-the-fly, and returns a JSON payload with the risk level and extracted metadata in milliseconds.",
         bullets: ["Sub-50ms Inference Latency", "RESTful API Integration", "Automated Feature Extraction"],
-        image: "/projects/phishingwebsite/thumbnail.png",
+        image: "/projects/phishingwebsite/thumbnail.webp",
         imageCaption: "Inference API Documentation & Logic",
         reverse: true
       },
@@ -628,11 +630,11 @@ export function ProjectsSection() {
     liveUrl: null,
     repoUrl: "https://github.com/ghantapavan93/SafePath-Airport-Transit-Assistant-for-Travelers-",
     technologies: ["React", "AI Assistant", "Travel APIs", "Real-time Data", "Navigation", "Python"],
-    heroImage: "/projects/SafePath-Airport-Transit-Assistant-for-Travelers/safepath.png",
+    heroImage: "/projects/SafePath-Airport-Transit-Assistant-for-Travelers/safepath.webp",
     gallery: [
-      "/projects/SafePath-Airport-Transit-Assistant-for-Travelers/safepath.png",
-      "/projects/SafePath-Airport-Transit-Assistant-for-Travelers/Demo video-1.gif",
-      "/projects/SafePath-Airport-Transit-Assistant-for-Travelers/demo video-2.gif"
+      "/projects/SafePath-Airport-Transit-Assistant-for-Travelers/safepath.webp",
+      "/projects/SafePath-Airport-Transit-Assistant-for-Travelers/Demo video-1.webp",
+      "/projects/SafePath-Airport-Transit-Assistant-for-Travelers/demo video-2.webp"
     ],
     story: [
       {
@@ -645,7 +647,7 @@ export function ProjectsSection() {
         heading: "Intelligent AI Travel Companion",
         text: "At the core of SafePath is an AI assistant that understands natural language queries about flights, gates, amenities, and navigation. Ask 'Where is my gate?' or 'Find the nearest coffee shop,' and get instant, context-aware responses tailored to your current location and flight status.",
         bullets: ["Natural Language Understanding", "Context-Aware Responses", "Personalized Recommendations"],
-        image: "/projects/SafePath-Airport-Transit-Assistant-for-Travelers/Demo video-1.gif",
+        image: "/projects/SafePath-Airport-Transit-Assistant-for-Travelers/Demo video-1.webp",
         imageCaption: "AI Assistant in Action",
         reverse: false
       },
@@ -654,7 +656,7 @@ export function ProjectsSection() {
         heading: "Real-Time Flight & Gate Tracking",
         text: "SafePath integrates with flight tracking APIs to provide live updates on departures, arrivals, gate changes, and delays. The system proactively alerts users to important changes, ensuring they never miss a flight or connection due to last-minute gate switches.",
         bullets: ["Live Flight Status Updates", "Gate Change Alerts", "Connection Time Warnings"],
-        image: "/projects/SafePath-Airport-Transit-Assistant-for-Travelers/demo video-2.gif",
+        image: "/projects/SafePath-Airport-Transit-Assistant-for-Travelers/demo video-2.webp",
         imageCaption: "Real-Time Flight Tracking Dashboard",
         reverse: true
       },
@@ -663,7 +665,7 @@ export function ProjectsSection() {
         heading: "Indoor Navigation & Wayfinding",
         text: "Leveraging indoor mapping technology, SafePath provides step-by-step navigation within airport terminals. Whether you need to find your gate, baggage claim, or a specific restaurant, the system generates optimized routes considering walking time and current terminal congestion.",
         bullets: ["Turn-by-Turn Terminal Navigation", "Optimized Route Planning", "Amenity Discovery"],
-        image: "/projects/SafePath-Airport-Transit-Assistant-for-Travelers/safepath.png",
+        image: "/projects/SafePath-Airport-Transit-Assistant-for-Travelers/safepath.webp",
         imageCaption: "Terminal Navigation Interface",
         reverse: false
       },
@@ -767,7 +769,7 @@ export function ProjectsSection() {
     liveUrl: "https://speechquest.vercel.app",
     repoUrl: "https://github.com/ghantapavan93/speech-app",
     technologies: ["Angular", "Firebase", "Web Speech API", "ElevenLabs API", "TypeScript"],
-    heroImage: "/projects/speechapp/thumbnail.png",
+    heroImage: "/projects/speechapp/thumbnail.webp",
     story: [
       {
         type: "intro",
@@ -779,7 +781,7 @@ export function ProjectsSection() {
         heading: "Real-Time AI Feedback",
         text: "Using the Web Speech API for recognition and ElevenLabs for realistic voice models, children receive instant, high-fidelity feedback on their pronunciation, helping them correct sounds in real-time.",
         bullets: ["90%+ Recognition Accuracy", "Bilingual Support (EN/ES)", "Interactive Visual Feedback"],
-        image: "/projects/speechapp/thumbnail.png",
+        image: "/projects/speechapp/thumbnail.webp",
         imageCaption: "A child interacting with the 'Phonetic Match' module.",
         reverse: false
       }
@@ -798,7 +800,7 @@ export function ProjectsSection() {
     liveUrl: "https://poster-a11y.vercel.app",
     repoUrl: "https://github.com/ghantapavan93/poster-evaluation-a11y",
     technologies: ["YOLOv10", "Gemini 1.5 Flash", "React", "Python", "Computer Vision"],
-    heroImage: "/projects/postera11y/thumbnail.png",
+    heroImage: "/projects/postera11y/thumbnail.webp",
     story: [
       {
         type: "intro",
@@ -810,7 +812,7 @@ export function ProjectsSection() {
         heading: "Dual-Model Architecture",
         text: "The tool uses YOLOv10 to first 'see' the layout—detecting charts, text blocks, and QR codes. Then, Gemini 1.5 Flash 'reasons' through the content to evaluate contrast, reading order, and alt-text quality, providing a comprehensive WCAG-aligned report.",
         bullets: ["Spatial Detection via YOLOv10", "Semantic Reasoning via Gemini 1.5", "Automated Remedy Suggestions"],
-        image: "/projects/postera11y/thumbnail.png",
+        image: "/projects/postera11y/thumbnail.webp",
         imageCaption: "Audit pipeline showing detected regions and AI insights.",
         reverse: false
       }
@@ -829,9 +831,9 @@ export function ProjectsSection() {
     liveUrl: "https://aetherlabs.vercel.app/",
     repoUrl: "https://github.com/ghantapavan93/aetherlabs",
     technologies: ["Next.js", "AI/ML", "Python", "Open Source", "Tailwind CSS", "Accessibility-First Design"],
-    heroImage: "/projects/aetherlabs/thumbnail.png",
+    heroImage: "/projects/aetherlabs/thumbnail.webp",
     gallery: [
-      "/projects/aetherlabs/thumbnail.png"
+      "/projects/aetherlabs/thumbnail.webp"
     ],
     story: [
       {
@@ -854,7 +856,7 @@ export function ProjectsSection() {
         heading: "A Thriving Project Ecosystem",
         text: "AetherLabs serves as the launchpad for a suite of specialized platforms. From 'EagleEye AI' (safety intelligence) to 'Smart Tutor' (RAG-driven education), each project follows a unified blueprint: high performance, grounded reasoning, and enterprise-grade accessibility.",
         bullets: ["Unified AI Architecture", "Cross-Project Synergies", "Production-Ready Open Source"],
-        image: "/projects/aetherlabs/thumbnail.png",
+        image: "/projects/aetherlabs/thumbnail.webp",
         imageCaption: "AetherLabs Ecosystem Overview",
         reverse: false
       },
@@ -863,7 +865,7 @@ export function ProjectsSection() {
         heading: "Ethical AI & Safety First",
         text: "We believe in deterministic-first reasoning where AI enhances human decision-making rather than replacing it. Our projects prioritize privacy-by-design, audit-ready logs, and cross-verified evidence, ensuring that technology serves as a reliable partner in critical environments.",
         bullets: ["Transparent Logic Chains", "Privacy-Preserving Models", "Human-in-the-Loop Design"],
-        image: "/projects/aetherlabs/thumbnail.png",
+        image: "/projects/aetherlabs/thumbnail.webp",
         imageCaption: "Safety & Integrity Dashboard",
         reverse: true
       },
@@ -892,12 +894,12 @@ export function ProjectsSection() {
     liveUrl: "https://capstone2024-five.vercel.app/",
     repoUrl: "https://github.com/Afthab33/capstone2024",
     technologies: ["Next.js", "Firebase", "React", "Tailwind CSS", "ShadCN UI", "Google Maps API"],
-    heroImage: "/projects/doctorfinder/thumbnail.png",
+    heroImage: "/projects/doctorfinder/thumbnail.webp",
     gallery: [
-      "/projects/doctorfinder/thumbnail.png",
-      "/projects/doctorfinder/search_results.png",
-      "/projects/doctorfinder/profile_view.png",
-      "/projects/doctorfinder/map_view.png"
+      "/projects/doctorfinder/thumbnail.webp",
+      "/projects/doctorfinder/search_results.webp",
+      "/projects/doctorfinder/profile_view.webp",
+      "/projects/doctorfinder/map_view.webp"
     ],
     story: [
       {
@@ -910,7 +912,7 @@ export function ProjectsSection() {
         heading: "Advanced Patient Search & Filtering",
         text: "Patients can filter through a curated database of doctors using granular criteria: specialty, city, insurance provider, and patient ratings. The search engine is optimized for speed, ensuring that users find the care they need in seconds, even with complex combinations of filters.",
         bullets: ["Multi-Criteria Search Engine", "Real-Time Filter Updates", "Insurance-Specific Search"],
-        image: "/projects/doctorfinder/search_results.png",
+        image: "/projects/doctorfinder/search_results.webp",
         imageCaption: "Search Results & Granular Filtering Interface",
         reverse: false
       },
@@ -919,7 +921,7 @@ export function ProjectsSection() {
         heading: "Interactive Map-Based Discovery",
         text: "Integrated with Google Maps API, the platform allows users to visually browse doctor locations. Selecting a map pin instantly provides an overview of the doctor's practice, allowing patients to find providers that are geographically convenient.",
         bullets: ["Visual Practice Discovery", "Distance-Based Search", "One-Click Profile Access"],
-        image: "/projects/doctorfinder/map_view.png",
+        image: "/projects/doctorfinder/map_view.webp",
         imageCaption: "Interactive Mapping & Location Awareness",
         reverse: true
       },
@@ -928,7 +930,7 @@ export function ProjectsSection() {
         heading: "Comprehensive Profiles & Scheduling",
         text: "Each doctor has a detailed professional profile showcasing their education, verified reviews, and a live availability calendar. Patients can request appointments directly through the platform, which syncs in real-time with the doctor's management dashboard.",
         bullets: ["Verified Patient Reviews", "Live Appointment Scheduling", "Doctor-Patient Communication Hub"],
-        image: "/projects/doctorfinder/profile_view.png",
+        image: "/projects/doctorfinder/profile_view.webp",
         imageCaption: "Detailed Doctor Profiles & Booking Flow",
         reverse: false
       },
@@ -957,9 +959,9 @@ export function ProjectsSection() {
     liveUrl: "https://100mosproto.vercel.app/",
     repoUrl: "https://github.com/ghantapavan93/100MoS-Proto",
     technologies: ["React Native", "Expo", "Reanimated", "TypeScript", "Skia", "Moti"],
-    heroImage: "/projects/100MoS-Proto/thumbnail.png",
+    heroImage: "/projects/100MoS-Proto/thumbnail.webp",
     gallery: [
-      "/projects/100MoS-Proto/thumbnail.png"
+      "/projects/100MoS-Proto/thumbnail.webp"
     ],
     story: [
       {
@@ -972,7 +974,7 @@ export function ProjectsSection() {
         heading: "Fluid Motion & Interaction",
         text: "Leveraging React Native Reanimated and Skia, every touch response is instantaneous and delightful. The interface breathes with the user, using micro-interactions to provide deep feedback. It's not just about tracking miles; it's about enjoying every swipe and tap along the way.",
         bullets: ["60fps Animations", "Gesture-Driven UI", "Haptic Feedback Integration"],
-        image: "/projects/100MoS-Proto/thumbnail.png",
+        image: "/projects/100MoS-Proto/thumbnail.webp",
         imageCaption: "Immersive Home Screen Experience",
         reverse: false
       },
@@ -1001,9 +1003,9 @@ export function ProjectsSection() {
     liveUrl: "https://sdv-project-website.vercel.app/",
     repoUrl: "https://github.com/Afthab33/sdv-project-website",
     technologies: ["Python", "Pandas", "Scikit-learn", "React", "D3.js", "Random Forest"],
-    heroImage: "/projects/sleepinsights/thumbnail.png",
+    heroImage: "/projects/sleepinsights/thumbnail.webp",
     gallery: [
-      "/projects/sleepinsights/thumbnail.png"
+      "/projects/sleepinsights/thumbnail.webp"
     ],
     story: [
       {
@@ -1016,7 +1018,7 @@ export function ProjectsSection() {
         heading: "Multivariate Correlation Engine",
         text: "Using Pandas and Seaborn, the platform generates correlation matrices that reveal non-obvious relationships. For example, it might detect that 'High Intensity Cardio > 8 PM' correlates with a '30% reduction in Deep Sleep,' visualizing these insights as interactive heatmaps.",
         bullets: ["Behavioral Heatmaps", "Lag-Time Analysis", "Hidden Pattern Detection"],
-        image: "/projects/sleepinsights/thumbnail.png",
+        image: "/projects/sleepinsights/thumbnail.webp",
         imageCaption: "Correlation Matrix: Habits vs. Sleep Stages",
         reverse: false
       },
@@ -1025,7 +1027,7 @@ export function ProjectsSection() {
         heading: "Predictive Quality Scoring",
         text: "Beyond simple analytics, the system uses a Random Forest Regressor to predict tonight's 'Recovery Score' based on today's inputs. This moves the platform from descriptive analytics ('You slept poorly') to prescriptive guidance ('Avoid caffeine now to save your deep sleep').",
         bullets: ["Random Forest Regression", "Prescriptive Analytics", "feature Importance Ranking"],
-        image: "/projects/sleepinsights/thumbnail.png",
+        image: "/projects/sleepinsights/thumbnail.webp",
         imageCaption: "ML Model Feature Importance",
         reverse: true
       },
@@ -1054,7 +1056,7 @@ export function ProjectsSection() {
     liveUrl: "https://diet-plan-app-woad.vercel.app/",
     repoUrl: "https://github.com/ghantapavan93/diet-plan-app",
     technologies: ["OpenAI API", "Django", "React", "Python", "Tailwind CSS", "PostgreSQL"],
-    heroImage: "/projects/dietapp/thumbnail.png",
+    heroImage: "/projects/dietapp/thumbnail.webp",
     story: [
       {
         type: "intro",
@@ -1065,7 +1067,7 @@ export function ProjectsSection() {
         type: "feature_split",
         heading: "Metabolic Math + GenAI Creativity",
         text: "The core engine first performs rigid metabolic calculations (using the Mifflin-St Jeor equation) to determine precise caloric and macro needs. It then passes these constraints to a fine-tuned LLM context, which generates recipes that are mathematically compliant but culinarily creative.",
-        image: "/projects/dietapp/thumbnail.png",
+        image: "/projects/dietapp/thumbnail.webp",
         imageCaption: "AI generating a vegan, high-protein plan in real-time.",
         bullets: [
           "Precise TDEE & Macro Calculation",
@@ -1101,14 +1103,345 @@ export function ProjectsSection() {
       observer.observe(sectionRef.current);
     }
 
-    return () => {
-      if (sectionRef.current) observer.unobserve(sectionRef.current);
-    };
+    return () => observer.disconnect();
   }, []);
+
+  // Every card in the grid. `categories` drive the filter buttons; `badge` marks
+  // proof-of-concept and in-progress work.
+  const cards = [
+    {
+      title: "Move Relay",
+      description: "Verified handoff infrastructure for home-services moves: one move arrives on three channels that disagree, and when a provider's reply is lost the system enters UNKNOWN, refuses the blind retry, and reconciles — one order, never two. 596 tests against a real Postgres.",
+      tags: ["TypeScript", "Next.js", "PostgreSQL", "Transactional Outbox", "Playwright"],
+      imageUrl: "/projects/moverelay/demo.webp",
+      liveUrl: "https://utility-connect-move-relay.vercel.app",
+      githubUrl: "https://github.com/ghantapavan93/Utility-Connect---Move-Relay",
+      caseStudyUrl: "/work/move-relay",
+      highlight: true,
+      categories: ["Backend", "AI", "Full-stack"],
+      badge: "Proof of concept",
+    },
+    {
+      title: "Project-H: AI-Powered Health Platform",
+      description: "Personalized health platform using React, Tailwind, Node.js, and OpenAI, helping users track fitness with 'Oats' AI coach and integrated biometric data analysis.",
+      tags: ["React", "OpenAI", "Node.js", "Machine Learning"],
+      imageUrl: "/projects/project-h/thumbnail.webp",
+      liveUrl: "https://projhealth.com",
+      githubUrl: "https://github.com/ghantapavan93/project-h",
+      highlight: true,
+      onLearnMore: () => setActiveProject(projectHLearnMore),
+      learnMore: true,
+      caseStudyUrl: "/work/project-h",
+      categories: ["AI", "Product", "Full-stack"],
+      badge: "In progress",
+    },
+    {
+      title: "NexusWatch",
+      description: "AI decision-support console for invoice exposure review. Tracks state thresholds, OCR review items, approval safety, and audit-ready exports through a Supabase-backed operations dashboard.",
+      tags: ["Next.js", "Supabase", "AI Workflow", "OCR", "FinOps"],
+      imageUrl: "/projects/nexuswatch/thumbnail.svg",
+      liveUrl: "https://nexus-watch-xem.vercel.app",
+      githubUrl: "https://github.com/ghantapavan93/NexusWatch-MVP",
+      highlight: true,
+      onLearnMore: () => setActiveProject(nexusWatchLearnMore),
+      learnMore: true,
+      categories: ["AI", "Full-stack", "Product"],
+      badge: "Proof of concept",
+    },
+    {
+      title: "Design Room",
+      description: "AI-powered exterior design platform that turns home photos into interactive design sessions with style galleries, region-based material editing, live collaboration, before/after comparison, and proposal-ready export workflows.",
+      tags: ["React", "AI Segmentation", "Design Tool", "Collaboration", "PropTech"],
+      imageUrl: [
+      "/projects/design-room/hero.webp",
+      "/projects/design-room/ideas.webp",
+      "/projects/design-room/process.webp",
+      "/projects/design-room/roles.webp",
+      "/projects/design-room/editor.webp"
+      ],
+      liveUrl: "https://design-room-five.vercel.app/",
+      githubUrl: "https://github.com/ghantapavan93/Design-Room",
+      highlight: true,
+      onLearnMore: () => setActiveProject(designRoomLearnMore),
+      learnMore: true,
+      categories: ["AI", "Frontend", "Product"],
+      badge: "Proof of concept",
+    },
+    {
+      title: "100 Miles of Summer",
+      description: "Premium React Native experience for summer event tracking. Features buttery-smooth 60fps animations, intuitive gesture-based UI, and a top-notch design system powered by Skia and Reanimated. The gold standard for mobile interaction.",
+      tags: ["React Native", "Expo", "Reanimated", "Skia", "Top Notch UX"],
+      imageUrl: "/projects/100MoS-Proto/thumbnail.webp",
+      liveUrl: "https://100mosproto.vercel.app/",
+      githubUrl: "https://github.com/ghantapavan93/100MoS-Proto",
+      highlight: true,
+      onLearnMore: () => setActiveProject(hundredMilesLearnMore),
+      learnMore: true,
+      categories: ["Frontend", "Product"],
+      badge: "Proof of concept",
+    },
+    {
+      title: "ShelfTrace",
+      description: "Reliability control plane for approved retail price execution — a transactional outbox, deterministic reconciliation across shelf, POS, and ecommerce, canary containment, and audit-verified recovery. Independent prototype.",
+      tags: ["Reliability Engineering", "Transactional Outbox", "Reconciliation", "Retail Systems", "Canary"],
+      imageUrl: [
+      "/projects/shelftrace/1.webp",
+      "/projects/shelftrace/2.webp",
+      "/projects/shelftrace/3.webp",
+      "/projects/shelftrace/4.webp",
+      "/projects/shelftrace/5.webp"
+      ],
+      liveUrl: "https://shelf-trace.vercel.app",
+      githubUrl: "https://github.com/ghantapavan93/ShelfTrace",
+      highlight: true,
+      categories: ["Backend", "Product"],
+      badge: "Proof of concept",
+    },
+    {
+      title: "FanFlow AI",
+      description: "Post-purchase, event-day intelligence for StubHub fans — turns a ticket confirmation into a personalized arrival plan, live fan/staff signals, and AI-explained recommendations. Rules decide, AI explains; it picks up where ChatGPT discovery ends.",
+      tags: ["AI Agent", "Event Intelligence", "Recommendations", "Rules + LLM", "StubHub"],
+      imageUrl: [
+      "/projects/fanflow/1.webp",
+      "/projects/fanflow/2.webp",
+      "/projects/fanflow/3.webp",
+      "/projects/fanflow/4.webp",
+      "/projects/fanflow/5.webp"
+      ],
+      liveUrl: "https://fan-flow-ai.vercel.app",
+      githubUrl: "https://github.com/ghantapavan93/FanFlow-AI",
+      highlight: true,
+      categories: ["AI", "Frontend", "Product"],
+      badge: "Proof of concept",
+    },
+    {
+      title: "EfficastVRA — Proof of Recovery",
+      description: "An AI agent that verifies a manufacturing line actually recovered after a fix — not just that the work order closed — and reopens on relapse. Independent, Efficast-aligned prototype on synthetic data (not affiliated with Efficast).",
+      tags: ["AI Agent", "Manufacturing", "Recovery Verification", "Anomaly Detection", "Prototype"],
+      imageUrl: [
+      "/projects/efficastvra/1.webp",
+      "/projects/efficastvra/2.webp",
+      "/projects/efficastvra/3.webp",
+      "/projects/efficastvra/4.webp"
+      ],
+      liveUrl: "https://efficast-vra.vercel.app",
+      githubUrl: "https://github.com/ghantapavan93/EfficastVRA",
+      highlight: true,
+      categories: ["AI", "Backend"],
+      badge: "Proof of concept",
+    },
+    {
+      title: "AirLock",
+      description: "Preflight layer that validates marketplace print-on-demand orders against 14 real Dreamship rejection rules, then intercepts, fixes, and replays failures before the immutable Accepted lock.",
+      tags: ["Django", "DRF", "Celery", "Postgres", "React"],
+      imageUrl: [
+      "/projects/airlock/1.webp",
+      "/projects/airlock/2.webp",
+      "/projects/airlock/3.webp"
+      ],
+      liveUrl: "https://air-lock.vercel.app",
+      highlight: true,
+      categories: ["Backend", "Full-stack"],
+      badge: "Proof of concept",
+    },
+    {
+      title: "Censys Summarization Agent",
+      description: "Full‑stack app that ingests Censys host data and produces analyst‑grade summaries: risks, insights, and next actions. Modern React UI, FastAPI backend, optional LLM rewrite, metrics, and export tools. Windows and Docker quickstart.",
+      tags: ["AI Agent", "RAG", "LLM Integration", "Cybersecurity AI", "React"],
+      imageUrl: [
+      "/projects/censys-agent/Censys-1.png",
+      "/projects/censys-agent/Censys-2.webp",
+      "/projects/censys-agent/Censys-3.webp",
+      "/projects/censys-agent/diagram.svg"
+      ],
+      liveUrl: "/projects/censys-agent/demo.html",
+      githubUrl: "https://github.com/ghantapavan93/censys-summarization-agent",
+      categories: ["AI", "Full-stack"],
+    },
+    {
+      title: "Medisync",
+      description: "A secure, HIPAA-compliant web prescription platform connecting doctors, patients, and pharmacies. Streamlines medication management with real-time tracking and digital verification.",
+      tags: ["React", "Node.js", "Healthcare", "HIPAA", "Web App"],
+      imageUrl: "/projects/Medisync/thumbnail.webp",
+      githubUrl: "https://github.com/ghantapavan93/Medisync",
+      onLearnMore: () => setActiveProject(medisyncLearnMore),
+      learnMore: true,
+      categories: ["Full-stack"],
+    },
+    {
+      title: "Episode Companion Agent",
+      description: "Microservice agent for 'AI Research Daily' episodes. Features automated RAG ingestion, vector search, and multi-persona queries (Founder, Engineer, Plain English).",
+      tags: ["AI Agent", "FastAPI", "RAG", "ChromaDB", "Gemini"],
+      imageUrl: [
+      "/Episode%20Companion%20Agent/Kochi-1.webp",
+      "/Episode%20Companion%20Agent/Kochi-2.webp",
+      "/Episode%20Companion%20Agent/Kochi-3.webp"
+      ],
+      githubUrl: "https://github.com/ghantapavan93/EPISODE-COMPANION-AGENT",
+      onLearnMore: () => setActiveProject(episodeAgentLearnMore),
+      learnMore: true,
+      categories: ["AI", "Backend"],
+    },
+    {
+      title: "Get Towed",
+      description: "A dedicated platform for vehicle towing services, enabling users to quickly request assistance. Built with React for a responsive and intuitive user experience.",
+      tags: ["React", "Web Application", "Emergency Services"],
+      imageUrl: "/projects/Get Towed/Main.webp",
+      liveUrl: "https://aftab-x5sw.vercel.app/home",
+      githubUrl: "https://github.com/ghantapavan93/GET-TOWED",
+      onLearnMore: () => setActiveProject(getTowedLearnMore),
+      learnMore: true,
+      categories: ["Full-stack", "Backend"],
+    },
+    {
+      title: "Poster Accessibility Evaluation Tool",
+      description: "Web app leveraging YOLOv10 and Gemini 1.5 Flash to assess academic posters for accessibility, providing actionable insights on WCAG compliance metrics.",
+      tags: ["YOLOv10", "Gemini 1.5", "Accessibility", "WCAG"],
+      imageUrl: "/projects/postera11y/thumbnail.webp",
+      liveUrl: "https://poster-a11y.vercel.app",
+      githubUrl: "https://github.com/ghantapavan93/poster-evaluation-a11y",
+      onLearnMore: () => setActiveProject(posterA11yLearnMore),
+      learnMore: true,
+      caseStudyUrl: "/case-studies/poster-accessibility-eval",
+      highlight: true,
+      categories: ["AI", "Full-stack"],
+    },
+    {
+      title: "Speech Quest - Speech Learning Platform",
+      description: "Bilingual speech therapy app built with Angular and Firebase, featuring 7+ interactive games with speech recognition and audio feedback via ElevenLabs API.",
+      tags: ["Angular", "Firebase", "ElevenLabs API", "Speech Recognition"],
+      imageUrl: "/projects/speechapp/thumbnail.webp",
+      liveUrl: "https://speechquest.vercel.app",
+      githubUrl: "https://github.com/ghantapavan93/speech-app",
+      onLearnMore: () => setActiveProject(speechQuestLearnMore),
+      learnMore: true,
+      caseStudyUrl: "/case-studies/speech-quest",
+      highlight: true,
+      categories: ["Frontend", "Full-stack", "Product"],
+    },
+    {
+      title: "A11yGame - Accessibility Game Portal",
+      description: "Multi-game accessibility learning portal built with React and Firebase, used by 200+ UNT students to engage with accessibility concepts interactively.",
+      tags: ["React", "Tailwind CSS", "Firebase", "Redux"],
+      imageUrl: "/projects/a11ygame/thumbnail.webp",
+      liveUrl: "https://a11ygamification.vercel.app",
+      githubUrl: "https://github.com/ghantapavan93/A11yPDF",
+      caseStudyUrl: "/case-studies/a11y-game",
+      highlight: true,
+      categories: ["Frontend", "Full-stack"],
+    },
+    {
+      title: "AI Powered Diet Plan Generator",
+      description: "An OpenAI-powered web app that generates personalized diet plans based on user preferences and dietary restrictions.",
+      tags: ["OpenAI", "Django", "Python", "React"],
+      imageUrl: "/projects/dietapp/thumbnail.webp",
+      liveUrl: "https://diet-plan-app-woad.vercel.app/",
+      githubUrl: "https://github.com/ghantapavan93/diet-plan-app",
+      onLearnMore: () => setActiveProject(dietPlanLearnMore),
+      learnMore: true,
+      highlight: true,
+      categories: ["AI", "Full-stack"],
+    },
+    {
+      title: "Doctor Finder",
+      description: "Doctor Finder is a Next.js and Firebase-powered web app that connects patients with healthcare providers based on specialty, location, insurance, and more.",
+      tags: ["JavaScript", "React", "Next.js", "Web Development"],
+      imageUrl: "/projects/doctorfinder/thumbnail.webp",
+      liveUrl: "https://capstone2024-five.vercel.app/",
+      githubUrl: "https://github.com/Afthab33/capstone2024",
+      onLearnMore: () => setActiveProject(doctorFinderLearnMore),
+      learnMore: true,
+      categories: ["Frontend", "Full-stack"],
+    },
+    {
+      title: "AetherLabs",
+      description: "AetherLabs is an innovation hub building open-source, accessible tech through research, projects, and education.",
+      tags: ["Accessibility", "Open Source", "AI/ML", "Web Development"],
+      imageUrl: "/projects/aetherlabs/thumbnail.webp",
+      liveUrl: "https://aetherlabs.vercel.app/",
+      githubUrl: "https://github.com/ghantapavan93/aetherlabs",
+      onLearnMore: () => setActiveProject(aetherLabsLearnMore),
+      learnMore: true,
+      categories: ["Product", "Frontend"],
+    },
+    {
+      title: "Sleep & Lifestyle Insights",
+      description: "An interactive web dashboard that analyzes wearable and self-reported data to uncover how daily habits like caffeine, exercise, and stress impact sleep quality and energy levels.",
+      tags: ["Data Visualization", "HealthTech", "Wearables", "D3.js"],
+      imageUrl: "/projects/sleepinsights/thumbnail.webp",
+      liveUrl: "https://sdv-project-website.vercel.app/",
+      githubUrl: "https://github.com/Afthab33/sdv-project-website",
+      onLearnMore: () => setActiveProject(sleepLifestyleLearnMore),
+      learnMore: true,
+      categories: ["Frontend"],
+    },
+    {
+      title: "AI-Powered Phishing URL Classifier",
+      description: "Phishing detection system using supervised ML, analyzing 100K+ URLs with lexical and host-based features to achieve 98%+ model accuracy.",
+      tags: ["Python", "Machine Learning", "Flask", "Cybersecurity"],
+      imageUrl: "/projects/phishingwebsite/thumbnail.webp",
+      githubUrl: "https://github.com/ghantapavan93/PhishBuster",
+      onLearnMore: () => setActiveProject(phishingLearnMore),
+      learnMore: true,
+      categories: ["AI", "Backend"],
+    },
+    {
+      title: "EagleEye AI",
+      description: "Safety-First, AI-Powered Video Intelligence Platform. Turns surveillance into real-time, evidence-grounded decision systems with deterministic reasoning and privacy-by-design.",
+      tags: ["Computer Vision", "Deep Learning", "Python", "OpenCV"],
+      imageUrl: "/projects/EagleEye AI/thumbnail.webp",
+      githubUrl: "https://github.com/ghantapavan93/Eagle-Eye-AI/tree/main/Eagle-Eye-AI-main",
+      onLearnMore: () => setActiveProject(eagleEyeLearnMore),
+      learnMore: true,
+      caseStudyUrl: "/work/eagleeye-ai",
+      categories: ["AI"],
+      badge: "Proof of concept",
+    },
+    {
+      title: "Clinical Query Assistant (RAG + LLMs)",
+      description: "AI-powered clinical assistant using Retrieval-Augmented Generation and LLMs to answer medical queries with high accuracy and context.",
+      tags: ["RAG", "LLMs", "Healthcare AI", "Python"],
+      imageUrl: "/projects/CLINICAL-QUERY-ASSISTANT-USING-RAG-AND-LLMs/interface-1.png",
+      githubUrl: "https://github.com/ghantapavan93/CLINICAL-QUERY-ASSISTANT-USING-RAG-AND-LLMS-",
+      onLearnMore: () => setActiveProject(clinicalQueryLearnMore),
+      learnMore: true,
+      categories: ["AI", "Backend"],
+    },
+    {
+      title: "PeopleMate AI – Context-Aware HR Assistant",
+      description: "Conversational AI platform for HR, providing context-aware support for employee engagement, feedback, and HR queries.",
+      tags: ["AI", "NLP", "HR Tech", "React"],
+      imageUrl: "/projects/PeopleMate-AI-Context-Aware-HR-Assistant-/thumbnail.png",
+      githubUrl: "https://github.com/ghantapavan93/PeopleMate-AI-Context-Aware-HR-Assistant-",
+      categories: ["AI", "Frontend"],
+      badge: "In progress",
+    },
+    {
+      title: "SafePath – Airport Transit Assistant",
+      description: "AI-powered assistant for airport transit, helping travelers navigate terminals, track flights, and get real-time updates.",
+      tags: ["AI Assistant", "Travel Tech", "React", "APIs"],
+      imageUrl: "/projects/SafePath-Airport-Transit-Assistant-for-Travelers/safepath.webp",
+      githubUrl: "https://github.com/ghantapavan93/SafePath-Airport-Transit-Assistant-for-Travelers-",
+      onLearnMore: () => setActiveProject(safePathLearnMore),
+      learnMore: true,
+      categories: ["AI", "Frontend"],
+    },
+    {
+      title: "Smart Tutor AI",
+      description: "AI-driven personalized teaching support platform, offering adaptive learning paths and intelligent tutoring for students.",
+      tags: ["AI", "EdTech", "Personalization", "React"],
+      imageUrl: "/projects/Smart-Tutor-AI-Clean/thumbnail.png",
+      githubUrl: "https://github.com/ghantapavan93/Smart-Tutor-AI-Clean/tree/main/Smart-Tutor-AI-AI-Driven-Personalized-Teaching-Support-main",
+      onLearnMore: () => setActiveProject(smartTutorLearnMore),
+      learnMore: true,
+      categories: ["AI", "Full-stack"],
+    },
+  ];
+  const visibleCards = filter === 'All' ? cards : cards.filter((c) => c.categories.includes(filter));
 
   return (
     <section
-      id="projects"
+      id="all-projects"
       className="py-10 md:py-14 bg-secondary/5"
       aria-labelledby="projects-heading"
     >
@@ -1124,333 +1457,40 @@ export function ProjectsSection() {
             Live Projects Portfolio
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-sm md:text-base">
-            All projects are deployed and ready to explore
+            Filter by area — live demos, source code, and case studies.
           </p>
           <div className="mt-4 flex justify-center">
             <VoiceButton clip="faq-other-projects" label="Let me walk you through these" />
           </div>
         </div>
 
+        <div role="group" aria-label="Filter projects by area" className="mb-6 md:mb-8 flex flex-wrap justify-center gap-2">
+          {['All', ...PROJECT_FILTERS].map((f) => {
+            const active = filter === f;
+            const count = f === 'All' ? cards.length : cards.filter((c) => c.categories.includes(f)).length;
+            return (
+              <button
+                key={f}
+                type="button"
+                onClick={() => setFilter(f)}
+                aria-pressed={active}
+                className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                  active
+                    ? 'border-transparent bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md shadow-primary/20'
+                    : 'border-border bg-background hover:border-primary/40 hover:text-primary'
+                }`}
+              >
+                {f} <span className={active ? 'text-white/80' : 'text-muted-foreground'}>{count}</span>
+              </button>
+            );
+          })}
+        </div>
+        <p className="sr-only" aria-live="polite">Showing {visibleCards.length} projects</p>
+
         <div ref={sectionRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-          <ProjectCard
-            title="Project-H: AI-Powered Health Platform"
-            description="Personalized health platform using React, Tailwind, Node.js, and OpenAI, helping users track fitness with 'Oats' AI coach and integrated biometric data analysis."
-            tags={["React", "OpenAI", "Node.js", "Machine Learning"]}
-            imageUrl="/projects/project-h/thumbnail.png"
-            liveUrl="https://projhealth.com"
-            githubUrl="https://github.com/ghantapavan93/project-h"
-            highlight={true}
-            onLearnMore={() => setActiveProject(projectHLearnMore)}
-            learnMore={true}
-          />
-
-          <ProjectCard
-            title="NexusWatch"
-            description="AI decision-support console for invoice exposure review. Tracks state thresholds, OCR review items, approval safety, and audit-ready exports through a Supabase-backed operations dashboard."
-            tags={["Next.js", "Supabase", "AI Workflow", "OCR", "FinOps"]}
-            imageUrl="/projects/nexuswatch/thumbnail.svg"
-            liveUrl="https://nexus-watch-xem.vercel.app"
-            githubUrl="https://github.com/ghantapavan93/NexusWatch-MVP"
-            highlight={true}
-            onLearnMore={() => setActiveProject(nexusWatchLearnMore)}
-            learnMore={true}
-          />
-
-          <ProjectCard
-            title="Design Room"
-            description="AI-powered exterior design platform that turns home photos into interactive design sessions with style galleries, region-based material editing, live collaboration, before/after comparison, and proposal-ready export workflows."
-            tags={["React", "AI Segmentation", "Design Tool", "Collaboration", "PropTech"]}
-            imageUrl={[
-              "/projects/design-room/hero.png",
-              "/projects/design-room/ideas.png",
-              "/projects/design-room/process.png",
-              "/projects/design-room/roles.png",
-              "/projects/design-room/editor.png"
-            ]}
-            liveUrl="https://design-room-five.vercel.app/"
-            githubUrl="https://github.com/ghantapavan93/Design-Room"
-            highlight={true}
-            onLearnMore={() => setActiveProject(designRoomLearnMore)}
-            learnMore={true}
-          />
-
-          <ProjectCard
-            title="100 Miles of Summer"
-            description="Premium React Native experience for summer event tracking. Features buttery-smooth 60fps animations, intuitive gesture-based UI, and a top-notch design system powered by Skia and Reanimated. The gold standard for mobile interaction."
-            tags={["React Native", "Expo", "Reanimated", "Skia", "Top Notch UX"]}
-            imageUrl="/projects/100MoS-Proto/thumbnail.png"
-            liveUrl="https://100mosproto.vercel.app/"
-            githubUrl="https://github.com/ghantapavan93/100MoS-Proto"
-            highlight={true}
-            onLearnMore={() => setActiveProject(hundredMilesLearnMore)}
-            learnMore={true}
-          />
-
-          {/* New: senior systems + AI agent prototypes */}
-          <ProjectCard
-            title="ShelfTrace"
-            description="Reliability control plane for approved retail price execution — a transactional outbox, deterministic reconciliation across shelf, POS, and ecommerce, canary containment, and audit-verified recovery. Independent prototype."
-            tags={["Reliability Engineering", "Transactional Outbox", "Reconciliation", "Retail Systems", "Canary"]}
-            imageUrl={[
-              "/projects/shelftrace/1.webp",
-              "/projects/shelftrace/2.webp",
-              "/projects/shelftrace/3.webp",
-              "/projects/shelftrace/4.webp",
-              "/projects/shelftrace/5.webp"
-            ]}
-            liveUrl="https://shelf-trace.vercel.app"
-            githubUrl="https://github.com/ghantapavan93/ShelfTrace"
-            highlight={true}
-          />
-
-          <ProjectCard
-            title="FanFlow AI"
-            description="Post-purchase, event-day intelligence for StubHub fans — turns a ticket confirmation into a personalized arrival plan, live fan/staff signals, and AI-explained recommendations. Rules decide, AI explains; it picks up where ChatGPT discovery ends."
-            tags={["AI Agent", "Event Intelligence", "Recommendations", "Rules + LLM", "StubHub"]}
-            imageUrl={[
-              "/projects/fanflow/1.webp",
-              "/projects/fanflow/2.webp",
-              "/projects/fanflow/3.webp",
-              "/projects/fanflow/4.webp",
-              "/projects/fanflow/5.webp"
-            ]}
-            liveUrl="https://fan-flow-ai.vercel.app"
-            githubUrl="https://github.com/ghantapavan93/FanFlow-AI"
-            highlight={true}
-          />
-
-          <ProjectCard
-            title="EfficastVRA — Proof of Recovery"
-            description="An AI agent that verifies a manufacturing line actually recovered after a fix — not just that the work order closed — and reopens on relapse. Independent, Efficast-aligned prototype on synthetic data (not affiliated with Efficast)."
-            tags={["AI Agent", "Manufacturing", "Recovery Verification", "Anomaly Detection", "Prototype"]}
-            imageUrl={[
-              "/projects/efficastvra/1.webp",
-              "/projects/efficastvra/2.webp",
-              "/projects/efficastvra/3.webp",
-              "/projects/efficastvra/4.webp"
-            ]}
-            liveUrl="https://efficast-vra.vercel.app"
-            githubUrl="https://github.com/ghantapavan93/EfficastVRA"
-            highlight={true}
-          />
-
-          <ProjectCard
-            title="AirLock"
-            description="Preflight layer that validates marketplace print-on-demand orders against 14 real Dreamship rejection rules, then intercepts, fixes, and replays failures before the immutable Accepted lock."
-            tags={["Django", "DRF", "Celery", "Postgres", "React"]}
-            imageUrl={[
-              "/projects/airlock/1.webp",
-              "/projects/airlock/2.webp",
-              "/projects/airlock/3.webp"
-            ]}
-            liveUrl="https://air-lock.vercel.app"
-            githubUrl="https://github.com/ghantapavan93/AirLock"
-            highlight={true}
-          />
-
-          {/* New: Censys Summarization Agent (appears right after Project-H) */}
-          <ProjectCard
-            title="Censys Summarization Agent"
-            description="Full‑stack app that ingests Censys host data and produces analyst‑grade summaries: risks, insights, and next actions. Modern React UI, FastAPI backend, optional LLM rewrite, metrics, and export tools. Windows and Docker quickstart."
-            tags={["AI Agent", "RAG", "LLM Integration", "Cybersecurity AI", "React"]}
-            imageUrl={[
-              "/projects/censys-agent/Censys-1.png",
-              "/projects/censys-agent/Censys-2.png",
-              "/projects/censys-agent/Censys-3.png",
-              "/projects/censys-agent/diagram.svg"
-            ]}
-            liveUrl="/projects/censys-agent/demo.html"
-            githubUrl="https://github.com/ghantapavan93/censys-summarization-agent"
-          />
-
-          <ProjectCard
-            title="Medisync"
-            description="A secure, HIPAA-compliant web prescription platform connecting doctors, patients, and pharmacies. Streamlines medication management with real-time tracking and digital verification."
-            tags={["React", "Node.js", "Healthcare", "HIPAA", "Web App"]}
-            imageUrl="/projects/Medisync/thumbnail.png"
-            githubUrl="https://github.com/ghantapavan93/Medisync"
-            onLearnMore={() => setActiveProject(medisyncLearnMore)}
-            learnMore={true}
-          />
-
-          <ProjectCard
-            title="Episode Companion Agent"
-            description="Microservice agent for 'AI Research Daily' episodes. Features automated RAG ingestion, vector search, and multi-persona queries (Founder, Engineer, Plain English)."
-            tags={["AI Agent", "FastAPI", "RAG", "ChromaDB", "Gemini"]}
-            imageUrl={[
-              "/Episode%20Companion%20Agent/Kochi-1.png",
-              "/Episode%20Companion%20Agent/Kochi-2.png",
-              "/Episode%20Companion%20Agent/Kochi-3.png"
-            ]}
-            githubUrl="https://github.com/ghantapavan93/EPISODE-COMPANION-AGENT"
-            onLearnMore={() => setActiveProject(episodeAgentLearnMore)}
-            learnMore={true}
-          />
-
-          <ProjectCard
-            title="Get Towed"
-            description="A dedicated platform for vehicle towing services, enabling users to quickly request assistance. Built with React for a responsive and intuitive user experience."
-            tags={["React", "Web Application", "Emergency Services"]}
-            imageUrl="/projects/Get Towed/Main.png"
-            liveUrl="https://aftab-x5sw.vercel.app/home"
-            githubUrl="https://github.com/ghantapavan93/GET-TOWED"
-            onLearnMore={() => setActiveProject(getTowedLearnMore)}
-            learnMore={true}
-          />
-
-          <ProjectCard
-            title="Poster Accessibility Evaluation Tool"
-            description="Web app leveraging YOLOv10 and Gemini 1.5 Flash to assess academic posters for accessibility, providing actionable insights on WCAG compliance metrics."
-            tags={["YOLOv10", "Gemini 1.5", "Accessibility", "WCAG"]}
-            imageUrl="/projects/postera11y/thumbnail.png"
-            liveUrl="https://poster-a11y.vercel.app"
-            githubUrl="https://github.com/ghantapavan93/poster-evaluation-a11y"
-            onLearnMore={() => setActiveProject(posterA11yLearnMore)}
-            learnMore={true}
-            caseStudyUrl="/case-studies/poster-accessibility-eval"
-            highlight={true}
-          />
-
-          <ProjectCard
-            title="Speech Quest - Speech Learning Platform"
-            description="Bilingual speech therapy app built with Angular and Firebase, featuring 7+ interactive games with speech recognition and audio feedback via ElevenLabs API."
-            tags={["Angular", "Firebase", "ElevenLabs API", "Speech Recognition"]}
-            imageUrl="/projects/speechapp/thumbnail.png"
-            liveUrl="https://speechquest.vercel.app"
-            githubUrl="https://github.com/ghantapavan93/speech-app"
-            onLearnMore={() => setActiveProject(speechQuestLearnMore)}
-            learnMore={true}
-            caseStudyUrl="/case-studies/speech-quest"
-            highlight={true}
-          />
-
-          <ProjectCard
-            title="A11yGame - Accessibility Game Portal"
-            description="Multi-game accessibility learning portal built with React and Firebase, used by 200+ UNT students to engage with accessibility concepts interactively."
-            tags={["React", "Tailwind CSS", "Firebase", "Redux"]}
-            imageUrl="/projects/a11ygame/thumbnail.png"
-            liveUrl="https://a11ygamification.vercel.app"
-            githubUrl="https://github.com/ghantapavan93/A11yPDF"
-            caseStudyUrl="/case-studies/a11y-game"
-            highlight={true}
-          />
-
-
-
-
-
-
-
-
-
-
-
-          <ProjectCard
-            title="AI Powered Diet Plan Generator"
-            description="An OpenAI-powered web app that generates personalized diet plans based on user preferences and dietary restrictions."
-            tags={["OpenAI", "Django", "Python", "React"]}
-            imageUrl="/projects/dietapp/thumbnail.png"
-            liveUrl="https://diet-plan-app-woad.vercel.app/"
-            githubUrl="https://github.com/ghantapavan93/diet-plan-app"
-            onLearnMore={() => setActiveProject(dietPlanLearnMore)}
-            learnMore={true}
-            highlight={true}
-          />
-
-          <ProjectCard
-            title="Doctor Finder"
-            description="Doctor Finder is a Next.js and Firebase-powered web app that connects patients with healthcare providers based on specialty, location, insurance, and more."
-            tags={["JavaScript", "React", "Next.js", "Web Development"]}
-            imageUrl="/projects/doctorfinder/thumbnail.png"
-            liveUrl="https://capstone2024-five.vercel.app/"
-            githubUrl="https://github.com/Afthab33/capstone2024"
-            onLearnMore={() => setActiveProject(doctorFinderLearnMore)}
-            learnMore={true}
-          />
-
-          <ProjectCard
-            title="AetherLabs"
-            description="AetherLabs is an innovation hub building open-source, accessible tech through research, projects, and education."
-            tags={["Accessibility", "Open Source", "AI/ML", "Web Development"]}
-            imageUrl="/projects/aetherlabs/thumbnail.png"
-            liveUrl="https://aetherlabs.vercel.app/"
-            githubUrl="https://github.com/ghantapavan93/aetherlabs"
-            onLearnMore={() => setActiveProject(aetherLabsLearnMore)}
-            learnMore={true}
-          />
-
-          <ProjectCard
-            title="Sleep & Lifestyle Insights"
-            description="An interactive web dashboard that analyzes wearable and self-reported data to uncover how daily habits like caffeine, exercise, and stress impact sleep quality and energy levels."
-            tags={["Data Visualization", "HealthTech", "Wearables", "D3.js"]}
-            imageUrl="/projects/sleepinsights/thumbnail.png"
-            liveUrl="https://sdv-project-website.vercel.app/"
-            githubUrl="https://github.com/Afthab33/sdv-project-website"
-            onLearnMore={() => setActiveProject(sleepLifestyleLearnMore)}
-            learnMore={true}
-          />
-
-          <ProjectCard
-            title="AI-Powered Phishing URL Classifier"
-            description="Phishing detection system using supervised ML, analyzing 100K+ URLs with lexical and host-based features to achieve 98%+ model accuracy."
-            tags={["Python", "Machine Learning", "Flask", "Cybersecurity"]}
-            imageUrl="/projects/phishingwebsite/thumbnail.png"
-            githubUrl="https://github.com/ghantapavan93/PhishBuster"
-            onLearnMore={() => setActiveProject(phishingLearnMore)}
-            learnMore={true}
-          />
-
-          <ProjectCard
-            title="EagleEye AI"
-            description="Safety-First, AI-Powered Video Intelligence Platform. Turns surveillance into real-time, evidence-grounded decision systems with deterministic reasoning and privacy-by-design."
-            tags={["Computer Vision", "Deep Learning", "Python", "OpenCV"]}
-            imageUrl="/projects/EagleEye AI/thumbnail.png"
-            githubUrl="https://github.com/ghantapavan93/Eagle-Eye-AI/tree/main/Eagle-Eye-AI-main"
-            liveUrl="https://fardeen210-eagle-eye-ai-streamlitapp-cebf0r.streamlit.app/"
-            onLearnMore={() => setActiveProject(eagleEyeLearnMore)}
-            learnMore={true}
-            voiceClip="faq-strongest-project"
-          />
-
-          <ProjectCard
-            title="Clinical Query Assistant (RAG + LLMs)"
-            description="AI-powered clinical assistant using Retrieval-Augmented Generation and LLMs to answer medical queries with high accuracy and context."
-            tags={["RAG", "LLMs", "Healthcare AI", "Python"]}
-            imageUrl="/projects/CLINICAL-QUERY-ASSISTANT-USING-RAG-AND-LLMs/interface-1.png"
-            githubUrl="https://github.com/ghantapavan93/CLINICAL-QUERY-ASSISTANT-USING-RAG-AND-LLMS-"
-            onLearnMore={() => setActiveProject(clinicalQueryLearnMore)}
-            learnMore={true}
-          />
-
-          <ProjectCard
-            title="PeopleMate AI – Context-Aware HR Assistant"
-            description="Conversational AI platform for HR, providing context-aware support for employee engagement, feedback, and HR queries."
-            tags={["AI", "NLP", "HR Tech", "React"]}
-            imageUrl="/projects/PeopleMate-AI-Context-Aware-HR-Assistant-/thumbnail.png"
-            githubUrl="https://github.com/ghantapavan93/PeopleMate-AI-Context-Aware-HR-Assistant-"
-          />
-
-          <ProjectCard
-            title="SafePath – Airport Transit Assistant"
-            description="AI-powered assistant for airport transit, helping travelers navigate terminals, track flights, and get real-time updates."
-            tags={["AI Assistant", "Travel Tech", "React", "APIs"]}
-            imageUrl="/projects/SafePath-Airport-Transit-Assistant-for-Travelers/safepath.png"
-            githubUrl="https://github.com/ghantapavan93/SafePath-Airport-Transit-Assistant-for-Travelers-"
-            onLearnMore={() => setActiveProject(safePathLearnMore)}
-            learnMore={true}
-          />
-
-
-
-          <ProjectCard
-            title="Smart Tutor AI"
-            description="AI-driven personalized teaching support platform, offering adaptive learning paths and intelligent tutoring for students."
-            tags={["AI", "EdTech", "Personalization", "React"]}
-            imageUrl="/projects/Smart-Tutor-AI-Clean/thumbnail.png"
-            githubUrl="https://github.com/ghantapavan93/Smart-Tutor-AI-Clean/tree/main/Smart-Tutor-AI-AI-Driven-Personalized-Teaching-Support-main"
-            onLearnMore={() => setActiveProject(smartTutorLearnMore)}
-            learnMore={true}
-          />
+          {visibleCards.map((card) => (
+            <ProjectCard key={card.title} {...card} />
+          ))}
         </div>
       </div>
       {/* Learn More Modal - Premium Case Study Layout */}
@@ -1705,7 +1745,9 @@ export function ProjectsSection() {
   )
 }
 
-function ProjectCard({ title, description, tags, imageUrl, githubUrl, liveUrl, highlight = false, learnMore = null, onLearnMore = null, caseStudyUrl = null, voiceClip = null }) {
+const PROJECT_FILTERS = ['AI', 'Backend', 'Full-stack', 'Frontend', 'Product'];
+
+function ProjectCard({ title, description, tags, imageUrl, githubUrl, liveUrl, highlight = false, learnMore = null, onLearnMore = null, caseStudyUrl = null, voiceClip = null, badge = null }) {
   // Support both string and array for imageUrl
   const images = Array.isArray(imageUrl) ? imageUrl : [imageUrl];
   const [current, setCurrent] = useState(0);
@@ -1783,6 +1825,11 @@ function ProjectCard({ title, description, tags, imageUrl, githubUrl, liveUrl, h
             </span>
           )}
         </h3>
+        {badge && (
+          <div className="mb-2">
+            <StatusBadge>{badge}</StatusBadge>
+          </div>
+        )}
 
         <p className="text-[11px] sm:text-xs text-muted-foreground mb-2 sm:mb-3 line-clamp-3 flex-1">{description}</p>
 

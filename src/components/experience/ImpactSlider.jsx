@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { ArrowLeftRight, TrendingUp, TrendingDown } from 'lucide-react';
 
 export const ImpactSlider = ({ data, roleTheme }) => {

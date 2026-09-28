@@ -1,4 +1,7 @@
-export const experiences = [
+// Detailed source records, one per role / engagement. The four SRM-era records
+// (robocon, lineysha, builder, alweb) are not listed on their own — they are
+// composed into a single SRM IST tenure at the bottom of this file.
+const roleRecords = [
     {
         id: "100mos",
         company: "100 Miles of Summer",
@@ -24,7 +27,6 @@ export const experiences = [
             "~97% Groundedness Score"
         ],
         heroMotif: {
-            emoji: "🏃",
             title: "Movement Platform",
             subtitle: "Full-Stack AI + Mobile"
         },
@@ -36,11 +38,11 @@ export const experiences = [
         },
         topStack: ["React Native", "Python", "FastAPI", "Docker", "LangChain", "PostgreSQL"],
         groupedTechStack: {
-            "📱 Mobile & Frontend": ["React Native", "React", "TypeScript", "Expo"],
-            "⚙️ Backend & API": ["Python", "FastAPI", "Node.js", "REST APIs", "Webhooks"],
-            "🧠 AI & LLM": ["LangChain", "GPT-4", "RAG", "Structured Outputs", "Pydantic"],
-            "🔄 Data Pipeline": ["Idempotency Keys", "Deduplication Engine", "Reconciliation", "PostgreSQL"],
-            "☁️ DevOps & Infra": ["Docker", "CI/CD", "GitHub Actions", "Vercel"]
+            "Mobile & Frontend": ["React Native", "React", "TypeScript", "Expo"],
+            "Backend & API": ["Python", "FastAPI", "Node.js", "REST APIs", "Webhooks"],
+            "AI & LLM": ["LangChain", "GPT-4", "RAG", "Structured Outputs", "Pydantic"],
+            "Data Pipeline": ["Idempotency Keys", "Deduplication Engine", "Reconciliation", "PostgreSQL"],
+            "DevOps & Infra": ["Docker", "CI/CD", "GitHub Actions", "Vercel"]
         },
         chapters: [
             { id: "overview", title: "Overview" },
@@ -90,7 +92,7 @@ export const experiences = [
                             layerTags: ["Pipeline", "Data"],
                             proofs: ["Sustained ~99% sync success across real provider event conditions by building idempotency-keyed ingestion with deduplication, replay-safe processing, ordering safeguards, and source-of-truth aggregation", "Safely handled ~18% duplicate or replayed events without double-counting, drift, or corrupted totals — maintaining ~0.5% reconciliation mismatches"],
                             tech: ["Python", "FastAPI", "PostgreSQL", "Webhooks"],
-                            src: "/100mos/thumbnail.png"
+                            src: "/100mos/thumbnail.webp"
                         }
                     }
                 ]
@@ -118,7 +120,7 @@ export const experiences = [
                             layerTags: ["AI", "LLM"],
                             proofs: ["Maintained ~99% schema validation pass rate by enforcing Pydantic structured outputs with strict type validation at every LLM response boundary", "Achieved ~97% groundedness on internal test sets by grounding all coaching responses in verified health content through RAG retrieval rather than pure generation"],
                             tech: ["LangChain", "GPT-4", "Pydantic", "RAG"],
-                            src: "/100mos/thumbnail.png"
+                            src: "/100mos/thumbnail.webp"
                         }
                     }
                 ]
@@ -146,7 +148,7 @@ export const experiences = [
                             layerTags: ["Mobile", "UX"],
                             proofs: ["Improved wearable account-linking success to ~91% and reduced onboarding setup drop-off by ~22% through progressive disclosure design, retry logic, and clear error recovery flows", "Achieved first successful sync in ~7 minutes for typical users by optimizing the OAuth → permission → initial sync path end-to-end"],
                             tech: ["React Native", "Expo", "Docker", "CI/CD"],
-                            src: "/100mos/thumbnail.png"
+                            src: "/100mos/thumbnail.webp"
                         }
                     }
                 ]
@@ -173,7 +175,7 @@ export const experiences = [
                             layerTags: ["Ops", "Internal"],
                             proofs: ["Built an internal ops console that gives the team full visibility into sync runs, reconciliation outcomes, and error states — replacing manual log-grepping with a real-time dashboard", "Designed for 'calm summer ops' so the team can monitor thousands of users across multiple wearable providers with minimal stress during peak season"],
                             tech: ["React", "FastAPI", "PostgreSQL"],
-                            src: "/100mos/thumbnail.png"
+                            src: "/100mos/thumbnail.webp"
                         }
                     }
                 ]
@@ -201,7 +203,7 @@ export const experiences = [
                             layerTags: ["ML", "Eval"],
                             proofs: ["Built an evaluation harness that tracks precision, recall, invalid-output rate, latency, and cost across every prompt, retrieval, and model change — maintaining ~99% schema validation pass rate and ~97% groundedness", "Implemented automated regression checks with golden test sets that run on every PR touching the AI layer, catching quality degradations before they reach production"],
                             tech: ["Python", "Pydantic", "CI/CD", "Golden Sets"],
-                            src: "/100mos/thumbnail.png"
+                            src: "/100mos/thumbnail.webp"
                         }
                     }
                 ]
@@ -273,7 +275,6 @@ export const experiences = [
             { label: "Tail Latency", value: "−32%", hint: "Reduced p99 spikes via TensorRT/CUDA optimization." }
         ],
         heroMotif: {
-            emoji: "🎧",
             title: "Multimodal localization",
             subtitle: "Voice & video AI"
         },
@@ -423,12 +424,12 @@ export const experiences = [
             "Escalations: -42% per 10k"
         ],
         groupedTechStack: {
-            "🧠 ML & Accel": ["PyTorch", "TensorFlow", "CUDA", "TensorRT", "ONNX Runtime"],
-            "🛰️ Serving": ["FastAPI", "gRPC", "NGINX"],
-            "📊 Data & Retrieval": ["FAISS", "Pinecone", "ChromaDB", "pgvector", "PostgreSQL"],
-            "⚙️ Infra & Ops": ["Docker", "Kubernetes", "AWS EKS", "Terraform", "GitHub Actions", "ArgoCD"],
-            "🔭 Observability": ["Prometheus", "OpenTelemetry"],
-            "🔐 Security & Access": ["IAM", "Service Roles", "Secrets Manager"]
+            "ML & Accel": ["PyTorch", "TensorFlow", "CUDA", "TensorRT", "ONNX Runtime"],
+            "Serving": ["FastAPI", "gRPC", "NGINX"],
+            "Data & Retrieval": ["FAISS", "Pinecone", "ChromaDB", "pgvector", "PostgreSQL"],
+            "Infra & Ops": ["Docker", "Kubernetes", "AWS EKS", "Terraform", "GitHub Actions", "ArgoCD"],
+            "Observability": ["Prometheus", "OpenTelemetry"],
+            "Security & Access": ["IAM", "Service Roles", "Secrets Manager"]
         },
         chapters: [
             { id: "overview", title: "Overview" },
@@ -477,8 +478,7 @@ export const experiences = [
                             metric: "274ms p95",
                             layerTags: ["ML", "Infra"],
                             proofs: ["274ms p95 sustained under 1,200+ concurrent requests", "32% reduction in p99 tail latency"],
-                            tech: ["PyTorch", "CUDA", "TensorRT", "ONNX Runtime", "FastAPI", "gRPC"],
-                            src: "/experience/vosyn-latency.png"
+                            tech: ["PyTorch", "CUDA", "TensorRT", "ONNX Runtime", "FastAPI", "gRPC"]
                         }
                     }
                 ]
@@ -506,8 +506,7 @@ export const experiences = [
                             metric: "5.2M QA",
                             layerTags: ["ML", "Data"],
                             proofs: ["5.2M QA regression coverage", "18% improvement in factual accuracy", "22% reduction in misclassification"],
-                            tech: ["Python", "PostgreSQL", "LLM-as-a-Judge"],
-                            src: "/experience/vosyn-eval.png"
+                            tech: ["Python", "PostgreSQL", "LLM-as-a-Judge"]
                         }
                     }
                 ]
@@ -534,8 +533,7 @@ export const experiences = [
                             metric: "Grounding Gate",
                             layerTags: ["ML", "Data"],
                             proofs: ["Reduction in hallucinations via enforced confidence", "Measurable release gates for retrieval updates"],
-                            tech: ["FAISS", "Pinecone", "ChromaDB", "pgvector"],
-                            src: "/experience/vosyn-arch.png"
+                            tech: ["FAISS", "Pinecone", "ChromaDB", "pgvector"]
                         }
                     }
                 ]
@@ -562,8 +560,7 @@ export const experiences = [
                             metric: "2% Hallucination",
                             layerTags: ["ML", "API"],
                             proofs: ["Hallucinations reduced from 8% to 2%", "Escalations reduced by 42% per 10k requests"],
-                            tech: ["LangChain", "LangGraph", "Python"],
-                            src: "/experience/vosyn-graph.png"
+                            tech: ["LangChain", "LangGraph", "Python"]
                         }
                     }
                 ]
@@ -591,8 +588,7 @@ export const experiences = [
                             metric: "~3% Drift Det.",
                             layerTags: ["Infra", "Observability"],
                             proofs: ["Drift detection around 3% monthly", "Latencies traced to exact model stages"],
-                            tech: ["AWS EKS", "Terraform", "Prometheus", "OpenTelemetry", "ArgoCD"],
-                            src: "/experience/vosyn-o11y.png"
+                            tech: ["AWS EKS", "Terraform", "Prometheus", "OpenTelemetry", "ArgoCD"]
                         }
                     }
                 ]
@@ -613,22 +609,11 @@ export const experiences = [
                             metric: "10+ Reports",
                             layerTags: ["ML", "Ops"],
                             proofs: ["10+ experiment reports used in sprint planning", "Design decisions backed by ablation evidence"],
-                            tech: ["Python", "Instrumentation", "A/B Testing"],
-                            src: "/experience/vosyn-reports.png"
+                            tech: ["Python", "Instrumentation", "A/B Testing"]
                         }
                     }
                 ]
             },
-            visuals: {
-                images: [
-                    { src: "/experience/vosyn-arch.png", alt: "VosynCore Architecture", caption: "Edge routing, internal gRPC, ONNX workers, vector retrieval, and metrics." },
-                    { src: "/experience/vosyn-latency.png", alt: "Latency Distribution", caption: "p50, p95, and p99 distribution showing 32% tail reduction." },
-                    { src: "/experience/vosyn-eval.png", alt: "Eval Dashboard", caption: "Language coverage and automated pass/fail regression gates." },
-                    { src: "/experience/vosyn-graph.png", alt: "Agent Graph", caption: "Planner-executor flow with explicit retry and fallback paths." },
-                    { src: "/experience/vosyn-o11y.png", alt: "Observability Panel", caption: "Prometheus metrics and OTel traces across inference stages." },
-                    { src: "/experience/vosyn-reports.png", alt: "Ablation Reports", caption: "Filmstrip of design memos and experiment failure analysis." }
-                ]
-            }
         },
         keyDecisions: [
             { decision: "Serving split: FastAPI + gRPC", why: "gRPC for internal throughput; FastAPI for control surface and routing.", tradeoff: "Two protocols to maintain, solved by shared schemas." },
@@ -662,7 +647,6 @@ export const experiences = [
             "99.95% System Uptime"
         ],
         heroMotif: {
-            emoji: "🛰️",
             title: "Crowd Intelligence",
             subtitle: "Real-time Safety"
         },
@@ -674,11 +658,11 @@ export const experiences = [
         },
         topStack: ["Python", "FastAPI", "React", "Terraform", "LangChain", "Kubernetes"],
         groupedTechStack: {
-            "🧠 AI & ML": ["PyTorch", "TensorFlow", "Keras", "vLLM", "DeepSpeed"],
-            "🤖 Agents & RAG": ["LangChain", "LangGraph", "LlamaIndex", "Pinecone", "ChromaDB"],
-            "⚙️ Backend & API": ["FastAPI", "Node.js", "TypeScript", "Docker", "Kubernetes"],
-            "☁️ Cloud & DevOps": ["AWS", "GCP", "Azure", "Terraform", "GitHub Actions"],
-            "🔭 Observability": ["Prometheus", "OpenTelemetry", "Langfuse", "Evidently AI", "MLflow"]
+            "AI & ML": ["PyTorch", "TensorFlow", "Keras", "vLLM", "DeepSpeed"],
+            "Agents & RAG": ["LangChain", "LangGraph", "LlamaIndex", "Pinecone", "ChromaDB"],
+            "Backend & API": ["FastAPI", "Node.js", "TypeScript", "Docker", "Kubernetes"],
+            "Cloud & DevOps": ["AWS", "GCP", "Azure", "Terraform", "GitHub Actions"],
+            "Observability": ["Prometheus", "OpenTelemetry", "Langfuse", "Evidently AI", "MLflow"]
         },
         chapters: [
             { id: "overview", title: "Overview" },
@@ -725,7 +709,7 @@ export const experiences = [
                             layerTags: ["Arch", "Full-Stack"],
                             proofs: ["Designed and deployed the full-stack system that served 20,000+ attendees at AfroTech Houston with zero critical failures", "Decoupled ingestion from processing using async event-driven queues, enabling horizontal scaling during peak load"],
                             tech: ["TypeScript", "Node.js", "React", "REST"],
-                            src: "/krowd-guide/home-page.png?v=2"
+                            src: "/krowd-guide/home-page.webp?v=2"
                         }
                     }
                 ]
@@ -753,7 +737,7 @@ export const experiences = [
                             layerTags: ["ML", "Data"],
                             proofs: ["Lifted predictive accuracy from 83.71% to 93.46% through rigorous iterative training, feature engineering, and statistical analysis on real-world event data", "Implemented automated release gates with regression suites and Great Expectations data validation (>99.9% schema integrity) to prevent model quality degradation"],
                             tech: ["MLflow", "DVC", "Great Expectations"],
-                            src: "/krowd-guide/j1.png?v=2"
+                            src: "/krowd-guide/j1.webp?v=2"
                         }
                     }
                 ]
@@ -780,7 +764,7 @@ export const experiences = [
                             layerTags: ["Inference", "Perf"],
                             proofs: ["Slashed p95 inference latency to <400ms using GPU-accelerated streaming, dynamic batching, and mixed-precision inference via vLLM/DeepSpeed", "Achieved 41.22% faster end-to-end processing through async FastAPI serving and distributed queue orchestration on Kubernetes"],
                             tech: ["Docker", "Kubernetes", "vLLM", "FastAPI"],
-                            src: "/krowd-guide/j7.png?v=2"
+                            src: "/krowd-guide/j7.webp?v=2"
                         }
                     }
                 ]
@@ -807,7 +791,7 @@ export const experiences = [
                             layerTags: ["AI", "UX"],
                             proofs: ["Boosted interpretability by 43.12% by building RAG-powered narrative generation that translates raw telemetry into plain-English safety explanations with source citations", "Cut reporting turnaround by 32.6% through agentic LLM workflows with human-in-the-loop guardrails and deterministic fallbacks for safety-critical context"],
                             tech: ["LangChain", "LangGraph", "Vector DBs"],
-                            src: "/krowd-guide/j2.png?v=2"
+                            src: "/krowd-guide/j2.webp?v=2"
                         }
                     }
                 ]
@@ -834,7 +818,7 @@ export const experiences = [
                             layerTags: ["DevOps", "Cloud"],
                             proofs: ["Achieved 99.27–99.95% uptime across live event windows by deploying multi-cloud AI workloads (AWS/GCP/Azure) with blue-green rollouts and automated canary evaluations", "Reduced infrastructure costs by 28.03% and regression detection time from 21 minutes to ~9 minutes through Terraform IaC, GitHub Actions CI/CD, and deep observability via Prometheus + OpenTelemetry"],
                             tech: ["Terraform", "GitHub Actions", "Prometheus"],
-                            src: "/krowd-guide/j4.png?v=2"
+                            src: "/krowd-guide/j4.webp?v=2"
                         }
                     }
                 ]
@@ -842,52 +826,52 @@ export const experiences = [
             visuals: {
                 images: [
                     {
-                        src: "/krowd-guide/home-page.png?v=2",
+                        src: "/krowd-guide/home-page.webp?v=2",
                         alt: "Krowd Guide Landing — Know the Vibe Before You Arrive",
                         caption: "The consumer-facing landing page of Krowd Guide. We solved the 'blind arrival' problem — attendees had no way to gauge crowd levels, parking, or safety before showing up to an event. This page introduces the platform's value prop with a real-time search bar, Houston Live Guide banner, and direct links to live event intelligence. Built with React and styled for instant trust."
                     },
                     {
-                        src: "/krowd-guide/houston-1.png?v=2",
+                        src: "/krowd-guide/houston-1.webp?v=2",
                         alt: "Houston Live Guide — Real-Time Event Discovery",
                         caption: "The Houston Live Guide aggregates 55+ live events with real-time crowd data. We solved the problem of fragmented event discovery — users previously had to check multiple platforms to find what's happening. This view shows category filtering (Dining, Nightlife, Networking), timeline-based event cards with 'How's the Vibe?' sentiment voting, RSVP actions, and crowd-sourced parking/wait data. Each card feeds back into our ML prediction pipeline."
                     },
                     {
-                        src: "/krowd-guide/houston-2.png?v=2",
+                        src: "/krowd-guide/houston-2.webp?v=2",
                         alt: "Crowd Density Predictions — Live Event Intelligence",
                         caption: "The deep event detail view with our core ML prediction engine in action. We solved the problem of unpredictable crowd surges — operators and attendees had no advance warning. This screen shows expected attendance (8–12 people, 66% confidence), 'vs. Typical Event' comparison bars (300% busier than usual), check-in breakdowns, activity timelines with peak-time predictions, and crowd-sourced vibe/parking/wait signals. This is the data that feeds our 93.46% accuracy model."
                     },
                     {
-                        src: "/krowd-guide/j1.png?v=2",
+                        src: "/krowd-guide/j1.webp?v=2",
                         alt: "ML Analytics Dashboard — Population & Prediction Metrics",
                         caption: "The real-time ML analytics dashboard showing Active Population (1.2M, +18.7% today), Revenue Impact ($287K, -12.3% vs forecast), High Risk Zones (12, +3 active), and Prediction Accuracy (98.4%, +0.8% this week). We solved the problem of operating blind — venue operators previously had no unified view of crowd health. This dashboard was the single pane of glass that let operators make data-driven decisions in real time, powered by our iterative ML lifecycle that pushed accuracy from 83.71% to 93.46%."
                     },
                     {
-                        src: "/krowd-guide/j2.png?v=2",
+                        src: "/krowd-guide/j2.webp?v=2",
                         alt: "City Risk Map — Geospatial Threat Visualization",
                         caption: "The City Risk Map with color-coded threat pins (Critical/Warning/Normal) plotted on a spatial grid. We solved the problem of situational blindness — security teams couldn't visualize *where* risk was concentrating across a large venue or city zone. This geospatial layer uses our RAG-enhanced classification pipeline to place risk labels based on crowd density, incident reports, and sensor data. It's the spatial foundation that drives the emergency dispatch system."
                     },
                     {
-                        src: "/krowd-guide/j3.png?v=2",
+                        src: "/krowd-guide/j3.webp?v=2",
                         alt: "Heatmap & Spatial Distribution View",
                         caption: "Spatial distribution heatmap overlaying crowd density onto venue zones. We solved the problem of 'where are the bottlenecks?' — traditional monitoring couldn't show density gradients in real time. This view transforms raw location signals into a multi-layered risk heatmap, enabling operators to deploy resources to the exact zones that are approaching capacity before a dangerous crush occurs."
                     },
                     {
-                        src: "/krowd-guide/j4.png?v=2",
+                        src: "/krowd-guide/j4.webp?v=2",
                         alt: "Business Impact Analysis — Revenue vs Cost Tracking",
                         caption: "The Business Impact Analysis chart showing revenue (blue) vs. cost (red) over event hours, with a '+$1.2M recovered this week' callout and a Live Alert Ticker streaming real-time warnings ('Max capacity exceeded by 42%', 'delay predicted'). We solved the problem of proving ROI for safety tech — stakeholders needed concrete financial evidence. This dashboard directly ties crowd management interventions to revenue protection, making the business case for continued investment."
                     },
                     {
-                        src: "/krowd-guide/j5.png?v=2",
+                        src: "/krowd-guide/j5.webp?v=2",
                         alt: "Live Alert Ticker & Risk Zones Monitor",
                         caption: "The Live Alert Ticker broadcasting WARNING and UPDATE events alongside the Risk Zones Monitor with per-zone capacity bars (Market District 78% rising, University Campus 65% falling, Entertainment Quarter 89% rising). We solved the problem of alert fatigue and information overload — operators were drowning in raw data. This view uses our RAG-powered triage to classify, prioritize, and surface only the alerts that matter, with directional trend indicators to show which zones need immediate attention."
                     },
                     {
-                        src: "/krowd-guide/j6.png?v=2",
+                        src: "/krowd-guide/j6.webp?v=2",
                         alt: "Emergency Response Console — One-Click Dispatch",
                         caption: "The Emergency Response action panel with one-click operations: Deploy Safety Teams (dispatch 8 teams to Downtown & Central Station), Activate Traffic Flow (optimize signals for emergency vehicle access), and Generate Impact Report (business disruption forecast & recovery plan). We solved the problem of slow manual coordination — dispatching teams previously required phone calls and radio. This console turns AI-recommended actions into a single button press, reducing mean-time-to-response from minutes to seconds."
                     },
                     {
-                        src: "/krowd-guide/j7.png?v=2",
+                        src: "/krowd-guide/j7.webp?v=2",
                         alt: "System Status & Observability Dashboard",
                         caption: "The System Status panel showing real-time health of all critical subsystems: Data Processing (98.7%), Prediction Engine (99.2%), and API Latency (187ms), alongside the Emergency Response console. We solved the problem of 'is the system even working?' — in safety-critical environments, operators need continuous proof that the AI pipeline is healthy. This observability layer is powered by Prometheus, OpenTelemetry, and Langfuse, enabling our 99.95% uptime SLA during live events."
                     },
@@ -965,7 +949,6 @@ export const experiences = [
             "−31% Environment Setup Issues"
         ],
         heroMotif: {
-            emoji: "🧠",
             title: "AI-First Discovery",
             subtitle: "Applied AI Studio"
         },
@@ -977,11 +960,11 @@ export const experiences = [
         },
         topStack: ["Python", "FastAPI", "LangChain", "PostgreSQL", "Docker", "Apache Airflow"],
         groupedTechStack: {
-            "🧠 AI & LLM": ["LangChain", "LangGraph", "GPT-4", "RAG", "Vector Search", "Embeddings", "Pydantic"],
-            "⚙️ Backend & API": ["Python", "FastAPI", "PostgreSQL", "REST APIs"],
-            "🔄 Pipeline & Automation": ["Apache Airflow", "Prefect", "CI/CD", "GitHub Actions"],
-            "📊 Evaluation": ["Golden Test Sets", "Rubric Scoring", "Regression Checks", "A/B Testing"],
-            "☁️ Infra": ["Docker", "AWS", "GCP", "Vertex AI", "Linux Servers"]
+            "AI & LLM": ["LangChain", "LangGraph", "GPT-4", "RAG", "Vector Search", "Embeddings", "Pydantic"],
+            "Backend & API": ["Python", "FastAPI", "PostgreSQL", "REST APIs"],
+            "Pipeline & Automation": ["Apache Airflow", "Prefect", "CI/CD", "GitHub Actions"],
+            "Evaluation": ["Golden Test Sets", "Rubric Scoring", "Regression Checks", "A/B Testing"],
+            "Infra": ["Docker", "AWS", "GCP", "Vertex AI", "Linux Servers"]
         },
         chapters: [
             { id: "overview", title: "Overview" },
@@ -1060,7 +1043,7 @@ export const experiences = [
                             layerTags: ["AI", "RAG"],
                             proofs: ["Built end-to-end LLM and RAG assistants using FastAPI, PostgreSQL, and vector search with embeddings — reducing query resolution time by 40.18% and improving human-rated answer quality by 21.36%", "Implemented hybrid retrieval combining dense vector search with structured SQL queries to produce evidence-grounded, citation-backed outputs for academic use"],
                             tech: ["LangChain", "FastAPI", "PostgreSQL", "Vector Search", "Embeddings"],
-                            src: "/contributions/Time at UNT/thumbnail-2.jpeg"
+                            src: "/contributions/Time at UNT/thumbnail-2.webp"
                         }
                     }
                 ]
@@ -1088,7 +1071,7 @@ export const experiences = [
                             layerTags: ["Education", "Leadership"],
                             proofs: ["Delivered 20+ workshops for 200+ learners and led student teams through sprint planning and code reviews, increasing successful AI project submissions by 53.12% through structured assignments and evaluation-driven iteration", "Reduced environment setup issues by 31.29% through reproducibility checklists, pre-configured Docker environments, and validation scripts"],
                             tech: ["Python", "Docker", "Jupyter", "GitHub"],
-                            src: "/Workshops/outreachmain.jpeg"
+                            src: "/Workshops/outreachmain.webp"
                         }
                     }
                 ]
@@ -1116,7 +1099,7 @@ export const experiences = [
                             layerTags: ["ML", "Eval"],
                             proofs: ["Designed evaluation harnesses with golden question sets, rubric-based scoring, and regression checks to make quality measurable across prompt, retrieval, and model iterations — preventing silent behavior drift", "Made every AI system change a measurable experiment: tracking correctness, completeness, citation quality, and safety against human-validated reference answers"],
                             tech: ["Python", "Pydantic", "Golden Sets", "Rubric Scoring"],
-                            src: "/contributions/Research paper/SUDT.png"
+                            src: "/contributions/Research paper/SUDT.webp"
                         }
                     }
                 ]
@@ -1144,7 +1127,7 @@ export const experiences = [
                             layerTags: ["Pipeline", "MLOps"],
                             proofs: ["Implemented automated pipelines using Apache Airflow and Prefect for ingestion, embedding refresh, and evaluation runs — adding latency and accuracy gates plus A/B comparisons for safe rollouts", "Created a repeatable MLOps workflow: data changes trigger embedding refresh, evaluation runs validate quality, and gates block deployment if metrics regress"],
                             tech: ["Apache Airflow", "Prefect", "Docker", "CI/CD"],
-                            src: "/contributions/Time at UNT/thumbnail-3.jpeg"
+                            src: "/contributions/Time at UNT/thumbnail-3.webp"
                         }
                     }
                 ]
@@ -1172,7 +1155,7 @@ export const experiences = [
                             layerTags: ["Research", "Architecture"],
                             proofs: ["Published 'Bridging Technology, Creativity, and Outreach' in UNT Scholarly Repository (2025), documenting a reusable reference architecture for modular RAG systems with evaluation, observability, and human-in-the-loop review", "Formalized the Initiative's engineering patterns into a citable, reproducible blueprint that other universities and teams can adopt"],
                             tech: ["RAG Architecture", "Evaluation", "Observability"],
-                            src: "/contributions/UNT Library Publication/Symposium photo.png"
+                            src: "/contributions/UNT Library Publication/Symposium photo.webp"
                         }
                     }
                 ]
@@ -1180,7 +1163,7 @@ export const experiences = [
             visuals: {
                 images: [
                     {
-                        src: "/contributions/Scrappy/scrappy-landing.png",
+                        src: "/contributions/Scrappy/scrappy-landing.webp",
                         alt: "Scrappy AI Assistant — UNT Academic Assistant landing page",
                         caption: "Scrappy, the UNT Academic Assistant — a grounded, source-cited AI companion for academics and campus life. Built as a core contributor within a five-person, faculty-supported team, it turns distributed institutional knowledge into accessible, verifiable answers with guided quick-actions (professor emails, research, academic concepts, campus resources)."
                     },
@@ -1190,32 +1173,32 @@ export const experiences = [
                         caption: "Scrappy's chat experience: students ask academic questions, draft professional emails to professors, find research and citations, and explore campus resources — every answer grounded in UNT-trusted sources with privacy-first handling."
                     },
                     {
-                        src: "/Workshops/outreachmain.jpeg?v=1",
+                        src: "/Workshops/outreachmain.webp?v=1",
                         alt: "AI-First Discovery Initiative — Main Outreach",
                         caption: "The heart of the AI-First Discovery Initiative at UNT's Discovery Park Library. This is where we ran the applied AI studio — translating cross-disciplinary needs from faculty and students into shipped AI solutions. We solved the problem of making AI tangible and accessible in an academic environment where most learners had zero hands-on experience."
                     },
                     {
-                        src: "/Workshops/outreach.jpeg?v=1",
+                        src: "/Workshops/outreach.webp?v=1",
                         alt: "Workshop Session — Hands-On AI Building",
                         caption: "A live workshop session where students are building with AI hands-on. We solved the problem of passive AI education — instead of lectures, each workshop was structured around 'build something real in 2 hours' with real datasets and real APIs. This approach contributed to the 53.12% increase in successful AI project submissions."
                     },
                     {
-                        src: "/Workshops/outreach1.jpeg?v=1",
+                        src: "/Workshops/outreach1.webp?v=1",
                         alt: "Student Engagement — Collaborative AI Development",
                         caption: "Students collaborating during an AI workshop, pairing up on projects. We solved the problem of isolation in learning — by treating workshops like collaborative sprints with sprint planning and code reviews, students learned not just AI but real engineering practices."
                     },
                     {
-                        src: "/Workshops/outreach3.jpg?v=1",
+                        src: "/Workshops/outreach3.webp?v=1",
                         alt: "Workshop Presentation — Teaching AI Concepts",
                         caption: "Presenting AI concepts to a diverse audience of engineering, art, media, and design students. We solved the problem of 'AI is only for CS majors' — the Initiative was deliberately cross-disciplinary, making AI accessible to every department."
                     },
                     {
-                        src: "/Workshops/outreach4.JPG?v=1",
+                        src: "/Workshops/outreach4.webp?v=1",
                         alt: "Discovery Park Library — AI Studio Space",
                         caption: "The physical space at Discovery Park Library where the AI-First Discovery Initiative operated. We transformed a traditional library space into an applied AI studio, complete with workstations, GPU resources, and a collaborative environment."
                     },
                     {
-                        src: "/Workshops/outreach5.jpeg?v=1",
+                        src: "/Workshops/outreach5.webp?v=1",
                         alt: "Outreach Event — Community AI Engagement",
                         caption: "A community outreach event showcasing AI projects and demos. We solved the problem of AI being perceived as abstract and inaccessible — by putting working demos in people's hands, we made the technology tangible."
                     },
@@ -1225,7 +1208,7 @@ export const experiences = [
                         caption: "The research poster summarizing the AI-First Discovery Initiative's approach, methodology, and results. This visual distills two years of applied AI studio work into a single, shareable format for academic conferences and symposiums."
                     },
                     {
-                        src: "/Workshops/Python Image.jpeg?v=1",
+                        src: "/Workshops/Python Image.webp?v=1",
                         alt: "Python Workshop — Foundations for AI",
                         caption: "A Python fundamentals workshop — the foundation layer for all AI work. We solved the problem of students jumping into LLMs and ML without basic programming skills by creating a structured progression from Python basics to AI applications."
                     },
@@ -1255,7 +1238,7 @@ export const experiences = [
                         caption: "LinkedIn post reflecting on the personal journey building the AI-First Discovery Initiative — the lessons learned from translating ambiguous cross-disciplinary needs into shipped AI products in an academic setting."
                     },
                     {
-                        src: "/contributions/UNT Library Publication/Symposium photo.png?v=1",
+                        src: "/contributions/UNT Library Publication/Symposium photo.webp?v=1",
                         alt: "UNT Symposium — Research Presentation",
                         caption: "Presenting at the UNT Symposium where the AI-First Discovery Initiative research was showcased. This was the formal academic validation of our engineering work — demonstrating that applied AI studio practices produce measurable educational and research outcomes."
                     },
@@ -1265,47 +1248,47 @@ export const experiences = [
                         caption: "The published paper in UNT Scholarly Repository: 'Bridging Technology, Creativity, and Outreach: Responsible AI Education through the AI-First Discovery Initiative.' This documents our reusable reference architecture for modular RAG systems with evaluation, observability, and human-in-the-loop review — a citable blueprint for other institutions."
                     },
                     {
-                        src: "/contributions/Works Published at UNT/_National_Engineering_Week_flyer.png?v=1",
+                        src: "/contributions/Works Published at UNT/_National_Engineering_Week_flyer.webp?v=1",
                         alt: "National Engineering Week — Workshop Flyer",
                         caption: "Flyer for National Engineering Week workshops organized through the AI-First Discovery Initiative. We partnered with the engineering department to bring AI workshops to a broader audience during this national celebration of engineering education."
                     },
                     {
-                        src: "/contributions/Works Published at UNT/crack_the_code_to_computer_programming.png?v=1",
+                        src: "/contributions/Works Published at UNT/crack_the_code_to_computer_programming.webp?v=1",
                         alt: "'Crack the Code to Computer Programming' Workshop",
                         caption: "Workshop flyer for 'Crack the Code to Computer Programming' — an introductory workshop that lowered the barrier to entry for students with no programming background. This was the first step in our pipeline from zero experience to shipped AI projects."
                     },
                     {
-                        src: "/contributions/Works Published at UNT/python workshop.png?v=1",
+                        src: "/contributions/Works Published at UNT/python workshop.webp?v=1",
                         alt: "Python Workshop Series Flyer",
                         caption: "Official flyer for the Python workshop series at UNT. These structured, hands-on workshops used reproducibility checklists and pre-configured environments to reduce setup friction by 31.29%, ensuring students spent time learning AI instead of fighting environment issues."
                     },
                     {
-                        src: "/contributions/Works Published at UNT/certificate citi.png?v=1",
+                        src: "/contributions/Works Published at UNT/certificate citi.webp?v=1",
                         alt: "CITI Research Ethics Certification",
                         caption: "CITI research ethics certification — ensuring all AI education and research through the Initiative met institutional ethical standards. Responsible AI isn't just a buzzword; we formalized it with proper certifications and review processes."
                     },
                     {
-                        src: "/contributions/Research paper/SUDT.png?v=1",
+                        src: "/contributions/Research paper/SUDT.webp?v=1",
                         alt: "Research Paper — System Design",
                         caption: "Technical diagram from the research paper showing the system design and architecture of the modular RAG framework developed through the AI-First Discovery Initiative. This architecture became the basis for the published reference architecture."
                     },
                     {
-                        src: "/Workshops/outreach2.jpeg?v=1",
+                        src: "/Workshops/outreach2.webp?v=1",
                         alt: "Student Teams — Sprint Planning",
                         caption: "Students working in teams during a sprint planning session. We solved the problem of teaching software engineering practices alongside AI — students didn't just learn to build models, they learned to plan, review, iterate, and ship like a real engineering team."
                     },
                     {
-                        src: "/Workshops/outreach6.jpeg?v=1",
+                        src: "/Workshops/outreach6.webp?v=1",
                         alt: "Workshop Materials — Structured Learning",
                         caption: "Structured workshop materials and hands-on exercises. Each workshop included reproducibility checklists, numbered setup guides, and evaluation rubrics — treating education with the same rigor we applied to engineering."
                     },
                     {
-                        src: "/Workshops/outreach7.jpeg?v=1",
+                        src: "/Workshops/outreach7.webp?v=1",
                         alt: "AI Demo Day — Student Projects",
                         caption: "Student projects on display during an AI demo day. These are the tangible outcomes of the Initiative's evaluation-driven teaching approach — real, working AI applications built by students who started with zero AI experience."
                     },
                     {
-                        src: "/Workshops/outreach8.jpeg?v=1",
+                        src: "/Workshops/outreach8.webp?v=1",
                         alt: "Mentorship — One-on-One Guidance",
                         caption: "One-on-one mentorship session with a student. Beyond workshops, we provided individual guidance for students working on more complex AI projects — the kind of support that turns classroom knowledge into real engineering capability."
                     }
@@ -1389,7 +1372,6 @@ export const experiences = [
             "Environmental Monitoring IoT Systems"
         ],
         heroMotif: {
-            emoji: "🤖",
             title: "SRM Robocon",
             subtitle: "Robotics & Edge AI"
         },
@@ -1401,11 +1383,11 @@ export const experiences = [
         },
         topStack: ["Python", "OpenCV", "YOLOv4", "ROS", "C++", "STM32"],
         groupedTechStack: {
-            "🤖 Robotics & Control": ["ROS", "SLAM", "Path Planning", "PID Control", "Kinematics"],
-            "🧠 AI & Vision": ["YOLOv4", "OpenCV", "TensorFlow", "Face Recognition", "Object Detection"],
-            "⚡ Embedded": ["Raspberry Pi", "STM32", "Arduino Nano", "ESP8266", "Teensy"],
-            "🔌 Sensors & IoT": ["Rplidar", "IMU", "BME680", "IR Sensor Arrays", "Pulse Oximeter"],
-            "🛠️ Hardware": ["Custom PCB Design", "3D Printing", "SolidWorks", "Motor Drivers"]
+            "Robotics & Control": ["ROS", "SLAM", "Path Planning", "PID Control", "Kinematics"],
+            "AI & Vision": ["YOLOv4", "OpenCV", "TensorFlow", "Face Recognition", "Object Detection"],
+            "Embedded": ["Raspberry Pi", "STM32", "Arduino Nano", "ESP8266", "Teensy"],
+            "Sensors & IoT": ["Rplidar", "IMU", "BME680", "IR Sensor Arrays", "Pulse Oximeter"],
+            "Hardware": ["Custom PCB Design", "3D Printing", "SolidWorks", "Motor Drivers"]
         },
         chapters: [
             { id: "overview", title: "Overview" },
@@ -1457,7 +1439,7 @@ export const experiences = [
                             layerTags: ["Robotics", "AI"],
                             proofs: ["Built an autonomous SLAM-based security robot with Rplidar, IMU, and camera sensors for the Technoaxian 2023 (World Robotics Championship), navigating multi-floor indoor environments without cloud connectivity", "Integrated YOLOv4 human detection, face recognition, and hazard identification running entirely on edge hardware (Raspberry Pi) at 30fps with model pruning and quantization"],
                             tech: ["ROS", "SLAM", "YOLOv4", "Raspberry Pi", "Rplidar", "IMU"],
-                            src: "/robocon/ros-rover.png"
+                            src: "/robocon/ros-rover.webp"
                         }
                     }
                 ]
@@ -1486,7 +1468,7 @@ export const experiences = [
                             layerTags: ["Embedded", "Algorithms"],
                             proofs: ["Built an autonomous maze-solving micro mouse with flood-fill algorithms, IR/ultrasonic sensing, and PID-tuned motor control for the Technoaxian 2023 competition", "Designed everything from chassis to firmware: custom PCB, sensor integration, motor drivers, and manual override buttons for competition reliability"],
                             tech: ["Microcontroller", "PID Control", "IR Sensors", "Custom PCB"],
-                            src: "/robocon/micro-mouse.png"
+                            src: "/robocon/micro-mouse.webp"
                         }
                     }
                 ]
@@ -1517,7 +1499,7 @@ export const experiences = [
                             layerTags: ["IoT", "Sensors"],
                             proofs: ["Designed a portable, bird-inspired air quality monitor measuring VOCs, PM 2.5, CO, pressure, humidity, and smoke — with pulse oximeter for personal safety monitoring", "Built integrated airflow system and real-time OLED display for accurate field measurements, demonstrated at the Smart Agro Event (IEI Department)"],
                             tech: ["BME680", "PM 2.5 Sensor", "Pulse Oximeter", "OLED", "Arduino"],
-                            src: "/robocon/cheepa-robot.png"
+                            src: "/robocon/cheepa-robot.webp"
                         }
                     }
                 ]
@@ -1568,22 +1550,22 @@ export const experiences = [
             visuals: {
                 images: [
                     {
-                        src: "/robocon/ros-rover.png?v=1",
+                        src: "/robocon/ros-rover.webp?v=1",
                         alt: "ROS Rover — Autonomous Security Robot (CAD Render)",
                         caption: "CAD render of the ROS Rover — an autonomous skid-drive security robot built for Technoaxian 2023 (World Robotics Championship). The four-wheel-drive chassis houses a Raspberry Pi (visible as the dark board), an Rplidar sensor (the cylindrical unit on top for SLAM mapping), and dual antennas for wireless communication. This robot navigates multi-floor indoor environments autonomously using SLAM, detects humans via YOLOv4, and identifies threats — all on edge hardware without cloud connectivity."
                     },
                     {
-                        src: "/robocon/pcb-design.jpg?v=1",
+                        src: "/robocon/pcb-design.webp?v=1",
                         alt: "Custom PCB Design — Robocon Control Board",
                         caption: "Custom-designed PCB for the competition robots, shown in the EDA tool with full component placement. This board integrates motor drivers, voltage sensors, status LEDs, I2C port headers, CAN bus connectors, and a Teensy microcontroller — all on a single board. Custom PCB design was essential because off-the-shelf boards couldn't meet our size, weight, and pin-count requirements for competition robots."
                     },
                     {
-                        src: "/robocon/micro-mouse.png?v=1",
+                        src: "/robocon/micro-mouse.webp?v=1",
                         alt: "Micro Mouse — Autonomous Maze-Solving Robot",
                         caption: "The Micro Mouse robot for Technoaxian 2023 — a compact, autonomous maze navigator. The 3D-printed chassis houses a microcontroller, motor driver board, IR sensors for wall detection, and a LiPo battery. The wide-tread wheels provide grip for precise turns in tight maze corridors. This robot implements flood-fill algorithms to explore, map, and solve mazes autonomously."
                     },
                     {
-                        src: "/robocon/cheepa-robot.png?v=1",
+                        src: "/robocon/cheepa-robot.webp?v=1",
                         alt: "Cheepa Robot — Portable Air Quality Monitor (CAD Render)",
                         caption: "CAD render of the bird-inspired Cheepa Robot — a portable air quality monitoring device developed for the Smart Agro Event. The compact enclosure houses BME680 sensors (VOCs, pressure, humidity), PM 2.5 particulate sensors, smoke detectors, a pulse oximeter, an integrated airflow system, and an OLED display. Designed to be field-portable for agricultural and industrial air quality assessment."
                     },
@@ -1652,7 +1634,6 @@ export const experiences = [
             { label: "False positives", value: "−65%", hint: "Via hybrid modeling." }
         ],
         heroMotif: {
-            emoji: "🔬",
             title: "Edge AI Research",
             subtitle: "Time-series & Anomaly detection"
         },
@@ -1765,7 +1746,6 @@ export const experiences = [
             { label: "Schema", value: "JSON-Schema", hint: "Blueprint validation." }
         ],
         heroMotif: {
-            emoji: "🧱",
             title: "Builder AI",
             subtitle: "Blueprint workflows"
         },
@@ -1892,7 +1872,6 @@ export const experiences = [
             { label: "SEO", value: "Semantic", hint: "Search-friendly markup." }
         ],
         heroMotif: {
-            emoji: "🌐",
             title: "Al Web",
             subtitle: "Web development workflows"
         },
@@ -2005,4 +1984,118 @@ export const experiences = [
             caseStudy: "/experience/alweb"
         }
     }
+];
+
+const byId = Object.fromEntries(roleRecords.map((r) => [r.id, r]));
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SRM Institute of Science and Technology, Jul 2019 – Feb 2023.
+// One continuous tenure: industry client projects contracted through the
+// institute, alongside SRM Team Robocon (the institute's robotics team).
+// Shown as ONE role with engagements, not four separate jobs.
+// ─────────────────────────────────────────────────────────────────────────────
+const SRM_ENGAGEMENTS = [
+    { id: "lineysha", client: "Lineysha & Thevan Technologies", focus: "Applied ML & edge AI", kind: "Client project", icon: "Brain", metric: "−65% false positives" },
+    { id: "robocon", client: "SRM Team Robocon", focus: "Real-time vision & autonomy", kind: "Institute robotics team", icon: "Zap", metric: "10+ robots" },
+    { id: "builder", client: "Builder.ai", focus: "Natural language → app blueprints", kind: "Client project", icon: "Layers", metric: "RAG + FAISS" },
+    { id: "alweb", client: "Al Web", focus: "Full-stack web platform", kind: "Client project", icon: "ShieldCheck", metric: "Firebase · SEO" },
+];
+
+const DEEP_DIVE_CHAPTER = { lineysha: "research", robocon: "rosRover", builder: "discovery", alweb: "product" };
+
+// Images that belong to another engagement (alweb reused a Robocon ROV photo).
+const MISPLACED_IMAGES = new Set(["alweb:/robocon/rov.png"]);
+
+function srmTenure() {
+    const engagements = SRM_ENGAGEMENTS.map((e) => ({
+        ...e,
+        dateRange: byId[e.id].dateRange,
+        outcome: byId[e.id].hookLine,
+    }));
+
+    const narrativeSections = {
+        overview: {
+            title: "One Institution, Four Engagements",
+            paragraphs: [
+                "From 2019 to 2023 I worked through SRM Institute of Science and Technology on industry client projects the institute took on — Al Web, then Builder.ai, then Lineysha & Thevan Technologies — while building with SRM Team Robocon, the institute's competition robotics team.",
+                "The common thread: take a fuzzy real-world problem and ship something that runs under hard constraints — noisy sensor data, low-power edge hardware, and ambiguous user intent.",
+            ],
+            ownership: engagements.map((e) => `${e.client} — ${e.outcome}`),
+        },
+        visuals: {
+            images: SRM_ENGAGEMENTS.flatMap(({ id }) =>
+                (byId[id].narrativeSections.visuals?.images || []).filter((img) => !MISPLACED_IMAGES.has(`${id}:${img.src}`))
+            ),
+        },
+    };
+    for (const e of engagements) {
+        const src = byId[e.id].narrativeSections;
+        const deep = src[DEEP_DIVE_CHAPTER[e.id]] || {};
+        narrativeSections[`srm-${e.id}`] = {
+            title: `${e.client} — ${e.focus}`,
+            problem: src.overview.paragraphs[0],
+            built: src.overview.ownership,
+            how: deep.how,
+        };
+    }
+
+    return {
+        id: "srm",
+        company: "SRM Institute of Science and Technology",
+        shortName: "SRM IST",
+        role: "AI & Software Engineer — Industry Client Projects & Robotics",
+        domainTags: [...new Set(SRM_ENGAGEMENTS.flatMap(({ id }) => byId[id].domainTags))],
+        dateRange: "Jul 2019 – Feb 2023",
+        location: "Chennai, India",
+        teamContext:
+            "One continuous tenure: industry client projects contracted through SRM IST (Lineysha & Thevan Technologies, Builder.ai, Al Web), alongside SRM Team Robocon, the institute's competition robotics team.",
+        hookLine:
+            "Four years at one institution — shipping ML and full-stack work for SRM's industry clients while building real-time vision and autonomy for SRM Team Robocon.",
+        proofMetrics: [
+            { label: "False Positives", value: "−65%", hint: "Hybrid LSTM-ARIMA anomaly detection for Lineysha & Thevan Technologies." },
+            { label: "Robot Builds", value: "10+", hint: "Competition-grade robots with SRM Team Robocon (ABU Robocon, SIH, Technoaxian)." },
+            { label: "Edge Vision", value: "30fps", hint: "Real-time YOLOv4 on Raspberry Pi and STM32." },
+        ],
+        snapshotProof: [
+            "−65% anomaly false positives (hybrid LSTM-ARIMA)",
+            "50,000+ sensor records processed",
+            "10+ competition-grade robots shipped",
+            "Real-time 30fps edge inference",
+            "NL → app-blueprint orchestration (FastAPI + FAISS)",
+            "Firebase-backed real-time web editing",
+        ],
+        overviewHeadline: ["One institution,", "four engagements."],
+        heroMotif: { title: "Industry Client Projects", subtitle: "ML, full-stack & robotics through SRM IST" },
+        theme: byId.robocon.theme,
+        topStack: ["Python", "TensorFlow", "OpenCV", "FastAPI", "ROS", "Docker"],
+        groupedTechStack: byId.robocon.groupedTechStack,
+        engagements,
+        bulletPoints: engagements.map((e) => ({
+            icon: e.icon,
+            headline: e.client,
+            metric: e.metric,
+            content: `${e.kind} · ${e.dateRange}. ${e.outcome}`,
+        })),
+        chapters: [
+            { id: "overview", title: "Overview" },
+            ...engagements.map((e) => ({ id: `srm-${e.id}`, title: e.client })),
+            { id: "visuals", title: "Visuals" },
+        ],
+        narrativeSections,
+        keyDecisions: [
+            ...byId.robocon.keyDecisions.slice(0, 2),
+            ...byId.lineysha.keyDecisions.slice(0, 1),
+            ...byId.builder.keyDecisions.slice(0, 1),
+            ...byId.alweb.keyDecisions.slice(0, 1),
+        ],
+        links: { caseStudy: "/experience/srm", website: byId.robocon.links?.website },
+    };
+}
+
+export const experiences = [
+    byId["100mos"],
+    byId.vosyn,
+    byId.krowd,
+    byId["unt-ai-first"],
+    srmTenure(),
 ];

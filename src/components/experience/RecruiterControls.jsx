@@ -1,20 +1,34 @@
-import { Filter, SortAsc, LayoutList, ChevronDown, Zap } from 'lucide-react';
-import { useState } from 'react';
+import { Filter, LayoutList, ChevronDown, Zap } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { yearSpan } from '../../lib/dates';
 
 export const RecruiterControls = ({
     filters,
     activeFilter,
     onFilterChange,
-    onSortChange,
     onJump,
     mode,
     onToggleMode,
     experiences
 }) => {
     const [isJumpOpen, setIsJumpOpen] = useState(false);
+    const jumpRef = useRef(null);
+
+    // Close the Quick Jump menu on outside click or Escape.
+    useEffect(() => {
+        if (!isJumpOpen) return;
+        const onPointer = (e) => { if (!jumpRef.current?.contains(e.target)) setIsJumpOpen(false); };
+        const onKey = (e) => { if (e.key === 'Escape') setIsJumpOpen(false); };
+        document.addEventListener('pointerdown', onPointer);
+        document.addEventListener('keydown', onKey);
+        return () => {
+            document.removeEventListener('pointerdown', onPointer);
+            document.removeEventListener('keydown', onKey);
+        };
+    }, [isJumpOpen]);
 
     return (
-        <div className="flex flex-col md:flex-row items-center gap-6 py-8 border-y border-border/50 mb-12 animate-fade-in">
+        <div className="flex flex-col lg:flex-row lg:items-center gap-6 py-8 border-y border-border/50 mb-12 animate-fade-in">
             {/* Mode Toggle */}
             <div className="flex items-center gap-2 p-1 bg-secondary/50 rounded-xl border border-border/50">
                 <button
@@ -31,10 +45,10 @@ export const RecruiterControls = ({
                 </button>
             </div>
 
-            <div className="h-[1px] md:h-8 w-24 md:w-[1px] bg-border/50" />
+            <div className="hidden lg:block h-8 w-[1px] bg-border/50" />
 
             {/* Filters */}
-            <div className="flex items-center gap-3 overflow-x-auto pb-2 md:pb-0 scrollbar-hide max-w-full">
+            <div className="flex flex-1 flex-wrap items-center gap-2 min-w-0">
                 <Filter className="w-4 h-4 text-muted-foreground shrink-0" />
                 {filters.map(f => (
                     <button
@@ -47,13 +61,15 @@ export const RecruiterControls = ({
                 ))}
             </div>
 
-            <div className="h-[1px] md:h-8 w-24 md:w-[1px] bg-border/50 hidden md:block" />
+            <div className="hidden lg:block h-8 w-[1px] bg-border/50" />
 
             {/* Quick Jump */}
-            <div className="relative ml-auto w-full md:w-auto">
+            <div ref={jumpRef} className="relative lg:ml-auto w-full lg:w-64 shrink-0">
                 <button
                     onClick={() => setIsJumpOpen(!isJumpOpen)}
-                    className="w-full md:w-64 flex items-center justify-between px-6 py-3 rounded-xl bg-secondary/30 border border-border/50 hover:border-primary/30 transition-all group"
+                    aria-expanded={isJumpOpen}
+                    aria-haspopup="true"
+                    className="w-full flex items-center justify-between px-6 py-3 rounded-xl bg-secondary/30 border border-border/50 hover:border-primary/30 transition-all group"
                 >
                     <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground group-hover:text-foreground transition-colors">
                         <LayoutList className="w-4 h-4" />
@@ -73,12 +89,11 @@ export const RecruiterControls = ({
                                 }}
                                 className="w-full flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-primary/5 group/jump transition-colors"
                             >
-                                <span className="text-xl group-hover/jump:scale-125 transition-transform">{exp.heroMotif.emoji}</span>
-                                <div className="text-left">
-                                    <div className="text-[10px] font-black uppercase tracking-widest text-foreground">{exp.company}</div>
-                                    <div className="text-[9px] text-muted-foreground">{exp.heroMotif.title}</div>
+                                <div className="text-left min-w-0">
+                                    <div className="text-[11px] font-black uppercase tracking-widest text-foreground truncate">{exp.company}</div>
+                                    <div className="text-[10px] text-muted-foreground">{exp.role} · {yearSpan(exp.dateRange)}</div>
                                 </div>
-                                <Zap className="w-3 h-3 ml-auto text-primary opacity-0 group-hover/jump:opacity-100 transition-opacity" />
+                                <Zap className="w-3 h-3 ml-auto shrink-0 text-primary opacity-0 group-hover/jump:opacity-100 transition-opacity" />
                             </button>
                         ))}
                     </div>

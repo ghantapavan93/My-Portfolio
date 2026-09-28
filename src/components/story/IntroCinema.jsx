@@ -3,6 +3,7 @@ import { Plus, Check } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { RESUME_URL } from '../../lib/links';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -56,17 +57,6 @@ const SYS_TOTAL = RECEIPTS.reduce((n, r) => n + r.length, 0);
 
 const CLOSING_PARAGRAPH =
   'Most of what I build starts as a personal or observed pain point—confusing medical information, unsafe public spaces, overwhelming admin work—and ends as a working product with real users. I enjoy the full lifecycle: listening to problems, shaping them into clear product ideas, designing data and AI workflows, building the backend and UI, wiring in observability, and iterating until the solution genuinely helps people and the teams who run it.';
-
-const DOMAIN_BADGES = [
-  { emoji: '❤️', top: '12%', left: '8%' },
-  { emoji: '🔐', top: '18%', left: '88%' },
-  { emoji: '👥', top: '78%', left: '6%' },
-  { emoji: '📚', top: '82%', left: '90%' },
-  { emoji: '♿', top: '6%', left: '48%' },
-  { emoji: '✈️', top: '92%', left: '52%' },
-];
-
-const RESUME_URL = 'https://drive.google.com/file/d/1ZzsEtDdGER8rRoCCX9zFI3qQSAgfj50z/view?usp=sharing';
 
 // Wrap each word of an element in a span for the spring pop. Spaces stay as text
 // nodes (an inline-block span holding only a space collapses to zero width and
@@ -290,11 +280,6 @@ export function IntroCinema() {
           className="absolute inset-0 bg-cover"
           style={{ backgroundImage: "url('/avatar-hero.webp')", backgroundPosition: '62% 30%', opacity: 0.05, filter: 'grayscale(1) blur(6px)' }}
         />
-        {DOMAIN_BADGES.map((b, i) => (
-          <span key={i} data-badge className="absolute text-3xl md:text-5xl select-none hidden sm:block" style={{ top: b.top, left: b.left, opacity: 0.16, filter: 'grayscale(0.35)' }}>
-            {b.emoji}
-          </span>
-        ))}
         <div data-glow-a className="absolute -top-24 right-[8%] w-[420px] h-[420px] rounded-full bg-gradient-to-br from-blue-500/12 to-purple-500/12 blur-3xl" />
         <div data-glow-b className="absolute bottom-0 left-[4%] w-[360px] h-[360px] rounded-full bg-gradient-to-tr from-pink-500/10 to-cyan-500/10 blur-3xl" />
         {/* Spotlight — keeps the centre text readable over the art */}
@@ -370,7 +355,6 @@ export function IntroCinema() {
           <div data-beat data-beat-systems className="md:absolute md:inset-0 md:flex md:items-center md:justify-center mb-12 md:mb-0">
             <div className="w-full max-w-2xl mx-auto">
               <p data-mreveal className="text-center text-[11px] md:text-xs font-semibold tracking-[0.28em] uppercase text-muted-foreground mb-5">
-                <span aria-hidden="true">🚀 </span>
                 <span data-tw-heading />
               </p>
               <ul className="space-y-3 font-mono">
@@ -456,7 +440,7 @@ export function IntroCinema() {
             </div>
             <div className="border-t border-border/50 bg-muted/20 px-8 py-8">
               <p className="text-center text-[11px] font-semibold tracking-[0.28em] uppercase text-muted-foreground mb-6">
-                <span aria-hidden="true">🚀 </span>{SYS_HEADING}
+                {SYS_HEADING}
               </p>
               <div className="grid grid-cols-2 gap-x-8 gap-y-4">
                 {RECEIPTS.map((r, i) => (

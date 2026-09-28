@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { X, ExternalLink, Copy, Share2, Check, ChevronDown, ListTree, ArrowDown, Maximize2 } from 'lucide-react';
 import { experiences } from '../data/experiences';
 import { ReceiptsDock } from './experience/ReceiptsDock';
-import { StackMap } from './experience/StackMap';
 import { DecisionCards } from './experience/DecisionCards';
 import { ImpactSlider } from './experience/ImpactSlider';
 import { InteractiveBulletList } from './experience/InteractiveBulletList';
@@ -80,7 +79,7 @@ export const ExperienceCaseStudy = ({ id, onClose }) => {
                 }
             }
         }
-    }, [id]);
+    }, [id, exp]); // exp is looked up from static data by id, so it only changes with id
 
     const copySummary = () => {
         const summary = `${exp.company} | ${exp.role}\nImpact: ${exp.hookLine}\nKey Metrics: ${exp.proofMetrics.map(m => `${m.label}: ${m.value}`).join(', ')}`;
@@ -101,6 +100,14 @@ export const ExperienceCaseStudy = ({ id, onClose }) => {
     };
 
     if (!exp) return null;
+
+    // Only list chapters that actually render — a "Visuals" entry with no images
+    // would otherwise be a dead link in both navs.
+    const headline = exp.overviewHeadline || ['Building the', exp.heroMotif.title];
+
+    const chapters = exp.chapters.filter(c =>
+        c.id === 'visuals' ? exp.narrativeSections.visuals?.images?.length : exp.narrativeSections[c.id]
+    );
 
     return (
         <div className="fixed inset-0 z-[100] bg-background animate-in fade-in duration-500 overflow-hidden flex flex-col">
@@ -130,7 +137,7 @@ export const ExperienceCaseStudy = ({ id, onClose }) => {
 
                 {/* Progress Timeline */}
                 <nav className="hidden lg:flex items-center gap-6">
-                    {exp.chapters.map((chapter, idx) => (
+                    {chapters.map((chapter, idx) => (
                         <button
                             key={chapter.id}
                             onClick={() => document.getElementById(chapter.id)?.scrollIntoView({ behavior: 'smooth' })}
@@ -138,7 +145,7 @@ export const ExperienceCaseStudy = ({ id, onClose }) => {
                         >
                             <span className="text-[10px] font-black text-primary" style={{ color: exp.theme.accent }}>0{idx + 1}</span>
                             <span className="text-[10px] font-black uppercase tracking-widest text-foreground">{chapter.title}</span>
-                            {idx < exp.chapters.length - 1 && (
+                            {idx < chapters.length - 1 && (
                                 <div className="w-8 h-[1px] bg-border/50 ml-2" />
                             )}
                         </button>
@@ -175,7 +182,7 @@ export const ExperienceCaseStudy = ({ id, onClose }) => {
                     <div className="space-y-4">
                         <h4 className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Chapters</h4>
                         <div className="flex flex-col gap-2">
-                            {exp.chapters.map(chapter => (
+                            {chapters.map(chapter => (
                                 <button
                                     key={chapter.id}
                                     onClick={() => document.getElementById(chapter.id)?.scrollIntoView({ behavior: 'smooth' })}
@@ -206,11 +213,13 @@ export const ExperienceCaseStudy = ({ id, onClose }) => {
                 {/* Center: Scrollable Narrative */}
                 <main
                     ref={scrollContainerRef}
-                    className="flex-1 overflow-y-auto px-6 md:px-12 lg:px-24 py-12 scroll-smooth custom-scrollbar"
+                    className="@container flex-1 min-w-0 overflow-y-auto px-6 md:px-10 xl:px-14 py-12 scroll-smooth custom-scrollbar"
                 >
                     <div className="max-w-4xl mx-auto space-y-16">
                         {/* Dynamic Narrative Chapters */}
                         {exp.chapters.map((chapter) => {
+                            // The gallery renders separately below as its own "visuals" section.
+                            if (chapter.id === 'visuals') return null;
                             const sectionData = exp.narrativeSections[chapter.id];
                             if (!sectionData) return null;
 
@@ -226,10 +235,10 @@ export const ExperienceCaseStudy = ({ id, onClose }) => {
                                         <>
                                             <div className="space-y-6">
                                                 <span className="text-[10px] font-black uppercase tracking-[0.3em] text-primary" style={{ color: exp.theme.accent }}>System Overview</span>
-                                                <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-foreground leading-[0.9]">
-                                                    Building the <br />
+                                                <h1 className="text-4xl @2xl:text-6xl font-black tracking-tighter text-foreground leading-[0.95] break-words">
+                                                    {headline[0]} <br />
                                                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-indigo-600" style={{ backgroundImage: `linear-gradient(to right, ${exp.theme.accent}, #6366f1)` }}>
-                                                        {exp.heroMotif.title}
+                                                        {headline[1]}
                                                     </span>
                                                 </h1>
                                                 <div className="flex flex-wrap gap-4 pt-4">
@@ -239,7 +248,7 @@ export const ExperienceCaseStudy = ({ id, onClose }) => {
                                                 </div>
                                             </div>
 
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-12 border-t border-border/50">
+                                            <div className="grid grid-cols-1 @3xl:grid-cols-2 gap-12 pt-12 border-t border-border/50">
                                                 <div className="space-y-6">
                                                     {sectionData.paragraphs?.map((p, i) => (
                                                         <p key={i} className="text-lg md:text-xl text-foreground font-medium leading-relaxed">
@@ -250,7 +259,7 @@ export const ExperienceCaseStudy = ({ id, onClose }) => {
                                                 <div className="space-y-6">
                                                     <h4 className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">What I Owned</h4>
                                                     {(sectionData.ownership || sectionData.bullets)?.map((o, i) => (
-                                                        <div key={i} className="flex gap-4 p-4 rounded-2xl bg-secondary/20 border border-white/5">
+                                                        <div key={i} className="flex gap-4 p-4 rounded-2xl bg-secondary/20 border border-border/60">
                                                             <div className="w-1.5 h-1.5 rounded-full mt-2 shrink-0 bg-primary" style={{ backgroundColor: exp.theme.accent }} />
                                                             <p className="text-sm text-foreground font-bold leading-tight">{typeof o === 'string' ? o : (o.content || o.label)}</p>
                                                         </div>
@@ -278,8 +287,8 @@ export const ExperienceCaseStudy = ({ id, onClose }) => {
                                                             <h5 className="text-[10px] font-black uppercase tracking-widest text-primary" style={{ color: exp.theme.accent }}>What I Built</h5>
                                                             <div className="grid grid-cols-1 gap-4">
                                                                 {sectionData.built.map((item, i) => (
-                                                                    <div key={i} className="flex gap-4 p-5 rounded-2xl bg-secondary/5 border border-white/5">
-                                                                        <div className="w-8 h-8 rounded-full flex items-center justify-center bg-card text-xs font-black" style={{ color: exp.theme.accent }}>0{i + 1}</div>
+                                                                    <div key={i} className="flex gap-4 p-5 rounded-2xl bg-secondary/5 border border-border/60">
+                                                                        <div className="w-8 h-8 shrink-0 rounded-full flex items-center justify-center bg-card text-xs font-black" style={{ color: exp.theme.accent }}>0{i + 1}</div>
                                                                         <p className="text-base text-muted-foreground font-medium leading-relaxed">{item}</p>
                                                                     </div>
                                                                 ))}
@@ -291,7 +300,7 @@ export const ExperienceCaseStudy = ({ id, onClose }) => {
                                                         <div className="space-y-6">
                                                             <h5 className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">How it worked (Deep Dive)</h5>
                                                             <div className="space-y-4 border-l border-border/50 pl-8 ml-4">
-                                                                {sectionData.how.map((step, i) => (
+                                                                {sectionData.how.map((step) => (
                                                                     <div key={step} className="relative">
                                                                         <div className="absolute -left-[37px] top-2 w-2 h-2 rounded-full border border-primary bg-background" style={{ borderColor: exp.theme.accent }} />
                                                                         <p className="text-sm text-muted-foreground leading-relaxed font-medium">{step}</p>
@@ -346,7 +355,7 @@ export const ExperienceCaseStudy = ({ id, onClose }) => {
                                 className="pb-16 space-y-8 pt-10"
                             >
                                 <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground border-b border-border/50 pb-2">Technical Artifacts</h4>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div className="grid grid-cols-1 @2xl:grid-cols-2 gap-8">
                                     {exp.narrativeSections.visuals.images.map((img, i) => (
                                         <div key={i} className="group space-y-4">
                                             <button
@@ -376,12 +385,12 @@ export const ExperienceCaseStudy = ({ id, onClose }) => {
                 </main>
 
                 {/* Right: Receipts Dock (Desktop) */}
-                <aside className="hidden lg:flex flex-col w-[400px] border-l border-border/50 p-8 shrink-0 relative overflow-y-auto">
+                <aside className="hidden xl:flex flex-col w-[360px] border-l border-border/50 p-8 shrink-0 relative overflow-y-auto">
                     <ReceiptsDock activeReceipt={activeReceipt} roleTheme={exp.theme} experience={exp} />
                 </aside>
 
-                {/* Mobile: Bottom Receipts Sheet */}
-                <div className={`lg:hidden fixed inset-x-0 bottom-0 z-[60] bg-card border-t border-border/50 rounded-t-[2.5rem] shadow-2xl transition-all duration-500 ease-out transform ${isReceiptsExpanded ? 'translate-y-0' : 'translate-y-[calc(100%-80px)]'}`}>
+                {/* Mobile / tablet: Bottom Receipts Sheet */}
+                <div className={`xl:hidden fixed inset-x-0 bottom-0 z-[60] bg-card border-t border-border/50 rounded-t-[2.5rem] shadow-2xl transition-all duration-500 ease-out transform ${isReceiptsExpanded ? 'translate-y-0' : 'translate-y-[calc(100%-80px)]'}`}>
                     <button
                         onClick={() => setIsReceiptsExpanded(!isReceiptsExpanded)}
                         className="w-full h-20 flex items-center justify-between px-8 border-b border-border/20"

@@ -25,18 +25,18 @@ export const contributionsData = [
         skills: ["Python", "Machine Learning", "Technical Communication", "C++", "Java", "GenAI"],
         proofTags: ["Workshop", "Video", "Mentorship"],
         media: [
-            { type: "video", url: "/contributions/Mentorship and Tutoring/Workshop talk.mp4", thumbnail: "/Workshops/outreachmain.jpeg", caption: "Live workshop talk — teaching ML fundamentals" },
-            { type: "image", url: "/Workshops/outreachmain.jpeg", caption: "Leading a hands-on Python coding session" },
-            { type: "image", url: "/Workshops/outreach.jpeg", caption: "Workshop in progress — full house" },
-            { type: "image", url: "/Workshops/outreach1.jpeg", caption: "Pair-programming mentorship during workshop" },
-            { type: "image", url: "/Workshops/outreach2.jpeg", caption: "Students presenting their workshop projects" },
-            { type: "image", url: "/Workshops/outreach3.jpg", caption: "Group coding exercise — C++ fundamentals" },
-            { type: "image", url: "/Workshops/outreach4.JPG", caption: "Teaching Java frameworks to beginners" },
-            { type: "image", url: "/Workshops/outreach5.jpeg", caption: "Collaborative debugging session" },
-            { type: "image", url: "/Workshops/outreach6.jpeg", caption: "GenAI foundations walkthrough" },
-            { type: "image", url: "/Workshops/outreach7.jpeg", caption: "One-on-one mentorship during lab time" },
-            { type: "image", url: "/Workshops/outreach8.jpeg", caption: "Workshop wrap-up and Q&A" },
-            { type: "image", url: "/Workshops/Python Image.jpeg", caption: "Python workshop flyer design" },
+            { type: "video", url: "/contributions/Mentorship and Tutoring/Workshop talk.mp4", thumbnail: "/Workshops/outreachmain.webp", caption: "Live workshop talk — teaching ML fundamentals" },
+            { type: "image", url: "/Workshops/outreachmain.webp", caption: "Leading a hands-on Python coding session" },
+            { type: "image", url: "/Workshops/outreach.webp", caption: "Workshop in progress — full house" },
+            { type: "image", url: "/Workshops/outreach1.webp", caption: "Pair-programming mentorship during workshop" },
+            { type: "image", url: "/Workshops/outreach2.webp", caption: "Students presenting their workshop projects" },
+            { type: "image", url: "/Workshops/outreach3.webp", caption: "Group coding exercise — C++ fundamentals" },
+            { type: "image", url: "/Workshops/outreach4.webp", caption: "Teaching Java frameworks to beginners" },
+            { type: "image", url: "/Workshops/outreach5.webp", caption: "Collaborative debugging session" },
+            { type: "image", url: "/Workshops/outreach6.webp", caption: "GenAI foundations walkthrough" },
+            { type: "image", url: "/Workshops/outreach7.webp", caption: "One-on-one mentorship during lab time" },
+            { type: "image", url: "/Workshops/outreach8.webp", caption: "Workshop wrap-up and Q&A" },
+            { type: "image", url: "/Workshops/Python Image.webp", caption: "Python workshop flyer design" },
             { type: "image", url: "/Workshops/Poster Image.jpeg", caption: "Event poster for engineering outreach" },
         ],
         links: []
@@ -48,7 +48,7 @@ export const contributionsData = [
     {
         id: "eagle-eye-ai",
         slug: "eagle-eye-ai",
-        title: "🏆 GradInnoHack 2025 — Eagle Eye AI",
+        title: "GradInnoHack 2025 — Eagle Eye AI",
         category: "Research",
         featured: true,
         bentoSize: "medium",
@@ -116,7 +116,7 @@ export const contributionsData = [
         skills: ["Machine Learning", "Deep Learning", "Data Processing", "Research", "Technical Writing", "Python"],
         proofTags: ["Published", "Paper", "ML", "Link"],
         media: [
-            { type: "image", url: "/contributions/Research paper/SUDT.png", caption: "Published paper — Speech Enhancement Using Deep Learning Techniques" }
+            { type: "image", url: "/contributions/Research paper/SUDT.webp", caption: "Published paper — Speech Enhancement Using Deep Learning Techniques" }
         ],
         links: [
             { label: "View Publication", url: "https://www.ijfmr.com/research-paper.php?id=12384" }
@@ -149,7 +149,7 @@ export const contributionsData = [
         skills: ["Public Speaking", "RAG Pipelines", "Responsible AI", "Technical Writing", "Academic Research"],
         proofTags: ["Symposium", "Publication", "Archived", "UNT"],
         media: [
-            { type: "image", url: "/contributions/UNT Library Publication/Symposium photo.png", caption: "Presenting at the UNT Library Symposium" },
+            { type: "image", url: "/contributions/UNT Library Publication/Symposium photo.webp", caption: "Presenting at the UNT Library Symposium" },
             { type: "image", url: "/contributions/UNT Library Publication/download.jpg", caption: "Symposium event documentation" },
         ],
         links: [
@@ -183,11 +183,11 @@ export const contributionsData = [
         skills: ["Event Management", "Technical Writing", "Python", "Research Ethics", "Web Content"],
         proofTags: ["Event", "Workshop", "Certificate", "Site"],
         media: [
-            { type: "image", url: "/contributions/Works Published at UNT/crack_the_code_to_computer_programming.png", caption: "Crack the Code to Computer Programming — event flyer" },
-            { type: "image", url: "/contributions/Works Published at UNT/python workshop.png", caption: "Python Workshop outreach materials" },
-            { type: "image", url: "/contributions/Works Published at UNT/_National_Engineering_Week_flyer.png", caption: "National Engineering Week flyer" },
-            { type: "image", url: "/contributions/Works Published at UNT/certificate citi.png", caption: "CITI Research Ethics Certification" },
-            { type: "image", url: "/contributions/Works Published at UNT/Symposium photo.png", caption: "Presenting at the university symposium" },
+            { type: "image", url: "/contributions/Works Published at UNT/crack_the_code_to_computer_programming.webp", caption: "Crack the Code to Computer Programming — event flyer" },
+            { type: "image", url: "/contributions/Works Published at UNT/python workshop.webp", caption: "Python Workshop outreach materials" },
+            { type: "image", url: "/contributions/Works Published at UNT/_National_Engineering_Week_flyer.webp", caption: "National Engineering Week flyer" },
+            { type: "image", url: "/contributions/Works Published at UNT/certificate citi.webp", caption: "CITI Research Ethics Certification" },
+            { type: "image", url: "/contributions/Works Published at UNT/Symposium photo.webp", caption: "Presenting at the university symposium" },
             { type: "image", url: "/contributions/Works Published at UNT/download.jpg", caption: "Published works documentation" },
         ],
         links: [
@@ -223,13 +223,12 @@ export const contributionsData = [
         proofTags: ["Gallery", "Outreach", "Photos"],
         media: [
             { type: "image", url: "/contributions/Time at UNT/thumbnail-1.jpeg", caption: "Engineering outreach event" },
-            { type: "image", url: "/contributions/Time at UNT/thumbnail-2.jpeg", caption: "Collaborative workspace" },
-            { type: "image", url: "/contributions/Time at UNT/thumbnail-3.jpeg", caption: "Technical mentorship session" },
-            { type: "image", url: "/contributions/Time at UNT/thumbnail-4.jpeg", caption: "Hackathon team collaboration" },
+            { type: "image", url: "/contributions/Time at UNT/thumbnail-2.webp", caption: "Collaborative workspace" },
+            { type: "image", url: "/contributions/Time at UNT/thumbnail-3.webp", caption: "Technical mentorship session" },
+            { type: "image", url: "/contributions/Time at UNT/thumbnail-4.webp", caption: "Hackathon team collaboration" },
             { type: "image", url: "/contributions/Time at UNT/thumbnail-5.jpeg", caption: "Workshop lab setup" },
-            { type: "image", url: "/contributions/Time at UNT/thumbnail-6.jpeg", caption: "Presenting technical concepts" },
-            { type: "image", url: "/contributions/Time at UNT/thumbnail-7.jpeg", caption: "Group coding challenge" },
-            { type: "image", url: "/contributions/Time at UNT/thumbnail-8.jpeg", caption: "Building projects together" },
+            { type: "image", url: "/contributions/Time at UNT/thumbnail-6.webp", caption: "Presenting technical concepts" },
+            { type: "image", url: "/contributions/Time at UNT/thumbnail-8.webp", caption: "Building projects together" },
             { type: "image", url: "/contributions/Time at UNT/thumbnail-9.jpeg", caption: "End-of-semester celebration" },
         ],
         links: []
