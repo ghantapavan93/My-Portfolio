@@ -1122,6 +1122,125 @@ export function ProjectsSection() {
       badge: "Proof of concept",
     },
     {
+      title: "Verity",
+      description: "Contract-review workbench: a local Qwen3 8B model answers in a fixed JSON schema, code checks every quote word-for-word against the document and sets the status, and a person confirms. Each run rebuilds to the same hash. Not affiliated with Ivo.",
+      tags: ["FastAPI", "Next.js", "Ollama (Qwen3 8B)", "BM25 Retrieval", "Property-based Tests"],
+      imageUrl: [
+        "/projects/verity/1.webp",
+        "/projects/verity/2.webp",
+        "/projects/verity/3.webp"
+      ],
+      githubUrl: "https://github.com/ghantapavan93/Verity",
+      highlight: true,
+      categories: ["AI", "Backend", "Full-stack"],
+      badge: "Proof of concept",
+    },
+    {
+      title: "Backstop",
+      description: "Change control and regression testing for business-critical AI workflows: versioned, effective-dated rules, eight behavioural contracts gating model output, paired statistics on held-out calls, and a hash-chained audit log. 389 backend + 255 frontend tests. Synthetic transcripts.",
+      tags: ["FastAPI", "React", "TypeScript", "PostgreSQL", "Ollama", "Terraform"],
+      imageUrl: [
+        "/projects/backstop/1.webp",
+        "/projects/backstop/2.webp",
+        "/projects/backstop/3.webp"
+      ],
+      githubUrl: "https://github.com/ghantapavan93/EIP-Proto",
+      highlight: true,
+      categories: ["AI", "Backend", "Full-stack"],
+      badge: "Proof of concept",
+    },
+    {
+      title: "Threshold",
+      description: "Deterministic pre-release gate for checkout placement-policy changes: replays seeded sessions in event time, proves fail-closed behaviour under injected faults, dedupes conversions and keeps an HMAC audit log. No LLM in the decision. 187 backend tests.",
+      tags: ["FastAPI", "Next.js", "PostgreSQL", "Docker", "Deterministic Replay"],
+      imageUrl: [
+        "/projects/threshold/1.webp",
+        "/projects/threshold/2.webp"
+      ],
+      liveUrl: "https://threshold-bice.vercel.app",
+      githubUrl: "https://github.com/ghantapavan93/threshold",
+      highlight: true,
+      categories: ["Backend", "Full-stack"],
+      badge: "Proof of concept",
+    },
+    {
+      title: "Daysheet",
+      description: "Operations backend for a performance-horse breeding business: append-only audit, transactional outbox, idempotent Stripe webhooks, QuickBooks sync behind circuit breakers, and a read-only Claude assistant that cites records and abstains when unsure. 305 + 60 e2e tests. Synthetic data.",
+      tags: ["Next.js", "NestJS", "PostgreSQL", "Redis + BullMQ", "Stripe", "Claude"],
+      imageUrl: [
+        "/projects/daysheet/1.webp"
+      ],
+      liveUrl: "https://onemare.vercel.app",
+      githubUrl: "https://github.com/ghantapavan93/SoloHorses",
+      highlight: true,
+      categories: ["AI", "Backend", "Full-stack"],
+      badge: "Proof of concept",
+    },
+    {
+      title: "Proof Layer",
+      description: "Purchase-to-access backend for baby-monitor plans: finds why a paid feature fails on one camera, refuses what wouldn't help, and proves each answer — append-only PostgreSQL, an exclusion constraint and an outbox with idempotent payments. Mutation testing caught 66 of 68 planted defects. Synthetic data; not affiliated with Nanit.",
+      tags: ["FastAPI", "PostgreSQL", "Transactional Outbox", "Playwright", "Mutation Testing"],
+      imageUrl: [
+        "/projects/proof-layer/1.webp",
+        "/projects/proof-layer/2.webp",
+        "/projects/proof-layer/3.webp"
+      ],
+      liveUrl: "https://lullaby-rho.vercel.app",
+      githubUrl: "https://github.com/ghantapavan93/Lullaby",
+      categories: ["Backend", "Full-stack"],
+      badge: "Proof of concept",
+    },
+    {
+      title: "CanopyOps",
+      description: "Treatment-assurance console for utility vegetation management, built on one idea: closed is not effective. Offline-first field capture, idempotent sync with revision conflicts, evidence gating, PostGIS geofencing and human-approved outcomes. Synthetic data.",
+      tags: ["Angular", "FastAPI", "PostgreSQL + PostGIS", "MapLibre GL", "PWA", "OpenTelemetry"],
+      imageUrl: [
+        "/projects/canopyops/1.webp"
+      ],
+      liveUrl: "https://canopyops-uvm.vercel.app",
+      githubUrl: "https://github.com/ghantapavan93/canopyops-uvm-",
+      categories: ["Full-stack", "Backend", "Frontend"],
+      badge: "Proof of concept",
+    },
+    {
+      title: "Savy Live Ops",
+      description: "A living simulation of one restaurant night: eight sources feed one event ledger and a restaurant twin, specialists propose versioned decisions behind a guard, a person approves, and Ask Savy runs a read-only tool loop. 109 tests across 192 fault combinations. Synthetic figures.",
+      tags: ["Next.js", "TypeScript", "Claude Tool Use", "Server-Sent Events", "Event Sourcing"],
+      imageUrl: [
+        "/projects/savy/1.webp"
+      ],
+      liveUrl: "https://sicily-mu.vercel.app",
+      githubUrl: "https://github.com/ghantapavan93/Sicily",
+      categories: ["AI", "Full-stack", "Product"],
+      badge: "Proof of concept",
+    },
+    {
+      title: "ISL Performance Compiler",
+      description: "Execution layer for an insurance agency: turns coaching playbooks into tracked promises, evidence findings tied to transcript spans, approved sprints and verification windows, with idempotent webhooks and an append-only audit trail. Seeded demo data.",
+      tags: ["React 19", "TypeScript", "GraphQL Yoga", "Node.js", "Tailwind CSS"],
+      imageUrl: [
+        "/projects/isl/1.webp"
+      ],
+      liveUrl: "https://isl-performance-compiler.vercel.app",
+      githubUrl: "https://github.com/ghantapavan93/ISL-Performance-Compiler",
+      categories: ["Full-stack", "Product"],
+      badge: "Proof of concept",
+    },
+    {
+      title: "Dear D(IA)ry",
+      description: "Emotional-continuity prototype: check-ins, journaling and an AI companion with consent-gated memory, a fail-closed safety classifier, outbound guardrails and consent-scoped human handoff. Front end complete; backend is a skeleton and model calls are mocked.",
+      tags: ["Next.js", "React 19", "FastAPI", "PostgreSQL + pgvector", "Tailwind CSS"],
+      imageUrl: [
+        "/projects/dear-diary/1.webp",
+        "/projects/dear-diary/2.webp",
+        "/projects/dear-diary/3.webp"
+      ],
+      liveUrl: "https://dear-d-ia-ry.vercel.app",
+      githubUrl: "https://github.com/ghantapavan93/Dear-D-IA-ry",
+      categories: ["AI", "Frontend", "Product"],
+      badge: "Proof of concept",
+    },
+    {
       title: "Project-H: AI-Powered Health Platform",
       description: "Personalized health platform using React, Tailwind, Node.js, and OpenAI, helping users track fitness with 'Oats' AI coach and integrated biometric data analysis.",
       tags: ["React", "OpenAI", "Node.js", "Machine Learning"],
@@ -1242,6 +1361,57 @@ export function ProjectsSection() {
       liveUrl: "https://air-lock.vercel.app",
       highlight: true,
       categories: ["Backend", "Full-stack"],
+      badge: "Proof of concept",
+    },
+    {
+      title: "100 Miles of Summer — Future Vision",
+      description: "Where 100 Miles of Summer can go in Year 10 and beyond, as a working front end: eleven screens with live 3D heroes, one pure-TypeScript command engine with hash-chained receipts, and an AI coach kept inside approved tips. Concept, not an official product.",
+      tags: ["Next.js", "React Three Fiber", "three.js", "Tailwind CSS", "Vitest"],
+      imageUrl: [
+        "/projects/100mos-vision/1.webp",
+        "/projects/100mos-vision/2.webp",
+        "/projects/100mos-vision/3.webp"
+      ],
+      liveUrl: "https://100-mos-future-vision.vercel.app",
+      githubUrl: "https://github.com/ghantapavan93/100-Mos-Future-Vision",
+      categories: ["Frontend", "Product", "AI"],
+      badge: "Proof of concept",
+    },
+    {
+      title: "L&B Frontier House",
+      description: "Wholesale storefront for a western-apparel maker: wholesale prices never reach public HTML, buyer apply/approve/deny/suspend states, prepack and minimum-order logic, and an HMAC session cookie. 335 of 335 tests pass (Vitest + Playwright).",
+      tags: ["Next.js", "React 19", "TypeScript", "Vitest", "Playwright"],
+      imageUrl: [
+        "/projects/lb-frontier/1.webp",
+        "/projects/lb-frontier/2.webp",
+        "/projects/lb-frontier/3.webp"
+      ],
+      githubUrl: "https://github.com/ghantapavan93/L-and-B-Frontier-House",
+      categories: ["Frontend", "Full-stack"],
+    },
+    {
+      title: "SSC Signs & Lighting — Concept",
+      description: "Cinematic concept site for a national signage company, plus a Project Blueprint tool: a 9-step intake produces rule-based readiness, complexity and timeline-risk scores and hands off to a person. Visuals illustrative; not affiliated with SSC.",
+      tags: ["Next.js", "React 19", "GSAP", "Framer Motion", "Zod"],
+      imageUrl: [
+        "/projects/ssc-signs/1.webp"
+      ],
+      liveUrl: "https://ssc-signs-concept.vercel.app",
+      categories: ["Frontend", "Product"],
+      badge: "Proof of concept",
+    },
+    {
+      title: "First Scene",
+      description: "Interaction concept for Ditto: drag a dial through six first-date contexts for the same pair while a deterministic eleven-dimension model re-ranks them, and the send bar declines when nothing clears. Unofficial; synthetic people.",
+      tags: ["Next.js", "React Three Fiber", "Framer Motion", "Zustand", "Zod"],
+      imageUrl: [
+        "/projects/first-scene/1.webp",
+        "/projects/first-scene/2.webp",
+        "/projects/first-scene/3.webp"
+      ],
+      liveUrl: "https://first-scene.vercel.app",
+      githubUrl: "https://github.com/ghantapavan93/Ditto-Kinetic-",
+      categories: ["Frontend", "Product"],
       badge: "Proof of concept",
     },
     {
