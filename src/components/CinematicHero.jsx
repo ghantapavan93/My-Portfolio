@@ -1,22 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
-import { Volume2, VolumeX, ArrowDown, MessageSquare, Sparkles, Pause, Play } from 'lucide-react';
+import { Volume2, VolumeX, ArrowDown, MessageSquare, Sparkles } from 'lucide-react';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// CinematicHero — full-screen video-first hero.
+// CinematicHero — full-screen photo hero.
 //
-// The welcome video autoplays MUTED right after the preloader (browsers block
-// un-muted autoplay — no way around that). A speaker button invites sound:
-// tap → the video restarts with Pavan's voice; when it ends the AI agent opens.
-// Ignore it and the reel just keeps looping silently. Overlay UI is deliberately
-// low-key (ghost/glass, brightens on hover) so the video is the star.
+// A still portrait fills the screen (the welcome video was removed: too busy).
+// The speaker button plays Pavan's cloned-voice intro; when it ends the AI
+// agent opens. Overlay UI is deliberately low-key (ghost/glass, brightens on
+// hover) so the portrait is the star.
 // ─────────────────────────────────────────────────────────────────────────────
 
-const AVATAR_IMAGE = '/avatar-hero.webp';  // poster + fallback if the video can't play
-const AVATAR_VIDEO = '/avatar-welcome.mp4';
-// true  = lip-synced talking clip: the speaker button replays it UNMUTED.
-// false = ambient motion clip: it keeps looping silently and the cloned-voice
-//         intro.wav plays over it instead.
-const AVATAR_VIDEO_TALKS = true;
+const AVATAR_IMAGE = '/avatar-hero.webp';
 const INTRO_AUDIO = '/voice/intro.wav';
 
 function openAgent() {
@@ -31,14 +25,7 @@ function scrollToContent() {
 
 export function CinematicHero() {
   const [soundOn, setSoundOn] = useState(false);
-  const [videoLive, setVideoLive] = useState(false);
-  const [videoFailed, setVideoFailed] = useState(false);
-  // The welcome video always plays (muted). The pause button next to the speaker
-  // lets anyone stop it (WCAG 2.2.2) — it is not gated on prefers-reduced-motion,
-  // which many laptops and phones have on by default and which hid the video.
-  const [paused, setPaused] = useState(false);
   const audioRef = useRef(null);
-  const videoRef = useRef(null);
 
   useEffect(() => () => audioRef.current?.pause(), []);
 
@@ -52,53 +39,13 @@ export function CinematicHero() {
     } catch { /* stay silent */ }
   };
 
-  // Speaker toggle:
-  // • sound OFF → restart the talking video un-muted (or play the wav intro over
-  //   an ambient clip); when it finishes, drop back to the silent loop and open the chat.
-  // • sound ON → mute back to the silent loop.
-  const togglePause = () => {
-    const v = videoRef.current;
-    if (!v) return;
-    if (v.paused) {
-      v.play().then(() => setPaused(false)).catch(() => {});
-    } else {
-      v.pause();
-      audioRef.current?.pause();
-      setSoundOn(false);
-      setPaused(true);
-    }
-  };
-
+  // Speaker toggle: play the voice intro, or stop it if it's already playing.
   const toggleSound = () => {
-    const v = videoRef.current;
-    setPaused(false);
-
     if (soundOn) {
-      if (v) { v.muted = true; v.loop = true; v.play().catch(() => {}); }
       audioRef.current?.pause();
       setSoundOn(false);
       return;
     }
-
-    if (AVATAR_VIDEO && v && AVATAR_VIDEO_TALKS && !videoFailed) {
-      try {
-        v.currentTime = 0;
-        v.muted = false;
-        v.loop = false;
-        v.onended = () => {
-          v.muted = true;
-          v.loop = true;
-          v.play().catch(() => {});
-          setSoundOn(false);
-          openAgent();
-        };
-        v.play().then(() => setSoundOn(true)).catch(() => playIntroAudio());
-      } catch {
-        playIntroAudio();
-      }
-      return;
-    }
-
     playIntroAudio();
   };
 
@@ -106,7 +53,6 @@ export function CinematicHero() {
     <section className="group/hero relative min-h-[100svh] w-full overflow-hidden bg-zinc-950 text-white">
       {/* ── Media layer ─────────────────────────────────────────────────────── */}
       <div className="absolute inset-0">
-        {/* Poster/fallback under the video (covers buffering + failure) */}
         <img
           src={AVATAR_IMAGE}
           alt="Pavan Kalyan Ghanta"
@@ -114,33 +60,12 @@ export function CinematicHero() {
           loading="eager"
         />
 
-        {/* Welcome video — starts immediately, muted, and fades in as it plays */}
-        {AVATAR_VIDEO && !videoFailed && (
-          <video
-            ref={videoRef}
-            className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-1000 ease-out ${
-              videoLive ? 'opacity-100' : 'opacity-0'
-            }`}
-            src={AVATAR_VIDEO}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            onPlaying={() => { setVideoLive(true); setPaused(false); }}
-            // Fallback: a cached video can start before 'playing' is observed,
-            // leaving it running invisibly behind the poster. Any time progress reveals it.
-            onTimeUpdate={videoLive ? undefined : () => setVideoLive(true)}
-            onError={() => setVideoFailed(true)}
-          />
-        )}
-
-        {/* Cinematic grade — lighter than before so the video shines */}
+        {/* Cinematic grade — keeps the overlay text readable over the portrait */}
         <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/85 via-zinc-950/40 md:via-zinc-950/25 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-zinc-950/50" />
       </div>
 
-      {/* ── Video controls: speaker (the one loud affordance) + pause ─────────── */}
+      {/* ── Speaker button: plays the voice intro ──────────────────────────────── */}
       {/* Phones: bottom-right row, clear of the name. Desktop: right-edge column. */}
       <div className="absolute z-20 right-4 bottom-28 flex flex-row-reverse items-center gap-4 md:right-[10%] md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:flex-col">
         <button
@@ -164,17 +89,6 @@ export function CinematicHero() {
             {soundOn ? 'Mute' : 'Hear me out'}
           </span>
         </button>
-
-        {AVATAR_VIDEO && !videoFailed && (
-          <button
-            onClick={togglePause}
-            aria-label={paused ? 'Play background video' : 'Pause background video'}
-            aria-pressed={paused}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/[0.06] backdrop-blur-md text-white/70 opacity-70 hover:opacity-100 hover:bg-white/15 hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
-          >
-            {paused ? <Play className="h-3.5 w-3.5" /> : <Pause className="h-3.5 w-3.5" />}
-          </button>
-        )}
       </div>
 
       {/* ── Overlay content — ghost-quiet, brightens on hover (always full on touch) ── */}
