@@ -4,6 +4,7 @@ import { Badge } from '../ui/badge';
 import { TechAtlas } from './TechAtlas';
 import { CoreBulletList } from './CoreBulletList';
 import { EngagementList } from './EngagementList';
+import { SignatureWins } from './SignatureWins';
 
 const CountUp = ({ value, label, hint }) => {
     const nodeRef = useRef(null);
@@ -72,6 +73,16 @@ export const RolePanel = ({ experience, isActive, onEnter, mode }) => {
                         Engagements: {experience.engagements.map(e => e.client).join(' · ')}
                     </p>
                 )}
+                {experience.signatureWins && (
+                    <ul className="mb-3 space-y-1">
+                        {experience.signatureWins.map((win) => (
+                            <li key={win.headline} className="flex gap-2 text-sm text-foreground/85">
+                                <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                                <span>{win.headline}</span>
+                            </li>
+                        ))}
+                    </ul>
+                )}
                 <div className="flex flex-wrap gap-4 mb-4">
                     {experience.proofMetrics.map((m, i) => (
                         <div key={i} className="flex items-center gap-2">
@@ -139,6 +150,12 @@ export const RolePanel = ({ experience, isActive, onEnter, mode }) => {
                         </div>
                     )}
                 </div>
+
+                {experience.signatureWins && (
+                    <div className="mb-12">
+                        <SignatureWins wins={experience.signatureWins} accent={experience.theme.accent} />
+                    </div>
+                )}
 
                 {experience.engagements && (
                     <div className="mb-12">
