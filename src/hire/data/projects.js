@@ -56,6 +56,7 @@ export const PROJECTS = [
     image: '/projects/EagleEye AI/thumbnail.webp',
     imageAlt: 'EagleEye AI operator console',
     links: {
+      live: 'https://fardeen210-eagle-eye-ai-streamlitapp-cebf0r.streamlit.app/',
       code: 'https://github.com/ghantapavan93/Eagle-Eye-AI/tree/main/Eagle-Eye-AI-main',
     },
     featured: true,
