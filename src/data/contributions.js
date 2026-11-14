@@ -85,6 +85,7 @@ export const contributionsData = [
             { type: "image", url: "/contributions/Linkedin/Hackathon.jpg", caption: "GradInnoHack 2025 — Eagle Eye AI team and live demo" }
         ],
         links: [
+            { label: "Live Demo", url: "https://fardeen210-eagle-eye-ai-streamlitapp-cebf0r.streamlit.app/" },
             { label: "View on LinkedIn", url: "https://www.linkedin.com/posts/pavankalyan-ghanta-b20115200_gradinnohack2025-eagleeyeai-ai-activity-7315266190489047041-496I" },
             { label: "GitHub Repository", url: "https://github.com/ghantapavan93/eagle-eye-ai" }
         ]

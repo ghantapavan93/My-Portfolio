@@ -433,7 +433,7 @@ export function ProjectsSection() {
     role: "AI Engineer & Architect",
     timeline: "2024",
     type: "Enterprise Safety Platform",
-    liveUrl: null, // the hosted Streamlit demo sits behind a sign-in wall
+    liveUrl: "https://fardeen210-eagle-eye-ai-streamlitapp-cebf0r.streamlit.app/",
     repoUrl: "https://github.com/ghantapavan93/Eagle-Eye-AI/tree/main/Eagle-Eye-AI-main",
     technologies: ["Python", "FastAPI", "OpenCV", "PyTorch", "Docker", "AWS", "Multimodal LLM", "Vector Search"],
     heroImage: "/projects/EagleEye AI/thumbnail.webp",
@@ -1560,6 +1560,7 @@ export function ProjectsSection() {
       description: "Safety-First, AI-Powered Video Intelligence Platform. Turns surveillance into real-time, evidence-grounded decision systems with deterministic reasoning and privacy-by-design.",
       tags: ["Computer Vision", "Deep Learning", "Python", "OpenCV"],
       imageUrl: "/projects/EagleEye AI/thumbnail.webp",
+      liveUrl: "https://fardeen210-eagle-eye-ai-streamlitapp-cebf0r.streamlit.app/",
       githubUrl: "https://github.com/ghantapavan93/Eagle-Eye-AI/tree/main/Eagle-Eye-AI-main",
       onLearnMore: () => setActiveProject(eagleEyeLearnMore),
       learnMore: true,
