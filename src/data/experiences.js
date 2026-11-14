@@ -11,6 +11,63 @@ const roleRecords = [
         location: "Remote (TX) — Chicago, IL (HQ)",
         teamContext: "Startup. Working directly with founders and stakeholders to ship production iOS, Android, and web experiences for a fitness movement platform.",
         hookLine: "Shipping production mobile apps, a reliability-first wearable sync pipeline, and an LLM-powered QUANTUM Health Coach for a fitness movement platform.",
+        // Signature wins: one-line headlines, each opens to the story behind it.
+        signatureWins: [
+            {
+                headline: "Hired to build the app. Pitched the coach nobody asked for. 10,000+ subscribers now train with it.",
+                metrics: [
+                    {
+                        value: "10,000+",
+                        label: "subscribers"
+                    },
+                    {
+                        value: "270,000",
+                        label: "community, staged rollout"
+                    },
+                    {
+                        value: "3",
+                        label: "wearable sources"
+                    }
+                ],
+                story: [
+                    "The mileage tracker could count every step, but it could not answer the question members actually had: what should I do next, given my goals and what I really did this week?",
+                    "I was hired to build the app. I saw that gap, pitched AI Quantum Health Coach, and shipped it. It is now used by 10,000+ subscribers and is rolling out in stages to the wider 270,000-person community."
+                ],
+                how: [
+                    "Pulled activity from Apple Health, Garmin and Strava into one view of each member's week",
+                    "Combined that activity with each member's goals and preferences to personalize the coaching",
+                    "Built the agent with LangChain and LangGraph, running on AWS Lambda",
+                    "Rolled out in stages, so each step to a larger audience was earned"
+                ],
+                owned: "The pitch, the agent and the path from activity data to coaching."
+            },
+            {
+                headline: "Then I built Year 10: a working prototype where the coach becomes part of the challenge itself.",
+                metrics: [
+                    {
+                        value: "Year 10",
+                        label: "product vision"
+                    },
+                    {
+                        value: "1",
+                        label: "joined-up experience"
+                    }
+                ],
+                story: [
+                    "Future Vision is a working prototype of where 100 Miles of Summer can go in Year 10. Activity tracking, coaching and community participation live in one experience.",
+                    "The coach is no longer a separate place to ask questions. It is woven into the challenge members are already doing."
+                ],
+                how: [
+                    "Brought tracking, coaching and community into a single flow",
+                    "Built as a working front end, not slides, so the idea can be clicked and tested"
+                ],
+                owned: "The concept and the prototype, end to end.",
+                link: {
+                    label: "Open Future Vision",
+                    url: "https://100-mos-future-vision.vercel.app"
+                }
+            }
+        ],
         proofMetrics: [
             { label: "Sync Success", value: "~99%", hint: "Wearable data reconciliation across Apple Health, Fitbit, Garmin." },
             { label: "Schema Valid.", value: "~99%", hint: "LLM structured output validation pass rate in QUANTUM Health Coach." },
@@ -633,6 +690,74 @@ const roleRecords = [
         dateRange: "Jun 2025 – Dec 2025",
         location: "Dallas, TX",
         hookLine: "Founding engineer for an AI-powered crowd safety platform piloted at AfroTech Houston.",
+        // Signature wins: one-line headlines, each opens to the story behind it.
+        signatureWins: [
+            {
+                headline: "A founder's idea on a blank page. Live venues, and 12,000+ people, a few months later.",
+                metrics: [
+                    {
+                        value: "0 to 1",
+                        label: "blank slate to live"
+                    },
+                    {
+                        value: "12,000+",
+                        label: "people"
+                    },
+                    {
+                        value: "AfroTech",
+                        label: "field tested"
+                    }
+                ],
+                story: [
+                    "I worked directly with the founder and venue operators to take Krowd Guide from an idea to a crowd-intelligence platform running at live venues, used by 12,000+ people."
+                ],
+                how: [
+                    "Owned the work from architecture through field testing at AfroTech",
+                    "Built live heat maps that show where crowds are building, as it happens",
+                    "Shaped the product with the people running the venues, not just the founder"
+                ],
+                owned: "Architecture, build and field testing."
+            },
+            {
+                headline: "Built KrowdGuard: an AI agent that tells you where not to go, before the crowd does.",
+                metrics: [
+                    {
+                        value: "AI agent",
+                        label: "for attendees"
+                    },
+                    {
+                        value: "Live",
+                        label: "crowd signals"
+                    }
+                ],
+                story: [
+                    "Heat maps show where people are. KrowdGuard turns that into a decision: it helps attendees choose which areas to avoid when crowds build."
+                ],
+                how: [
+                    "Fed the agent the same live crowd signals behind the heat maps",
+                    "Turned density into plain advice an attendee can act on in the moment"
+                ],
+                owned: "The agent, from design to live use."
+            },
+            {
+                headline: "When live traffic broke the original setup, I stayed on it. Now operators run the floor on the same signals.",
+                metrics: [
+                    {
+                        value: "2",
+                        label: "audiences: attendees and operators"
+                    }
+                ],
+                story: [
+                    "Live traffic pushed the original setup past its limits. I stayed on it and kept the platform running for real events.",
+                    "The platform now also serves event operators, who use the same crowd signals to see where attention is needed on the ground."
+                ],
+                how: [
+                    "Reworked the system under real event load, not a test bench",
+                    "Extended one set of crowd signals to a second audience: the operators"
+                ],
+                owned: "Keeping it working when it mattered most."
+            }
+        ],
         proofMetrics: [
             { label: "Predictive Acc.", value: "93.46%", hint: "Up from 83.71% via iterative ML lifecycle." },
             { label: "Latency p95", value: "<400ms", hint: "High-concurrency streaming inference." },
@@ -934,6 +1059,73 @@ const roleRecords = [
         location: "Denton, TX",
         teamContext: "Co-founded the AI-First Discovery Initiative at UNT's Discovery Park Library — an applied AI studio delivering full-stack web apps, LLM assistants, and hands-on workshops for faculty, students, and external collaborators.",
         hookLine: "Co-founded an applied AI studio, shipping LLM/RAG assistants, production-style internal tools, and 20+ workshops for 200+ learners — increasing AI project submissions by 53%.",
+        // Signature wins: one-line headlines, each opens to the story behind it.
+        signatureWins: [
+            {
+                headline: "The campus assistant I helped build kept answering questions after I graduated.",
+                metrics: [
+                    {
+                        value: "~10,000",
+                        label: "students, faculty, researchers"
+                    },
+                    {
+                        value: "5",
+                        label: "person team"
+                    }
+                ],
+                story: [
+                    "On a five-person team, I worked with faculty to build Scrappy AI for the Discovery Park community of roughly 10,000 students, faculty and researchers.",
+                    "The part I am proudest of: people kept coming back to it after I left."
+                ],
+                how: [
+                    "Built with faculty, around the questions the community actually asks",
+                    "Designed to keep running and stay useful without its builders in the room"
+                ],
+                owned: "Core contributor on a five-person team."
+            },
+            {
+                headline: "No more hunting across campus sites. An answer you can trace to its source, about 40% faster.",
+                metrics: [
+                    {
+                        value: "~40%",
+                        label: "less time to an answer"
+                    },
+                    {
+                        value: "Cited",
+                        label: "every answer"
+                    }
+                ],
+                story: [
+                    "Instead of making people hunt across campus resources for the right information, we gave them an answer they could trace back to the original source.",
+                    "Across the initiative's assistants, people got to an answer in about 40% less time."
+                ],
+                how: [
+                    "Grounded each answer in the original campus source",
+                    "Showed the source with the answer, so people could check it themselves"
+                ],
+                owned: "Retrieval and the answer experience."
+            },
+            {
+                headline: "20+ workshops, 200+ learners: from asking AI tools questions to building their own.",
+                metrics: [
+                    {
+                        value: "20+",
+                        label: "workshops"
+                    },
+                    {
+                        value: "200+",
+                        label: "learners"
+                    }
+                ],
+                story: [
+                    "I ran 20+ workshops for 200+ learners, helping students go from asking questions of AI tools to building their own."
+                ],
+                how: [
+                    "Hands-on sessions: build something real, not just watch slides"
+                ],
+                owned: "Designed and ran the workshops."
+            }
+        ],
         proofMetrics: [
             { label: "Query Resolution", value: "−40%", hint: "RAG-powered assistants reduced query resolution time by 40.18%." },
             { label: "Answer Quality", value: "+21%", hint: "Human-rated answer quality improved by 21.36% with hybrid retrieval." },
