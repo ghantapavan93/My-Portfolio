@@ -26,12 +26,29 @@ export const ExperienceCaseStudy = ({ id, onClose }) => {
 
     const scrollContainerRef = useRef(null);
     const chapterRefs = useRef({});
+    const closeButtonRef = useRef(null);
 
     useEffect(() => {
-        // Lock body scroll
+        // Lock body scroll; move focus into the window and give it back on close.
+        const opener = document.activeElement;
         document.body.style.overflow = 'hidden';
-        return () => { document.body.style.overflow = 'unset'; };
+        closeButtonRef.current?.focus();
+        return () => {
+            document.body.style.overflow = 'unset';
+            opener?.focus?.({ preventScroll: true });
+        };
     }, []);
+
+    // Escape closes an open image first, then the case study.
+    useEffect(() => {
+        const onKey = (e) => {
+            if (e.key !== 'Escape') return;
+            if (lightboxImg) setLightboxImg(null);
+            else onClose();
+        };
+        window.addEventListener('keydown', onKey);
+        return () => window.removeEventListener('keydown', onKey);
+    }, [lightboxImg, onClose]);
 
     // Scrollspy logic
     useEffect(() => {
@@ -110,7 +127,12 @@ export const ExperienceCaseStudy = ({ id, onClose }) => {
     );
 
     return (
-        <div className="fixed inset-0 z-[100] bg-background animate-in fade-in duration-500 overflow-hidden flex flex-col">
+        <div
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${exp.company} case study`}
+            className="fixed inset-0 z-[100] bg-background animate-in fade-in duration-500 overflow-hidden flex flex-col"
+        >
             {/* Cinematic Background Motif */}
             <ThematicBackground motif={exp.theme.motif} color={exp.theme.accent} />
 
@@ -118,7 +140,9 @@ export const ExperienceCaseStudy = ({ id, onClose }) => {
             <header className="h-20 border-b border-border/50 bg-background/80 backdrop-blur-xl flex items-center justify-between px-6 shrink-0 z-50">
                 <div className="flex items-center gap-6">
                     <button
+                        ref={closeButtonRef}
                         onClick={onClose}
+                        aria-label="Close case study"
                         className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition-colors"
                     >
                         <X className="w-6 h-6" />

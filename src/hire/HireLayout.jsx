@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { FileText } from 'lucide-react';
-import { CONTAINER, buttonClass, resumeLinkProps } from './shared';
+import { Mail } from 'lucide-react';
+import { CONTAINER, buttonClass } from './shared';
 import { EMAIL, LINKEDIN_URL, GITHUB_URL } from '../lib/links';
 
 // Case-study pages link back into the main portfolio's sections.
@@ -33,8 +33,8 @@ function SiteHeader({ onHome }) {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a {...resumeLinkProps} className={`${buttonClass.primary} px-3.5 py-2`}>
-            <FileText className="h-4 w-4" aria-hidden="true" /> Résumé
+          <a href={anchor('contact')} className={`${buttonClass.primary} px-3.5 py-2`}>
+            <Mail className="h-4 w-4" aria-hidden="true" /> Get in touch
           </a>
           {/* No-JS disclosure: works before hydration and in the prerendered HTML. */}
           <details className="relative md:hidden">

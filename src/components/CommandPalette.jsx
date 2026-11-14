@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Search, Command, ArrowRight, Sparkles, FileText, Linkedin, Github, X } from 'lucide-react';
-import { RESUME_URL } from '../lib/links';
+import { Search, Command, ArrowRight, Sparkles, Linkedin, Github, X } from 'lucide-react';
+import { scrollToSection } from '../lib/scroll';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // ⌘K — the portfolio behaves like a product. Jump anywhere, ask GPK anything,
-// grab the resume. A floating hint teaches the shortcut once.
+// open LinkedIn or GitHub. A floating hint teaches the shortcut once.
 // ─────────────────────────────────────────────────────────────────────────────
 
 const GPK_QUESTIONS = [
@@ -17,9 +17,7 @@ const GPK_QUESTIONS = [
   'Tell me about your education',
 ];
 
-function jump(id) {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-}
+const jump = (id) => scrollToSection(id);
 
 export function CommandPalette() {
   const [open, setOpen] = useState(false);
@@ -37,11 +35,10 @@ export function CommandPalette() {
         run: () => window.dispatchEvent(new CustomEvent('ask-gpk', { detail: q })),
       })),
       { group: 'Go to', label: 'Projects', icon: ArrowRight, run: () => jump('projects') },
+      { group: 'Go to', label: 'Contributions', icon: ArrowRight, run: () => jump('contributions') },
       { group: 'Go to', label: 'Experience', icon: ArrowRight, run: () => jump('experience') },
       { group: 'Go to', label: 'Skills', icon: ArrowRight, run: () => jump('skills') },
-      { group: 'Go to', label: 'Contributions', icon: ArrowRight, run: () => jump('contributions') },
       { group: 'Go to', label: 'Contact', icon: ArrowRight, run: () => jump('contact') },
-      { group: 'Links', label: 'Download resume', icon: FileText, run: () => window.open(RESUME_URL, '_blank', 'noopener') },
       { group: 'Links', label: 'LinkedIn', icon: Linkedin, run: () => window.open('https://www.linkedin.com/in/pavankalyan-ghanta-b20115200/', '_blank', 'noopener') },
       { group: 'Links', label: 'GitHub', icon: Github, run: () => window.open('https://github.com/ghantapavan93', '_blank', 'noopener') },
     ],
@@ -112,7 +109,7 @@ export function CommandPalette() {
                 value={query}
                 onChange={(e) => { setQuery(e.target.value); setSelected(0); }}
                 onKeyDown={onKeyNav}
-                placeholder="Jump somewhere, ask GPK, grab the resume…"
+                placeholder="Jump somewhere or ask GPK…"
                 className="flex-1 bg-transparent outline-none text-sm"
               />
               <button onClick={() => setOpen(false)} aria-label="Close" className="p-1 rounded hover:bg-white/10">

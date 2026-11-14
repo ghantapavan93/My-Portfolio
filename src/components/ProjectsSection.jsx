@@ -9,6 +9,24 @@ export function ProjectsSection() {
   const sectionRef = useRef(null);
   const [activeProject, setActiveProject] = useState(null); // For Learn More modal
   const [filter, setFilter] = useState('All');
+  const modalCloseRef = useRef(null);
+
+  // Learn More modal: Escape closes it, focus moves into it and returns to the
+  // button that opened it, and the page behind doesn't scroll.
+  useEffect(() => {
+    if (!activeProject) return;
+    const opener = document.activeElement;
+    const onKey = (e) => { if (e.key === 'Escape') setActiveProject(null); };
+    window.addEventListener('keydown', onKey);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    modalCloseRef.current?.focus();
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = previousOverflow;
+      opener?.focus?.({ preventScroll: true });
+    };
+  }, [activeProject]);
 
   // Data for Project-H: AI-Powered Health & Fitness Assistant
   const projectHLearnMore = {
@@ -1666,21 +1684,26 @@ export function ProjectsSection() {
       </div>
       {/* Learn More Modal - Premium Case Study Layout */}
       {activeProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-0 sm:p-4 animate-in fade-in duration-300">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-0 sm:p-4 animate-in fade-in duration-300"
+          onClick={(e) => { if (e.target === e.currentTarget) setActiveProject(null); }}
+        >
           <div
             className="relative bg-background w-full max-w-6xl h-full sm:h-[95vh] rounded-none sm:rounded-2xl border border-border/50 shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300"
             role="dialog"
             aria-modal="true"
+            aria-labelledby="learn-more-title"
           >
             {/* Toolbar */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-border/40 shrink-0 bg-background/95 backdrop-blur z-20">
               <div className="flex items-center gap-3">
-                <h3 className="text-xl font-bold tracking-tight">{activeProject.title}</h3>
+                <h3 id="learn-more-title" className="text-xl font-bold tracking-tight">{activeProject.title}</h3>
                 <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-medium border border-primary/20">
                   {activeProject.type || 'Project'}
                 </span>
               </div>
               <button
+                ref={modalCloseRef}
                 onClick={() => setActiveProject(null)}
                 className="p-2 rounded-full hover:bg-secondary transition-colors"
                 aria-label="Close modal"

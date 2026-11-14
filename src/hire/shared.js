@@ -1,7 +1,6 @@
 // Non-component helpers shared by the hiring pages (kept out of .jsx component
 // files so React Fast Refresh keeps working).
 import { useEffect } from 'react';
-import { RESUME_URL } from '../lib/links';
 
 export const CONTAINER = 'mx-auto w-full max-w-5xl px-5 sm:px-8';
 
@@ -24,8 +23,5 @@ export const buttonClass = {
 };
 
 // A same-origin PDF downloads directly; anything else opens in a new tab.
-export const resumeLinkProps = /\.pdf$/i.test(RESUME_URL)
-  ? { href: RESUME_URL, download: 'Pavan-Kalyan-Ghanta-Resume.pdf' }
-  : { href: RESUME_URL, target: '_blank', rel: 'noopener noreferrer' };
 
 export const caseStudyTitle = (project) => `${project.title} — case study · Pavan Kalyan Ghanta`;

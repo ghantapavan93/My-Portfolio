@@ -3,7 +3,6 @@ import { Plus, Check } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { RESUME_URL } from '../../lib/links';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -386,9 +385,6 @@ export function IntroCinema() {
                 <a href="#projects" className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary/25 hover:scale-[1.03] transition-transform">
                   Explore Projects
                 </a>
-                <a href={RESUME_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-6 py-2.5 text-sm font-semibold hover:border-primary/50 hover:bg-primary/10 transition-colors">
-                  Download Resume
-                </a>
               </div>
             </div>
           </div>
@@ -465,9 +461,6 @@ export function IntroCinema() {
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <a href="#projects" className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary/25 hover:scale-[1.03] transition-transform">
                 Explore Projects
-              </a>
-              <a href={RESUME_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-6 py-2.5 text-sm font-semibold hover:border-primary/50 hover:bg-primary/10 transition-colors">
-                Download Resume
               </a>
             </div>
           </div>
