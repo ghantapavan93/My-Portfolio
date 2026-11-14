@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { Send, X, Sparkles, FileText, Linkedin, Mail, Volume2, VolumeX } from 'lucide-react';
+import { Send, X, Sparkles, Linkedin, Mail, Volume2, VolumeX } from 'lucide-react';
 import { playVoice, stopVoice, currentVoice, subscribeVoice, VOICE_SCRIPTS } from '../lib/voice';
-import { RESUME_URL, LINKEDIN_URL } from '../lib/links';
+import { LINKEDIN_URL } from '../lib/links';
+import { scrollToSection } from '../lib/scroll';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // GPK — Pavan's AI twin. Typewriter answers, cloned-voice playback, contextual
@@ -350,14 +351,15 @@ export function AIAgent() {
 
           {/* Quick links — conversion built in */}
           <div className="px-4 py-2 border-t border-white/10 flex items-center justify-center gap-2">
-            <a href={RESUME_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all">
-              <FileText className="w-3 h-3" /> Resume
-            </a>
             <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all">
               <Linkedin className="w-3 h-3" /> LinkedIn
             </a>
             <button
-              onClick={() => { setOpen(false); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}
+              onClick={() => {
+                setOpen(false);
+                // Case-study pages have no contact section: go to the home page's.
+                if (!scrollToSection('contact')) window.location.assign('/#contact');
+              }}
               className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all"
             >
               <Mail className="w-3 h-3" /> Contact

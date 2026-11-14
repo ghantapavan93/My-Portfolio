@@ -119,6 +119,16 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* Main sections land just below the fixed header. Header.jsx keeps --header-h
+   in sync with the header's real height (it wraps and shrinks on scroll). */
+#projects,
+#contributions,
+#experience,
+#skills,
+#contact {
+  scroll-margin-top: var(--header-h, 5rem);
+}
+
 /* Smooth in-page anchor jumps, except for people who ask for less motion. */
 @media (prefers-reduced-motion: no-preference) {
   html {

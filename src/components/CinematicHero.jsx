@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Volume2, VolumeX, ArrowDown, MessageSquare, Sparkles } from 'lucide-react';
+import { scrollToSection } from '../lib/scroll';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CinematicHero — full-screen photo hero.
@@ -18,9 +19,7 @@ function openAgent() {
 }
 
 function scrollToContent() {
-  const el = document.getElementById('projects') || window;
-  el === window ? window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })
-                : el.scrollIntoView({ behavior: 'smooth' });
+  if (!scrollToSection('projects')) window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
 }
 
 export function CinematicHero() {

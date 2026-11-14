@@ -1,13 +1,77 @@
 import { useState, useEffect, useRef } from 'react';
 import { ThemeToggle } from './ThemeToggle';
 import { Menu, X } from 'lucide-react';
-import { RESUME_URL } from '../lib/links';
+import { handleInPageLinkClick } from '../lib/scroll';
+
+// In-page sections, in the order they appear on the page.
+const SECTIONS = [
+  { id: 'projects', label: 'Projects' },
+  { id: 'contributions', label: 'Contributions' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'contact', label: 'Contact', highlight: true },
+];
+
+/**
+ * The section the visitor is reading: the last one whose top has passed a line
+ * a third of the way down the screen. At the very bottom, the last section wins.
+ */
+function useActiveSection() {
+  const [active, setActive] = useState(null);
+  useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const line = window.innerHeight / 3;
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+      let current = null;
+      for (const { id } of SECTIONS) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= line) current = id;
+      }
+      if (atBottom) current = SECTIONS[SECTIONS.length - 1].id;
+      setActive(current);
+    };
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    update();
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+    };
+  }, []);
+  return active;
+}
+
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef(null);
-  const resumeLink = RESUME_URL;
+  const headerRef = useRef(null);
+  const activeSection = useActiveSection();
+
+  // Every in-page link (#projects, #experience, …) anywhere on the page goes
+  // through one scroll routine, so they all land the same way.
+  useEffect(() => {
+    document.addEventListener('click', handleInPageLinkClick);
+    return () => document.removeEventListener('click', handleInPageLinkClick);
+  }, []);
+
+  // Publish the header's real height; sections use it as their scroll margin.
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+    const publish = () =>
+      document.documentElement.style.setProperty('--header-h', `${header.offsetHeight}px`);
+    const observer = new ResizeObserver(publish);
+    // border-box: the header shrinks by changing its padding, not its content.
+    observer.observe(header, { box: 'border-box' });
+    publish();
+    return () => observer.disconnect();
+  }, []);
 
   // ✅ Scroll effect for header
   useEffect(() => {
@@ -37,12 +101,13 @@ export function Header() {
     };
   }, [mobileMenuOpen]);
 
-  // At the very top the header floats over the dark video hero, so its text
+  // At the very top the header floats over the dark photo hero, so its text
   // must be light in both themes (theme colours take over once scrolled).
   const onHero = !scrolled && !mobileMenuOpen;
 
   return (
     <header
+      ref={headerRef}
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
           ? 'py-3 md:py-4 bg-background/95 backdrop-blur-sm shadow-sm text-foreground'
           : `py-4 md:py-6 bg-transparent ${onHero ? 'text-white' : 'text-foreground'}`
@@ -66,28 +131,13 @@ export function Header() {
           <div className="hidden md:flex items-center gap-6">
             <nav aria-label="Main Navigation">
               <ul className="flex space-x-6 lg:space-x-8">
-                <li>
-                  <NavLink href="#projects">Projects</NavLink>
-                </li>
-                <li>
-                  <NavLink href={resumeLink} isExternal={true}>
-                    Resume
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink href="#experience">Experience</NavLink>
-                </li>
-                <li>
-                  <NavLink href="#skills">Skills</NavLink>
-                </li>
-                <li>
-                  <NavLink href="#contributions">Contributions</NavLink>
-                </li>
-                <li>
-                  <NavLink href="#contact" highlight={true}>
-                    Contact
-                  </NavLink>
-                </li>
+                {SECTIONS.map(({ id, label, highlight }) => (
+                  <li key={id}>
+                    <NavLink href={`#${id}`} highlight={highlight} isActive={activeSection === id}>
+                      {label}
+                    </NavLink>
+                  </li>
+                ))}
               </ul>
             </nav>
             <ThemeToggle />
@@ -114,45 +164,24 @@ export function Header() {
       <div
         id="mobile-menu"
         ref={mobileMenuRef}
-        className={`fixed inset-0 bg-background/95 backdrop-blur-md flex flex-col justify-center items-center z-40 transition-all duration-300 ${mobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'
+        inert={!mobileMenuOpen}
+        className={`md:hidden fixed inset-0 bg-background/95 backdrop-blur-md flex flex-col justify-center items-center z-40 transition-all duration-300 ${mobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'
           }`}
       >
         <nav>
           <ul className="flex flex-col space-y-6 text-center">
-            <li>
-              <MobileNavLink href="#projects" onClick={() => setMobileMenuOpen(false)}>
-                Projects
-              </MobileNavLink>
-            </li>
-            <li>
-              <MobileNavLink href={resumeLink} isExternal={true}>
-                Resume
-              </MobileNavLink>
-            </li>
-            <li>
-              <MobileNavLink href="#experience" onClick={() => setMobileMenuOpen(false)}>
-                Experience
-              </MobileNavLink>
-            </li>
-            <li>
-              <MobileNavLink href="#skills" onClick={() => setMobileMenuOpen(false)}>
-                Skills
-              </MobileNavLink>
-            </li>
-            <li>
-              <MobileNavLink href="#contributions" onClick={() => setMobileMenuOpen(false)}>
-                Contributions
-              </MobileNavLink>
-            </li>
-            <li>
-              <MobileNavLink
-                href="#contact"
-                highlight={true}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Contact
-              </MobileNavLink>
-            </li>
+            {SECTIONS.map(({ id, label, highlight }) => (
+              <li key={id}>
+                <MobileNavLink
+                  href={`#${id}`}
+                  highlight={highlight}
+                  isActive={activeSection === id}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {label}
+                </MobileNavLink>
+              </li>
+            ))}
           </ul>
         </nav>
       </div>
@@ -160,40 +189,14 @@ export function Header() {
   );
 }
 
-function NavLink({ href, children, highlight = false, isExternal = false }) {
-  const [isActive, setIsActive] = useState(false);
-
-  useEffect(() => {
-    if (isExternal) return;
-    const section = document.querySelector(href);
-    const checkIfActive = () => {
-      if (!section) return;
-      const rect = section.getBoundingClientRect();
-      setIsActive(rect.top <= 100 && rect.bottom >= 100);
-    };
-    window.addEventListener('scroll', checkIfActive);
-    checkIfActive();
-    return () => window.removeEventListener('scroll', checkIfActive);
-  }, [href, isExternal]);
-
-  const handleClick = (e) => {
-    if (isExternal) return;
-    e.preventDefault();
-    const targetElement = document.querySelector(href);
-    if (targetElement) {
-      const headerHeight = document.querySelector('header').offsetHeight;
-      const targetPosition =
-        targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-      window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-    }
-  };
-
+// In-page links are plain anchors; Header's document click handler scrolls them.
+function NavLink({ href, children, highlight = false, isExternal = false, isActive = false }) {
   return (
     <a
       href={href}
       target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noopener noreferrer' : undefined}
-      onClick={!isExternal ? handleClick : undefined}
+      aria-current={isActive ? 'location' : undefined}
       className={`text-sm font-medium relative transition-colors ${highlight
           ? 'text-primary hover:text-primary/90'
           : isActive
@@ -209,27 +212,15 @@ function NavLink({ href, children, highlight = false, isExternal = false }) {
   );
 }
 
-function MobileNavLink({ href, children, highlight = false, isExternal = false, onClick }) {
-  const handleClick = (e) => {
-    if (isExternal) return;
-    e.preventDefault();
-    const targetElement = document.querySelector(href);
-    if (targetElement) {
-      const headerHeight = document.querySelector('header').offsetHeight;
-      const targetPosition =
-        targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-      window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-      if (onClick) onClick();
-    }
-  };
-
+function MobileNavLink({ href, children, highlight = false, isExternal = false, isActive = false, onClick }) {
   return (
     <a
       href={href}
       target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noopener noreferrer' : undefined}
-      onClick={!isExternal ? handleClick : undefined}
-      className={`text-lg font-medium py-2 px-4 block transition-colors ${highlight ? 'text-primary hover:text-primary/90' : 'hover:text-primary'
+      onClick={onClick}
+      aria-current={isActive ? 'location' : undefined}
+      className={`text-lg font-medium py-2 px-4 block transition-colors ${highlight || isActive ? 'text-primary hover:text-primary/90' : 'hover:text-primary'
         }`}
     >
       {children}

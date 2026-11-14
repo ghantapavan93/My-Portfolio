@@ -1,9 +1,7 @@
-import { Github, Linkedin, Mail, FileText, ExternalLink } from 'lucide-react'
-import { Button } from './ui/button'
-import { EMAIL, RESUME_URL } from '../lib/links'
+import { Github, Linkedin, Mail, ExternalLink } from 'lucide-react'
+import { EMAIL } from '../lib/links'
 
 export function Footer() {
-  const resumeLink = RESUME_URL;
   const currentYear = new Date().getFullYear();
   
   return (
@@ -30,7 +28,7 @@ export function Footer() {
             </a>
           </div>
           
-          {/* Social icons and resume (center column on mobile, right column on desktop) */}
+          {/* Social icons (center column on mobile, right column on desktop) */}
           <div className="flex flex-row items-center gap-2 md:gap-3 flex-wrap justify-center md:justify-end">
             <a 
               href="https://github.com/ghantapavan93" 
@@ -67,22 +65,6 @@ export function Footer() {
               </svg>
             </a>
             
-            <Button 
-              variant="outline" 
-              size="sm"
-              className="border-white/20 bg-white/5 hover:bg-primary hover:text-white hover:border-primary text-white ml-0 md:ml-1 flex items-center gap-1.5 text-[10px] md:text-xs rounded-full transition-all duration-200 h-7 md:h-8 px-2.5 md:px-3 focus:ring-offset-gray-900"
-              asChild
-            >
-              <a 
-                href={resumeLink} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                aria-label="Download Resume (opens in new tab)"
-              >
-                <FileText className="h-3 w-3 md:h-3.5 md:w-3.5" aria-hidden="true" />
-                <span>Resume</span>
-              </a>
-            </Button>
           </div>
         </div>
         
